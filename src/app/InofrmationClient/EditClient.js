@@ -6,6 +6,7 @@ import { CalenderIcon, Coins, Downarrow, LeftArrow, MuscleIcon, PlusIcon } from 
 import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import CreditCard from '../Popups/CreditCard'
+import Image from 'next/image';
 const EditClient = ({ setSelectedItem }) => {
   const [popupIsOpen, setShowPopup] = useState(false);
   const openPopup = () => {
@@ -32,8 +33,8 @@ const EditClient = ({ setSelectedItem }) => {
       </div>
       <div className={styles.main_div__}>
         <div className={styles.left_div_profile}>
-          <img
-            style={{ height: 107, width: 107 }}
+          <Image
+           height={107} width={107}
             src='/images/profileee.png'
           />
           <div className={styles.changePhoto}>

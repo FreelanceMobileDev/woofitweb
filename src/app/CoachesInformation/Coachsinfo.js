@@ -6,6 +6,7 @@ import { ArchivedIcon, CallIcon, LeftArrow, MessageIcon } from '../../../public'
 import PaymentCoachs from './PaymentCoachs';
 import TrainingsCoach from './TrainingsCoach';
 import ProfessionalInfo from './ProfessionalInfo';
+import Image from 'next/image';
 const Coachsinfo = ({setSelectedItem}) => {
   const [activeTab, setActiveTab] = useState('Professional Info');
 
@@ -26,8 +27,8 @@ const Coachsinfo = ({setSelectedItem}) => {
       </div>
       <div className={styles.main_div__}>
         <div className={styles.left_div_profile}>
-          <img
-            style={{ height: 107, width: 107 }}
+          <Image
+          height={107} width={107}
             src='/images/profileee.png'
           />
           <h1 className={styles.usernamee}>Eloise Robinson</h1>

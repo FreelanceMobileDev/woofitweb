@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { DeleteIcon, EditIcon, } from '../../../public'
 import styles from './Login.module.css'
 const ClientsData = ({setSelectedItem}) => {
@@ -32,7 +33,7 @@ const ClientsData = ({setSelectedItem}) => {
            
             <tr key={item.id} className={styles.temppp} onClick={()=>{setSelectedItem('ClientInfo')}}  >
               <td><input type="checkbox" /></td>
-              <td><img src={item.image} alt={item.name} className={styles.profileImage} /></td>
+              <td><Image src={item.image} height={40} width={40} alt={item.name} className={styles.profileImage} /></td>
               <td className={styles.name_client}>{item.name}</td>
               <td className={styles.email_client}>{item.email}</td>
               <td className={styles.email_client}>{item.rate}</td>

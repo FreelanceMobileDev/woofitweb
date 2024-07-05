@@ -1,17 +1,17 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import styles from './Popups.module.css';
 import { CalenderIcon, CashSecondIcon, ClockIcon, CrossIcon, GroupIcon, NonCashIcon, Rightarrow, Userimg } from '../../../public';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Inputfield from '../_reuseableComponent/Inputfield';
+import Image from 'next/image';
 
 const Clientsdata = [
-    { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
-    { name: 'Franky Williamson', avatar: '/images/profilepic.png' },
-    { name: 'Bronson Glass', avatar: '/images/profilepic.png' },
-   
-]
+    { name: 'Eloise Robinson', avatar: '/images/profilepic.png', width: 50, height: 50 },
+    { name: 'Franky Williamson', avatar: '/images/profilepic.png', width: 50, height: 50 },
+    { name: 'Bronson Glass', avatar: '/images/profilepic.png', width: 50, height: 50 },
+];
 
 const EditTraining = ({ show, handleClose }) => {
     const [selected, setSelected] = useState('cash');
@@ -20,18 +20,17 @@ const EditTraining = ({ show, handleClose }) => {
         setSelected(selection);
     };
 
-
     const handleSave = () => {
         handleClose();
     };
+
     return (
         <div className={show ? styles.popupDisplay : styles.popupHide}>
             <div className={styles.popupContent}>
                 <div className={styles.space_div}>
-                    <div style={{width:60}}/>
+                    <div style={{ width: 60 }} />
                     <div className={styles.popheadertxt}>Edit Training</div>
                     <div onClick={handleClose} className={styles.greycrossicon}><CrossIcon /></div>
-
                 </div>
                 <TextWithButton
                     label={"Date"}
@@ -61,18 +60,16 @@ const EditTraining = ({ show, handleClose }) => {
                     </div>
 
                     {Clientsdata.map((item, index) => (
-        <div key={index} className={styles.space_div} style={{marginBottom:10,marginTop:10}} >
-            <div className={styles.row_div}>
-            <img src={item.avatar}/>
-         <div className={styles.client_name_style}>{item.name}</div>
-         </div>
-         <div>
-            <CrossIcon/>
-         </div>
-        </div>
-      ))}
-
-
+                        <div key={index} className={styles.space_div} style={{ marginBottom: 10, marginTop: 10 }}>
+                            <div className={styles.row_div}>
+                                <Image src={item.avatar} alt={item.name} width={item.width} height={item.height} />
+                                <div className={styles.client_name_style}>{item.name}</div>
+                            </div>
+                            <div>
+                                <CrossIcon />
+                            </div>
+                        </div>
+                    ))}
 
                     <div className={styles.paymentTypetxt}>Type of Payment</div>
                     <div className={styles.row_div} style={{ justifyContent: 'space-between' }}>
@@ -86,9 +83,7 @@ const EditTraining = ({ show, handleClose }) => {
                             <NonCashIcon className={selected === 'noncash' ? styles.selectedIcon : styles.unselectedIcon} />
                             <div className={`${selected === 'noncash' ? styles.Cashtxt : styles.noncashtxt}`}>Non-Cash</div>
                         </div>
-
                     </div>
-
                 </div>
                 <Inputfield
                     name={'Comment'}
@@ -102,7 +97,7 @@ const EditTraining = ({ show, handleClose }) => {
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default EditTraining
+export default EditTraining;

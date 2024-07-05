@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { EditIcon, DeleteIcon } from '../../../public'; // Adjust the import paths accordingly
 import styles from './Login.module.css';
 import GroupEdit from '../Popups/GroupEdit'
+import Image from 'next/image';
 
 const groupsData = [
   {
@@ -61,7 +62,7 @@ const GroupItem = ({ title, clients, images, additionalClients, }) => {
       <div className={styles.groupClients}>{clients} Clients</div>
       <div className={styles.groupImages}>
         {images.map((img, index) => (
-          <img key={index} src={`${img}`} alt={`Client ${index}`} className={styles.clientImage} />
+          <Image key={index} height={30} width={30} src={`${img}`} alt={`Client ${index}`} className={styles.clientImage} />
         ))}
         {additionalClients > 0 && <span className={styles.additionalClients}>+{additionalClients}</span>}
       </div>

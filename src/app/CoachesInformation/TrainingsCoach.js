@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Coaches.module.css';
 import { CheckIcon, ClockCalender, CrossIcon, DownBlueArrow, Rightarrow } from '../../../public';
+import Image from 'next/image';
 
 const TrainingsCoach = () => {
   const sessions = [
-    { day: 'fri', date: '26', time: '02:00 pm - 03:00 pm', backgroundColor: '#FFE0E0', icon: <CrossIcon />, name:'Gabe Woodward',avatar: '/images/profilepic.png', },
-    { day: 'Wed', date: '23', time: '02:00 pm - 03:00 pm', backgroundColor: '#E0F7FF', avatar2: '/images/profilepic.png', icon: <ClockCalender/>, name:'Gabe Woodward',avatar: '/images/profilepic.png', },
-    { day: 'Thu', date: '17', time: "02:00 pm - 03:00 pm", backgroundColor: '#E0FFE1', icon: <CheckIcon />, name:'Gabe Woodward',avatar: '/images/profilepic.png', },
+    { day: 'fri', date: '26', time: '02:00 pm - 03:00 pm', backgroundColor: '#FFE0E0', icon: <CrossIcon />, name: 'Gabe Woodward', avatar: '/images/profilepic.png', },
+    { day: 'Wed', date: '23', time: '02:00 pm - 03:00 pm', backgroundColor: '#E0F7FF', avatar2: '/images/profilepic.png', icon: <ClockCalender />, name: 'Gabe Woodward', avatar: '/images/profilepic.png', },
+    { day: 'Thu', date: '17', time: "02:00 pm - 03:00 pm", backgroundColor: '#E0FFE1', icon: <CheckIcon />, name: 'Gabe Woodward', avatar: '/images/profilepic.png', },
   ];
   return (
 
@@ -22,7 +23,7 @@ const TrainingsCoach = () => {
       <div className={styles.session}>
         <div className={styles.Todayline}>
           <span>August</span>
-        
+
 
         </div>
 
@@ -36,13 +37,13 @@ const TrainingsCoach = () => {
               <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                 <div style={{ display: 'flex', alignItems: 'center', }}>
                   {session.icon}
-<img src={session.avatar} className={styles.avatarimagee}/>
-{session.avatar2 && <img src={session.avatar2} className={styles.avatar2imagee} />}
+                  <Image height={25} width={25} src={session.avatar} className={styles.avatarimagee} />
+                  {session.avatar2 && <Image height={25} width={25} src={session.avatar2} className={styles.avatar2imagee} />}
                   <p style={{ marginLeft: 10 }}>{session.name}</p>
                 </div>
                 <div className={styles.row}>
                   <div className={styles.time_txt}>{session.time}</div>
-                <Rightarrow />
+                  <Rightarrow />
                 </div>
               </div>
             </div>
@@ -53,12 +54,12 @@ const TrainingsCoach = () => {
       <div className={styles.session}>
         <div className={styles.Todayline}>
           <span>July</span>
-         
+
 
         </div>
 
         <div className={styles.sessionDetails}>
-        {sessions.map((session, index) => (
+          {sessions.map((session, index) => (
             <div className={styles.sessionCard2} >
               <div style={{ width: 110, display: 'flex', alignItems: 'center' }}>
                 <div className={styles.date_background}>{session.date}</div>
@@ -67,13 +68,13 @@ const TrainingsCoach = () => {
               <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                 <div style={{ display: 'flex', alignItems: 'center', }}>
                   {session.icon}
-<img src={session.avatar} className={styles.avatarimagee}/>
-{session.avatar2 && <img src={session.avatar2} className={styles.avatar2imagee} />}
+                  <Image height={25} width={25} src={session.avatar} className={styles.avatarimagee} />
+                  {session.avatar2 &&   <Image height={25} width={25}  src={session.avatar2} className={styles.avatar2imagee} />}
                   <p style={{ marginLeft: 10 }}>{session.name}</p>
                 </div>
                 <div className={styles.row}>
                   <div className={styles.time_txt}>{session.time}</div>
-                <Rightarrow />
+                  <Rightarrow />
                 </div>
               </div>
             </div>

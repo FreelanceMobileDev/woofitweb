@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
+import Image from 'next/image';
 const Groups = ({ show, handleClose }) => {
 
     const group1 = [
@@ -29,9 +30,9 @@ const Groups = ({ show, handleClose }) => {
                 <div className={styles.clientInfo}>
                     <span className={styles.Clientsname}>{client.name}</span>
                     <div className={styles.row}>
-                        <img src={client.avatar} alt={client.name} className={styles.avatargroup} />
-                        <img src={client.avatar1} alt={client.name} className={styles.avatargroup} />
-                        {client.avatar2 && <img src={client.avatar2} alt={client.name} className={styles.avatargroup} />}
+                        <Image height={35} width={35} src={client.avatar} alt={client.name} className={styles.avatargroup} />
+                        <Image height={35} width={35} src={client.avatar1} alt={client.name} className={styles.avatargroup} />
+                        {client.avatar2 &&  <Image height={35} width={35} src={client.avatar2} alt={client.name} className={styles.avatargroup} />}
                         {client.count&&<div className={styles.group_count}>+3</div>}
                       <div style={{marginLeft:20}}>
                         <input

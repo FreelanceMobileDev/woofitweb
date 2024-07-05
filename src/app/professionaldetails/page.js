@@ -4,6 +4,7 @@ import styles from './../_components/Login.module.css'
 import { Downarrow, LeftArrow } from '../../../public';
 import Inputfield from '../_reuseableComponent/Inputfield'
 import TextWithButton from '../_reuseableComponent/TextWithButton'
+import Image from 'next/image';
 
 const Professionaldetails = () => {
     return (
@@ -35,7 +36,7 @@ const Professionaldetails = () => {
                                 <TextWithButton
                                     label={"Service Offerings"}
                                     text={"Select"}
-                                    RightIcon={Downarrow}
+                                    RightIcon={Downwarrow}
                                 />
    <Link href="/addProfilePicture" passHref className={styles.noUnderline}>
                                 <button type="submit" className={styles.authButton2} >Continue</button>
@@ -47,12 +48,17 @@ const Professionaldetails = () => {
                     </div>
                 </div>
                 <div className={styles.rightPane}>
-                    <img src="/images/Logo.png" alt="Workout"
+                    <Image src="/images/Logo.png" alt="Workout"
                         className={styles.Logoimg}
+                        height={136}
+                        width={450}
+                       
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
-                    <img src="/images/africanMan.png" alt="Workout"
+                    <Image src="/images/africanMan.png" alt="Workout"
                         className={styles.africnManstyle}
+                        height={400}
+                        width={400}
                     />
                 </div>
             </div>

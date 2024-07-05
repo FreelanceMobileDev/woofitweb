@@ -56,14 +56,17 @@ const LoginWoofit = () => {
                     </div>
                 </div>
                 <div className={styles.rightPane}>
-                    <img src="/images/Logo.png" alt="Workout"
+                    <Image src="/images/Logo.png" alt="Workout"
                         className={styles.Logoimg}
+                        height={136}
+                        width={450}
+ 
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
                     <Image src="/images/africanMan.png" alt="Workout"
                         className={styles.africnManstyle}
-                        width={500} // Replace with your image width
-                        height={400} // Replace with your image height
+                        width={500} 
+                        height={400} 
                     />
                 </div>
             </div>

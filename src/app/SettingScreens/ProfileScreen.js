@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { CalenderIcon, Downarrow, UploadimgIcon } from '../../../public';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
@@ -6,8 +7,10 @@ const ProfileScreen = () => {
   return (
     <div className={styles.right_div_data}>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
-        <img src='/images/profileee.png'
+        <Image src='/images/profileee.png'
           className={styles.profile_pic_setting}
+          height={107}
+          width={107}
         />
         <div className={styles.upload_pic_div}>
           <UploadimgIcon />
@@ -32,23 +35,23 @@ const ProfileScreen = () => {
           additionalcontainer={styles.rate_input_div}
         />
       </div> */}
-        <div className={styles.row_div} style={{marginTop: 20 }} >
-                        <Inputfield
-                            input_parent_div_prop={styles.calender_input}
-                            additionalMainDivClassName={styles.additionalMainDiv}
-                            additionalinput_field={styles.additionalInputField}
-                            inputtxt={styles.invoicenumber}
-                            name="Invoice ID"
+      <div className={styles.row_div} style={{ marginTop: 20 }} >
+        <Inputfield
+          input_parent_div_prop={styles.calender_input}
+          additionalMainDivClassName={styles.additionalMainDiv}
+          additionalinput_field={styles.additionalInputField}
+          inputtxt={styles.invoicenumber}
+          name="Invoice ID"
 
-                        />
-                        <div style={{ width: 30 }} />
-                        <TextWithButton
-                            label={"Date"}
-                            RightIcon={CalenderIcon}
-                            text={"14 Mar 2002"}
-                            props={{ additionalcontainer: styles.calender_input }}
-                        />
-                    </div>
+        />
+        <div style={{ width: 30 }} />
+        <TextWithButton
+          label={"Date"}
+          RightIcon={CalenderIcon}
+          text={"14 Mar 2002"}
+          props={{ additionalcontainer: styles.calender_input }}
+        />
+      </div>
       <div className={styles.row_div} style={{ marginTop: 20 }}>
         <Inputfield
           input_parent_div_prop={styles.calender_input}

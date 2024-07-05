@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Notificationimg from '../../../public/Images/Notificationimg';
 import Searchimg from '../../../public/Images/Searchimg';
 import Inputfield from '../_reuseableComponent/Inputfield';
@@ -17,7 +18,7 @@ const Header = () => {
       <div className={styles.userInfo}>
       
        
-        <img src="/images/profilepic.png" alt="User Avatar" className={styles.avatar} />
+        <Image height={40} width={40} src="/images/profilepic.png" alt="User Avatar" className={styles.avatar} />
         <span className={styles.hellousername}>Hello James!</span>
         <Notificationimg
         className={styles.Notificationimg}

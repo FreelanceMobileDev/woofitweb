@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
+import Image from 'next/image';
 const AddClients = ({ show, handleClose }) => {
 
   const group1 = [
@@ -33,7 +34,7 @@ const AddClients = ({ show, handleClose }) => {
   const renderClientGroup = (clients) => (
     clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
-        <img src={client.avatar} alt={client.name} className={styles.avatar} />
+        <Image height={35} width={35} src={client.avatar} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
           <span className={styles.Clientsname}>{client.name}</span>
           <input

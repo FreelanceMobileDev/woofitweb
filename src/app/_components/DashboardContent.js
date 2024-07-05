@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import CheckIcon from '../../../public/Images/CheckIcon';
 import ClockCalender from '../../../public/Images/ClockCalender';
 import CrossIcon from '../../../public/Images/CrossIcon';
@@ -85,8 +86,8 @@ const DashboardContent = () => {
                   <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                     <div style={{ display: 'flex', alignItems: 'center', }}>
                       {session.icon}
-                      <img src={session.avatar} className={styles.avatarimagee} />
-                      {session.avatar2 && <img src={session.avatar2} className={styles.avatar2imagee} />}
+                      <Image src={session.avatar} height={25} width={25} className={styles.avatarimagee} />
+                      {session.avatar2 && <Image height={25} width={25} src={session.avatar2} className={styles.avatar2imagee} />}
                       <p style={{ marginLeft: 10 }}>{session.name}</p>
                     </div>
                     <Rightarrow />
@@ -108,7 +109,7 @@ const DashboardContent = () => {
                 <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                   <div style={{ display: 'flex', alignItems: 'center', }}>
                     {session.icon}
-                    <img src={session.avatar} className={styles.avatarimagee} />
+                    <Image src={session.avatar} height={25} width={25} className={styles.avatarimagee} />
                     <p style={{ marginLeft: 10 }}>{session.name}</p>
                   </div>
                   <Rightarrow />
@@ -132,7 +133,7 @@ const DashboardContent = () => {
           <ul>
             {newClients.map((client, index) => (
               <li key={index} className={styles.clientItem}>
-                <img src={client.avatar} alt={client.name} className={styles.avatar} />
+                <Image src={client.avatar} height={40} width={40} alt={client.name} className={styles.avatar} />
                 <span>{client.name}</span>
               </li>
             ))}
@@ -144,7 +145,7 @@ const DashboardContent = () => {
           <ul>
             {recentActivities.map((activity, index) => (
               <li key={index} className={styles.activityItem}>
-                <img src={activity.avatar} alt={activity.name} className={styles.avatar} />
+                <Image src={activity.avatar} height={40} width={40} alt={activity.name} className={styles.avatar} />
                 <div className={styles.activityText}>
                   <span className={styles.clientName}>{activity.name}</span>
                   <span className={styles.actionText}> {activity.action} </span>

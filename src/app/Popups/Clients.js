@@ -4,6 +4,7 @@ import styles from './Popups.module.css';
 import { CrossIcon, LeftArrow } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import AddClients from './AddClients'
+import Image from 'next/image';
 
 const Clients = ({ show, handleClose }) => {
   const [clientsopen, setclientsopen] = useState(false);
@@ -39,7 +40,7 @@ const handleSave = () => {
           {data.map((item, index) => (
             <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
               <div className={styles.row}>
-                <img src={item.avatar} />
+                <Image width={40} height={40}  src={item.avatar} />
                 <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
               </div>
               <CrossIcon />

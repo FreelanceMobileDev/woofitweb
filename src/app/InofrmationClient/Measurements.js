@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ClientPage.module.css';
+import Image from 'next/image';
 
 
 const Measurements = () => {
@@ -25,7 +26,7 @@ const Measurements = () => {
           <div key={index}>
            <div className={styles.bodysizestyle} style={{textAlign:'left'}}>{item.position}</div>
               <div className={styles.main_photo_div}>
-                <img src={item.image} className={styles.image_body} />
+                <Image height={90} width={130} src={item.image} className={styles.image_body} />
                 <div className={styles.bodysizestyle}>{item.size}</div>
               </div>
          
@@ -54,7 +55,9 @@ const Measurements = () => {
                 <div className={styles.space_view}>24.20</div>
               </div>
 
-              <img src='/images/chartimg.png' className={styles.chart} />
+              <Image src='/images/chartimg.png' className={styles.chart}
+              width={'100%'}
+              />
 
             </div>
           </div>

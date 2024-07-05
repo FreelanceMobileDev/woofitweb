@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {ArchivedOUTicon } from '../../../public'; 
 import styles from './Login.module.css';
 
@@ -49,7 +50,7 @@ const GroupItem = ({ title, clients, images, additionalClients }) => {
       <div className={styles.groupClients}>{clients} Clients</div>
       <div className={styles.groupImages}>
         {images.map((img, index) => (
-          <img key={index} src={`${img}`} alt={`Client ${index}`} className={styles.clientImage} />
+          <Image key={index} src={`${img}`} alt={`Client ${index}`} height={30} width={30} className={styles.clientImage} />
         ))}
         {additionalClients > 0 && <span className={styles.additionalClients}>+{additionalClients}</span>}
       </div>

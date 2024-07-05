@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArchivedIcon, DeleteIcon, EditIcon, FilterIcon, SearchIcon, } from '../../../public';
 import styles from './Login.module.css';
 
@@ -44,7 +45,7 @@ const CoachesContant = ({setSelectedItem}) => {
           {data.map(item => (
             <tr key={item.id} className={styles.temppp} onClick={()=>{setSelectedItem('Coachsinfo')}}>
               <td><input type="checkbox" /></td>
-              <td><img src={item.image} alt={item.name} className={styles.profileImage} /></td>
+              <td><Image height={40} width={40} src={item.image} alt={item.name} className={styles.profileImage} /></td>
               <td className={styles.name_client}>{item.name}</td>
               <td className={styles.email_client}>{item.email}</td>
               <td className={styles.email_client}>{item.rate}</td>
