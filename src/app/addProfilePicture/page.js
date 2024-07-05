@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './../_components/Login.module.css'
 import {LeftArrow } from '../../../public';
 
-const ProfilePicUpload = ({ onRegisterClick, onClickButton }) => {
+const ProfilePicUpload = () => {
     return (
         <>
             <div className={styles.container}>

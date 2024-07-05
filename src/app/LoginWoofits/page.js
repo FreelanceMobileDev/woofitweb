@@ -5,7 +5,7 @@ import Inputfield from '../_reuseableComponent/Inputfield';
 import { AppleLogo, Attherateimg, GoogleLogo, Lockimg } from '../../../public';
 
 
-const LoginWoofit = ({ onLogin }) => {
+const LoginWoofit = () => {
 
     return (
         <>
