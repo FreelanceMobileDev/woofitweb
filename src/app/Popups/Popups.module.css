@@ -1,0 +1,431 @@
+/* styles/NewPayment.module.css */
+.popupDisplay {
+  display: block;
+  position:absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/* .popupDisplay2 {
+  display: block;
+  position:absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+} */
+.popupHide {
+  display: none;
+}
+
+.popupContent {
+  background-color: #fff;
+  margin:  auto;
+  padding: 20px;
+  padding-right: 40px;
+  border: 1px solid #888;
+  width: 40%;
+  /* max-width: 500px; */
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.comment_div_2 {
+  height: 80px;
+  width: 95%;
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+
+.space_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popheadertxt {
+  font-family: Urbanist;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+
+.TextWithButtonstyle {
+  width: 80%;
+}
+.calender_input {
+  width: 45%;
+}
+
+.invoicenumber {
+  margin-top: 0px;
+  margin-left: -6px;
+}
+
+.UsdInput {
+  width: 100%;
+
+}.UsdInput2 {
+  width: 100%;
+  margin-left: 20px;
+
+}
+
+.row_div {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  /* border: 1px solid red; */
+  justify-content: center;
+}
+.Clientaddtxt{
+  font-family: Urbanist;
+font-size: 14px;
+font-weight: 500;
+line-height: 16.8px;
+text-align: left;
+color: #697585;
+}
+.paymentTypetxt {
+  margin-top: 20px;
+  font-family: Urbanist;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  text-align: left;
+  color: #697585;
+  margin-bottom: 10px;
+}
+
+.cashDiv {
+  background-color: #CFF3FD;
+  border: 1px solid #14AED1;
+  width: 47%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 10px;
+  opacity: 0px;
+}
+
+.noncash {
+  /* background-color: #CFF3FD; */
+  border: 1px solid #8D99AE33;
+  width: 47%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 10px;
+  opacity: 0px;
+}
+
+.SaveButton {
+  background-color: #14AED1;
+}
+
+.AddClientButton {
+  background-color: #14AED1;
+  margin-top: 80px;
+}
+
+.Cashtxt {
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: left;
+  color: #14AED1;
+}
+
+.noncashtxt {
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: left;
+  color: #697585;
+}
+
+.selectedIcon {
+  filter: invert(52%) sepia(84%) saturate(1576%) hue-rotate(169deg) brightness(97%) contrast(98%);
+}
+
+.unselectedIcon {
+  filter: none;
+}
+
+.NewTrainingTabsDiv {
+  border-bottom: 1px solid #8D99AE4D;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+margin-bottom: 10px;
+}
+
+.on_the_date {
+  width: 50%;
+  border-bottom: 2px solid #14AED1;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding-bottom: 10px;
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: center;
+  color: #14AED1;
+  cursor: pointer;
+}
+.for_the_period{
+  cursor: pointer;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding-bottom: 10px;
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: center;
+color: #697585;
+}
+.greycrossicon {
+  height: 24px;
+  width: 24px;
+  filter: invert(29%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(96%) contrast(84%);
+}
+
+
+
+
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.backButton,
+.searchButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.clientList {
+  /* max-height: 300px; */
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+.clientItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  margin-right: 15px;
+}
+
+.clientInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.selectClientsButton {
+  background: #14AED1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.row{
+  display: flex;
+  align-items: center;
+}
+.albhabate_txt{
+  font-family: Urbanist;
+font-size: 16px;
+font-weight: 500;
+line-height: 19.2px;
+text-align: left;
+color: #697585;
+margin-bottom: 10px;
+padding-top: 10px;
+border-top: 1px solid #8D99AE26;margin-top: 10px;
+}
+.albhabate_txt2{
+  font-family: Urbanist;
+font-size: 16px;
+font-weight: 500;
+line-height: 19.2px;
+text-align: left;
+color: #697585;
+margin-bottom: 10px;
+padding-top: 10px;
+margin-top: 10px;
+}
+.Clientsname{
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 500;
+line-height: 21.6px;
+text-align: left;
+
+}
+.Select_GroupButton{
+  background-color: #14AED1;
+  margin-top: 50%;
+}
+
+.avatargroup {
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+}
+.group_count{
+  margin-left: 5px;font-family: Urbanist;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.6px;
+  text-align: left;
+color: #697585;  
+}
+.days_of_training_txt{
+  font-family: Urbanist;
+font-size: 14px;
+font-weight: 500;
+line-height: 16.8px;
+text-align: left;
+color: #697585;
+margin-left: 10px;
+margin-top: 10px;margin-bottom: 10px;
+}
+.timer_parent_div{
+ background-color: #CFF3FD;margin-left: 10px;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;padding-right: 10px;
+}
+.day{
+  font-family: Urbanist;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.6px;
+  text-align: left;
+  
+}
+.switchContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switchButton {
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 25px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.switchButton.on {
+  background-color: #14AED1;
+}
+
+.switchButton.off {
+  background-color: #ccc;
+}
+
+.switchCircle {
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: left 0.3s;
+}
+
+.switchButton.on .switchCircle {
+  left: 21px;
+}
+.day_div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #6975850D;margin-bottom: 10px;margin-top: 10px;margin-left: 10px;border-radius: 10px;
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 700;
+line-height: 21.6px;
+text-align: left;
+color: #697585;
+}
+.add_buttn{
+  color: #14AED1;
+  font-family: Urbanist;
+font-size: 14px;
+font-weight: 500;
+line-height: 16.8px;
+text-align: left;
+
+}
+.client_name_style{
+  font-family: Urbanist;
+font-size: 16px;
+font-weight: 500;
+line-height: 19.2px;
+text-align: left;
+margin-left: 10px;
+}
+.cvvcodetxt{
+  margin-left: 0px;
+}
+
+.client_name_style2{
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 500;
+line-height: 21.6px;
+text-align: left;
+}
+
+.countingClient{
+font-family: Urbanist;
+font-size: 24px;
+font-weight: 700;
+line-height: 28.8px;
+text-align: left;
+margin-bottom: 10px;
+}

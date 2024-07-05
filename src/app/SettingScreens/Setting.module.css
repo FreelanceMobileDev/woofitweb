@@ -1,0 +1,408 @@
+.switchContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .switchButton {
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .switchButton.on {
+    background-color: #14AED1;
+  }
+  
+  .switchButton.off {
+    background-color: #ccc;
+  }
+  
+  .switchCircle {
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: left 0.3s;
+  }
+  
+  .switchButton.on .switchCircle {
+    left: 21px;
+  }
+  
+  .right_div_data {
+    background-color: #FFF;
+    border-left: 1px solid #8D99AE26;
+    width: 67%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 35px;
+  }
+
+  .space_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .total_rate{
+font-family: Urbanist;
+font-size: 24px;
+font-weight: 700;
+line-height: 28.8px;
+text-align: left;
+  }
+
+  .add_rate{
+    font-family: Urbanist;
+font-size: 14px;
+font-weight: 600;
+line-height: 16.8px;
+text-align: left;
+color: #14AED1;
+border: 1px solid #14AED1;
+width: Fixed (120px)px;
+height: Fixed (40px)px;
+padding: 10px 22px 10px 22px;
+gap: 10px;
+border-radius: 40px;
+border: 1px 0px 0px 0px;
+opacity: 0px;
+  }
+.rates_div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6975850D;
+  padding-left:  20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;
+  border-radius: 10px;
+  gap: 20px;
+} 
+.rate_txtt{
+  font-family: Urbanist;
+font-size: 20px;
+font-weight: 500;
+line-height: 24px;
+text-align: left;
+}  
+.row{
+  display: flex;
+  align-items: center;justify-content: center;
+}
+.rate_amount{
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 600;
+line-height: 21.6px;
+text-align: left;
+color: #14AED1;
+margin-right: 15px;
+}
+.notificationText{
+  font-family: Urbanist;
+font-size: 20px;
+font-weight: 500;
+line-height: 24px;
+text-align: left;
+
+}
+.container {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.integrationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.integrationInfo {
+  display: flex;
+  align-items: center;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
+
+.name {
+  font-family: Urbanist;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.description {
+  font-family: Urbanist;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-align: left;
+color: #697585;  
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: Urbanist;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.8px;
+  text-align: left;
+  margin-right: 15px;
+  align-items: center;
+justify-content: center;
+display: flex;
+width: 120px;
+margin-right: 20px;
+}
+
+.connectButton {
+  background-color: #fff;
+  color: #14AED1;
+  border: 1px solid #14AED1;
+
+
+}
+
+.disconnectButton {
+
+  background-color: #fff;
+  color: #FE4726;
+  border: 1px solid #FE4726;
+
+
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #00bcd4;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+.faqContainer {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.faqItem {
+  border-bottom: 1px solid #8D99AE26;
+  padding: 15px 0;
+}
+
+.question {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-family: Urbanist;
+font-size: 16px;
+font-weight: 600;
+line-height: 19.2px;
+text-align: left;
+
+}
+
+.arrow {
+  font-size: 18px;
+}
+
+.answer {
+  padding: 10px ;padding-left: 18px;
+  font-family: Urbanist;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+color: #697585;  
+}
+.ContachUstxt{
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 700;
+line-height: 21.6px;
+text-align: left;
+margin-top: 20px;
+}
+.Email_div{
+background-color: #6975850D;
+padding: 15px 15px 15px 15px;
+gap: 20px;
+border-radius: 10px;
+border: 1px 0px 0px 0px;
+opacity: 0px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-top: 15px;
+}
+.emailtxtt{
+  margin-left: 15px;
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 500;
+line-height: 21.6px;
+text-align: left;
+
+}
+.popupDisplay {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling within the popup */
+  background-color: rgba(0,0,0,0.5);
+}
+
+.popupHide {
+  display: none;
+}
+
+.popupContent {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.closeButton {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.submitButton:hover {
+  background-color: #009acd;
+}
+
+.greycrossicon {
+  height: 24px;
+  width: 24px;
+  filter: invert(29%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(96%) contrast(84%);
+}
+.popheadertxt {
+  font-family: Urbanist;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+.AddClientButton {
+  background-color: #14AED1;
+  margin-top: 40px;
+}
+.comment_div_2 {
+  height: 80px;
+  /* width: 95%; */
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+.Title_div_2{
+  margin-left: 15px;
+}

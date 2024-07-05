@@ -1,0 +1,158 @@
+.input_main_div {
+  width: 93%;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  align-self: center;
+  border-radius: 10px;
+}
+
+.input_field {
+  width: 100%;
+  padding: 10px;
+  border: 0px;
+  border-radius: 4px;
+  color: black;
+  font-size: 18px;
+}
+
+.inputtxt {
+  margin-top: 15px;
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: left;
+  color: #697585;
+  margin-bottom: 6px;margin-left: 10px;
+}
+
+.input_image {
+  height: 30px;
+  width: 30px;
+}
+
+.input_image2 {
+  height: 24px;
+  width: 24px;
+}
+
+.button_main_div{
+  height: 50px;
+  background-color: #8D99AE26;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+}
+.buttonname{
+  font-family: Urbanist;
+font-size: 17px;
+font-weight: 600;
+line-height: 20.4px;
+text-align: left;
+
+}
+/* components/TextWithButton.module.css */
+/* components/TextWithButton.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 95%;
+
+}
+
+.label {
+  font-size: 14px;
+  color: #5b5b5b;
+  margin-bottom: 5px;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  /* padding: 10px; */
+  height: 48px;
+  padding-left: 10px;padding-right: 10px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.text {
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: left;
+flex: 1;  
+margin-left: 10px;
+}
+
+.button {
+  margin-right: 10px;
+  font-family: Urbanist;
+font-size: 18px;
+font-weight: 600;
+line-height: 21.6px;
+text-align: left;
+color: #697585;
+
+}
+
+.icon {
+  margin: 0 10px;
+}
+.rightboxdiv{
+  margin-left: 10px;
+  border-left: 1px solid #8D99AE26;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  align-items: center;justify-content: center;
+}
+.input_parent_div{
+  /* border: 1px solid red;  */
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+}
+.leftImage{
+  border-right: 1px solid #8D99AE4D;
+  height: 100%;
+  width: 80px;
+  align-items: center;
+  display: flex;
+  padding-right: 10px;
+  justify-content: space-between;
+}
+.lefttxtx{
+  border-right: 1px solid #8D99AE4D;
+  height: 100%;
+  width: 40px;
+  align-items: center;
+  display: flex;
+  padding-right: 10px;
+  justify-content: space-between;
+  font-family: Urbanist;
+font-size: 16px;
+font-weight: 500;
+line-height: 19.2px;
+text-align: left;
+color: #697585;
+}
+.space_div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
