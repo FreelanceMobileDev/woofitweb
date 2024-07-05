@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './../_components/Login.module.css'
 import Inputfield from '../_reuseableComponent/Inputfield';
 import { AppleLogo, Attherateimg, GoogleLogo, Lockimg } from '../../../public';
-
+import Image from 'next/image';
 
 const LoginWoofit = () => {
 
@@ -60,8 +60,10 @@ const LoginWoofit = () => {
                         className={styles.Logoimg}
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
-                    <img src="/images/africanMan.jpg" alt="Workout"
+                    <Image src="/images/africanMan.png" alt="Workout"
                         className={styles.africnManstyle}
+                        width={500} // Replace with your image width
+                        height={400} // Replace with your image height
                     />
                 </div>
             </div>

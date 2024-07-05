@@ -15,29 +15,6 @@
       "static/css/9121ede8a014db1e.css",
       "static/chunks/app/layout-a148a8d2e0abedcc.js"
     ],
-    "/LoginWoofits/page": [
-      "static/chunks/webpack-01a270de285f93e0.js",
-      "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
-      "static/chunks/23-c466da7ec22cb41b.js",
-      "static/chunks/main-app-de1bc1ce39e02507.js",
-      "static/css/e33d5f14fce76028.css",
-      "static/chunks/231-84fb8f77df94fb7f.js",
-      "static/chunks/982-1763630ac5b8f657.js",
-      "static/chunks/app/LoginWoofits/page-ccf9cc3fa3370dff.js"
-    ],
-    "/page": [
-      "static/chunks/webpack-01a270de285f93e0.js",
-      "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
-      "static/chunks/23-c466da7ec22cb41b.js",
-      "static/chunks/main-app-de1bc1ce39e02507.js",
-      "static/css/e33d5f14fce76028.css",
-      "static/chunks/ca377847-912eed0958b7ce46.js",
-      "static/chunks/231-84fb8f77df94fb7f.js",
-      "static/chunks/668-63f6dab2a1708fc8.js",
-      "static/chunks/982-1763630ac5b8f657.js",
-      "static/chunks/475-a02562ab9afa23be.js",
-      "static/chunks/app/page-9489052e331144fe.js"
-    ],
     "/addProfilePicture/page": [
       "static/chunks/webpack-01a270de285f93e0.js",
       "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
@@ -47,16 +24,6 @@
       "static/chunks/231-84fb8f77df94fb7f.js",
       "static/chunks/app/addProfilePicture/page-3515da11436ad353.js"
     ],
-    "/professionaldetails/page": [
-      "static/chunks/webpack-01a270de285f93e0.js",
-      "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
-      "static/chunks/23-c466da7ec22cb41b.js",
-      "static/chunks/main-app-de1bc1ce39e02507.js",
-      "static/css/e33d5f14fce76028.css",
-      "static/chunks/231-84fb8f77df94fb7f.js",
-      "static/chunks/982-1763630ac5b8f657.js",
-      "static/chunks/app/professionaldetails/page-a26694083c288445.js"
-    ],
     "/dashboard/page": [
       "static/chunks/webpack-01a270de285f93e0.js",
       "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
@@ -65,20 +32,24 @@
       "static/css/e33d5f14fce76028.css",
       "static/chunks/ca377847-912eed0958b7ce46.js",
       "static/chunks/231-84fb8f77df94fb7f.js",
-      "static/chunks/668-63f6dab2a1708fc8.js",
-      "static/chunks/982-1763630ac5b8f657.js",
-      "static/chunks/475-a02562ab9afa23be.js",
-      "static/chunks/app/dashboard/page-34f71fd487d1d7a5.js"
+      "static/chunks/572-c157b930e9dabc97.js",
+      "static/chunks/982-f83386f69b5073d3.js",
+      "static/chunks/475-154781c97db31970.js",
+      "static/chunks/app/dashboard/page-c4af324a0c7bab79.js"
     ],
-    "/authStack/page": [
+    "/page": [
       "static/chunks/webpack-01a270de285f93e0.js",
       "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
       "static/chunks/23-c466da7ec22cb41b.js",
       "static/chunks/main-app-de1bc1ce39e02507.js",
       "static/css/e33d5f14fce76028.css",
+      "static/chunks/ca377847-912eed0958b7ce46.js",
       "static/chunks/231-84fb8f77df94fb7f.js",
-      "static/chunks/982-1763630ac5b8f657.js",
-      "static/chunks/app/authStack/page-9ed7dfb7585f75ae.js"
+      "static/chunks/974-23215fc0dcd1d44c.js",
+      "static/chunks/572-c157b930e9dabc97.js",
+      "static/chunks/982-f83386f69b5073d3.js",
+      "static/chunks/475-154781c97db31970.js",
+      "static/chunks/app/page-7ee9a9c4b4e07ceb.js"
     ],
     "/signupW/page": [
       "static/chunks/webpack-01a270de285f93e0.js",
@@ -88,6 +59,38 @@
       "static/css/e33d5f14fce76028.css",
       "static/chunks/231-84fb8f77df94fb7f.js",
       "static/chunks/app/signupW/page-aae5d0c63e25a603.js"
+    ],
+    "/professionaldetails/page": [
+      "static/chunks/webpack-01a270de285f93e0.js",
+      "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
+      "static/chunks/23-c466da7ec22cb41b.js",
+      "static/chunks/main-app-de1bc1ce39e02507.js",
+      "static/css/e33d5f14fce76028.css",
+      "static/chunks/231-84fb8f77df94fb7f.js",
+      "static/chunks/982-f83386f69b5073d3.js",
+      "static/chunks/app/professionaldetails/page-65485ff35ad8784f.js"
+    ],
+    "/LoginWoofits/page": [
+      "static/chunks/webpack-01a270de285f93e0.js",
+      "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
+      "static/chunks/23-c466da7ec22cb41b.js",
+      "static/chunks/main-app-de1bc1ce39e02507.js",
+      "static/css/e33d5f14fce76028.css",
+      "static/chunks/231-84fb8f77df94fb7f.js",
+      "static/chunks/974-23215fc0dcd1d44c.js",
+      "static/chunks/982-f83386f69b5073d3.js",
+      "static/chunks/app/LoginWoofits/page-64702c2cbd2dc86e.js"
+    ],
+    "/authStack/page": [
+      "static/chunks/webpack-01a270de285f93e0.js",
+      "static/chunks/fd9d1056-2737f78bfff3f6bf.js",
+      "static/chunks/23-c466da7ec22cb41b.js",
+      "static/chunks/main-app-de1bc1ce39e02507.js",
+      "static/css/e33d5f14fce76028.css",
+      "static/chunks/231-84fb8f77df94fb7f.js",
+      "static/chunks/974-23215fc0dcd1d44c.js",
+      "static/chunks/982-f83386f69b5073d3.js",
+      "static/chunks/app/authStack/page-67c0fb4f5e1cc4ed.js"
     ]
   }
 }
