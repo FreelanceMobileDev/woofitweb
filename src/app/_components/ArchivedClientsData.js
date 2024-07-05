@@ -1,6 +1,7 @@
 
 import { ArchivedOUTicon, DeleteIcon, EditIcon, } from '../../../public';
 import styles from './Login.module.css';
+// import Image from 'next/image';
 const ArchivedClientsData = ({setSelectedItem}) => {
     const data = [
         { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', rate: 'Optimum', goal: 'Muscle Gain', gender: 'Female' },

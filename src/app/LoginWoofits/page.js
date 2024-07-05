@@ -60,7 +60,7 @@ const LoginWoofit = () => {
                         className={styles.Logoimg}
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
-                    <img src="/images/africanMan.png" alt="Workout"
+                    <img src="/images/africanMan.jpg" alt="Workout"
                         className={styles.africnManstyle}
                     />
                 </div>
