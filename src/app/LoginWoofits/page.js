@@ -55,20 +55,25 @@ const LoginWoofit = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className={styles.rightPane}>
-                    <Image src="/images/Logo.png" alt="Workout"
-                        className={styles.Logoimg}
-                        height={136}
-                        width={450}
- 
-                    />
-                    <p className={styles.textttt}>Where Coaching Meets Excellence</p>
-                    <Image src="/images/africanMan.png" alt="Workout"
-                        className={styles.africnManstyle}
-                        width={500} 
-                        height={400} 
-                    />
-                </div>
+            <Image 
+                src="/images/Logo.png" 
+                alt="Workout" 
+                className={styles.Logoimg} 
+                height={136} 
+                width={450} 
+            />
+            <p className={styles.textttt}>Where Coaching Meets Excellence</p>
+            <Image 
+                src="/images/africanMan.png" 
+                alt="Workout" 
+                className={styles.africnManstyle} 
+                width={500} 
+                height={400} 
+            />
+        </div>
+
             </div>
         </>
 
