@@ -18,6 +18,7 @@ const CoachesContant = ({setSelectedItem}) => {
     <div  style={{backgroundColor:"white"}}>
       <div className={styles.CoachesHeaderdiv}>
         <div className={styles.Coachestxtt}>Coaches</div>
+        <div style={{display:'flex',alignItems:'center'}}>
         <ArchivedIcon />
         <div className={styles.Archived_Clients}onClick={()=>{setSelectedItem('ArchivedCoaches')}}>Archived Coaches</div>
         <div className={styles.Add_Client}>Add a Coach</div>
@@ -25,6 +26,7 @@ const CoachesContant = ({setSelectedItem}) => {
         <SearchIcon/>
         <div style={{width:40}}/>
         <FilterIcon/>
+        </div>
         </div>
       </div>
     <div>

@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  overflow: hidden;
   height: 98vh;
 }
 .noUnderline {
@@ -12,17 +13,21 @@
   justify-content: center;
   /* align-items: center; */
   /* padding: 20px; */
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none; 
 }
 
 .rightPane {
   flex: 1;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: column;
   background: linear-gradient(to right, #14AED1, #CFF3FD);
   color: white;
-
+  overflow: hidden; 
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 .LeftContainor {
@@ -287,7 +292,35 @@
   flex: 1;
 }
 
-
+@media (max-width: 1024px) {
+  .summary,
+  .newclientSidebar {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .summarydashboard {
+    flex-direction: column;
+  }
+  .summaryCarddashboard {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .headerdashboardContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .summaryCarddashboard {
+    padding: 10px;
+  }
+  .sessionDetails {
+    gap: 5px;
+  }
+}
 .newclientSidebar {
   width: 25%;
   padding-left: 2%;
@@ -298,12 +331,13 @@
   display: flex;
   gap: 20px;
   padding: 20px;
-  width: 70%;
+  width: 67%;
   flex-direction: column;
   border-left: 1px solid #8D99AE4D;
   border-right: 1px solid #8D99AE4D;
 
 }
+
 
 .summaryCard {
   background-color: #fff;
@@ -583,7 +617,9 @@
 .DashboardContent {
   display: flex;
   background-color: #fff;
+  flex-wrap: wrap; 
 }
+
 
 .actionText {
   color: #697585;
@@ -812,9 +848,10 @@
 
 .clientsHeaderdiv {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
+
   /*  */
 }
 
@@ -824,7 +861,7 @@
   font-weight: 700;
   line-height: 38.4px;
   text-align: left;
-  width: 70%;
+  /* width: 65%; */
 }
 
 .Coachestxtt {
@@ -833,7 +870,7 @@
   font-weight: 700;
   line-height: 38.4px;
   text-align: left;
-  width: 60%;
+  /* width: 60%; */
 
 }
 
@@ -843,7 +880,7 @@
   font-weight: 700;
   line-height: 38.4px;
   text-align: left;
-  width: 70%;
+  /* width: 70%; */
   /* border: 1px solid green; */
 }
 
@@ -851,21 +888,21 @@
   font-family: Urbanist;
   font-size: 14px;
   font-weight: 500;
-  line-height: 16.8px;
-  text-align: left;
+  /* line-height: 16.8px; */
+  /* text-align: left; */
   color: #14AED1;
-  align-items: center;
+  /* align-items: center; */
   margin-left: 8px;
   cursor: pointer;
 }
 
 .Add_Client {
   padding: 10px 22px 10px 22px;
-  gap: 10px;
+  /* gap: 10px; */
   border-radius: 40px;
   border: 1px solid #14AED1;
   opacity: 0.8px;
-  margin-left: 4%;
+  margin-left: 30px;
   font-family: Urbanist;
   font-size: 14px;
   font-weight: 500;
@@ -1064,9 +1101,9 @@
 
 .PaymentsHeaderdiv {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  width: 96%;
+  /* width: 96%; */
   padding-left: 20px;
   padding-top: 40px;
   /* margin-top: 20px; */
@@ -1077,9 +1114,9 @@
 
 .CoachesHeaderdiv {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 30px;
@@ -1154,24 +1191,23 @@
   padding: 4px 10px 4px 10px;
   gap: 10px;
   border-radius: 25px;
-  opacity: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:#E3FACF;;
+  background-color: #E3FACF;
+  opacity: 1; /* Ensure opacity is set to 1 */
 }
-
-.status.success {
+.successStatus {
   background-color: #E3FACF;
   color: #359C00;
 }
 
-.status.failed {
+.failedStatus {
   background-color: #FFE6D7;
   color: #FE4726;
 }
 
-.status.pending {
+.pendingStatus {
   background-color: #FFF4CD;
   color: #FFA84A;
 }
@@ -1186,11 +1222,23 @@
   border-right: 1px solid #8D99AE4D;
   margin-top: 15px;
 }
+.summaryReportstwo {
+  display: flex;
+  gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 68%;
+  flex-direction: column;
+  border-right: 1px solid #8D99AE4D;
+  margin-top: 15px;
+  box-sizing: border-box;
+}
 
 .sidetableContainer {
-  width: 24%;
+  width: 32%; /* Adjusted width */
   padding: 20px;
   margin-top: 15px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -1237,13 +1285,43 @@
   text-align: left;
   margin-bottom: 10px;
 }
+@media (max-width: 1024px) {
+  .summaryReports, .sidetableContainer {
+    width: 100%; /* Full width on smaller screens */
+    border-right: none; /* Remove border */
+    border-bottom: 1px solid #8D99AE4D; /* Add bottom border */
+    padding: 15px; /* Adjust padding */
+  }
+}
+
+@media (max-width: 768px) {
+  .summaryReports {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .sidetableContainer {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reportheaderdashboardContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .sidetableContainer {
+    padding: 5px;
+  }
+}
 
 .reportheaderdashboardContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
+
 
 .row {
   display: flex;
@@ -1336,9 +1414,6 @@
 .weekContainer::-webkit-scrollbar {
   display: none;
 }
-
-
-
 .selected {
   background-color: #14AED1;
   color: white;

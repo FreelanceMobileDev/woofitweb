@@ -15,9 +15,11 @@ const ClientsContant = ({setSelectedItem}) => {
       <div style={{padding: 20,}}>
       <div className={styles.clientsHeaderdiv}>
         <div className={styles.clientstxtt}>Clients</div>
+        <div style={{display:'flex',alignItems:'center'}}>
         <ArchivedIcon />
-        <div className={styles.Archived_Clients}onClick={()=>{setSelectedItem('ArchivedClients')}}>Archived Clients</div>
+        <div className={styles.Archived_Clients} onClick={()=>{setSelectedItem('ArchivedClients')}}>Archived Clients</div>
         <div className={styles.Add_Client}>Add a Client</div>
+        </div>
       </div>
       <div className={styles.Groups_Clients} >
         <div style={{display:'flex',}}>

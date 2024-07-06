@@ -49,7 +49,7 @@ const LoginWoofit = () => {
                                 </button>
                                 <button type="button" className={styles.appleButton}>
                                     <AppleLogo className={styles.googlelogo} />
-                                    Continue with Apple hello 
+                                    Continue with Apple 
                                 </button>
                             </div>
                         </div>

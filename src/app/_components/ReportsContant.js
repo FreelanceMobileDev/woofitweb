@@ -75,7 +75,7 @@ const ReportsContant = () => {
       };
     return (
         <div className={styles.DashboardContent}>
-            <div className={styles.summaryReports}>
+            <div className={styles.summaryReportstwo}>
             <div className={styles.reportheaderdashboardContent}>
           <div style={{ display: 'flex', alignItems: 'center', }}><LeftArrow /> <h2 className={styles.month_year_txt}>August 2024</h2>
             <Rightarrow />
@@ -141,11 +141,11 @@ const ReportsContant = () => {
               <td className={styles.cell}>{transaction.txnId}</td>
               <td className={styles.cell}>{transaction.date}</td>
               <td className={styles.cellname}>{transaction.amount}</td>
-              <td className={styles.cellname}>
-                <div className={`${styles.status} ${styles[transaction.status.toLowerCase()]}`}>
-                  {transaction.status}
-                </div>
-              </td>
+               <td className={styles.cellname}>
+                        <div className={`${styles.status} ${styles[transaction.status.toLowerCase() + 'Status']}`}>
+                          {transaction.status}
+                        </div>
+                      </td>
             </tr>
           ))}
         </tbody>

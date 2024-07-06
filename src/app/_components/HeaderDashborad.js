@@ -12,7 +12,7 @@ const Header = () => {
       img1={<Searchimg/>}
       type="text" placeholder="Search Users"
       additionalMainDivClassName={styles.searchinput}
-      additionalinput_field={styles.searchtxt}
+  additionalinput_field={styles.searchtxt}
       />
      </div>
       <div className={styles.userInfo}>

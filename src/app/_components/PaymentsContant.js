@@ -17,12 +17,14 @@ const PaymentsContant = ({ setSelectedItem }) => {
     <div style={{ backgroundColor: "white" }}>
       <div className={styles.PaymentsHeaderdiv}>
         <div className={styles.Paymentstxtt}>Payments</div>
+        <div style={{display:'flex',alignItems:'center',}}>
         <div className={styles.Add_Client} onClick={() => { setSelectedItem('InvoiceCreate') }}>Create Invoice</div>
         <div style={{ display: 'flex', marginLeft: 30 }}>
           <SearchIcon />
           <div style={{ width: 40 }} />
           <FilterIcon />
         </div>
+      </div>
       </div>
       <div>
         <div className={styles.tableContainer}>
