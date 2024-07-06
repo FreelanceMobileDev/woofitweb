@@ -36,10 +36,10 @@ const Professionaldetails = () => {
                                 <TextWithButton
                                     label={"Service Offerings"}
                                     text={"Select"}
-                                    RightIcon={Downwarrow}
+                                    RightIcon={Downarrow}
                                 />
-   <Link href="/addProfilePicture" passHref className={styles.noUnderline}>
-                                <button type="submit" className={styles.authButton2} >Continue</button>
+                                 <Link href="/addProfilePicture" passHref className={styles.noUnderline}>
+                                    <button type="submit" className={styles.authButton2} >Continue</button>
                                 </Link>
                             </form>
 
@@ -52,7 +52,7 @@ const Professionaldetails = () => {
                         className={styles.Logoimg}
                         height={136}
                         width={450}
-                       
+
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
                     <Image src="/images/africanMan.png" alt="Workout"

@@ -36,8 +36,10 @@ const ProfilePicUpload = () => {
                                     <div className={styles.terms_and_condi_txt}>Privacy Policy.</div>
                                     </div>
                                 </div>
-                                <Link href="/dashboard" passHref className={styles.noUnderline}>
-                                <button type="submit" className={styles.authButton2} >Continue</button>
+                                <Link href="/dashboard" className={styles.noUnderline}>
+                                    <button type="submit" className={styles.authButton}>
+                                        Continue
+                                    </button>
                                 </Link>
                             </form>
 
