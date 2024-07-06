@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ClientPage.module.css';
-import { CheckIcon, ClockCalender, CrossIcon, DownBlueArrow, PlayIcon, PlusIcon, Rightarrow } from '../../../public';
+import { CheckIcon, ClockCalender, CrossIcon, DownBlueArrow,  Rightarrow } from '../../../public';
 
 const Trainings = () => {
   const sessions = [

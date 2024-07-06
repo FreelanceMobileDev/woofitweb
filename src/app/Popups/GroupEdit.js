@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import styles from './Popups.module.css';
-import { CalenderIcon, CashSecondIcon, ClockIcon, CrossIcon, GroupIcon, NonCashIcon, Rightarrow, Userimg } from '../../../public';
+import { CrossIcon, } from '../../../public';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Inputfield from '../_reuseableComponent/Inputfield';

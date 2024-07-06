@@ -9,7 +9,7 @@ import AddClients from './AddClients'
 import Groups from './Groups'
 
 
-const OntheDate = ({ show, handleClose }) => {
+const OntheDate = ({  handleClose }) => {
   const [popupIsOpen, setShowPopup] = useState(false);
   const [groupdata, setgroupdata] = useState(false);
   const [selected, setSelected] = useState('cash');

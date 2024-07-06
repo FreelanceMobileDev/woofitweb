@@ -6,7 +6,6 @@ import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import Image from 'next/image';
 const EditCoach = ({ setSelectedItem }) => {
-  const [activeTab, setActiveTab] = useState('Overall Info');
 
   return (
 

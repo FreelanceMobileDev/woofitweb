@@ -1,7 +1,7 @@
 'use client';
 import { GoogleCalender, MailchimpIcon, SlackIcon, Stripe, TelegramIcon } from '../../../public';
 import styles from './Setting.module.css'
-import React, { useState } from 'react';
+import React from 'react';
 const IntegrationsScreen = () => {
   const integrationsData = [
     { name: 'Google Calendar', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', connected: false, buttonText: 'Connect', imageUrl: <GoogleCalender/>},

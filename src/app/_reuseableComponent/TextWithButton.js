@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Componet.module.css'
-import { Downarrow, Rightarrow } from '../../../public';
+
 const TextWithButton = ({ label, text, buttonText, RightIcon, LeftIcon,props,RightBox,space,onClick }) => {
     return (
         <div style={props?.style} className={`${styles.container} ${props?.additionalcontainer}`}>

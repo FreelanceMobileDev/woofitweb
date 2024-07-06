@@ -17,7 +17,7 @@ const SignupWoofit = () => {
                             <Link href="/authStack" passHref>
                                 <div className={styles.RegisterButton} style={{ textDecoration: 'none' }}>Log In</div>
                             </Link>
-                          
+
                         </div>
                         <div className={styles.authBox}>
                             <h2 className={styles.WelcomeBack}>Sign Up</h2>
@@ -33,7 +33,7 @@ const SignupWoofit = () => {
                                     type="email" id="email" placeholder="Enter your Email"
                                     img1={<Attherateimg />}
                                 />
-                                   <Inputfield
+                                <Inputfield
                                     name={"Phone"}
                                     img2
                                 />
@@ -47,9 +47,9 @@ const SignupWoofit = () => {
                                     type="password" id="password" placeholder="Confirm your Password"
                                     img1={<Lockimg />}
                                 />
-                              <Link href="/professionaldetails" passHref className={styles.noUnderline}>
-                                <button type="submit" className={styles.authButton}>Continue</button>
-                             </Link>
+                                <Link href="/professionaldetails" passHref className={styles.noUnderline}>
+                                    <button type="submit" className={styles.authButton}>Continue</button>
+                                </Link>
                             </form>
                             <div className={styles.Linediv} />
                             <div className={styles.socialLogin}>
@@ -68,9 +68,9 @@ const SignupWoofit = () => {
                 <div className={styles.rightPane}>
                     <Image src="/images/Logo.png" alt="Logo"
                         className={styles.Logoimg}
-height={136}
-width={450}
-                     
+                        height={136}
+                        width={450}
+
                     />
                     <p className={styles.textttt}> Where Coaching Meets Excellence</p>
                     <Image src="/images/africanMan.png" alt="Workout"

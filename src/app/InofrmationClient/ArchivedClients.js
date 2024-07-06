@@ -16,7 +16,7 @@ import GroupArchivedData from '../_components/GroupArchivedData';
 
 import styles from './../_components/Login.module.css';
 import React, { useState } from 'react';
-const ArchivedClients = ({setSelectedItem}) => {
+const ArchivedClients = () => {
   const [activeTab, setActiveTab] = useState('Clients');
   const handleTabClick = (tab) => {
     setActiveTab(tab);

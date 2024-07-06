@@ -5,7 +5,7 @@ import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
-const Groups = ({ show, handleClose }) => {
+const Groups = ({  handleClose }) => {
 
     const group1 = [
         { id: 1,count:'+3', name: 'Eloise Robinson', avatar: '/images/profilepic.png', avatar1: '/images/profilepic.png', avatar2: '/images/profilepic.png', },

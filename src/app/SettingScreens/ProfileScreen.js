@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { CalenderIcon, Downarrow, UploadimgIcon } from '../../../public';
+import { CalenderIcon, UploadimgIcon } from '../../../public';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import styles from './../_components/Login.module.css';
@@ -20,21 +20,7 @@ const ProfileScreen = () => {
       <Inputfield
         name={"Name"}
       />
-      {/* <div className={styles.rateAndGoal}>
-        <TextWithButton
-          label="Date of Birth"
-          text="14 Mar 2002"
-          additionalcontainer={styles.rate_input_div}
-          RightIcon={CalenderIcon}
-        />
-        <div style={{ width: 80 }} />
-        <TextWithButton
-          label="Gender"
-          text="Male"
-          RightIcon={Downarrow}
-          additionalcontainer={styles.rate_input_div}
-        />
-      </div> */}
+     
       <div className={styles.row_div} style={{ marginTop: 20 }} >
         <Inputfield
           input_parent_div_prop={styles.calender_input}

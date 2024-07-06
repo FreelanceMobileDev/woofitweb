@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ArchivedOUTicon, DeleteIcon, EditIcon, } from '../../../public';
 import styles from './Login.module.css';
 // import Image from 'next/image';
-const ArchivedClientsData = ({setSelectedItem}) => {
+const ArchivedClientsData = () => {
     const data = [
         { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', rate: 'Optimum', goal: 'Muscle Gain', gender: 'Female' },
         { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', rate: 'Light', goal: 'Muscle Gain', gender: 'Female' },

@@ -1,16 +1,8 @@
-// import React from 'react';
 
-// const Payments = () => (
-//   <div>
-//     <p>Payments content goes here.</p>
-//   </div>
-// );
-
-// export default Payments;
 
 import React from 'react';
 import styles from './ClientPage.module.css';
-import { CashIcon, CheckIcon, ClockCalender, CrossIcon, DownBlueArrow, PlayIcon, PlusIcon, Rightarrow } from '../../../public';
+import { CashIcon, DownBlueArrow, Rightarrow } from '../../../public';
 import CardIcon from '../../../public/Images/CardIcon';
 
 const Payments = () => {
