@@ -49,7 +49,7 @@ const LoginWoofit = () => {
                                 </button>
                                 <button type="button" className={styles.appleButton}>
                                     <AppleLogo className={styles.googlelogo} />
-                                    Continue with Apple 
+                                    Continue with Apple
                                 </button>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ const LoginWoofit = () => {
             />
             <p className={styles.textttt}>Where Coaching Meets Excellence</p>
             <Image 
-                src="https://woofitapp.s3.eu-north-1.amazonaws.com/africanMan%403x.png" 
+                src="/images/africanMan.png" 
                 alt="Workout" 
                 className={styles.africnManstyle} 
                 width={500} 
