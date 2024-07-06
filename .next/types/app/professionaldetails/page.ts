@@ -1,4 +1,4 @@
-// File: /Users/apple/Documents/Nextjs Project/woofitadmin/src/app/professionaldetails/page.js
+// File: /Users/apple/Documents/woofitadmin/src/app/professionaldetails/page.js
 import * as entry from '../../../../src/app/professionaldetails/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

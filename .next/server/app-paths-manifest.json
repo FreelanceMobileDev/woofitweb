@@ -1,11 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/addProfilePicture/page": "app/addProfilePicture/page.js",
   "/LoginWoofits/page": "app/LoginWoofits/page.js",
+  "/addProfilePicture/page": "app/addProfilePicture/page.js",
   "/authStack/page": "app/authStack/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
   "/professionaldetails/page": "app/professionaldetails/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/signupW/page": "app/signupW/page.js"
 }
