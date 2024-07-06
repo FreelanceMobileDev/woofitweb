@@ -1,7 +1,7 @@
 {
-  "/page": "app/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/signupW/page": "app/signupW/page.js",
   "/professionaldetails/page": "app/professionaldetails/page.js",
-  "/addProfilePicture/page": "app/addProfilePicture/page.js"
+  "/dashboard/page": "app/dashboard/page.js",
+  "/page": "app/page.js",
+  "/addProfilePicture/page": "app/addProfilePicture/page.js",
+  "/signupW/page": "app/signupW/page.js"
 }

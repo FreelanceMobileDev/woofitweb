@@ -100,7 +100,7 @@ const ScheduleContant = () => {
                 </div>
                
                 <div className={styles.weekContainer}>
-                    {days.map((date) => (
+                    {/* {days.map((date) => (
                         <div
                             key={date}
                             className={`${styles.day} ${date.toDateString() === selectedDate.toDateString() ? styles.selected : ''}`}
@@ -109,7 +109,7 @@ const ScheduleContant = () => {
                             <div className={styles.date} style={{ color: date.toDateString() === selectedDate.toDateString() ? 'white' : '#697585' }}>{format(date, 'd')}</div>
                             <div className={styles.label} style={{ color: date.toDateString() === selectedDate.toDateString() ? 'white' : '#697585' }}>{format(date, 'EEE')}</div>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
                 <div onClick={handleNextWeek}>
                   <Rightarrow/>
