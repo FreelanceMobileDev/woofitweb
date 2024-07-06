@@ -55,7 +55,7 @@ const ProfilePicUpload = () => {
                        
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
-                    <Image src="/images/africanMan.png" alt="Workout"
+                    <Image src="https://woofitapp.s3.eu-north-1.amazonaws.com/africanMan%403x.png" alt="Workout"
 height={400} width={400}
                         className={styles.africnManstyle}
                     />
