@@ -20,13 +20,27 @@ const Sidebar = ({ onItemSelected,setSelectedItem,selectedItem}) => {
     onItemSelected(item); 
   };
   const navItems = [
-    { id: 1, icon: <DashBoradimg />, label: "Dashboard", },
-    { id: 2, icon: <Scheduleimg />, label: "Schedule",},
-    { id: 3, icon: <Clientimg />, label: "Clients",},
-    { id: 4, icon: <Coachesimg />, label: "Coaches",  },
-    { id: 5, icon: <Paymentsimg />, label: "Payments",  },
-    { id: 6, icon: <Reportsimg />, label: "Reports",  },
-    { id: 7, icon: <Settingsimg />, label: "Settings",  },
+    { id: 1, icon: <DashBoradimg
+      //  className={}
+    />, label: "Dashboard", },
+    { id: 2, icon: <Scheduleimg 
+     //  className={}
+    />, label: "Schedule",},
+    { id: 3, icon: <Clientimg 
+     //  className={}
+    />, label: "Clients",},
+    { id: 4, icon: <Coachesimg 
+     //  className={}
+    />, label: "Coaches",  },
+    { id: 5, icon: <Paymentsimg 
+     //  className={}
+    />, label: "Payments",  },
+    { id: 6, icon: <Reportsimg 
+     //  className={}
+    />, label: "Reports",  },
+    { id: 7, icon: <Settingsimg 
+     //  className={}
+    />, label: "Settings",  },
   ];
   
   return (

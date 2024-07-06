@@ -352,7 +352,7 @@
   gap: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  width: 70%;
+  width: 66%;
   flex-direction: column;
   margin-top: 30px;
   border-right: 1px solid #8D99AE4D;
@@ -614,7 +614,7 @@
 
 }
 
-.DashboardContent {
+.DashboardContenttwo {
   display: flex;
   background-color: #fff;
   flex-wrap: wrap; 
@@ -1221,6 +1221,11 @@
   flex-direction: column;
   border-right: 1px solid #8D99AE4D;
   margin-top: 15px;
+}
+.DashboardContent {
+  display: flex;
+  background-color: #fff;
+  flex-wrap: wrap; 
 }
 .summaryReportstwo {
   display: flex;

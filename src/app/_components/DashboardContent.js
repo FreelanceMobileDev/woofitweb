@@ -35,7 +35,7 @@ const DashboardContent = () => {
     { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', icon: <ClockCalender /> },
   ];
   return (
-    <div className={styles.DashboardContent}>
+    <div className={styles.DashboardContenttwo}>
       <div className={styles.summary}>
         <div className={styles.headerdashboardContent}>
           <div style={{ display: 'flex', alignItems: 'center', }}><LeftArrow /> <h2 className={styles.month_year_txt}>August 2024</h2>

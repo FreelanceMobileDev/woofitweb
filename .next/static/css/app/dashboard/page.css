@@ -751,7 +751,7 @@ color: #697585;
   gap: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  width: 70%;
+  width: 66%;
   flex-direction: column;
   margin-top: 30px;
   border-right: 1px solid #8D99AE4D;
@@ -1013,7 +1013,7 @@ color: #697585;
 
 }
 
-.Login_DashboardContent__ZJPOv {
+.Login_DashboardContenttwo__ix3WJ {
   display: flex;
   background-color: #fff;
   flex-wrap: wrap; 
@@ -1621,6 +1621,11 @@ color: #697585;
   flex-direction: column;
   border-right: 1px solid #8D99AE4D;
   margin-top: 15px;
+}
+.Login_DashboardContent__ZJPOv {
+  display: flex;
+  background-color: #fff;
+  flex-wrap: wrap; 
 }
 .Login_summaryReportstwo__Ui_jr {
   display: flex;

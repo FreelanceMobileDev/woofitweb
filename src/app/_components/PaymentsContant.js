@@ -48,10 +48,10 @@ const PaymentsContant = ({ setSelectedItem }) => {
                   <td className={styles.cell}>{transaction.date}</td>
                   <td className={styles.cellname}>{transaction.amount}</td>
                   <td className={styles.cellname}>
-                    <div className={`${styles.status} ${styles[transaction.status.toLowerCase()]}`}>
-                      {transaction.status}
-                    </div>
-                  </td>
+                        <div className={`${styles.status} ${styles[transaction.status.toLowerCase() + 'Status']}`}>
+                          {transaction.status}
+                        </div>
+                      </td>
                 </tr>
               ))}
             </tbody>
