@@ -300,6 +300,7 @@
     padding-right: 10px;
   }
 }
+
 @media (max-width: 768px) {
   .summarydashboard {
     flex-direction: column;
@@ -314,12 +315,6 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  .summaryCarddashboard {
-    padding: 10px;
-  }
-  .sessionDetails {
-    gap: 5px;
-  }
 }
 .newclientSidebar {
   width: 25%;
@@ -329,13 +324,12 @@
 
 .summary {
   display: flex;
+  flex-direction: column;
   gap: 20px;
   padding: 20px;
   width: 67%;
-  flex-direction: column;
   border-left: 1px solid #8D99AE4D;
   border-right: 1px solid #8D99AE4D;
-
 }
 
 
@@ -448,13 +442,39 @@
 
 }
 
-.searchinput {
-  width: 100%;
-  align-self: left;
-  border-radius: 30px;
-  height: 42px;
-
+/* components/SearchInput.module.css */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  padding: 10px 10px;
+  width: 300px;
 }
+
+.searchIcon {
+  fill: #a0a0a0;
+  margin-right: 10px;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  font-family: Urbanist;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  text-align: left;
+  
+  color:#697585;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.searchInput::placeholder {
+  color: #a0a0a0;
+}
+
 
 .searchtxt {
   font-family: Urbanist;
@@ -479,6 +499,7 @@
 }
 
 /*  */
+
 
 
 .headerdashboardContent {
@@ -613,11 +634,11 @@
   margin: 5px 0;
 
 }
-
 .DashboardContenttwo {
   display: flex;
   background-color: #fff;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 

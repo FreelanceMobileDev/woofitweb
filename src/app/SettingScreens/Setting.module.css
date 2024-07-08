@@ -292,7 +292,7 @@ padding: 15px 15px 15px 15px;
 gap: 20px;
 border-radius: 10px;
 border: 1px 0px 0px 0px;
-opacity: 0px;
+/* opacity: 0px; */
 display: flex;
 align-items: center;
 justify-content: space-between;

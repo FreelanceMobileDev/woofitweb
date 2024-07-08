@@ -9,12 +9,17 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div style={{width:'30%',}}>
-      <Inputfield
+      {/* <Inputfield
       img1={<Searchimg/>}
       type="text" placeholder="Search Users"
       additionalMainDivClassName={styles.searchinput}
   additionalinput_field={styles.searchtxt}
-      />
+      /> */}
+    <div className={styles.searchContainer}>
+    <Searchimg/> 
+      <input type="text" placeholder="Search Users" className={styles.searchInput} />
+    </div>
+       
      </div>
       <div className={styles.userInfo}>
       
