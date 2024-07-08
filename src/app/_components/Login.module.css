@@ -2032,3 +2032,68 @@ text-align: left;
 color: #14AED1;
 margin-left: 5px;
 }
+
+.calendar_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+ 
+  margin: 0 auto;
+}
+
+.daytwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  color: #697585;
+  margin-left: 15px; 
+  margin-right: 15px;
+}
+
+.datetwo {
+  font-family: Urbanist;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.6px;
+  text-align: left;
+color: #697585;  
+margin-bottom: 6px;
+}
+
+.labeltwo {
+  font-family: Urbanist;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.4px;
+  text-align: left;
+color: #697585;  
+}
+
+.selectedtwo {
+  background-color: #14AED1;
+  border-radius: 30px;
+  padding: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.selecteddatetxt{
+  font-family: Urbanist;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.6px;
+  text-align: left;
+color: #fff;  
+margin-bottom: 6px;
+}
+.selecteddaytxt{
+  font-family: Urbanist;
+font-size: 12px;
+font-weight: 500;
+line-height: 14.4px;
+text-align: left;
+color: #FFF;
+}

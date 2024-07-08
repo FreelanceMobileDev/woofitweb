@@ -2,7 +2,7 @@
 import { CalenderIcon, CashIcon, CheckIcon, ClockCalender, ClockIcon, CrossIcon, LeftArrow, PlayIcon, PlusIcon, Rightarrow, } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import styles from './Login.module.css';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { extendMoment } from 'moment-range';
 import NewPayment from '../Popups/NewPayment';
@@ -109,7 +109,7 @@ const ScheduleContant = () => {
               <LeftArrow />
             </div>
             <div className={styles.weekContainer}>
-              {days.map((date) => (
+              {/* {days.map((date) => (
                 <div
                   key={date.format('YYYY-MM-DD')}
                   className={`${styles.day} ${date.isSame(selectedDate, 'day') ? styles.selected : ''}`}
@@ -118,7 +118,38 @@ const ScheduleContant = () => {
                   <div className={styles.date} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('D')}</div>
                   <div className={styles.label} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('ddd')}</div>
                 </div>
-              ))}
+              ))} */}
+              <div className={styles.calendar_container}>
+  <div className={styles.daytwo}>
+    <div className={styles.datetwo}>13</div>
+    <div className={styles.labeltwo}>Mon</div>
+  </div>
+  <div className={styles.daytwo}>
+    <div className={styles.datetwo}>14</div>
+    <div className={styles.labeltwo}>Tue</div>
+  </div>
+  <div className={styles.daytwo}>
+    <div className={styles.datetwo}>15</div>
+    <div className={styles.labeltwo}>Wed</div>
+  </div>
+  <div className={styles.selectedtwo}>
+    <div className={styles.selecteddatetxt}>16</div>
+    <div className={styles.selecteddaytxt}>Thu</div>
+  </div>
+  <div className={styles.daytwo}>
+    <div className={styles.datetwo}>17</div>
+    <div className={styles.labeltwo}>Fri</div>
+  </div>
+  <div className={styles.daytwo}>
+    <div className={styles.datetwo}>18</div>
+    <div className={styles.labeltwo}>Sat</div>
+  </div>
+  <div className={styles.daytwo}>
+    <div className={styles.datetwo}>19</div>
+    <div className={styles.labeltwo}>Sun</div>
+  </div>
+</div>
+
             </div>
             <div onClick={handleNextWeek}>
               <Rightarrow />
@@ -226,43 +257,43 @@ const ScheduleContant = () => {
         </div>
 
         <div>
-<div className={styles.clientslist}>
-        Clients
-        </div>
-        
-            {newClients.map((client, index) => (
-              <div key={index} className={styles.newclientItem}>
-                <Image height={40} width={40} src={client.avatar} alt={client.name} className={styles.avatar} />
-                <span>{client.name}</span>
-              </div>
-            ))}
-         
-          </div>
           <div className={styles.clientslist}>
+            Clients
+          </div>
+
+          {newClients.map((client, index) => (
+            <div key={index} className={styles.newclientItem}>
+              <Image height={40} width={40} src={client.avatar} alt={client.name} className={styles.avatar} />
+              <span>{client.name}</span>
+            </div>
+          ))}
+
+        </div>
+        <div className={styles.clientslist}>
           Comment
         </div>
         <div>
-        Aliquam pulvinar vestibulum blandit. Donec sed nisl libero.
+          Aliquam pulvinar vestibulum blandit. Donec sed nisl libero.
         </div>
         <div className={styles.clientslist}>
-        Type of Payment
+          Type of Payment
         </div>
         <div className={styles.cashIcon_txt}>
-          <CashIcon/> <div style={{marginLeft:10}}>Cash</div>
+          <CashIcon /> <div style={{ marginLeft: 10 }}>Cash</div>
         </div>
         <OpticityButton
-        style={{backgroundColor:'#CFF3FD'}}
-        txtstyle={{color:'#14AED1'}}
-        name={"Edit"}
-        onClick={openEditPopup}
+          style={{ backgroundColor: '#CFF3FD' }}
+          txtstyle={{ color: '#14AED1' }}
+          name={"Edit"}
+          onClick={openEditPopup}
         />
-         <OpticityButton
-        style={{backgroundColor:'#FFE6D7'}}
-        txtstyle={{color:'#FE4726'}}
-        name={"Cancel"}
+        <OpticityButton
+          style={{ backgroundColor: '#FFE6D7' }}
+          txtstyle={{ color: '#FE4726' }}
+          name={"Cancel"}
         />
       </div>
-     
+
     </div>
 
   )
