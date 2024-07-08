@@ -149,7 +149,6 @@ const ScheduleContant = () => {
     <div className={styles.labeltwo}>Sun</div>
   </div>
 </div>
-
             </div>
             <div onClick={handleNextWeek}>
               <Rightarrow />

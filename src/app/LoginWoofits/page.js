@@ -4,6 +4,7 @@ import styles from './../_components/Login.module.css'
 import Inputfield from '../_reuseableComponent/Inputfield';
 import { AppleLogo, Attherateimg, GoogleLogo, Lockimg } from '../../../public';
 import Image from 'next/image';
+import iconimg from '../../../public/Images/africanMan.png'
 
 const LoginWoofit = () => {
 
@@ -66,7 +67,7 @@ const LoginWoofit = () => {
             />
             <p className={styles.textttt}>Where Coaching Meets Excellence</p>
             <Image 
-                src="/images/africanMan.png" 
+                src={iconimg} 
                 alt="Workout" 
                 className={styles.africnManstyle} 
                 width={500} 
