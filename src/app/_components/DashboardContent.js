@@ -43,7 +43,7 @@ const DashboardContent = () => {
           </div>
 
           <div className={styles.dateSelector}>
-            <div className={styles.Monthlytxt}>Monthly</div> <Downarrow />
+            <div className={styles.Monthlytxt}>Monthly hellloooooo</div> <Downarrow />
           </div>
         </div>
 
