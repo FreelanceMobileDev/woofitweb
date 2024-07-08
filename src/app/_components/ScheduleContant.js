@@ -3,15 +3,18 @@ import { CalenderIcon, CashIcon, CheckIcon, ClockCalender, ClockIcon, CrossIcon,
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import styles from './Login.module.css';
 import React, { useState,useEffect } from 'react';
-import { format, addDays, subDays, addWeeks, subWeeks } from 'date-fns'
+import moment from 'moment';
+import { extendMoment } from 'moment-range';
 import NewPayment from '../Popups/NewPayment';
 import NewTraining from '../Popups/NewTraining';
 import EditTraining from '../Popups/EditTraining';
 import Image from 'next/image';
 // 
+
+const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedDate, setSelectedDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(extendedMoment());
+  const [selectedDate, setSelectedDate] = useState(extendedMoment());
     const [popupIsOpen, setShowPopup] = useState(false);
     const [newTrainingpop, setNewTrainingpop] = useState(false);
     const [editpopup, seteditpopup] = useState(false);
@@ -38,33 +41,35 @@ const ScheduleContant = () => {
     };
 
     useEffect(() => {
+      if (typeof window !== 'undefined') {
         const centerSelectedDate = () => {
-            const selectedElement = document.querySelector(`.${styles.selected}`);
-            if (selectedElement) {
-                selectedElement.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-            }
+          const selectedElement = document.querySelector(`.${styles.selected}`);
+          if (selectedElement) {
+            selectedElement.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+          }
         };
         centerSelectedDate();
+      }
     }, [selectedDate]);
 
- const handlePrevWeek = () => {
-        setCurrentDate(subWeeks(currentDate, 1));
+    const handlePrevWeek = () => {
+      setCurrentDate(currentDate.clone().subtract(1, 'weeks'));
     };
-
+  
     const handleNextWeek = () => {
-        setCurrentDate(addWeeks(currentDate, 1));
+      setCurrentDate(currentDate.clone().add(1, 'weeks'));
     };
-
+  
     const handleDateClick = (date) => {
-        setSelectedDate(date);
+      setSelectedDate(date);
     };
+    const startOfWeek = currentDate.clone().startOf('isoWeek');
+  const endOfWeek = currentDate.clone().endOf('isoWeek');
+  const range = extendedMoment.range(startOfWeek, endOfWeek);
+  const days = Array.from(range.by('day'));
 
-    const startOfWeek = subDays(currentDate, currentDate.getDay() - 1);
-    const endOfWeek = addDays(startOfWeek, 6);
-    const days = [];
-    for (let date = startOfWeek; date <= endOfWeek; date = addDays(date, 1)) {
-        days.push(new Date(date));
-    }
+
+   
   const newClients = [
     { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
     { name: 'Franky Williamson', avatar: '/images/profilepic.png' },
@@ -88,7 +93,8 @@ const ScheduleContant = () => {
       <div className={styles.summarySecedule}>
       <div className={styles.calendarContainer}>
             <div className={styles.headercalender}>
-                <div className={styles.monthname}>{format(currentDate, 'MMMM yyyy')}</div>
+            <div className={styles.monthname}>{currentDate.format('MMMM YYYY')}</div>
+
                 <div className={styles.buttons}>
                     <button className={styles.actionButton} onClick={openPopup} >New Payment</button>
                     <button className={styles.actionButton} onClick={openTraning}>Schedule a Training</button>
@@ -100,16 +106,16 @@ const ScheduleContant = () => {
                 </div>
                
                 <div className={styles.weekContainer}>
-                    {days.map((date) => (
-                        <div
-                            key={date}
-                            className={`${styles.day} ${date.toDateString() === selectedDate.toDateString() ? styles.selected : ''}`}
-                            onClick={() => handleDateClick(date)}
-                        >
-                            <div className={styles.date} style={{ color: date.toDateString() === selectedDate.toDateString() ? 'white' : '#697585' }}>{format(date, 'd')}</div>
-                            <div className={styles.label} style={{ color: date.toDateString() === selectedDate.toDateString() ? 'white' : '#697585' }}>{format(date, 'EEE')}</div>
-                        </div>
-                    ))}
+                {days.map((date) => (
+            <div
+              key={date.format('YYYY-MM-DD')}
+              className={`${styles.day} ${date.isSame(selectedDate, 'day') ? styles.selected : ''}`}
+              onClick={() => handleDateClick(date)}
+            >
+              <div className={styles.date} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('D')}</div>
+              <div className={styles.label} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('ddd')}</div>
+            </div>
+          ))}
                 </div>
                 <div onClick={handleNextWeek}>
                   <Rightarrow/>
