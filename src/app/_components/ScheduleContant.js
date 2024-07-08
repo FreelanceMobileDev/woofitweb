@@ -15,75 +15,80 @@ const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
   const [currentDate, setCurrentDate] = useState(extendedMoment());
   const [selectedDate, setSelectedDate] = useState(extendedMoment());
-    const [popupIsOpen, setShowPopup] = useState(false);
-    const [newTrainingpop, setNewTrainingpop] = useState(false);
-    const [editpopup, seteditpopup] = useState(false);
-    const openEditPopup = () => {
-      seteditpopup(true);
-    };
-  
-    const closeEditPopup = () => {
-      seteditpopup(false);
-    };
-    const openPopup = () => {
-      setShowPopup(true);
-    };
-  
-    const closePopup = () => {
-      setShowPopup(false);
-    };
-    const openTraning = () => {
-      setNewTrainingpop(true);
-    };
-  
-    const closeopenTraning = () => {
-      setNewTrainingpop(false);
-    };
+  const [popupIsOpen, setShowPopup] = useState(false);
+  const [newTrainingpop, setNewTrainingpop] = useState(false);
+  const [editpopup, seteditpopup] = useState(false);
 
-    useEffect(() => {
-      if (typeof window !== 'undefined') {
-        const centerSelectedDate = () => {
-          const selectedElement = document.querySelector(`.${styles.selected}`);
-          if (selectedElement) {
-            selectedElement.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-          }
-        };
-        centerSelectedDate();
-      }
-    }, [selectedDate]);
+  const openEditPopup = () => {
+    seteditpopup(true);
+  };
 
-    const handlePrevWeek = () => {
-      setCurrentDate(currentDate.clone().subtract(1, 'weeks'));
-    };
-  
-    const handleNextWeek = () => {
-      setCurrentDate(currentDate.clone().add(1, 'weeks'));
-    };
-  
-    const handleDateClick = (date) => {
-      setSelectedDate(date);
-    };
-    const startOfWeek = currentDate.clone().startOf('isoWeek');
+  const closeEditPopup = () => {
+    seteditpopup(false);
+  };
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const openTraning = () => {
+    setNewTrainingpop(true);
+  };
+
+  const closeopenTraning = () => {
+    setNewTrainingpop(false);
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const centerSelectedDate = () => {
+        const selectedElement = document.querySelector(`.${styles.selected}`);
+        if (selectedElement) {
+          selectedElement.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        }
+      };
+      centerSelectedDate();
+    }
+  }, [selectedDate]);
+
+  const handlePrevWeek = () => {
+    setCurrentDate(currentDate.clone().subtract(1, 'weeks'));
+  };
+
+  const handleNextWeek = () => {
+    setCurrentDate(currentDate.clone().add(1, 'weeks'));
+  };
+
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+  };
+
+  const startOfWeek = currentDate.clone().startOf('isoWeek');
   const endOfWeek = currentDate.clone().endOf('isoWeek');
   const range = extendedMoment.range(startOfWeek, endOfWeek);
   const days = Array.from(range.by('day'));
 
-
-   
   const newClients = [
     { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
     { name: 'Franky Williamson', avatar: '/images/profilepic.png' },
     { name: 'Bronson Glass', avatar: '/images/profilepic.png' },
   ];
+
   const sessions = [
     { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: '/images/profilepic.png', icon: <CrossIcon /> },
     { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', avatar2: '/images/profilepic.png', icon: <PlayIcon /> },
     { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: '/images/profilepic.png', icon: <CheckIcon /> },
   ];
+
   const sessionssecond = [
     { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0EAFE', avatar: '/images/profilepic.png', avatar2: '/images/profilepic.png', icon: <PlayIcon /> },
     { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: '/images/profilepic.png', icon: <CheckIcon /> },
   ];
+
   const Augestdata = [
     { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', icon: <ClockCalender /> },
   ];
@@ -91,44 +96,39 @@ const ScheduleContant = () => {
   return (
     <div className={styles.DashboardContenttwo}>
       <div className={styles.summarySecedule}>
-      <div className={styles.calendarContainer}>
-            <div className={styles.headercalender}>
-            <div className={styles.monthname}>{currentDate.format('MMMM YYYY')+"hello"}</div>
-
-                <div className={styles.buttons}>
-                    <button className={styles.actionButton} onClick={openPopup} >New Payment</button>
-                    <button className={styles.actionButton} onClick={openTraning}>Schedule a Training</button>
-                </div>
+        <div className={styles.calendarContainer}>
+          <div className={styles.headercalender}>
+            <div className={styles.monthname}>{currentDate.format('MMMM YYYY')}</div>
+            <div className={styles.buttons}>
+              <button className={styles.actionButton} onClick={openPopup}>New Payment</button>
+              <button className={styles.actionButton} onClick={openTraning}>Schedule a Training</button>
             </div>
-            <div className={styles.navigation}>
-              <div onClick={handlePrevWeek}>
-                <LeftArrow/>
-                </div>
-               
-                <div className={styles.weekContainer}>
-                {days.map((date) => (
-            <div
-              key={date.format('YYYY-MM-DD')}
-              className={`${styles.day} ${date.isSame(selectedDate, 'day') ? styles.selected : ''}`}
-              onClick={() => handleDateClick(date)}
-            >
-              <div className={styles.date} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('D')}</div>
-              <div className={styles.label} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('ddd')}</div>
+          </div>
+          <div className={styles.navigation}>
+            <div onClick={handlePrevWeek}>
+              <LeftArrow />
             </div>
-          ))}
+            <div className={styles.weekContainer}>
+              {days.map((date) => (
+                <div
+                  key={date.format('YYYY-MM-DD')}
+                  className={`${styles.day} ${date.isSame(selectedDate, 'day') ? styles.selected : ''}`}
+                  onClick={() => handleDateClick(date)}
+                >
+                  <div className={styles.date} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('D')}</div>
+                  <div className={styles.label} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('ddd')}</div>
                 </div>
-                <div onClick={handleNextWeek}>
-                  <Rightarrow/>
-                </div>
-              
+              ))}
             </div>
+            <div onClick={handleNextWeek}>
+              <Rightarrow />
+            </div>
+          </div>
         </div>
 
-       {popupIsOpen && <NewPayment show={popupIsOpen} handleClose={closePopup} />}
-
-{newTrainingpop&& <NewTraining show={newTrainingpop} handleClose={closeopenTraning}/>}
-{/* editpopup */}
-{editpopup && <EditTraining show={editpopup} handleClose={closeEditPopup}/> }
+        {popupIsOpen && <NewPayment show={popupIsOpen} handleClose={closePopup} />}
+        {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={closeopenTraning} />}
+        {editpopup && <EditTraining show={editpopup} handleClose={closeEditPopup} />}
 
         <div className={styles.session}>
           <div className={styles.TodayTxtdiv}>
@@ -163,7 +163,7 @@ const ScheduleContant = () => {
         </div>
         <div className={styles.session}>
           <div className={styles.TodayTxtdiv}>
-            <span>August 18</span>
+            <span>August 19</span>
             <PlusIcon />
           </div>
           <div className={styles.sessionDetails}>
@@ -184,7 +184,7 @@ const ScheduleContant = () => {
         </div>
         <div className={styles.session}>
           <div className={styles.TodayTxtdiv}>
-            <span>Today</span>
+            <span>August 20</span>
             <PlusIcon />
           </div>
 
