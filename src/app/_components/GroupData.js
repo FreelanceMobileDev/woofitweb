@@ -5,42 +5,43 @@ import { EditIcon, DeleteIcon } from '../../../public'; // Adjust the import pat
 import styles from './Login.module.css';
 import GroupEdit from '../Popups/GroupEdit'
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const groupsData = [
   {
     title: 'Academic Tutors',
     clients: 6,
-    images: ['/images/profilepic.png', '/images/profilepic.png', '/images/profilepic.png'],
+    images: [profilepicture, profilepicture, profilepicture],
     additionalClients: 3,
   },
   {
     title: 'Teaching Assistants',
     clients: 2,
-    images: ['/images/profilepic.png', '/images/profilepic.png'],
+    images: [profilepicture, profilepicture],
     additionalClients: 0,
   },
   {
     title: 'English Team',
     clients: 6,
-    images: ['/images/profilepic.png', '/images/profilepic.png', '/images/profilepic.png'],
+    images: [profilepicture, profilepicture, profilepicture],
     additionalClients: 3,
   },
   {
     title: 'Pastoral Staff',
     clients: 6,
-    images: ['/images/profilepic.png', '/images/profilepic.png', '/images/profilepic.png'],
+    images: [profilepicture, profilepicture, profilepicture],
     additionalClients: 3,
   },
   {
     title: 'Heads Of Year',
     clients: 6,
-    images: ['/images/profilepic.png', '/images/profilepic.png', '/images/profilepic.png'],
+    images: [profilepicture, profilepicture, profilepicture],
     additionalClients: 3,
   },
   {
     title: 'Heads Of Houses',
     clients: 6,
-    images: ['/images/profilepic.png', '/images/profilepic.png', '/images/profilepic.png'],
+    images: [profilepicture, profilepicture, profilepicture],
     additionalClients: 3,
   },
 ];

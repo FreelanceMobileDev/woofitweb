@@ -7,6 +7,8 @@ import PaymentCoachs from './PaymentCoachs';
 import TrainingsCoach from './TrainingsCoach';
 import ProfessionalInfo from './ProfessionalInfo';
 import Image from 'next/image';
+import profileiconn from '../../../public/Images/profileee.png'
+
 const Coachsinfo = ({setSelectedItem}) => {
   const [activeTab, setActiveTab] = useState('Professional Info');
 
@@ -29,7 +31,7 @@ const Coachsinfo = ({setSelectedItem}) => {
         <div className={styles.left_div_profile}>
           <Image
           height={107} width={107}
-            src='/images/profileee.png'
+            src={profileiconn}
           />
           <h1 className={styles.usernamee}>Eloise Robinson</h1>
           <div className={styles.clietdiv}>

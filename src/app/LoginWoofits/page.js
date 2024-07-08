@@ -4,7 +4,8 @@ import styles from './../_components/Login.module.css'
 import Inputfield from '../_reuseableComponent/Inputfield';
 import { AppleLogo, Attherateimg, GoogleLogo, Lockimg } from '../../../public';
 import Image from 'next/image';
-import iconimg from '../../../public/Images/africanMan.png'
+import africanimg from '../../../public/Images/africanMan.png'
+import logoicon from '../../../public/Images/Logo.png'
 
 const LoginWoofit = () => {
 
@@ -59,7 +60,7 @@ const LoginWoofit = () => {
 
                 <div className={styles.rightPane}>
             <Image 
-                src="/images/Logo.png" 
+                src={logoicon}
                 alt="Workout" 
                 className={styles.Logoimg} 
                 height={136} 
@@ -67,7 +68,7 @@ const LoginWoofit = () => {
             />
             <p className={styles.textttt}>Where Coaching Meets Excellence</p>
             <Image 
-                src={iconimg} 
+                src={africanimg} 
                 alt="Workout" 
                 className={styles.africnManstyle} 
                 width={500} 

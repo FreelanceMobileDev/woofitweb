@@ -5,6 +5,8 @@ import { AppleLogo, Attherateimg, GoogleLogo, Lockimg, Userimg } from '../../../
 import Inputfield from '../_reuseableComponent/Inputfield'
 import Link from 'next/link'
 import Image from 'next/image'
+import logoicon from '../../../public/Images/Logo.png'
+import africanimg from '../../../public/Images/africanMan.png'
 const SignupWoofit = () => {
 
     return (
@@ -66,14 +68,14 @@ const SignupWoofit = () => {
                     </div>
                 </div>
                 <div className={styles.rightPane}>
-                    <Image src="/images/Logo.png" alt="Logo"
+                    <Image src={logoicon} alt="Logo"
                         className={styles.Logoimg}
                         height={136}
                         width={450}
 
                     />
                     <p className={styles.textttt}> Where Coaching Meets Excellence</p>
-                    <Image src="/images/africanMan.png" alt="Workout"
+                    <Image src={africanimg} alt="Workout"
                         className={styles.africnManstyle}
                         height={400}
                         width={400}

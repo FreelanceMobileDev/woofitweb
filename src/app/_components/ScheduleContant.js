@@ -9,7 +9,8 @@ import NewPayment from '../Popups/NewPayment';
 import NewTraining from '../Popups/NewTraining';
 import EditTraining from '../Popups/EditTraining';
 import Image from 'next/image';
-// 
+import profilepicture from '../../../public/Images/profilepic.png'
+
 
 const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
@@ -73,24 +74,24 @@ const ScheduleContant = () => {
   const days = Array.from(range.by('day'));
 
   const newClients = [
-    { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
-    { name: 'Franky Williamson', avatar: '/images/profilepic.png' },
-    { name: 'Bronson Glass', avatar: '/images/profilepic.png' },
+    { name: 'Eloise Robinson', avatar: profilepicture },
+    { name: 'Franky Williamson', avatar: profilepicture },
+    { name: 'Bronson Glass', avatar: profilepicture },
   ];
 
   const sessions = [
-    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: '/images/profilepic.png', icon: <CrossIcon /> },
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', avatar2: '/images/profilepic.png', icon: <PlayIcon /> },
-    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: '/images/profilepic.png', icon: <CheckIcon /> },
+    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: profilepicture, icon: <CrossIcon /> },
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
+    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
   ];
 
   const sessionssecond = [
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0EAFE', avatar: '/images/profilepic.png', avatar2: '/images/profilepic.png', icon: <PlayIcon /> },
-    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: '/images/profilepic.png', icon: <CheckIcon /> },
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0EAFE', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
+    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
   ];
 
   const Augestdata = [
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', icon: <ClockCalender /> },
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, icon: <ClockCalender /> },
   ];
 
   return (

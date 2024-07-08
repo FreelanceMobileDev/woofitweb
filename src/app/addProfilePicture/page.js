@@ -3,7 +3,9 @@ import Link from 'next/link';
 import styles from './../_components/Login.module.css'
 import {LeftArrow } from '../../../public';
 import Image from 'next/image';
-
+import logoicon from '../../../public/Images/Logo.png'
+import africanimg from '../../../public/Images/africanMan.png'
+import profileiconn from '../../../public/Images/profileee.png'
 const ProfilePicUpload = () => {
     return (
         <>
@@ -21,7 +23,7 @@ const ProfilePicUpload = () => {
                                 <div className={styles.centeralign}>
                                     <Image
                                       height={107} width={107}
-                                        src='/images/profileee.png'
+                                        src={profileiconn}
                                     />
                                     <div className={styles.upload_photo_txt}>Upload Photo </div>
                                     <div className={styles.Linediv} />
@@ -48,14 +50,14 @@ const ProfilePicUpload = () => {
                     </div>
                 </div>
                 <div className={styles.rightPane}>
-                    <Image src="/images/Logo.png" alt="Workout"
+                    <Image src={logoicon} alt="Workout"
                         className={styles.Logoimg}
                         height={136}
                         width={450}
                        
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
-                    <Image src="/images/africanMan.png" alt="Workout"
+                    <Image src={africanimg} alt="Workout"
 height={400} width={400}
                         className={styles.africnManstyle}
                     />

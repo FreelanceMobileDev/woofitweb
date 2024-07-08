@@ -4,22 +4,24 @@ import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
+
 const AddClients = ({  handleClose }) => {
 
   const group1 = [
-    { id: 1, name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
-    { id: 2, name: 'Franky Williamson', avatar: '/images/profilepic.png' },
-    { id: 3, name: 'Bronson Glass', avatar: '/images/profilepic.png' },
-    { id: 4, name: 'Monroe Benjamin', avatar: '/images/profilepic.png' },
+    { id: 1, name: 'Eloise Robinson', avatar: profilepicture },
+    { id: 2, name: 'Franky Williamson', avatar: profilepicture },
+    { id: 3, name: 'Bronson Glass', avatar: profilepicture },
+    { id: 4, name: 'Monroe Benjamin', avatar: profilepicture },
   ];
   
   const group2 = [
-    { id: 5, name: 'Samuel O\'Brien', avatar: '/images/profilepic.png' },
-    { id: 6, name: 'Morgan Warren', avatar: '/images/profilepic.png' },
+    { id: 5, name: 'Samuel O\'Brien', avatar: profilepicture },
+    { id: 6, name: 'Morgan Warren', avatar: profilepicture },
   ];
   
   const group3 = [
-    { id: 7, name: 'Jonathan Andrews', avatar: '/images/profilepic.png' },
+    { id: 7, name: 'Jonathan Andrews', avatar: profilepicture },
   ];
   
   const [selectedClients, setSelectedClients] = useState([]);

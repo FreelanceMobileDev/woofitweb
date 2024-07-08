@@ -7,9 +7,10 @@ import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import Clients from '../Popups/Clients';
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const Clientsdata = [
-    { name: '6 Clients', count: '+3', avatar: '/images/profilepic.png', avatar1: '/images/profilepic.png', avatar2: '/images/profilepic.png' },
+    { name: '6 Clients', count: '+3', avatar: profilepicture, avatar1: profilepicture, avatar2: profilepicture },
 ];
 
 const RateEdit = ({ show, handleClose }) => {

@@ -5,6 +5,8 @@ import { CalenderIcon, Coins, Downarrow, LeftArrow, MuscleIcon, PlusIcon } from 
 import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import Image from 'next/image';
+import profileiconn from '../../../public/Images/profileee.png'
+
 const EditCoach = ({ setSelectedItem }) => {
 
   return (
@@ -27,7 +29,7 @@ const EditCoach = ({ setSelectedItem }) => {
           <Image
           height={107}
           width={107}
-            src='/images/profileee.png'
+            src={profileiconn}
           />
           <div className={styles.changePhoto}>
             Change Photo

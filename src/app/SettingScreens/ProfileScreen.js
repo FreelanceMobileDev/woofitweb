@@ -3,11 +3,13 @@ import { CalenderIcon, UploadimgIcon } from '../../../public';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import styles from './../_components/Login.module.css';
+import profileiconn from '../../../public/Images/profileee.png'
+
 const ProfileScreen = () => {
   return (
     <div className={styles.right_div_data}>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
-        <Image src='/images/profileee.png'
+        <Image src={profileiconn}
           className={styles.profile_pic_setting}
           height={107}
           width={107}

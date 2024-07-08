@@ -1,15 +1,19 @@
 import React from 'react';
 import styles from './ClientPage.module.css';
 import Image from 'next/image';
-
-
+import backbodyimg from '../../../public/Images/backbody.png'
+import sidebodyimg from '../../../public/Images/sideBody.png'
+import frontbodyimg from '../../../public/Images/front_body.png'
+import leftarmimg from '../../../public/Images/leftARm.png'
+import RightARM from '../../../public/Images/RightARM.png'
+import chartimgg from '../../../public/Images/chartimg.png'
 const Measurements = () => {
   const data = [
-    { position: 'Back', size: '24.4', image: '/images/backbody.png' },
-    { position: 'Front', size: '24.5', image: '/images/front_body.png' },
-    { position: 'Side', size: '24.2', image: '/images/sideBody.png' },
-    { position: 'Left Arm', size: '24.2', image: '/images/leftARm.png' },
-    { position: 'Right Arm', size: '24.2', image: '/images/RightARM.png' },
+    { position: 'Back', size: '24.4', image:backbodyimg },
+    { position: 'Front', size: '24.5', image: frontbodyimg },
+    { position: 'Side', size: '24.2', image: sidebodyimg },
+    { position: 'Left Arm', size: '24.2', image: leftarmimg },
+    { position: 'Right Arm', size: '24.2', image:RightARM },
   ]
   return (
     <div className={styles.measurements}>
@@ -55,7 +59,7 @@ const Measurements = () => {
                 <div className={styles.space_view}>24.20</div>
               </div>
 
-              <Image src='/images/chartimg.png' className={styles.chart}
+              <Image src={chartimgg} className={styles.chart}
               width={'100%'}
               />
 

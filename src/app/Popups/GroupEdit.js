@@ -6,11 +6,12 @@ import TextWithButton from '../_reuseableComponent/TextWithButton';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const Clientsdata = [
-    { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
-    { name: 'Franky Williamson', avatar: '/images/profilepic.png' },
-    { name: 'Bronson Glass', avatar: '/images/profilepic.png' },
+    { name: 'Eloise Robinson', avatar: profilepicture },
+    { name: 'Franky Williamson', avatar: profilepicture },
+    { name: 'Bronson Glass', avatar: profilepicture },
 ]
 
 const GroupEdit = ({ show, handleClose }) => {

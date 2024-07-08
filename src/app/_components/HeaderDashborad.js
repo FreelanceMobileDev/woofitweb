@@ -3,6 +3,7 @@ import Notificationimg from '../../../public/Images/Notificationimg';
 import Searchimg from '../../../public/Images/Searchimg';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import styles from './Login.module.css';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const Header = () => {
   return (
@@ -18,7 +19,7 @@ const Header = () => {
       <div className={styles.userInfo}>
       
        
-        <Image height={40} width={40} src="/images/profilepic.png" alt="User Avatar" className={styles.avatar} />
+        <Image height={40} width={40} src={profilepicture} alt="User Avatar" className={styles.avatar} />
         <span className={styles.hellousername}>Hello James!</span>
         <Notificationimg
         className={styles.Notificationimg}

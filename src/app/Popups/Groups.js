@@ -5,13 +5,15 @@ import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
+
 const Groups = ({  handleClose }) => {
 
     const group1 = [
-        { id: 1,count:'+3', name: 'Eloise Robinson', avatar: '/images/profilepic.png', avatar1: '/images/profilepic.png', avatar2: '/images/profilepic.png', },
-        { id: 2, name: 'Franky Williamson', avatar: '/images/profilepic.png', avatar1: '/images/profilepic.png', },
-        { id: 3,count:'+3', name: 'Bronson Glass', avatar: '/images/profilepic.png', avatar1: '/images/profilepic.png', avatar2: '/images/profilepic.png', },
-        { id: 4, name: 'Monroe Benjamin', avatar: '/images/profilepic.png', avatar1: '/images/profilepic.png', },
+        { id: 1,count:'+3', name: 'Eloise Robinson', avatar: profilepicture, avatar1: profilepicture, avatar2: profilepicture, },
+        { id: 2, name: 'Franky Williamson', avatar: profilepicture, avatar1: profilepicture, },
+        { id: 3,count:'+3', name: 'Bronson Glass', avatar: profilepicture, avatar1: profilepicture, avatar2: profilepicture, },
+        { id: 4, name: 'Monroe Benjamin', avatar: profilepicture, avatar1: profilepicture, },
     ];
 
 

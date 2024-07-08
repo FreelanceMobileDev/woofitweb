@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './ClientPage.module.css';
 import { CheckIcon, ClockCalender, CrossIcon, DownBlueArrow,  Rightarrow } from '../../../public';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const Trainings = () => {
   const sessions = [
     { day: 'fri', date: '26', name: '02:00 pm - 03:00 pm', backgroundColor: '#FFE0E0', icon: <CrossIcon /> },
-    { day: 'Wed', date: '23', name: '02:00 pm - 03:00 pm', backgroundColor: '#E0F7FF', avatar2: '/images/profilepic.png', icon: <ClockCalender /> },
+    { day: 'Wed', date: '23', name: '02:00 pm - 03:00 pm', backgroundColor: '#E0F7FF', avatar2: profilepicture, icon: <ClockCalender /> },
     { day: 'Thu', date: '17', name: "02:00 pm - 03:00 pm", backgroundColor: '#E0FFE1', icon: <CheckIcon /> },
   ];
   return (

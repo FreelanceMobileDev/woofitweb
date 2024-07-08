@@ -1,18 +1,19 @@
 import Image from 'next/image';
 import { ArchivedIcon, DeleteIcon, EditIcon, FilterIcon, SearchIcon, } from '../../../public';
 import styles from './Login.module.css';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const CoachesContant = ({setSelectedItem}) => {
     const data = [
-        { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Female' },
-        { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '5 Years', rate: 'Nutrition Specialist', gender: 'Female' },
-        { id: 3, image: '/images/profilepic.png', name: 'Dakota Mullen', email: 'willie.jennings@example.com', goal: '7 Years', rate: 'Youth Fitness Specialist', gender: 'Male' },
-        { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '10+ Years', rate: 'Yoga Specialist', gender: 'Female' },
-        { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Female' },
-        { id: 3, image: '/images/profilepic.png', name: 'Dakota Mullen', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Senior Fitness', gender: 'Male' },
-        { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Muscle Gain', gender: 'Female' },
-        { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '3 Years', rate: 'Muscle Gain', gender: 'Female' },
-        { id: 3, image: '/images/profilepic.png', name: 'Dakota Mullen', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Male' },
+        { id: 1, image: profilepicture, name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Female' },
+        { id: 2, image: profilepicture, name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '5 Years', rate: 'Nutrition Specialist', gender: 'Female' },
+        { id: 3, image: profilepicture, name: 'Dakota Mullen', email: 'willie.jennings@example.com', goal: '7 Years', rate: 'Youth Fitness Specialist', gender: 'Male' },
+        { id: 1, image: profilepicture, name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '10+ Years', rate: 'Yoga Specialist', gender: 'Female' },
+        { id: 2, image: profilepicture, name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Female' },
+        { id: 3, image: profilepicture, name: 'Dakota Mullen', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Senior Fitness', gender: 'Male' },
+        { id: 1, image: profilepicture, name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Muscle Gain', gender: 'Female' },
+        { id: 2, image: profilepicture, name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '3 Years', rate: 'Muscle Gain', gender: 'Female' },
+        { id: 3, image: profilepicture, name: 'Dakota Mullen', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Male' },
       ];
   return (
     <div  style={{backgroundColor:"white"}}>

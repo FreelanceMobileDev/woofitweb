@@ -11,28 +11,29 @@ import PlusIcon from '../../../public/Images/PlusIcon';
 import Rightarrow from '../../../public/Images/Rightarrow';
 import Sessionsimg from '../../../public/Images/Sessionsimg';
 import styles from './Login.module.css';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const DashboardContent = () => {
   const newClients = [
-    { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
-    { name: 'Franky Williamson', avatar: '/images/profilepic.png' },
-    { name: 'Bronson Glass', avatar: '/images/profilepic.png' },
-    { name: 'Monroe Benjamin', avatar: '/images/profilepic.png' },
+    { name: 'Eloise Robinson', avatar: profilepicture },
+    { name: 'Franky Williamson', avatar: profilepicture },
+    { name: 'Bronson Glass', avatar: profilepicture },
+    { name: 'Monroe Benjamin', avatar: profilepicture },
   ];
   const recentActivities = [
-    { name: 'Eloise Robinson', action: 'purchased the', item: 'Yearly Subscription', time: '1 hour ago', avatar: '/images/profilepic.png' },
-    { name: 'Frank Williamson', action: 'has completed his training.', item: '', time: '2 hours ago', avatar: '/images/profilepic.png' },
-    { name: 'Glass Bronson', action: 'has completed his training.', item: '', time: '2 hours ago', avatar: '/images/profilepic.png' },
-    { name: 'Monroe Benjamin', action: 'purchased the', item: 'Monthly Subscription', time: '3 hours ago', avatar: '/images/profilepic.png' },
+    { name: 'Eloise Robinson', action: 'purchased the', item: 'Yearly Subscription', time: '1 hour ago', avatar: profilepicture },
+    { name: 'Frank Williamson', action: 'has completed his training.', item: '', time: '2 hours ago', avatar: profilepicture },
+    { name: 'Glass Bronson', action: 'has completed his training.', item: '', time: '2 hours ago', avatar: profilepicture },
+    { name: 'Monroe Benjamin', action: 'purchased the', item: 'Monthly Subscription', time: '3 hours ago', avatar: profilepicture },
   ];
   const sessions = [
-    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: '/images/profilepic.png', icon: <CrossIcon /> },
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', avatar2: '/images/profilepic.png', icon: <PlayIcon /> },
-    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: '/images/profilepic.png', icon: <CheckIcon /> },
+    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar:profilepicture, icon: <CrossIcon /> },
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
+    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
   ];
 
   const Augestdata = [
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: '/images/profilepic.png', icon: <ClockCalender /> },
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, icon: <ClockCalender /> },
   ];
   return (
     <div className={styles.DashboardContenttwo}>

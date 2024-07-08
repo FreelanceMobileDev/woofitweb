@@ -2,12 +2,13 @@ import React from 'react';
 import styles from './Coaches.module.css';
 import { CheckIcon, ClockCalender, CrossIcon, DownBlueArrow, Rightarrow } from '../../../public';
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const TrainingsCoach = () => {
   const sessions = [
-    { day: 'fri', date: '26', time: '02:00 pm - 03:00 pm', backgroundColor: '#FFE0E0', icon: <CrossIcon />, name: 'Gabe Woodward', avatar: '/images/profilepic.png', },
-    { day: 'Wed', date: '23', time: '02:00 pm - 03:00 pm', backgroundColor: '#E0F7FF', avatar2: '/images/profilepic.png', icon: <ClockCalender />, name: 'Gabe Woodward', avatar: '/images/profilepic.png', },
-    { day: 'Thu', date: '17', time: "02:00 pm - 03:00 pm", backgroundColor: '#E0FFE1', icon: <CheckIcon />, name: 'Gabe Woodward', avatar: '/images/profilepic.png', },
+    { day: 'fri', date: '26', time: '02:00 pm - 03:00 pm', backgroundColor: '#FFE0E0', icon: <CrossIcon />, name: 'Gabe Woodward', avatar: profilepicture, },
+    { day: 'Wed', date: '23', time: '02:00 pm - 03:00 pm', backgroundColor: '#E0F7FF', avatar2: profilepicture, icon: <ClockCalender />, name: 'Gabe Woodward', avatar: profilepicture, },
+    { day: 'Thu', date: '17', time: "02:00 pm - 03:00 pm", backgroundColor: '#E0FFE1', icon: <CheckIcon />, name: 'Gabe Woodward', avatar: profilepicture, },
   ];
   return (
 

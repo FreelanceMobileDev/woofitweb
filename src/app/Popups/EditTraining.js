@@ -6,11 +6,12 @@ import TextWithButton from '../_reuseableComponent/TextWithButton';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import Image from 'next/image';
+import profilepicture from '../../../public/Images/profilepic.png'
 
 const Clientsdata = [
-    { name: 'Eloise Robinson', avatar: '/images/profilepic.png', width: 50, height: 50 },
-    { name: 'Franky Williamson', avatar: '/images/profilepic.png', width: 50, height: 50 },
-    { name: 'Bronson Glass', avatar: '/images/profilepic.png', width: 50, height: 50 },
+    { name: 'Eloise Robinson', avatar: profilepicture, width: 50, height: 50 },
+    { name: 'Franky Williamson', avatar: profilepicture, width: 50, height: 50 },
+    { name: 'Bronson Glass', avatar: profilepicture, width: 50, height: 50 },
 ];
 
 const EditTraining = ({ show, handleClose }) => {

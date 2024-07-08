@@ -7,6 +7,8 @@ import Payments from './Payments';
 import styles from './ClientPage.module.css';
 import { ArchivedIcon, CallIcon, LeftArrow, MessageIcon } from '../../../public';
 import Image from 'next/image';
+import profileiconn from '../../../public/Images/profileee.png'
+
 const Clientinformation = ({setSelectedItem}) => {
   const [activeTab, setActiveTab] = useState('Overall Info');
 
@@ -30,7 +32,7 @@ const Clientinformation = ({setSelectedItem}) => {
 <Image
 // style={{height:107,width:107}}
 height={107} width={107}
-src='/images/profileee.png'
+src={profileiconn}
 />
 <h1 className={styles.usernamee}>Eloise Robinson</h1>
 <div className={styles.clietdiv}>
