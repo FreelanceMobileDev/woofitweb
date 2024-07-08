@@ -121,7 +121,7 @@ const ScheduleContant = () => {
               ))} */}
               <div className={styles.calendar_container}>
   <div className={styles.daytwo}>
-    <div className={styles.datetwo}>13</div>
+    <div className={styles.datetwo}>12</div>
     <div className={styles.labeltwo}>Mon</div>
   </div>
   <div className={styles.daytwo}>
