@@ -22,20 +22,20 @@ const SupportScreen = () => {
   ];
   return (
 
-    <div className={styles.right_div_data}>
-      <div className={styles.ContachUstxt}>Contact Us</div>
-      <div className={styles.Email_div} onClick={handleEmailClick}>
-        <div className={styles.row}>
-         <EmailIcon/> <div className={styles.emailtxtt}>Email</div>
+    <div className={styles?.right_div_data}>
+      <div className={styles?.ContachUstxt}>Contact Us</div>
+      <div className={styles?.Email_div} onClick={handleEmailClick}>
+        <div className={styles?.row}>
+         <EmailIcon/> <div className={styles?.emailtxtt}>Email</div>
         </div>
         <Rightarrow />
       </div>
-      <div className={styles.ContachUstxt}>Other</div>
-      {items.map((item, index) => (
-        <div key={index} className={styles.Email_div}>
-          <div className={styles.row}>
+      <div className={styles?.ContachUstxt}>Other</div>
+      {items && items?.map((item, index) => (
+        <div key={index} className={styles?.Email_div}>
+          <div className={styles?.row}>
             {item.icon}
-            <div className={styles.emailtxtt}>{item.name}</div>
+            <div className={styles?.emailtxtt}>{item.name}</div>
           </div>
           <Rightarrow />
         </div>
