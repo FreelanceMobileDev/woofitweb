@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import CheckIcon from '../../../public/Images/CheckIcon';
 import ClockCalender from '../../../public/Images/ClockCalender';
 import CrossIcon from '../../../public/Images/CrossIcon';
@@ -11,7 +12,12 @@ import Rightarrow from '../../../public/Images/Rightarrow';
 import Sessionsimg from '../../../public/Images/Sessionsimg';
 import styles from './Login.module.css';
 
+
 const DashboardContent = () => {
+// const seltData = useSelector((e) => e.sliceReducer)
+// console.log(seltData,'====selectselectselectselectselect')
+
+
   const newClients = [
     { name: 'Eloise Robinson', avatar: '/images/profilepic.png' },
     { name: 'Franky Williamson', avatar: '/images/profilepic.png' },

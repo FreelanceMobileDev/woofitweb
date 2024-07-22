@@ -17,6 +17,18 @@
       "static/chunks/main-app.js",
       "static/css/app/dashboard/page.css",
       "static/chunks/app/dashboard/page.js"
+    ],
+    "/authStack/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/authStack/page.css",
+      "static/chunks/app/authStack/page.js"
+    ],
+    "/signupW/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/signupW/page.css",
+      "static/chunks/app/signupW/page.js"
     ]
   }
 }
