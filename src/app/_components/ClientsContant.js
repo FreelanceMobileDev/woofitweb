@@ -1,12 +1,26 @@
 'use client';
-
 import { ArchivedIcon,  FilterIcon, SearchIcon } from '../../../public';
+import { getClinent } from '../../api/helper';
 import ClientsData from './ClientsData';
 import GroupData from './GroupData';
 import styles from './Login.module.css';
 import React, { useState } from 'react';
 const ClientsContant = ({setSelectedItem}) => {
   const [activeTab, setActiveTab] = useState('Clients');
+  // const [getdata, setData]= useState()
+
+  // const getApiClinent =async()=>{
+  //   try {
+  //     const getData = await getClinent(0)
+  //     console.log(getData.data.data.getAllClientData ,'====here=======>>>>>>>>>>>>')
+  //     setData(getData.data.data.getAllClientData)
+  //   } catch (error) {
+  //     console.log(error,'====error')
+  //   }
+  // }
+  // getApiClinent()
+
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -41,7 +55,7 @@ const ClientsContant = ({setSelectedItem}) => {
         </div>
       </div>
       </div>
-      {activeTab === 'Clients' && <ClientsData setSelectedItem={setSelectedItem}/>}
+      {activeTab === 'Clients' && <ClientsData  setSelectedItem={setSelectedItem}/>}
       {activeTab === 'Groups' && <GroupData />}
     </div>
   )

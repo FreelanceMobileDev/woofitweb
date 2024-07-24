@@ -1242,7 +1242,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .row {
@@ -1919,6 +1918,7 @@ font-weight: 500;
 line-height: 19.2px;
 text-align: left;
 color: #14AED1;
+cursor: pointer;
 }
 .flex_row_div{
   display: flex;

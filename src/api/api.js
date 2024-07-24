@@ -1,7 +1,7 @@
 
 import axios from "axios";
 // import { Show_Toast } from "../customComponent/toast";
-import { Store } from "../redux";
+import { Store } from "../redux/index";
 import { setError, setLoading, setNetworkConnected, setNetworkSpeed,  } from "../redux/reducer";
 export const isWeb = 'web';
 export const apiClient = axios.create({
@@ -10,8 +10,6 @@ export const apiClient = axios.create({
         "Content-Type": "application/json",
     },
 });
-
-
 
 
 export const apiClientUpload = axios.create({
@@ -23,10 +21,12 @@ export const apiClientUpload = axios.create({
 apiClient.interceptors.request.use(
     (config) => {
 
-        const state = Store.getState()
-        console.log("==========>",state?.cookies?.userDetails,"console.log(state?.cookies?.userDetails)============>")
-        const token = state?.cookies?.userDetails?.data?.access_token
-        Store.dispatch(setLoading(true))
+         const state = []
+        // console.log("==========>",state?.cookies?.userDetails,"console.log(state?.cookies?.userDetails)============>")
+        const token = localStorage.getItem("token")
+        // console.log(token,'====token')
+
+        // Store.dispatch(setLoading(true))
         // const isNetworkConnected = state.sliceReducer.isNetworkConnected
         // console.log(isNetworkConnected,"isNetworkConnected====>")
         // if (!isNetworkConnected) {
@@ -35,9 +35,9 @@ apiClient.interceptors.request.use(
         // } else {
         //     //  
         // }
-        const accessToken = `Bearer ${token}`
+        const accessToken = `${token}`
         if (accessToken) {
-            config.headers["Authorization"] = accessToken;
+            config.headers["Authorization"] = token;
         }
         return config;
     },
@@ -54,7 +54,6 @@ apiClient.interceptors.response.use(
          console.log(response,"response===========>")
         Store.dispatch(setLoading(false))
         return response;
-
     },
 
     async (error) => {
@@ -75,7 +74,7 @@ apiClient.interceptors.response.use(
 
 apiClientUpload.interceptors.request.use(
     (config) => {
-        const state = Store.getState()
+        const state = []
         const token = state?.cookies?.userDetails?.data?.access_token
         //  console.log('state=========>',token,'vbjvbj====>')
         // Store.dispatch(setLoading(true))

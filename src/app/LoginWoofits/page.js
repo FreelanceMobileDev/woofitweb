@@ -1,6 +1,5 @@
 'use client';
 import { useRouter } from 'next/navigation'
-import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import styles from './../_components/Login.module.css'
 import Inputfield from '../_reuseableComponent/Inputfield';
@@ -9,14 +8,11 @@ import Image from 'next/image';
 import { login } from '../../api/helper'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import { useState } from 'react';
-import { setLoading, setToken } from '../../redux/reducer'
-
+import { useEffect, useState } from 'react';
 const LoginWoofit = () => {
     const router = useRouter();
-    // const seltData = useSelector((e) => e.sliceReducer)
-    const dispatch = useDispatch()
     const [errMessage, setErrormsg] = useState()
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -32,13 +28,20 @@ const LoginWoofit = () => {
                 if (response?.data?.success === false) {
                     setErrormsg(response?.data)
                 }
-                dispatch(setToken(response.data.data.token))
+                localStorage.setItem("token",response.data.data.token)
+                localStorage.setItem("id",response.data.data._id)
                 router.push('/dashboard')
             } catch (error) {
                 console.log(error, '====')
             }
         },
     });
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            router.push('/dashboard');
+        }
+    }, []);
 
     return (
         <>

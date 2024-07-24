@@ -1,19 +1,24 @@
 
+import { useEffect, useState } from 'react';
 import { ArchivedOUTicon, DeleteIcon, EditIcon, } from '../../../public';
 import styles from './Login.module.css';
+import { getClinent } from '../../api/helper';
 // import Image from 'next/image';
 const ArchivedClientsData = ({setSelectedItem}) => {
-    const data = [
-        { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', rate: 'Optimum', goal: 'Muscle Gain', gender: 'Female' },
-        { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', rate: 'Light', goal: 'Muscle Gain', gender: 'Female' },
-        { id: 3, image: '/images/profilepic.png', name: 'Dakota Mullen', email: 'willie.jennings@example.com', rate: 'Max', goal: 'Muscle Gain', gender: 'Male' },
-        { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', rate: 'Optimum', goal: 'Muscle Gain', gender: 'Female' },
-        { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', rate: 'Light', goal: 'Muscle Gain', gender: 'Female' },
-        { id: 3, image: '/images/profilepic.png', name: 'Dakota Mullen', email: 'willie.jennings@example.com', rate: 'Max', goal: 'Muscle Gain', gender: 'Male' },
-        { id: 1, image: '/images/profilepic.png', name: 'Declan Mcgowan', email: 'willie.jennings@example.com', rate: 'Optimum', goal: 'Muscle Gain', gender: 'Female' },
-        { id: 2, image: '/images/profilepic.png', name: 'Chris Craig', email: 'tim.jennings@example.com', rate: 'Light', goal: 'Muscle Gain', gender: 'Female' },
-        { id: 3, image: '/images/profilepic.png', name: 'Dakota Mullen', email: 'willie.jennings@example.com', rate: 'Max', goal: 'Muscle Gain', gender: 'Male' },
-      ];
+  const [getdata, setData] = useState()
+
+  const getApiClinent = async () => {
+    try {
+      const getData = await getClinent(1)
+      setData(getData.data.data.getAllClientData)
+    } catch (error) {
+      console.log(error, '====error')
+    }
+  }
+  useEffect(() => {
+    getApiClinent()
+  }, [])
+  console.log(getdata, '====getdata')
   return (
     <div >
       <table className={styles.table}>
@@ -30,21 +35,23 @@ const ArchivedClientsData = ({setSelectedItem}) => {
           </tr>
         </thead>
         <tbody >
-          {data.map(item => (
-           
-            <tr key={item.id} className={styles.temppp}   >
+          {getdata&&getdata?.map(item => (
+            <>
+            <tr className={styles.temppp} onClick={() => { setSelectedItem('ClientInfo') }}  >
               <td><input type="checkbox" /></td>
-              <td><img src={item.image} alt={item.name} className={styles.profileImage} /></td>
-              <td className={styles.name_client}>{item.name}</td>
-              <td className={styles.email_client}>{item.email}</td>
-              <td className={styles.email_client}>{item.rate}</td>
-              <td className={styles.email_client}>{item.goal}</td>
-              <td className={styles.email_client}>{item.gender}</td>
-              <td className={styles.flex_row_div}>
-              <ArchivedOUTicon/>
+              <td><img src={item?.clientImage} alt={item?.clientImage} className={styles?.clientImage} /></td>
+              <td className={styles?.name_client}>{item?.name}</td>
+              <td className={styles?.email_client}>{item?.email}</td>
+              <td className={styles?.email_client}>{item?.rate !==null ? item?.rate?.name :"No Name"}</td>
+              <td className={styles?.email_client}>{item?.trainingGoal}</td>
+              <td className={styles?.email_client}>{item?.gender}</td>
+              <td className={styles?.flex_row_div}>
+                <EditIcon className={styles?.actionIcon} />
+                <div style={{ width: 33 }} />
+                <DeleteIcon className={styles?.actionIcon} />
               </td>
             </tr>
-           
+            </>
           ))}
         </tbody>
       </table>
