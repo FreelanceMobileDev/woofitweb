@@ -3,6 +3,7 @@ import {ArchivedOUTicon } from '../../../public';
 import styles from './Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
 
+
 const groupsData = [
   {
     title: 'Academic Tutors',
@@ -50,9 +51,9 @@ const GroupItem = ({ title, clients, images, additionalClients }) => {
       <div style={{display:'flex',marginTop:25,alignItems: 'center',}}>
       <div className={styles.groupClients}>{clients} Clients</div>
       <div className={styles.groupImages}>
-        {images.map((img, index) => (
-          <Image key={index} src={`${img}`} alt={`Client ${index}`} height={30} width={30} className={styles.clientImage} />
-        ))}
+        {/* {images.map((img, index) => (
+          // <Image key={index} src={`${img}`} alt={`Client ${index}`} height={30} width={30} className={styles.clientImage} />
+        ))} */}
         {additionalClients > 0 && <span className={styles.additionalClients}>+{additionalClients}</span>}
       </div>
     </div>

@@ -6,6 +6,10 @@ import { LeftArrow } from '../../../public';
 import { useRouter } from 'next/navigation'
 import { imageUpload, update_professional_details } from '../../api/helper';
 import { useState } from 'react';
+import logoicon from '../../../public/Images/Logo.png'
+import africanimg from '../../../public/Images/africanMan.png'
+import Image from 'next/image';
+
 
 const ProfilePicUpload = () => {
     const router = useRouter();

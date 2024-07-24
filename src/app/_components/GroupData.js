@@ -5,47 +5,7 @@ import { EditIcon, DeleteIcon } from '../../../public'; // Adjust the import pat
 import styles from './Login.module.css';
 import GroupEdit from '../Popups/GroupEdit'
 import { getGroupList } from '../../api/helper';
-
-const groupsData = [
-  {
-    title: 'Academic Tutors',
-    clients: 6,
-    images: [profilepicture, profilepicture, profilepicture],
-    additionalClients: 3,
-  },
-  {
-    title: 'Teaching Assistants',
-    clients: 2,
-    images: [profilepicture, profilepicture],
-    additionalClients: 0,
-  },
-  {
-    title: 'English Team',
-    clients: 6,
-    images: [profilepicture, profilepicture, profilepicture],
-    additionalClients: 3,
-  },
-  {
-    title: 'Pastoral Staff',
-    clients: 6,
-    images: [profilepicture, profilepicture, profilepicture],
-    additionalClients: 3,
-  },
-  {
-    title: 'Heads Of Year',
-    clients: 6,
-    images: [profilepicture, profilepicture, profilepicture],
-    additionalClients: 3,
-  },
-  {
-    title: 'Heads Of Houses',
-    clients: 6,
-    images: [profilepicture, profilepicture, profilepicture],
-    additionalClients: 3,
-  },
-];
-
-
+import Image from 'next/image'
 
 
 const GroupItem = ({ name,title, clients, images, additionalClients, }) => {

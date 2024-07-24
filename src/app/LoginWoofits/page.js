@@ -9,6 +9,9 @@ import { login } from '../../api/helper'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { useEffect, useState } from 'react';
+import logoicon from '../../../public/Images/Logo.png'
+import africanimg from '../../../public/Images/africanMan.png'
+
 const LoginWoofit = () => {
     const router = useRouter();
     const [errMessage, setErrormsg] = useState()

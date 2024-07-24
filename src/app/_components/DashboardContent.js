@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import CheckIcon from '../../../public/Images/CheckIcon';
 import ClockCalender from '../../../public/Images/ClockCalender';
 import CrossIcon from '../../../public/Images/CrossIcon';
@@ -12,8 +12,7 @@ import Rightarrow from '../../../public/Images/Rightarrow';
 import Sessionsimg from '../../../public/Images/Sessionsimg';
 import styles from './Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
-
-
+import Image from 'next/image'
 const DashboardContent = () => {
 // const seltData = useSelector((e) => e.sliceReducer)
 // console.log(seltData,'====selectselectselectselectselect')
@@ -92,7 +91,7 @@ const DashboardContent = () => {
                   <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                     <div style={{ display: 'flex', alignItems: 'center', }}>
                       {session.icon}
-                      <Image src={session.avatar} height={25} width={25} className={styles.avatarimagee} />
+                      <Image src={session.avatar} height={25} width={25} />
                       {session.avatar2 && <Image height={25} width={25} src={session.avatar2} className={styles.avatar2imagee} />}
                       <p style={{ marginLeft: 10 }}>{session.name}</p>
                     </div>
@@ -115,7 +114,7 @@ const DashboardContent = () => {
                 <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                   <div style={{ display: 'flex', alignItems: 'center', }}>
                     {session.icon}
-                    <Image src={session.avatar} height={25} width={25} className={styles.avatarimagee} />
+                    <Image src={session.avatar} height={25} width={25} />
                     <p style={{ marginLeft: 10 }}>{session.name}</p>
                   </div>
                   <Rightarrow />

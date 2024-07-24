@@ -9,7 +9,10 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
-import { register, update_professional_details } from '../../api/helper';
+import {  update_professional_details } from '../../api/helper';
+import logoicon from '../../../public/Images/Logo.png'
+import africanimg from '../../../public/Images/africanMan.png'
+import Image from 'next/image';
 
 const Professionaldetails = () => {
     const Coaching_Specializationoptions = [

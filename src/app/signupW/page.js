@@ -10,6 +10,9 @@ import * as Yup from "yup";
 import { useRouter } from 'next/navigation'
 import {  register } from '../../api/helper'
 import { useState } from 'react'
+import logoicon from '../../../public/Images/Logo.png'
+import africanimg from '../../../public/Images/africanMan.png'
+import Image from 'next/image';
 const SignupWoofit = () => {
     const [errMessage, setErrormsg] = useState()
 
