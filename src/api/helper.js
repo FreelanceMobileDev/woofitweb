@@ -1,0 +1,73 @@
+import { apiClient, apiClientUpload } from "./api";
+import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST } from "./url";
+
+
+  export const imageUpload = (payload) => {
+    console.log("imageUpload--->", payload,)
+    return apiClientUpload({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: IMAGEUPLOAD,
+      data: payload,
+    });
+  };
+
+  export const createCategeory = (payload) => {
+    console.log("login_payload--->", payload,)
+    return apiClientUpload({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: CAT_CREATE,
+      data: payload,
+    });
+  };
+
+  export const register = (payload) => {
+    console.log("register--->", payload,)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: REGISTER,
+      data: payload,
+    });
+  };
+
+  export const login = (payload) => {
+    console.log("login_payload--->", payload,)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: LOGIN,
+      data: payload,
+    });
+  };
+
+  export const update_professional_details = (payload,id) => {
+    console.log("update-professional-details--->", payload,)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: `${UPDATE_PROFESSIONAL_DETAILS}?id=${id}`,
+      data: payload,
+    });
+  };
+
+  export const getClinent = (payload,) => {
+    console.log("update-professional-details--->", payload,)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: GET_METHOD,
+      url: `${GET_CLIENT}?isArchive=${payload}`,
+      // data: payload,
+    });
+  };
+
+  export const getGroupList = (payload,) => {
+    console.log("GET_GROUP_LIST->", payload,)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: GET_METHOD,
+      url: `${GET_GROUP_LIST}?coachId=${payload}`,
+      // data: payload,
+    });
+  };

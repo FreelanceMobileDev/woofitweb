@@ -16,8 +16,9 @@ const Sidebar = ({ onItemSelected,setSelectedItem,selectedItem}) => {
 
 
   const handleItemClick = (item) => {
+    console.log(item,'===item')
     setSelectedItem(item);
-    onItemSelected(item); 
+    // onItemSelected(item); 
   };
   const navItems = [
     { id: 1, icon: <DashBoradimg

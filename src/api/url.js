@@ -1,0 +1,11 @@
+export const BASE_URL = "http://51.20.168.126:5879/api/";
+export const POST_METHOD = "POST";
+export const GET_METHOD = 'GET';
+export const PUTMETHOD ="PUT"
+export const DELETE="DELETE"
+export const IMAGEUPLOAD = "user/upload-image"
+export const LOGIN= 'user/login'
+export const REGISTER ="user/sign-up"
+export const UPDATE_PROFESSIONAL_DETAILS= "user/update-professional-details"
+export const GET_CLIENT ="rates/get-client"
+export const GET_GROUP_LIST="group/getGroupList"
