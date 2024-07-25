@@ -35,12 +35,12 @@ const ArchivedClients = () => {
         >
           Clients
         </div>
-        <div 
+        {/* <div 
           className={activeTab === 'Groups' ? styles.clientsButton : styles.groups_Button}
           onClick={() => handleTabClick('Groups')}
         >
           Groups
-        </div>
+        </div> */}
         </div>
         <div style={{display:'flex'}}>
         <SearchIcon/>

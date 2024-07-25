@@ -1,5 +1,5 @@
 import { apiClient, apiClientUpload } from "./api";
-import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST } from "./url";
+import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE } from "./url";
 
 
   export const imageUpload = (payload) => {
@@ -68,6 +68,17 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
       baseURL: BASE_URL,
       method: GET_METHOD,
       url: `${GET_GROUP_LIST}?coachId=${payload}`,
+      // data: payload,
+    });
+  };
+
+
+  export const getProfile = () => {
+    console.log("getProfile->")
+    return apiClient({
+      baseURL: BASE_URL,
+      method: GET_METHOD,
+      url: `${GET_PROFILE}`,
       // data: payload,
     });
   };

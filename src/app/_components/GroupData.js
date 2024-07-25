@@ -5,7 +5,6 @@ import { EditIcon, DeleteIcon } from '../../../public'; // Adjust the import pat
 import styles from './Login.module.css';
 import GroupEdit from '../Popups/GroupEdit'
 import { getGroupList } from '../../api/helper';
-import Image from 'next/image'
 
 
 const GroupItem = ({ name,title, clients, images, additionalClients, }) => {
@@ -53,7 +52,7 @@ const GroupData = () => {
     try {
       const id = localStorage.getItem("id")
       const getData = await getGroupList(id)
-      console.log(getData.data.data.data, '====here=======>>>>>>>>>>>>')
+      // console.log(getData.data.data.data, '====here=======>>>>>>>>>>>>')
       setData(getData.data.data.data)
     } catch (error) {
       console.log(error, '====error')

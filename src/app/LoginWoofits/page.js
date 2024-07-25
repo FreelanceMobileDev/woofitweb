@@ -33,6 +33,7 @@ const LoginWoofit = () => {
                 }
                 localStorage.setItem("token",response.data.data.token)
                 localStorage.setItem("id",response.data.data._id)
+                localStorage.setItem("userData",JSON.stringify(response.data.data))
                 router.push('/dashboard')
             } catch (error) {
                 console.log(error, '====')

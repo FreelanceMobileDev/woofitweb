@@ -1047,6 +1047,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  
 }
 
 
@@ -1691,6 +1692,7 @@
 .profile_pic_setting {
   height: 107px;
   width: 107px;
+  border-radius: 60px;
 }
 
 .upload_photo_text {

@@ -58,7 +58,7 @@ const ClientsContant = ({setSelectedItem}) => {
       </div>
       </div>
       {activeTab === 'Clients' && <ClientsData  setSelectedItem={setSelectedItem}/>}
-      {activeTab === 'Groups' && <GroupData />}
+      {activeTab === 'Groups' && <div style={{height: '100vh'}}><GroupData /></div>}
     </div>
   )
 }

@@ -1,11 +1,22 @@
-import Image from 'next/image';
+"use client"
+ import Image from 'next/image';
 import Notificationimg from '../../../public/Images/Notificationimg';
 import Searchimg from '../../../public/Images/Searchimg';
-import Inputfield from '../_reuseableComponent/Inputfield';
+// import Inputfield from '../_reuseableComponent/Inputfield';
 import styles from './Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
+import { useEffect, useState } from 'react';
 
 const Header = () => {
+  const  [data,setData] = useState()
+
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      let ddata = JSON.parse(localStorage.getItem("userData"));
+      setData(ddata)
+    }
+  },[])
+
   return (
     <header className={styles.header}>
       <div style={{width:'30%',}}>
@@ -22,10 +33,8 @@ const Header = () => {
        
      </div>
       <div className={styles.userInfo}>
-      
-       
-        <Image height={40} width={40} src={profilepicture} alt="User Avatar" className={styles.avatar} />
-        <span className={styles.hellousername}>Hello James!</span>
+        <Image height={40} width={40} src={data?.image} alt={profilepicture} className={styles.avatar} />
+        <span className={styles.hellousername}>Hello {data?.name}!</span>
         <Notificationimg
         className={styles.Notificationimg}
         />

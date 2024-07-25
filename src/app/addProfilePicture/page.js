@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './../_components/Login.module.css'
 import { LeftArrow } from '../../../public';
 import { useRouter } from 'next/navigation'
-import { imageUpload, update_professional_details } from '../../api/helper';
+import { imageUpload, update_professional_details ,getProfile} from '../../api/helper';
 import { useState } from 'react';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
@@ -28,7 +28,6 @@ const ProfilePicUpload = () => {
                 setSelectedFile(e.target.result);
             };
             reader.readAsDataURL(file);
-
             // here is file upload api call
             const formData = new FormData();
             formData.append('image', file);
@@ -70,9 +69,11 @@ const ProfilePicUpload = () => {
         if (response?.data?.success === false) {
             setErrormsg(response?.data)
         }
-        console.log(response?.data, '====api response')
+        const getData = await getProfile()
+        localStorage.setItem("userData",JSON.stringify(getData.data.data))
+        // console.log(response?.data, '====api response')
+        // user/get-profile
         router.push('/dashboard')
-
     }
 
     return (
