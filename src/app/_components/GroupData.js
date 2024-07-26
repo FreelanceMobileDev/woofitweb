@@ -8,7 +8,7 @@ import { getGroupList } from '../../api/helper';
 
 
 const GroupItem = ({ name,title, clients, images, additionalClients, }) => {
-  console.log(name,'====name')
+  // console.log(name,'====name')
   const [popupIsOpen, setShowPopup] = useState(false);
   
   const openPopup = () => {

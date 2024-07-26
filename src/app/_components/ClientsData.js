@@ -3,22 +3,26 @@ import { useEffect, useState } from 'react'
 import { DeleteIcon, EditIcon, } from '../../../public'
 import styles from './Login.module.css'
 import { getClinent } from '../../api/helper'
-const ClientsData = ({ setSelectedItem }) => {
-  const [getdata, setData] = useState()
+import profilePic from '../../../public/Images/profilepic.png'
+const ClientsData = ({ setSelectedItem ,activeTab}) => {
+  const [getdata, setData] = useState([])
 
-  const getApiClinent = async () => {
+  const getApiClinent = async (data) => {
     try {
-      const getData = await getClinent(0)
-      // console.log(getData.data.data.getAllClientData ,'====here=======>>>>>>>>>>>>')
+      const getData = await getClinent(data)
       setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
     }
   }
   useEffect(() => {
-    getApiClinent()
-  }, [])
-  console.log(getdata, '====getdata')
+    if(activeTab === "Clients"){
+      getApiClinent(0)
+    }else{
+      getApiClinent(1)
+    }
+  }, [activeTab])
+
   return (
     <div >
       <table className={styles.table}>
@@ -35,7 +39,7 @@ const ClientsData = ({ setSelectedItem }) => {
           </tr>
         </thead>
         <tbody >
-          {getdata&&getdata?.map(item => (
+          {getdata.length ==0? "Data Not Found" : getdata&&getdata?.map(item => (
             <>
             <tr className={styles.temppp} onClick={() => { setSelectedItem('ClientInfo') }}  >
               <td><input type="checkbox" /></td>

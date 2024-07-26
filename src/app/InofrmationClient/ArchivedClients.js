@@ -1,13 +1,4 @@
 
-// const ArchivedClients = () => {
-//   return (
-//   <div>
-//     helloooo
-//   </div>
-//   )
-// }
-
-// export default ArchivedClients
 'use client';
 
 import { ArchivedIcon,  FilterIcon, SearchIcon } from '../../../public';

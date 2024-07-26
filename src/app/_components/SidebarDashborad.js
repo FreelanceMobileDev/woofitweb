@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useRouter,useSearchParams,usePathname } from 'next/navigation'
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 import DashBoradimg from '../../../public/Images/Dashboardimg';
@@ -10,38 +11,24 @@ import Paymentsimg from '../../../public/Images/Paymentsimg';
 import Reportsimg from '../../../public/Images/Reportsimg';
 import Settingsimg from '../../../public/Images/Settingsimg';
 import LogoWoofit from '../../../public/Images/LogoWoofit';
+;
 
-
-const Sidebar = ({ onItemSelected,setSelectedItem,selectedItem}) => {
-
-
+const Sidebar = () => {
+  const router = useRouter();
+  const pathname = usePathname()
   const handleItemClick = (item) => {
-    console.log(item,'===item')
-    setSelectedItem(item);
-    // onItemSelected(item); 
+    router.push(`/${item}`);
   };
+
+
   const navItems = [
-    { id: 1, icon: <DashBoradimg
-      //  className={}
-    />, label: "Dashboard", },
-    { id: 2, icon: <Scheduleimg 
-     //  className={}
-    />, label: "Schedule",},
-    { id: 3, icon: <Clientimg 
-     //  className={}
-    />, label: "Clients",},
-    { id: 4, icon: <Coachesimg 
-     //  className={}
-    />, label: "Coaches",  },
-    { id: 5, icon: <Paymentsimg 
-     //  className={}
-    />, label: "Payments",  },
-    { id: 6, icon: <Reportsimg 
-     //  className={}
-    />, label: "Reports",  },
-    { id: 7, icon: <Settingsimg 
-     //  className={}
-    />, label: "Settings",  },
+    { id: 1, icon: <DashBoradimg/>, label: "Dashboard",url:"dashboard" },
+    { id: 2, icon: <Scheduleimg/>, label: "Schedule",url:"schedule"},
+    { id: 3, icon: <Clientimg  />, label: "Clients", url:"Clients"},
+    { id: 4, icon: <Coachesimg />, label: "Coaches", url:"coaches" },
+    { id: 5, icon: <Paymentsimg/>, label: "Payments",url:"payments"  },
+    { id: 6, icon: <Reportsimg />, label: "Reports", url:"reports" },
+    { id: 7, icon: <Settingsimg/>, label: "Settings", url:"settings/profile"  },
   ];
   
   return (
@@ -52,8 +39,8 @@ const Sidebar = ({ onItemSelected,setSelectedItem,selectedItem}) => {
       <ul className={styles.navList}>
       {navItems.map(item => (
            <li key={item.id}
-           className={`${styles.navItem} ${selectedItem === item.label ? styles.selected : ''}`}
-             onClick={() => handleItemClick(item.label)}>
+           className={`${styles.navItem} ${pathname === `/${item.url}` ? styles.selected : ''}`}
+             onClick={() => handleItemClick(item.url)}>
             <div >
               <div className={styles.dashboradimage}>
                 {item.icon}

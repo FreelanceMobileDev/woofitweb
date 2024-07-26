@@ -26,6 +26,7 @@ const SettingContant = () => {
     setActiveTab(tab);
   };
 
+
   const navItems = [
     { id: 1, icon: <ProfileIcon />, label: "Profile" },
     { id: 2, icon: <ServicesIcon />, label: "Services" },
@@ -49,7 +50,7 @@ const SettingContant = () => {
           <ul className={styles.navList}>
             {navItems.map(item => (
               <li key={item.id}
-                className={`${styles.navItem} ${activeTab === item.label ? styles.activeNavItem : ''}`}
+                className={`${styles.navItem}${activeTab === item.label ? styles.activeNavItem : ''}`}
                 onClick={() => handleTabClick(item.label)}
               >
                 <div className={styles.navItemContent}>
