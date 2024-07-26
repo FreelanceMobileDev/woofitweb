@@ -23,18 +23,18 @@ const DashContant = () => {
     <DeshBorad setSelectedItem={setSelectedItem} selectedItem={selectedItem}>
       <div className={styles.dashboard}>
         <div className={styles.dashboard}>
-          {selectedItem === 'Dashboard' && <DashboardContent />}
-          {selectedItem === 'Schedule' && <ScheduleContant />}
-          {selectedItem === 'Clients' && <ClientsContant setSelectedItem={setSelectedItem} />}
-          {selectedItem === 'Coaches' && <CoachesContant setSelectedItem={setSelectedItem}/>}
-          {selectedItem === 'Payments' && <PaymentsContant setSelectedItem={setSelectedItem}/>}
+          {/* {selectedItem === 'Dashboard' && <DashboardContent />} */}
+          {/* {selectedItem === 'Schedule' && <ScheduleContant />} */}
+          {/* {selectedItem === 'Clients' && <ClientsContant setSelectedItem={setSelectedItem} />} */}
+          {/* {selectedItem === 'Coaches' && <CoachesContant setSelectedItem={setSelectedItem}/>} */}
+          {/* {selectedItem === 'Payments' && <PaymentsContant setSelectedItem={setSelectedItem}/>} */}
           {selectedItem === 'Reports' && <ReportsContant />}
-          {selectedItem === 'Settings' && <SettingContant />}
-          {selectedItem === "ClientInfo" && <Clientinformation  setSelectedItem={setSelectedItem}/>}
-          {selectedItem === "Coachsinfo" && <Coachsinfo  setSelectedItem={setSelectedItem}/>}
-          {selectedItem === "EditClient" && <EditClient setSelectedItem={setSelectedItem}/>}
-          {selectedItem === "EditCoach" && <EditCoach setSelectedItem={setSelectedItem}/>}
-          {selectedItem === "ArchivedCoaches" && <ArchivedCoaches/>}
+          {/* {selectedItem === 'Settings' && <SettingContant />} */}
+          {/* {selectedItem === "ClientInfo" && <Clientinformation  setSelectedItem={setSelectedItem}/>} */}
+          {/* {selectedItem === "Coachsinfo" && <Coachsinfo  setSelectedItem={setSelectedItem}/>} */}
+          {/* {selectedItem === "EditClient" && <EditClient setSelectedItem={setSelectedItem}/>} */}
+          {/* {selectedItem === "EditCoach" && <EditCoach setSelectedItem={setSelectedItem}/>} */}
+          {/* {selectedItem === "ArchivedCoaches" && <ArchivedCoaches/>} */}
           {/* {selectedItem === "ArchivedClients" && <ArchivedClients/>} */}
           {selectedItem === "InvoiceCreate" && <InvoiceCreate setSelectedItem={setSelectedItem}/>}
         </div>

@@ -1,9 +1,15 @@
+"use client"
 import Image from 'next/image';
 import { ArchivedIcon, DeleteIcon, EditIcon, FilterIcon, SearchIcon, } from '../../../public';
 import styles from './Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-const CoachesContant = ({setSelectedItem}) => {
+const CoachesContant = () => {
+  const router = useRouter()
+  const [archived , setArchived]= useState(false)
+
     const data = [
         { id: 1, image: profilepicture, name: 'Declan Mcgowan', email: 'willie.jennings@example.com', goal: '3 Years', rate: 'Health Coach', gender: 'Female' },
         { id: 2, image: profilepicture, name: 'Chris Craig', email: 'tim.jennings@example.com', goal: '5 Years', rate: 'Nutrition Specialist', gender: 'Female' },
@@ -18,10 +24,10 @@ const CoachesContant = ({setSelectedItem}) => {
   return (
     <div  style={{backgroundColor:"white"}}>
       <div className={styles.CoachesHeaderdiv}>
-        <div className={styles.Coachestxtt}>Coaches</div>
+        <div className={styles.Coachestxtt}>{archived ? "Archived Coaches":"Coaches"}</div>
         <div style={{display:'flex',alignItems:'center'}}>
         <ArchivedIcon />
-        <div className={styles.Archived_Clients}onClick={()=>{setSelectedItem('ArchivedCoaches')}}>Archived Coaches</div>
+        <div className={styles.Archived_Clients}onClick={()=>{setArchived(!archived)}}>{archived ? "Coaches":"Archived Coaches"}</div>
         <div className={styles.Add_Client}>Add a Coach</div>
         <div style={{display:'flex',marginLeft:30}}>
         <SearchIcon/>
@@ -46,7 +52,7 @@ const CoachesContant = ({setSelectedItem}) => {
         </thead>
         <tbody >
           {data.map(item => (
-            <tr key={item.id} className={styles.temppp} onClick={()=>{setSelectedItem('Coachsinfo')}}>
+            <tr key={item.id} className={styles.temppp} onClick={()=>router.push("/coaches/coachInfo")}>
               <td><input type="checkbox" /></td>
               <td><Image height={40} width={40} src={item.image} alt={item.name} className={styles.profileImage} /></td>
               <td className={styles.name_client}>{item.name}</td>

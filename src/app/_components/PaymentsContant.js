@@ -1,7 +1,10 @@
+"use client"
+import { useRouter } from 'next/navigation';
 import { ArchivedIcon, FilterIcon, SearchIcon, } from '../../../public';
 import styles from './Login.module.css';
 
 const PaymentsContant = ({ setSelectedItem }) => {
+  const router = useRouter()
   const transactions = [
     { name: 'Franky Williamson', txnId: '79120283', date: 'May 31, 2015', amount: '$19.00', status: 'Success' },
     { name: 'Bronson Glass', txnId: '79116801', date: 'May 31, 2015', amount: '$90.00', status: 'Failed' },
@@ -18,7 +21,7 @@ const PaymentsContant = ({ setSelectedItem }) => {
       <div className={styles.PaymentsHeaderdiv}>
         <div className={styles.Paymentstxtt}>Payments</div>
         <div style={{display:'flex',alignItems:'center',}}>
-        <div className={styles.Add_Client} onClick={() => { setSelectedItem('InvoiceCreate') }}>Create Invoice</div>
+        <div className={styles.Add_Client} onClick={() => router.push('/payments/InvoiceCreate')}>Create Invoice</div>
         <div style={{ display: 'flex', marginLeft: 30 }}>
           <SearchIcon />
           <div style={{ width: 40 }} />

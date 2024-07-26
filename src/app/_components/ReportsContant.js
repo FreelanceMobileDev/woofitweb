@@ -1,3 +1,4 @@
+"use client"
 import {  Downarrow, EarningsIcon, FilterIcon, LeftArrow, NewClients, Rightarrow, SearchIcon, Sessionsimg, } from '../../../public';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';

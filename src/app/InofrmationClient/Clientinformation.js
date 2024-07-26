@@ -8,8 +8,10 @@ import styles from './ClientPage.module.css';
 import { ArchivedIcon, CallIcon, LeftArrow, MessageIcon } from '../../../public';
 import Image from 'next/image';
 import profileiconn from '../../../public/Images/profileee.png'
+import { useRouter } from 'next/navigation';
 
 const Clientinformation = ({setSelectedItem}) => {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState('Overall Info');
 
   return (
@@ -17,7 +19,7 @@ const Clientinformation = ({setSelectedItem}) => {
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
-        <div onClick={()=>{setSelectedItem('Clients')}} style={{cursor:'pointer'}}>
+        <div onClick={()=>router.push('/Clients')} style={{cursor:'pointer'}}>
           <LeftArrow />
           </div>
           <div className={styles.ClientStyle}>Client</div>
@@ -44,7 +46,7 @@ src={profileiconn}
   <div className={styles.callicon_background}><CallIcon/></div>
   <div className={styles.callicon_background}><MessageIcon/></div>
 </div>
-<div className={styles.EditProfilee_buttoon} onClick={()=>{setSelectedItem('EditClient')}}>
+<div className={styles.EditProfilee_buttoon} onClick={()=>router.push('/Clients/edit')}>
 Edit Profile
 </div>
   </div>

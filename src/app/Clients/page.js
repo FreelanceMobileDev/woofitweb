@@ -1,12 +1,9 @@
 'use client';
 import { ArchivedIcon, FilterIcon, SearchIcon } from '../../../public';
-import { getClinent } from '../../api/helper';
 import ClientsData from '../_components/ClientsData';
 import GroupData from '../_components/GroupData';
 import styles from '../_components/Login.module.css';
 import React, { useState } from 'react';
-import Header from '../_components/HeaderDashborad'
-import Sidebar from '../_components/SidebarDashborad'
 import DeshBorad from '../dashboard/DashCompoent';
 
 function page() {
@@ -15,7 +12,6 @@ function page() {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  console.log(activeTab, '====activeTab')
   return (
     <>
       <DeshBorad>

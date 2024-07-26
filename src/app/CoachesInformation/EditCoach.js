@@ -6,15 +6,18 @@ import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import Image from 'next/image';
 import profileiconn from '../../../public/Images/profileee.png'
+import { useRouter } from 'next/navigation';
+
 
 const EditCoach = ({ setSelectedItem }) => {
+  const router = useRouter()
 
   return (
 
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
-        <div onClick={()=>{setSelectedItem('Coachsinfo')}} className={styles.backarrow}>
+        <div onClick={()=>router.push("/coaches/coachInfo")} className={styles.backarrow}>
           <LeftArrow />
           </div>
           <div className={styles.ClientStyle}>Edit Coach Profile</div>

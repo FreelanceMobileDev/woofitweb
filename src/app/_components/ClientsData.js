@@ -4,7 +4,9 @@ import { DeleteIcon, EditIcon, } from '../../../public'
 import styles from './Login.module.css'
 import { getClinent } from '../../api/helper'
 import profilePic from '../../../public/Images/profilepic.png'
+import { useRouter } from 'next/navigation'
 const ClientsData = ({ setSelectedItem ,activeTab}) => {
+  const router = useRouter()
   const [getdata, setData] = useState([])
 
   const getApiClinent = async (data) => {
@@ -41,7 +43,7 @@ const ClientsData = ({ setSelectedItem ,activeTab}) => {
         <tbody >
           {getdata.length ==0? "Data Not Found" : getdata&&getdata?.map(item => (
             <>
-            <tr className={styles.temppp} onClick={() => { setSelectedItem('ClientInfo') }}  >
+            <tr className={styles.temppp} onClick={() => router.push("/Clients/clientsInfo")}  >
               <td><input type="checkbox" /></td>
               <td><img src={item?.clientImage ? item?.clientImage:"/images/profilepic.png"} alt={"/images/profilepic.png"} className={styles?.clientImage} /></td>
               <td className={styles?.name_client}>{item?.name}</td>

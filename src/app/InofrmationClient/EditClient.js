@@ -8,8 +8,10 @@ import TextWithButton from '../_reuseableComponent/TextWithButton';
 import CreditCard from '../Popups/CreditCard'
 import Image from 'next/image';
 import profileiconn from '../../../public/Images/profileee.png'
+import { useRouter } from 'next/navigation';
 
 const EditClient = ({ setSelectedItem }) => {
+  const router = useRouter()
   const [popupIsOpen, setShowPopup] = useState(false);
   const openPopup = () => {
     setShowPopup(true);
@@ -23,7 +25,7 @@ const EditClient = ({ setSelectedItem }) => {
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
-          <div onClick={()=>{setSelectedItem('ClientInfo')}} style={{cursor:'pointer'}}>
+          <div onClick={()=>router.push('/Clients/clientsInfo')} style={{cursor:'pointer'}}>
           <LeftArrow />
           </div>
           <div className={styles.ClientStyle}>Edit Client Profile</div>
