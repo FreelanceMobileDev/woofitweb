@@ -57,7 +57,6 @@ const ProfilePicUpload = () => {
         if(!formData || formData.Privacy!="on" || formData.Terms!="on" ){
             return setErrormsg({message:"Please Check 'I Am Agree' "})
         }
-        console.log(formData,'===formData')
 
         if(!image){
             return setErrormsg({message:"Please select the image"}) 

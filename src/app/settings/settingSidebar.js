@@ -1,24 +1,36 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import styles from '../_components/Login.module.css';
 import { FAQsIcon, IntegrationsIcon, NotificationIcon, ProfileIcon, Rightarrow, ServicesIcon, SupportIcon } from '../../../public';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const SettingSidebar = ({ children }) => {
   const router = useRouter();
+  const pathname = usePathname(); // Gets the current path
+
   const [activeTab, setActiveTab] = useState('/settings/profile');
+
+  useEffect(() => {
+    const path = pathname.replace('/settings/', '');
+    if(pathname =="/settings"){
+      router.push('/settings/profile')
+    }
+    setActiveTab(path || '/settings/profile');
+  }, [pathname]);
+
   const handleNavigation = (route) => {
     if (route === "Logout") {
-      let confirmed = window.confirm("Are you sure you want to logout?");
+      const confirmed = window.confirm("Are you sure you want to logout?");
       if (confirmed) {
         console.log("User clicked OK, logging out...");
-        localStorage.clear()
-        router.push('/')
+        localStorage.clear();
+        router.push('/');
       }
     } else {
       router.push(`/settings/${route}`);
     }
   };
+
   const navItems = [
     { id: 1, icon: <ProfileIcon />, label: "Profile", url: "profile" },
     { id: 2, icon: <ServicesIcon />, label: "Services", url: "services" },
@@ -29,6 +41,10 @@ const SettingSidebar = ({ children }) => {
     { id: 7, icon: <SupportIcon />, label: "Logout", url: "Logout" }
   ];
 
+  const isActive = (url) => {
+    return pathname.startsWith(`/settings/${url}`);
+  };
+
   return (
     <div style={{ backgroundColor: '#fff' }}>
       <div className={styles.Setting_texttt}>Settings</div>
@@ -36,8 +52,9 @@ const SettingSidebar = ({ children }) => {
         <div className={styles.settingSidebar}>
           <ul className={styles.navList}>
             {navItems.map(item => (
-              <li key={item.id}
-                className={`${styles.navItem}${activeTab === item.label ? styles.activeNavItem : ''}`}
+              <li
+                key={item.id}
+                className={`${styles.navItem} ${isActive(item.url) ? styles.activeNavItem : ''}`}
                 onClick={() => handleNavigation(item.url)}
               >
                 <div className={styles.navItemContent}>
@@ -45,7 +62,7 @@ const SettingSidebar = ({ children }) => {
                     {item.icon}
                     <span className={styles.navItemLabel}>{item.label}</span>
                   </div>
-                  {item.id == 7 ? "" : <Rightarrow />}
+                  {item.id !== 7 && <Rightarrow />}
                 </div>
               </li>
             ))}

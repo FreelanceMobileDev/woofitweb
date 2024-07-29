@@ -21,19 +21,17 @@ const Sidebar = () => {
     router.push(`/${item}`);
   };
 
-  // Determine if a path matches the current pathname
   const isActive = (url) => {
-    return pathname === `/${url}` || pathname.startsWith(`/${url}/`);
+    return pathname.startsWith(`/${url}/`) || pathname === `/${url}`;
   };
-
   const navItems = [
     { id: 1, icon: <DashBoradimg />, label: "Dashboard", url: "dashboard" },
     { id: 2, icon: <Scheduleimg />, label: "Schedule", url: "schedule" },
     { id: 3, icon: <Clientimg />, label: "Clients", url: "Clients" },
-    { id: 4, icon: <Coachesimg />, label: "Coaches", url: "coaches" },
+    // { id: 4, icon: <Coachesimg />, label: "Coaches", url: "coaches" },
     { id: 5, icon: <Paymentsimg />, label: "Payments", url: "payments" },
     { id: 6, icon: <Reportsimg />, label: "Reports", url: "reports" },
-    { id: 7, icon: <Settingsimg />, label: "Settings", url: "settings/profile" },
+    { id: 7, icon: <Settingsimg />, label: "Settings", url: "settings" },
   ];
 
   return (

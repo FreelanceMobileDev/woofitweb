@@ -1,5 +1,5 @@
 import { apiClient, apiClientUpload } from "./api";
-import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE } from "./url";
+import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT } from "./url";
 
 
   export const imageUpload = (payload) => {
@@ -82,3 +82,32 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
       // data: payload,
     });
   };
+  export const getClientDetails = (id) => {
+    console.log("getClientDetails->",id)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: GET_METHOD,
+      url: `${GET_CLIENT_DETAILS}?id=${id}`,
+      // data: payload,
+    });
+  };
+  export const getRates = (id) => {
+    console.log("getRates-====???>",id)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: GET_METHOD,
+      url: `${GET_RATES}?coachId=${id}`,
+      // data: payload,
+    });
+  };
+  
+  export const createOrUpdateClient = (id,payload) => {
+    console.log("createOrUpdateClient-====>>>>>>>>",id,payload)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: `${CREATE_OR_UPDATE_CLIENT}?id=${id}`,
+      data: payload,
+    });
+  };
+  

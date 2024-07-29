@@ -1,8 +1,9 @@
 {
   "/Clients/page": "app/Clients/page.js",
-  "/reports/page": "app/reports/page.js",
   "/schedule/page": "app/schedule/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/Clients/clientsInfo/page": "app/Clients/clientsInfo/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/Clients/edit/page": "app/Clients/edit/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/settings/profile/page": "app/settings/profile/page.js"
 }

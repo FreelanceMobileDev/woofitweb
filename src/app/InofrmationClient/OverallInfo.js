@@ -2,44 +2,52 @@ import { Coins, Downarrow, MuscleIcon, Rightarrow } from "../../../public";
 import PlusGallery from "../../../public/Images/PlusGallery";
 import Inputfield from "../_reuseableComponent/Inputfield";
 import TextWithButton from "../_reuseableComponent/TextWithButton"
+import SelectOption from '../_reuseableComponent/SelectOption'
 import styles from './ClientPage.module.css';
-const OverallInfo = () => {
+import {genderData,experienceOptions,specializationOptions} from '../../util/staticData'
+
+const OverallInfo = ({ info, getRetes }) => {
+  
   return (
     <div className={styles.container}>
-   <TextWithButton 
-                label="Balance" 
-                text="3 Trainings" 
-                buttonText="$80" 
-                RightIcon={Downarrow} 
-                RightBox={PlusGallery}
-            />
-    <div className={styles.rateAndGoal}>
-    <TextWithButton 
-                    label="Rate" 
-                    text="Optimum" 
-                    buttonText="$35" 
-                    LeftIcon={Coins}
-                    RightIcon={Downarrow} 
-                    additionalcontainer={styles.rate_input_div}
-                />
-             <div style={{width:50}}/>
-                <TextWithButton 
-                    label="Training Goal" 
-                    text="Muscle Gain" 
-                    LeftIcon={MuscleIcon}
-                    RightIcon={Downarrow} 
-                    additionalcontainer={styles.rate_input_div}
-                />
-    </div>
-    {/* <div className={styles.commentSection}>
+      
+      <div className={styles.rateAndGoal}>
+          <SelectOption
+            label={"Rate"}
+            id={"rate"}
+            data={getRetes?.getAllRatesData}
+            selectedId={info?.clientDetails?.rate?._id}
+            RightIcon={Downarrow}
+          />
+        <div style={{ width: 50 }} />
+
+        <SelectOption
+            label={"Training Goal"}
+            id={"trainingGoal"}
+            data={specializationOptions}
+            selectedId={info?.clientDetails?.trainingGoal}
+            RightIcon={Downarrow}
+          />
+  
+        {/* <TextWithButton
+          label="Training Goal"
+          text={info?.clientDetails?.trainingGoal}
+          LeftIcon={MuscleIcon}
+          RightIcon={Downarrow}
+          additionalcontainer={styles.rate_input_div}
+        // value={info?.clientDetails?.trainingGoal}
+        /> */}
+      </div>
+      {/* <div className={styles.commentSection}>
         <label className={styles.label}>Comment</label>
         <textarea className={styles.textarea} placeholder="Your comment here..."></textarea>
     </div> */}
-    <Inputfield
-    name={"Comment"}
-    additionalMainDivClassName={styles.comment_div}
-    />
-</div>
+      <Inputfield
+        name={"Comment"}
+        additionalMainDivClassName={styles.comment_div}
+        value={info?.clientDetails?.comment}
+      />
+    </div>
   )
 }
 

@@ -15,50 +15,61 @@ import africanimg from '../../../public/Images/africanMan.png'
 import Image from 'next/image';
 
 const Professionaldetails = () => {
-    const Coaching_Specializationoptions = [
-        'Personal Training',
-        'Strength Training',
-        'Cardio Fitness',
-        'Weight Loss',
-        'Muscle Building',
-        'Bodybuilding',
-        'CrossFit',
-        'Functional Training',
-        'HIIT (High-Intensity Interval Training)',
-        'Pilates',
-        'Yoga',
-        'Zumba',
-        'Sports Conditioning',
-        'Athletic Performance',
-        'Endurance Training',
-        'Marathon Training',
-        'Triathlon Training',
-        'Cycling Training',
-        'Swimming Training',
-        'Running Coaching',
-        'Boxing Fitness',
-        'Kickboxing',
-        'Martial Arts Training',
-        'Flexibility Training',
-        'Mobility Training',
-        'Rehabilitation Training',
-        'Postnatal Fitness',
-        'Prenatal Fitness',
-        'Senior Fitness',
-        'Youth Fitness',
-        'Group Fitness',
-        'Dance Fitness',
-        'Barre Workouts',
-        'Meditation Coaching',
-        'Nutrition Coaching',
-        'Lifestyle Coaching',
-        'Wellness Coaching',
-        'Behavioral Change Coaching',
-        'Stress Management',
-        'Holistic Fitness'
-    ];
+    const specializationOptions = [
+        { _id: 1, name: 'Personal Training' },
+        { _id: 2, name: 'Strength Training' },
+        { _id: 3, name: 'Cardio Fitness' },
+        { _id: 4, name: 'Weight Loss' },
+        { _id: 5, name: 'Muscle Building' },
+        { _id: 6, name: 'Bodybuilding' },
+        { _id: 7, name: 'CrossFit' },
+        { _id: 8, name: 'Functional Training' },
+        { _id: 9, name: 'HIIT (High-Intensity Interval Training)' },
+        { _id: 10, name: 'Pilates' },
+        { _id: 11, name: 'Yoga' },
+        { _id: 12, name: 'Zumba' },
+        { _id: 13, name: 'Sports Conditioning' },
+        { _id: 14, name: 'Athletic Performance' },
+        { _id: 15, name: 'Endurance Training' },
+        { _id: 16, name: 'Marathon Training' },
+        { _id: 17, name: 'Triathlon Training' },
+        { _id: 18, name: 'Cycling Training' },
+        { _id: 19, name: 'Swimming Training' },
+        { _id: 20, name: 'Running Coaching' },
+        { _id: 21, name: 'Boxing Fitness' },
+        { _id: 22, name: 'Kickboxing' },
+        { _id: 23, name: 'Martial Arts Training' },
+        { _id: 24, name: 'Flexibility Training' },
+        { _id: 25, name: 'Mobility Training' },
+        { _id: 26, name: 'Rehabilitation Training' },
+        { _id: 27, name: 'Postnatal Fitness' },
+        { _id: 28, name: 'Prenatal Fitness' },
+        { _id: 29, name: 'Senior Fitness' },
+        { _id: 30, name: 'Youth Fitness' },
+        { _id: 31, name: 'Group Fitness' },
+        { _id: 32, name: 'Dance Fitness' },
+        { _id: 33, name: 'Barre Workouts' },
+        { _id: 34, name: 'Meditation Coaching' },
+        { _id: 35, name: 'Nutrition Coaching' },
+        { _id: 36, name: 'Lifestyle Coaching' },
+        { _id: 37, name: 'Wellness Coaching' },
+        { _id: 38, name: 'Behavioral Change Coaching' },
+        { _id: 39, name: 'Stress Management' },
+        { _id: 40, name: 'Holistic Fitness' }
+      ];
 
-    const Experience = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10 +']
+      const experienceOptions = [
+        { _id: 1, name: '1 ' },
+        { _id: 2, name: '2 ' },
+        { _id: 3, name: '3 ' },
+        { _id: 4, name: '4 ' },
+        { _id: 5, name: '5 ' },
+        { _id: 6, name: '6 ' },
+        { _id: 7, name: '7 ' },
+        { _id: 8, name: '8 ' },
+        { _id: 9, name: '9 ' },
+        { _id: 10, name: '10+ ' }
+      ];
 
     const [errMessage, setErrormsg] = useState()
     const router = useRouter();
@@ -112,7 +123,7 @@ const Professionaldetails = () => {
 
                                 <SelectOption label={"Coaching Specialization"}
                                     id={"coachSpecialization"}
-                                    data={Coaching_Specializationoptions}
+                                    data={specializationOptions}
                                     RightIcon={Downarrow}
                                     onChange={formik.handleChange}
                                     value={formik.values.coachSpecialization}
@@ -123,7 +134,7 @@ const Professionaldetails = () => {
 
                                 <SelectOption label={"Years of Experience"}
                                     id={"yearOfExperience"}
-                                    data={Experience}
+                                    data={experienceOptions}
                                     RightIcon={Downarrow}
                                     onChange={formik.handleChange}
                                     value={formik.values.yearOfExperience}
