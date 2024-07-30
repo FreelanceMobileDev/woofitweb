@@ -51,7 +51,7 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
     (response) => {
-         console.log(response,"response===========>")
+        //  console.log(response,"response===========>")
         Store.dispatch(setLoading(false))
         return response;
     },

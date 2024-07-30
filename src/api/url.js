@@ -13,3 +13,4 @@ export const GET_PROFILE ="user/get-profile";
 export const GET_CLIENT_DETAILS= 'rates/getClientDetails'
 export const GET_RATES="rates/get-rates"
 export const CREATE_OR_UPDATE_CLIENT= "rates/create-or-update-client"
+export const GET_TRANNING_SESSION ="tranning/getTrainingSession"
