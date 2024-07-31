@@ -17,8 +17,10 @@ const ClientsData = ({ activeTab}) => {
       console.log(error, '====error')
     }
   }
-  
+  console.log(activeTab)
+
   useEffect(() => {
+    
     if(activeTab === "Clients"){
       getApiClinent(0)
     }else{

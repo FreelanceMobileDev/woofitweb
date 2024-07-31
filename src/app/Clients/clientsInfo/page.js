@@ -13,12 +13,3 @@ export default function ClientInfo () {
     </Suspense>
   );
 }
-
-
-// export default function Page() {
-//   return (
-//     <Suspense fallback={<div>Loading...</div>}>
-//       <ClientInfo />
-//     </Suspense>
-//   );
-// }

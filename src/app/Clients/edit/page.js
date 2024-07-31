@@ -12,11 +12,3 @@ export default function EditClientPage() {
     </Suspense>
   );
 }
-
-// export default function Page() {
-//   return (
-//     <Suspense fallback={<div>Loading...</div>}>
-//       <EditClientPage />
-//     </Suspense>
-//   );
-// }
