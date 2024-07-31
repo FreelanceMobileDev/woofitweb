@@ -54,7 +54,7 @@ const Clientinformation = ({ setSelectedItem }) => {
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
-          <div onClick={() => router.push('/Clients')} style={{ cursor: 'pointer' }}>
+          <div onClick={() => router.push('/clients')} style={{ cursor: 'pointer' }}>
             <LeftArrow />
           </div>
           <div className={styles.ClientStyle}>Client</div>

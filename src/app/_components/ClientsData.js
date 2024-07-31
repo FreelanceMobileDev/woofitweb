@@ -17,6 +17,7 @@ const ClientsData = ({ activeTab}) => {
       console.log(error, '====error')
     }
   }
+  
   useEffect(() => {
     if(activeTab === "Clients"){
       getApiClinent(0)
@@ -45,7 +46,7 @@ const ClientsData = ({ activeTab}) => {
             <>
             <tr className={styles.temppp} onClick={() => router.push(`/clients/clientsInfo?id=${item?._id}`)}  >
               <td><input type="checkbox" /></td>
-              <td><img src={item?.clientImage ? item?.clientImage:"/images/profilepic.png"} alt={"/images/profilepic.png"} className={styles?.clientImage} /></td>
+              <td><img src={item?.clientImage ? item?.clientImage:profilePic.src} alt={profilePic.src} className={styles?.clientImage} /></td>
               <td className={styles?.name_client}>{item?.name}</td>
               <td className={styles?.email_client}>{item?.email}</td>
               <td className={styles?.email_client}>{item?.rate !==null ? item?.rate?.name :"No Name"}</td>
