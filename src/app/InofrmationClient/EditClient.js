@@ -115,7 +115,7 @@ const EditClient = ({ setSelectedItem }) => {
           console.log(error)
         }
         // console.log(values, '===value')
-        router.push(`/Clients/clientsInfo?id=${getData.clientDetails?._id}`)
+        router.push(`/clients/clientsInfo?id=${getData.clientDetails?._id}`)
       } catch (error) {
         console.log(error, '====')
       }
@@ -140,11 +140,12 @@ const EditClient = ({ setSelectedItem }) => {
 
 
   return (
+<>
 
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
-          <div onClick={() => router.push(`/Clients/clientsInfo?id=${id}`)} style={{ cursor: 'pointer' }}>
+          <div onClick={() => router.push(`/clients/clientsInfo?id=${id}`)} style={{ cursor: 'pointer' }}>
             <LeftArrow />
           </div>
           <div className={styles.ClientStyle}>Edit Client Profile</div>
@@ -267,6 +268,7 @@ const EditClient = ({ setSelectedItem }) => {
       </div>
       {popupIsOpen && <CreditCard show={popupIsOpen} handleClose={closePopup} />}
     </div>
+</>
   );
 };
 

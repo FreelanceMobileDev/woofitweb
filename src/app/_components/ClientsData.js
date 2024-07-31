@@ -43,7 +43,7 @@ const ClientsData = ({ activeTab}) => {
         <tbody >
           {getdata.length ==0? "Data Not Found" : getdata&&getdata?.map(item => (
             <>
-            <tr className={styles.temppp} onClick={() => router.push(`/Clients/clientsInfo?id=${item?._id}`)}  >
+            <tr className={styles.temppp} onClick={() => router.push(`/clients/clientsInfo?id=${item?._id}`)}  >
               <td><input type="checkbox" /></td>
               <td><img src={item?.clientImage ? item?.clientImage:"/images/profilepic.png"} alt={"/images/profilepic.png"} className={styles?.clientImage} /></td>
               <td className={styles?.name_client}>{item?.name}</td>

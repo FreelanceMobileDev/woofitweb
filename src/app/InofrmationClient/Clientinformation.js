@@ -50,6 +50,7 @@ const Clientinformation = ({ setSelectedItem }) => {
 
 
   return (
+    <>
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
@@ -74,13 +75,13 @@ const Clientinformation = ({ setSelectedItem }) => {
           <div className={styles.clietdiv}>
             <div className={styles.gender_age}>{calculateAge(getData?.clientDetails?.DOB)} Years old</div>
             <div className={styles.lineee} />
-            <div className={styles.gender_age}>{genderData?.find((ele)=>ele._id==getData?.clientDetails?.gender)?.name }</div>
+            <div className={styles.gender_age}>{ genderData?.find((ele)=>ele._id==getData?.clientDetails?.gender)?.name }</div>
           </div>
           <div className={styles.clietdiv} style={{ marginTop: 30, marginBottom: 30 }}>
             <div className={styles.callicon_background}><CallIcon /></div>
             <div className={styles.callicon_background}><MessageIcon /></div>
           </div>
-          <div className={styles.EditProfilee_buttoon} onClick={() => router.push(`/Clients/edit?id=${id}`)}>
+          <div className={styles.EditProfilee_buttoon} onClick={() => router.push(`/clients/edit?id=${id}`)}>
             Edit Profile
           </div>
         </div>
@@ -108,6 +109,7 @@ const Clientinformation = ({ setSelectedItem }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

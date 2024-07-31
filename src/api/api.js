@@ -1,8 +1,8 @@
 
 import axios from "axios";
 // import { Show_Toast } from "../customComponent/toast";
-import { Store } from "../redux/index";
-import { setError, setLoading, setNetworkConnected, setNetworkSpeed,  } from "../redux/reducer";
+// import { Store } from "../redux/index";
+// import { setError, setLoading, setNetworkConnected, setNetworkSpeed,  } from "../redux/reducer";
 export const isWeb = 'web';
 export const apiClient = axios.create({
     headers: {
@@ -52,15 +52,15 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
     (response) => {
         //  console.log(response,"response===========>")
-        Store.dispatch(setLoading(false))
+        // Store.dispatch(setLoading(false))
         return response;
     },
 
     async (error) => {
-        Store.dispatch(setLoading(false))
+        // Store.dispatch(setLoading(false))
         const { response } = error
          console.log("error---->apimain", response.data)
-        Store.dispatch(setError(response?.data?.message))
+        // Store.dispatch(setError(response?.data?.message))
         // Show_Toast(error?.response?.data?.message)
         // Show_Toast(error?.response)
         return Promise.reject(error);
@@ -94,14 +94,14 @@ apiClientUpload.interceptors.request.use(
 apiClientUpload.interceptors.response.use(
     (response) => {
         // console.log("response===========>",response)
-        Store.dispatch(setLoading(false))
+        // Store.dispatch(setLoading(false))
         return response;
     },
     async (error) => {
-        Store.dispatch(setLoading(false))
+        // Store.dispatch(setLoading(false))
         const { response } = error
         // console.log("error---->apimain", response.data)
-        Store.dispatch(setError(response?.data?.message))
+        // Store.dispatch(setError(response?.data?.message))
         // Show_Toast(error?.response?.data?.message)
         return Promise.reject(error);
     }
