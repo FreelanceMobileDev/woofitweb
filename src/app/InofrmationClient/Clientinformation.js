@@ -54,7 +54,7 @@ const Clientinformation = ({ setSelectedItem }) => {
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
-          <div onClick={() => router.push('/clients')} style={{ cursor: 'pointer' }}>
+          <div onClick={() => router.push('/Clients')} style={{ cursor: 'pointer' }}>
             <LeftArrow />
           </div>
           <div className={styles.ClientStyle}>Client</div>
@@ -81,7 +81,7 @@ const Clientinformation = ({ setSelectedItem }) => {
             <div className={styles.callicon_background}><CallIcon /></div>
             <div className={styles.callicon_background}><MessageIcon /></div>
           </div>
-          <div className={styles.EditProfilee_buttoon} onClick={() => router.push(`/clients/edit?id=${id}`)}>
+          <div className={styles.EditProfilee_buttoon} onClick={() => router.push(`/Clients/edit?id=${id}`)}>
             Edit Profile
           </div>
         </div>
