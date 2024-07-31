@@ -1,9 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CrossIcon } from '../../../public';
 import styles from './Popups.module.css';
 import OntheDate from './OntheDate'
 import ForthePeriod from './ForthePeriod'
+import { getClinent } from '../../api/helper';
 const NewTraining = ({ show, handleClose }) => {
   const [activeTab, setActiveTab] = useState('OntheDate');
   const handleTabClick = (tab) => {

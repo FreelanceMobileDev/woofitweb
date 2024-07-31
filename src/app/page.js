@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import DashContant from "./dashboard/page.js";
+import React, { Suspense } from 'react';
 import Woofit from './authStack/page.js';
 
 
@@ -9,7 +8,10 @@ export default function Home() {
 
   return (
   <>
-   <Woofit/>
+  <Suspense fallback={<>Loading...</>}>
+  <Woofit/>
+  </Suspense>
+ 
   </>
   )
 }

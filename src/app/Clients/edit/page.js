@@ -1,13 +1,12 @@
-import React from 'react'
+'use client';
 import DeshBorad from '../../dashboard/DashCompoent'
 import EditClient from '../../InofrmationClient/EditClient'
 
-function page() {
+export default function page() {
   return (
-   <DeshBorad>
-    <EditClient/>
-   </DeshBorad>
+    <DeshBorad>
+      <EditClient />
+    </DeshBorad>
   )
 }
 
-export default page

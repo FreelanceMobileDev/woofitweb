@@ -116,7 +116,7 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
     return apiClient({
       baseURL: BASE_URL,
       method: GET_METHOD,
-      url: `${GET_TRANNING_SESSION}`,
+      url: `${GET_TRANNING_SESSION}?${payload}`,
       // data: payload,
     });
   };

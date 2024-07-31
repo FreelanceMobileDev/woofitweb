@@ -1,13 +1,12 @@
-import React from 'react'
+'use client';
 import DeshBorad from '../../dashboard/DashCompoent'
 import Clientinformation from '../../InofrmationClient/Clientinformation'
 
-function page() {
+export default function page() {
   return (
     <DeshBorad>
-        <Clientinformation/>
+        <Clientinformation />
     </DeshBorad>
   )
 }
 
-export default page

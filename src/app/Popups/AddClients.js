@@ -1,12 +1,38 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic.png'
+import { getClinent } from '../../api/helper';
 
 const AddClients = ({  handleClose }) => {
+  
+  
+  
+  const [clientData, setclientData] = useState([])
+
+
+  const getApiClinent = async (data) => {
+    try {
+      const getData = await getClinent(data)
+      console.log(getData.data.data.getAllClientData)
+      setclientData(getData.data.data.getAllClientData)
+    } catch (error) {
+      console.log(error, '====error')
+    }
+  }
+
+  useEffect(() => {
+    getApiClinent()
+  
+    return () => {
+    console.log("clear function")
+    console.log(clientData,'===clientData')
+    }
+  }, [])
+  
 
   const group1 = [
     { id: 1, name: 'Eloise Robinson', avatar: profilepicture },
