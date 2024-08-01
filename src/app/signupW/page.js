@@ -14,9 +14,11 @@ import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
 import Image from 'next/image';
 import useAuth from '../hooks/useAuth'
+import Loader from '../_components/Loader'
 
 const SignupWoofit = () => {
     const [errMessage, setErrormsg] = useState()
+    const [loading, setLoading] = useState(false);
     useAuth()
 
     const router = useRouter();
@@ -40,11 +42,10 @@ const SignupWoofit = () => {
         }),
         onSubmit: async (values) => {
             try {
-                
+                setLoading(true);
                 const response = await register(values);
                 if (response?.data?.success === false) {
                     console.log(response.data)
-                    // return
                   return setErrormsg(response?.data)
                 }
                 console.log(response?.data)
@@ -55,12 +56,15 @@ const SignupWoofit = () => {
                  router.push('/professionaldetails')
             } catch (error) {
                 console.log(error, '====')
+            } finally{
+                setLoading(false);
             }
         },
     });
 
     return (
         <>
+           <Loader loading={loading} />
             <div className={styles.container}>  
                 <div className={styles.leftPane}>
                     <div className={styles.LeftContainor}>

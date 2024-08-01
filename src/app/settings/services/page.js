@@ -22,7 +22,7 @@ function page() {
 
   const getRateData =async()=>{
    const resoponse= await getRates(catchId)
-   console.log(resoponse?.data?.data,'===resoponse')
+  //  console.log(resoponse?.data?.data,'===resoponse')
    setGetRates(resoponse?.data?.data)
   }
   useEffect(() => {
@@ -30,7 +30,6 @@ function page() {
       getRateData(catchId)
     }
   }, [catchId])
-
 
 
 
@@ -42,13 +41,8 @@ function page() {
   const closePopup = () => {
     console.log("close popups")
     setShowPopup(false);
+    getRateData(catchId)
   };
-
-  const data = [
-    { name: 'Light', amount: '$25' },
-    { name: 'Optimum', amount: '$45' },
-    { name: 'Max', amount: '$65' },
-  ]
 
   return (
     <>
@@ -72,7 +66,7 @@ function page() {
            {popupIsOpen && (
               <RateEdit show={popupIsOpen} handleClose={closePopup} rateData={rateData} catchId={catchId} />
             )} </div>
-
+            
         </SettingSidebar>
       </DeshBorad>
     </>

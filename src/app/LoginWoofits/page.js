@@ -12,10 +12,13 @@ import { useEffect, useState } from 'react';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
 import useAuth from '../hooks/useAuth';
+import Loader from '../_components/Loader'
 
 const LoginWoofit = () => {
     const router = useRouter();
     const [errMessage, setErrormsg] = useState()
+    const [loading, setLoading] = useState(false);
+
     useAuth()
     const formik = useFormik({
         initialValues: {
@@ -28,6 +31,7 @@ const LoginWoofit = () => {
         }),
         onSubmit: async (values) => {
             try {
+                setLoading(true);
                 const response = await login(values);
                 if (response?.data?.success === false) {
                     setErrormsg(response?.data)
@@ -35,16 +39,23 @@ const LoginWoofit = () => {
                 localStorage.setItem("token",response.data.data.token)
                 localStorage.setItem("id",response.data.data._id)
                 localStorage.setItem("userData",JSON.stringify(response.data.data))
+                setTimeout(() => {
+                setLoading(false);
                 router.push('/dashboard')
+                }, 1000);
+                
             } catch (error) {
+                setLoading(false);
                 console.log(error, '====')
             }
         },
     });
 
 
+
     return (
         <>
+            <Loader loading={loading} />
             <div className={styles.container}>
                 <div className={styles.leftPane}>
                     <div className={styles.LeftContainor}>

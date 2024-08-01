@@ -21,6 +21,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
     // console.log(rateData, '===rateData')
     const [clientsopen, setclientsopen] = useState(false);
     const [selectClients, setSelectclients] = useState([]);
+    const [errorMsg, setErrorMsg] = useState("")
 
 
     const closePopup = () => {
@@ -37,22 +38,32 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            priceForTraining: "",
-            comment: ""
+            name: rateData?.name || "",
+            priceForTraining: rateData?.priceForTraining || "",
+            comment: rateData?.comment || "",
+            coachId: rateData?.coachId || catchId,
         },
         validationSchema: Yup.object({
             name: Yup.string().required('Name is required'),
             priceForTraining: Yup.string().required('Price is required'),
             comment: Yup.string().required('Comment is required'),
-
         }),
 
         onSubmit: async (values) => {
             try {
-                console.log(values, '===values')
-              const response= await createAndUpdateRate()
-                console.log(response,'===response')
+                // console.log(values,'===values')
+                let response = {}
+                if (rateData._id) {
+                    delete values.coachId;
+                    response = await createAndUpdateRate(values, `id=${rateData?._id}}`)
+                } else {
+                    response = await createAndUpdateRate(values)
+                }
+
+                if (response.data.success == false) {
+                    return setErrorMsg(response.data.message)
+                }
+                handleClose()
                 // router.push('/addProfilePicture')
             } catch (error) {
                 console.log(error, '====')
@@ -70,8 +81,6 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                     <div onClick={handleClose} className={styles.greycrossicon}><CrossIcon /></div>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
-
-
                     <Inputfield
                         name="Name"
                         id={"name"}

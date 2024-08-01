@@ -121,12 +121,12 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
     });
   };
   
-  export const createAndUpdateRate  = (payload,) => {
-    console.log("createAndUpdateRate--->", payload,)
+  export const createAndUpdateRate  = (payload,id) => {
+    console.log("createAndUpdateRate--->", payload,id)
     return apiClient({
       baseURL: BASE_URL,
       method: POST_METHOD,
-      url: `${CREATE_UPDATE_RATE}?${payload}`,
-      // data: payload,
+      url: `${CREATE_UPDATE_RATE}?${id}`,
+      data: payload,
     });
   };

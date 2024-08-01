@@ -8,8 +8,11 @@ import { imageUpload, update_professional_details ,getProfile} from '../../api/h
 import { useState } from 'react';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
+import profileIcon from '../../../public/Images/addProfile.png'
 import Image from 'next/image';
 import useAuth from '../hooks/useAuth';
+import check from '../../../public/Images/Checkflieddbox.png'
+import nocheck from '../../../public/Images/Checkbox@2x.png'
 
 
 const ProfilePicUpload = () => {
@@ -19,7 +22,7 @@ const ProfilePicUpload = () => {
     const [errMessage, setErrormsg] = useState();
     const [image, setImage] = useState();
     const [formData , setformData]= useState();
-
+    const [state, setState]=useState({term:false,privacy:false})
 
     const handleFileSelect = async (event) => {
         const file = event.target.files[0];
@@ -81,6 +84,7 @@ const ProfilePicUpload = () => {
         router.push('/dashboard')
     }
 
+    console.log(profileIcon,'===profileIcon')
     return (
         <>
             <div className={styles.container}>
@@ -100,7 +104,7 @@ const ProfilePicUpload = () => {
                                 <div className={styles.centeralign}>
                                     <img
                                         style={{ height: 107, width: 107, borderRadius: 60 }}
-                                        src={selectedFile ? selectedFile : '/images/profileee.png'}
+                                        src={selectedFile ? selectedFile : profileIcon.src}
                                     />
                                     <div className={styles.upload_photo_txt} onClick={triggerFileSelect}>Upload Photo </div>
                                     <input
@@ -112,18 +116,17 @@ const ProfilePicUpload = () => {
                                     />
                                     <div className={styles.Linediv} />
                                     <div className={styles.flex_row_div}>
-                                        <input type="checkbox"
-                                        name="Terms"
-                                            className={styles.inputcheckbox}
-                                            onChange={handleChange}
-                                        />
+                                    <Image src={ state.term ? check : nocheck} height={15} width={15}  onClick={()=>{setState({...state,term:!state.term})}} />
 
-                                        <div className={styles.i_accept_txt}>I Accept the </div>
+                                        <div className={styles.i_accept_txt} style={{marginLeft:5}}>I Accept the </div>
                                         <div className={styles.terms_and_condi_txt}>Terms and Conditions.</div>
                                     </div>
                                     <div className={styles.flex_row_div} style={{ marginTop: 15 }}>
-                                        <input type="checkbox" className={styles.inputcheckbox}  name="Privacy" onChange={handleChange}/>
-                                        <div className={styles.i_accept_txt}>I Agree to the </div>
+                                        {/* <input type="checkbox" className={styles.inputcheckbox}  name="Privacy" onChange={handleChange}/> */}
+                                        
+                                        <Image src={ state.privacy ? check : nocheck} height={15} width={15} onClick={()=>{setState({...state,privacy:!state.privacy})}}/>
+
+                                        <div className={styles.i_accept_txt} style={{marginLeft:5}}>I Agree to the </div>
                                         <div className={styles.terms_and_condi_txt}>Privacy Policy.</div>
                                     </div>
                                 </div>
