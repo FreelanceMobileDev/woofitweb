@@ -21,13 +21,13 @@ const ProfilePicUpload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [errMessage, setErrormsg] = useState();
     const [image, setImage] = useState();
-    const [formData , setformData]= useState();
     const [state, setState]=useState({term:false,privacy:false})
 
     const handleFileSelect = async (event) => {
         const file = event.target.files[0];
 
         if (file) {
+            setErrormsg("")
             const reader = new FileReader();
             reader.onload = (e) => {
                 setSelectedFile(e.target.result);
@@ -108,7 +108,7 @@ const ProfilePicUpload = () => {
                                     />
                                     <div className={styles.Linediv} />
                                     <div className={styles.flex_row_div}>
-                                    <Image src={ state.term ? check : nocheck} height={15} width={15}  onClick={()=>{setState({...state,term:!state.term})}} />
+                                    <Image src={ state.term ? check : nocheck} height={15} width={15}  onClick={()=>{setState({...state,term:!state.term} , setErrormsg(""))}} />
 
                                         <div className={styles.i_accept_txt} style={{marginLeft:5}}>I Accept the </div>
                                         <div className={styles.terms_and_condi_txt}>Terms and Conditions.</div>
@@ -116,7 +116,7 @@ const ProfilePicUpload = () => {
                                     <div className={styles.flex_row_div} style={{ marginTop: 15 }}>
                                         {/* <input type="checkbox" className={styles.inputcheckbox}  name="Privacy" onChange={handleChange}/> */}
                                         
-                                        <Image src={ state.privacy ? check : nocheck} height={15} width={15} onClick={()=>{setState({...state,privacy:!state.privacy})}}/>
+                                        <Image src={ state.privacy ? check : nocheck} height={15} width={15} onClick={()=>{setState({...state,privacy:!state.privacy}),  setErrormsg("")}}/>
 
                                         <div className={styles.i_accept_txt} style={{marginLeft:5}}>I Agree to the </div>
                                         <div className={styles.terms_and_condi_txt}>Privacy Policy.</div>

@@ -1,4 +1,3 @@
 {
-  "/addProfilePicture/page": "app/addProfilePicture/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/addProfilePicture/page": "app/addProfilePicture/page.js"
 }
