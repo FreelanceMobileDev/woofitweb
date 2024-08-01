@@ -6,8 +6,10 @@ import Searchimg from '../../../public/Images/Searchimg';
 import styles from './Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
 import { useEffect, useState } from 'react';
+import useAuth from '../hooks/useAuth';
 
 const Header = () => {
+  useAuth()
   const  [data,setData] = useState()
 
   useEffect(()=>{

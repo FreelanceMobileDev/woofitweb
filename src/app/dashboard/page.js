@@ -18,7 +18,6 @@ import Image from 'next/image'
 import useAuth from "../hooks/useAuth";
 
 const DashContant = () => {
-  useAuth()
   const newClients = [
     { name: 'Eloise Robinson', avatar: profilepicture },
     { name: 'Franky Williamson', avatar: profilepicture },
