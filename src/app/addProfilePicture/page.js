@@ -50,16 +50,10 @@ const ProfilePicUpload = () => {
         document.getElementById('fileInput').click();
     };
 
-    const handleChange = (e)=>{
-        const {name, value} = e.target
-        setformData({...formData,[name]:value})
-    }
-
     const handleSubmit = async(e) => {
         e.preventDefault()
-
        
-        if(!formData || formData.Privacy!="on" || formData.Terms!="on" ){
+        if(!state || state.term!=true || state.privacy!=true ){
             return setErrormsg({message:"Please Check 'I Am Agree' "})
         }
 
@@ -67,7 +61,6 @@ const ProfilePicUpload = () => {
             return setErrormsg({message:"Please select the image"}) 
         }
 
-        console.log(image, '====image')
 
         const id = localStorage.getItem("id")
         const response = await update_professional_details(image, id);
@@ -84,7 +77,6 @@ const ProfilePicUpload = () => {
         router.push('/dashboard')
     }
 
-    console.log(profileIcon,'===profileIcon')
     return (
         <>
             <div className={styles.container}>
