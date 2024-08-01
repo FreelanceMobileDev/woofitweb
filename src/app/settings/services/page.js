@@ -3,49 +3,80 @@ import DeshBorad from '../../dashboard/DashCompoent'
 import SettingSidebar from '../settingSidebar'
 import { Rightarrow } from '../../../../public'
 import styles from '../Setting.module.css'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RateEdit from '../../Popups/RateEdit'
+import { getRates } from '../../../api/helper';
 
 function page() {
-    const [popupIsOpen, setShowPopup] = useState(false);
-  const openPopup = () => {
+  const [popupIsOpen, setShowPopup] = useState(false);
+  const [catchId, setCoachId] = useState()
+  const [getRetes, setGetRates] = useState([])
+  const [rateData,setRateData]= useState()
+
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      let ddata = localStorage.getItem("id");
+      setCoachId(ddata)
+    }
+  },[])
+
+  const getRateData =async()=>{
+   const resoponse= await getRates(catchId)
+   console.log(resoponse?.data?.data,'===resoponse')
+   setGetRates(resoponse?.data?.data)
+  }
+  useEffect(() => {
+    if (catchId) {
+      getRateData(catchId)
+    }
+  }, [catchId])
+
+
+
+
+  const openPopup = (data) => {
+    setRateData(data)
     setShowPopup(true);
   };
 
   const closePopup = () => {
+    console.log("close popups")
     setShowPopup(false);
   };
-  const data =[
-    {name:'Light',amount:'$25'},
-    {name:'Optimum',amount:'$45'},
-    {name:'Max',amount:'$65'},
+
+  const data = [
+    { name: 'Light', amount: '$25' },
+    { name: 'Optimum', amount: '$45' },
+    { name: 'Max', amount: '$65' },
   ]
-    return (
-        <>
-            <DeshBorad>
-                <SettingSidebar >
-                <div className={styles.right_div_data}>
-      <div className={styles.space_div} style={{ marginTop: 30 }}>
-        <div className={styles.total_rate}>3 Rates</div>
-        <div className={styles.add_rate}>Add Rate</div>
-      </div>
-      <div style={{ marginTop: 20 }}/>
-      {data.map((item, index) => (
-     <div key={index} style={{ marginTop: 20 }} className={styles.rates_div} onClick={openPopup}>
-        <div className={styles.rate_txtt}>{item.name}</div>
-        <div className={styles.row}>
-          <div className={styles.rate_amount}>{item.amount}</div>
-          <Rightarrow />
-        </div>
-      </div> 
-       ))}
-          {RateEdit && <RateEdit show={popupIsOpen} handleClose={closePopup} />}
-    </div>
-      
-                </SettingSidebar>
-            </DeshBorad>
-        </>
-    )
+
+  return (
+    <>
+      <DeshBorad>
+        <SettingSidebar >
+          <div className={styles.right_div_data}>
+            <div className={styles.space_div} style={{ marginTop: 30 }}>
+              <div className={styles.total_rate}>{getRetes?.pagination?.totalItems} Rates</div>
+              <div className={styles.add_rate} style={{cursor:"pointer"}} onClick={openPopup}>Add Rate</div>
+            </div>
+            <div style={{ marginTop: 20 }} />
+            {getRetes?.getAllRatesData?.map((item, index) => (
+              <div key={index} style={{ marginTop: 20 }} className={styles.rates_div} onClick={()=>openPopup(item)}>
+                <div className={styles.rate_txtt}>{item.name}</div>
+                <div className={styles.row}>
+                  <div className={styles.rate_amount}>{item.amount}</div>
+                  <Rightarrow />
+                </div>
+              </div>
+            ))}
+           {popupIsOpen && (
+              <RateEdit show={popupIsOpen} handleClose={closePopup} rateData={rateData} catchId={catchId} />
+            )} </div>
+
+        </SettingSidebar>
+      </DeshBorad>
+    </>
+  )
 }
 
 export default page

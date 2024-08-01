@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Popups.module.css';
 import { CrossIcon, Rightarrow } from '../../../public';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
@@ -8,33 +8,73 @@ import Inputfield from '../_reuseableComponent/Inputfield';
 import Clients from '../Popups/Clients';
 import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic.png'
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 
 const Clientsdata = [
     { name: '6 Clients', count: '+3', avatar: profilepicture, avatar1: profilepicture, avatar2: profilepicture },
 ];
 
-const RateEdit = ({ show, handleClose }) => {
+const RateEdit = ({ show, handleClose, rateData,catchId }) => {
+    console.log(rateData,'===rateData')
     const [clientsopen, setclientsopen] = useState(false);
-    
+
     const closePopup = () => {
         setclientsopen(false);
     };
 
     const handleSave = () => {
         setclientsopen(true);
-        handleClose();
+        // handleClose();
     };
+
+    useEffect(() => {
+       
+    }, [])
+
+    const formik = useFormik({
+        initialValues: {
+            coachSpecialization: "",
+            yearOfExperience: "",
+        },
+        validationSchema: Yup.object({
+            coachSpecialization: Yup.string().required('Coaching Specialization is required'),
+            yearOfExperience: Yup.string().required('Years of Experience is required'),
+
+        }),
+
+        onSubmit: async (values) => {
+            try {
+                console.log(values, '===values')
+                const id = localStorage.getItem("id")
+                const response = await update_professional_details(values,id);
+                if (response?.data?.success === false) {
+                    setErrormsg(response?.data)
+                }
+                console.log(response?.data,'====api response')
+                localStorage.setItem('url',"/addProfilePicture")
+                router.push('/addProfilePicture')
+                // router.push('/addProfilePicture')
+            } catch (error) {
+                console.log(error, '====')
+            }
+        },
+    });
 
     return (
         <div className={show ? styles.popupDisplay : styles.popupHide}>
             <div className={styles.popupContent} style={{ marginTop: 30, marginBottom: 30 }}>
                 <div className={styles.space_div}>
                     <div style={{ width: 60 }} />
-                    <div className={styles.popheadertxt}>Edit Rate</div>
+                    <div className={styles.popheadertxt}>{rateData?._id ? "Edit Rate" :"Add Rate"} </div>
+
                     <div onClick={handleClose} className={styles.greycrossicon}><CrossIcon /></div>
                 </div>
-                <TextWithButton
-                    label={"Name"}
+                <form onSubmit={formik.handleSubmit}>
+
+               
+                <Inputfield
+                    label={"name"}
                     additionalcontainer={styles.TextWithButtonstyle}
                     text={'Light'}
                 />
@@ -47,7 +87,7 @@ const RateEdit = ({ show, handleClose }) => {
                     {Clientsdata.map((item, index) => (
                         <div key={index} className={styles.space_div} style={{ marginBottom: 10, marginTop: 10 }} onClick={handleSave}>
                             <div className={styles.client_name_style2} style={{ marginLeft: 0 }}>{item.name}</div>
-                            <div className={styles.row}>
+                            <div className={styles.row} >
                                 <Image src={item.avatar} alt="Client Avatar" width={40} height={40} className={styles.avatar2} />
                                 <Image src={item.avatar1} alt="Client Avatar" width={40} height={40} className={styles.avatar2} />
                                 <Image src={item.avatar2} alt="Client Avatar" width={40} height={40} className={styles.avatar2} />
@@ -69,6 +109,7 @@ const RateEdit = ({ show, handleClose }) => {
                     txtstyle={{ color: '#FFF' }}
                     additionalMainDivClassName={styles.SaveButton}
                 />
+                 </form>
             </div>
             {clientsopen && <Clients show={clientsopen} handleClose={closePopup} />}
         </div>

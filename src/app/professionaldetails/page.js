@@ -13,8 +13,10 @@ import {  update_professional_details } from '../../api/helper';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
 import Image from 'next/image';
+import useAuth from '../hooks/useAuth';
 
 const Professionaldetails = () => {
+    useAuth()
     const specializationOptions = [
         { _id: 1, name: 'Personal Training' },
         { _id: 2, name: 'Strength Training' },
@@ -93,6 +95,7 @@ const Professionaldetails = () => {
                     setErrormsg(response?.data)
                 }
                 console.log(response?.data,'====api response')
+                localStorage.setItem('url',"/addProfilePicture")
                 router.push('/addProfilePicture')
                 // router.push('/addProfilePicture')
             } catch (error) {

@@ -14,11 +14,29 @@ import { getClinent, getTranningSession } from '../../api/helper';
 
 const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
+  const sessions = [
+    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: profilepicture, icon: <CrossIcon /> },
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
+    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
+  ];
+
+  const sessionssecond = [
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0EAFE', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
+    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
+  ];
+
+  const Augestdata = [
+    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, icon: <ClockCalender /> },
+  ];
+
   const [currentDate, setCurrentDate] = useState(extendedMoment());
   const [selectedDate, setSelectedDate] = useState(extendedMoment());
   const [popupIsOpen, setShowPopup] = useState(false);
   const [newTrainingpop, setNewTrainingpop] = useState(false);
   const [editpopup, seteditpopup] = useState(false);
+  const [getdata, setData] = useState([])
+  const [getSession, setSessing] = useState([])
+  const [getTranningData, setTranningData] = useState([])
 
   const openEditPopup = () => {
     seteditpopup(true);
@@ -92,25 +110,7 @@ const ScheduleContant = () => {
     return item ? item.icon : <CheckIcon />;
   }
 
-
-  const sessions = [
-    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: profilepicture, icon: <CrossIcon /> },
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
-    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
-  ];
-
-  const sessionssecond = [
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0EAFE', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
-    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
-  ];
-
-  const Augestdata = [
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, icon: <ClockCalender /> },
-  ];
-
-  const [getdata, setData] = useState([])
-  const [getSession, setSessing] = useState([])
-  const [getTranningData, setTranningData] = useState([])
+ 
 
   const getApiClinent = async (data) => {
     try {
@@ -127,7 +127,7 @@ const ScheduleContant = () => {
       setSessing(getData?.data?.data?.data)
       const groupedByDateArray = groupDataByDate(getData?.data?.data?.data);
       setTranningData(groupedByDateArray)
-      console.log('Grouped Data by Date in Array Format:', groupedByDateArray);
+      // console.log('Grouped Data by Date in Array Format:', groupedByDateArray);
       // setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')

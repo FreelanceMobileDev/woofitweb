@@ -5,6 +5,8 @@ import styles from './Login.module.css'
 import { getClinent } from '../../api/helper'
 import profilePic from '../../../public/Images/profilepic.png'
 import { useRouter } from 'next/navigation'
+import { specializationOptions ,genderData} from '../../util/staticData'
+
 const ClientsData = ({ activeTab}) => {
   const router = useRouter()
   const [getdata, setData] = useState([])
@@ -52,10 +54,10 @@ const ClientsData = ({ activeTab}) => {
               <td className={styles?.name_client}>{item?.name}</td>
               <td className={styles?.email_client}>{item?.email}</td>
               <td className={styles?.email_client}>{item?.rate !==null ? item?.rate?.name :"No Name"}</td>
-              <td className={styles?.email_client}>{item?.trainingGoal}</td>
-              <td className={styles?.email_client}>{item?.gender}</td>
-              <td className={styles?.flex_row_div}>
-                <EditIcon className={styles?.actionIcon} />
+              <td className={styles?.email_client}>{specializationOptions?.find((e)=>e?._id==item?.trainingGoal)?.name||"NAN"}</td>
+              <td className={styles?.email_client}>{genderData?.find((e)=>e?._id==item?.gender)?.name||"NAN"}</td>
+              <td className={styles?.flex_row_div}  >
+                <EditIcon className={styles?.actionIcon} onClick={()=>router.push(`Clients/edit?id=${item_id}`)} />
                 <div style={{ width: 33 }} />
                 <DeleteIcon className={styles?.actionIcon} />
               </td>

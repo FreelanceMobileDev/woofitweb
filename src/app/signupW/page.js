@@ -9,12 +9,15 @@ import * as Yup from "yup";
 // import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import {  register } from '../../api/helper'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
 import Image from 'next/image';
+import useAuth from '../hooks/useAuth'
+
 const SignupWoofit = () => {
     const [errMessage, setErrormsg] = useState()
+    useAuth()
 
     const router = useRouter();
     const formik = useFormik({
@@ -37,16 +40,19 @@ const SignupWoofit = () => {
         }),
         onSubmit: async (values) => {
             try {
-                console.log(values,'====values')
+                
                 const response = await register(values);
                 if (response?.data?.success === false) {
-                    setErrormsg(response?.data)
+                    console.log(response.data)
+                    // return
+                  return setErrormsg(response?.data)
                 }
                 console.log(response?.data)
+                localStorage.setItem("signSteps", true)
+                localStorage.setItem("url", "/professionaldetails")
                 localStorage.setItem("token", response?.data?.data?.token)
                 localStorage.setItem("id", response?.data?.data?._id)
                  router.push('/professionaldetails')
-                // router.push('/dashboard')
             } catch (error) {
                 console.log(error, '====')
             }

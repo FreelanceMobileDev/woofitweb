@@ -9,9 +9,11 @@ import { useState } from 'react';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
 import Image from 'next/image';
+import useAuth from '../hooks/useAuth';
 
 
 const ProfilePicUpload = () => {
+    useAuth()
     const router = useRouter();
     const [selectedFile, setSelectedFile] = useState(null);
     const [errMessage, setErrormsg] = useState();
@@ -63,11 +65,15 @@ const ProfilePicUpload = () => {
         }
 
         console.log(image, '====image')
+
         const id = localStorage.getItem("id")
         const response = await update_professional_details(image, id);
         if (response?.data?.success === false) {
             setErrormsg(response?.data)
         }
+
+        localStorage.removeItem("signSteps")
+        localStorage.removeItem("url")
         const getData = await getProfile()
         localStorage.setItem("userData",JSON.stringify(getData.data.data))
         // console.log(response?.data, '====api response')

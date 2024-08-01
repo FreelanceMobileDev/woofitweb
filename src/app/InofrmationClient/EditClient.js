@@ -115,7 +115,7 @@ const EditClient = ({ setSelectedItem }) => {
           console.log(error)
         }
         // console.log(values, '===value')
-        router.push(`/clients/clientsInfo?id=${getData.clientDetails?._id}`)
+        router.push(`/Clients/clientsInfo?id=${getData.clientDetails?._id}`)
       } catch (error) {
         console.log(error, '====')
       }

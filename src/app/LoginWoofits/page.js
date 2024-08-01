@@ -11,11 +11,12 @@ import * as Yup from "yup";
 import { useEffect, useState } from 'react';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
+import useAuth from '../hooks/useAuth';
 
 const LoginWoofit = () => {
     const router = useRouter();
     const [errMessage, setErrormsg] = useState()
-
+    useAuth()
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -40,12 +41,7 @@ const LoginWoofit = () => {
             }
         },
     });
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            router.push('/dashboard');
-        }
-    }, []);
+
 
     return (
         <>

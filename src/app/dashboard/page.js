@@ -15,8 +15,10 @@ import Sessionsimg from '../../../public/Images/Sessionsimg';
 import styles from '../_components/Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image'
-const DashContant = () => {
+import useAuth from "../hooks/useAuth";
 
+const DashContant = () => {
+  useAuth()
   const newClients = [
     { name: 'Eloise Robinson', avatar: profilepicture },
     { name: 'Franky Williamson', avatar: profilepicture },
