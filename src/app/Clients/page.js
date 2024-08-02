@@ -5,8 +5,10 @@ import GroupData from '../_components/GroupData';
 import styles from '../_components/Login.module.css';
 import React, { useState } from 'react';
 import DeshBorad from '../dashboard/DashCompoent';
+import { useRouter } from 'next/navigation';
 
 function page() {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState('Clients');
 
   const handleTabClick = (tab) => {
@@ -22,7 +24,8 @@ function page() {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <ArchivedIcon />
                 <div className={styles.Archived_Clients} onClick={() => { handleTabClick('ArchivedClients') }}>Archived Clients</div>
-                <div className={styles.Add_Client}>Add a Client</div>
+                <div className={styles.Add_Client} style={{cursor:"pointer"}} onClick={()=>router.push('Clients/edit')}  >Add a Client</div>
+                {/* Clients/edit */}
               </div>
             </div>
             <div className={styles.Groups_Clients} >

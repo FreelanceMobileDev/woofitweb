@@ -2276,6 +2276,17 @@ color: #697585;
   align-items: center;
   justify-content: center;
 }
+.Popups_button_main_div__kJ2Yh{
+  height: 50px;
+  /* background-color: #8D99AE26; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+}
 
 .Popups_AddClientButton__8kZQD {
   background-color: #14AED1;
@@ -2622,7 +2633,7 @@ margin-bottom: 10px;
 
 .Componet_button_main_div__qp8l2{
   height: 50px;
-  background-color: #8D99AE26;
+  /* background-color: #8D99AE26; */
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 30px;

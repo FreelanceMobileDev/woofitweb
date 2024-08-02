@@ -60,11 +60,13 @@ const ProfilePicUpload = () => {
         setLoading(true)
        
         if(!state || state.term!=true || state.privacy!=true ){
+            setLoading(false)
             return setErrormsg({message:"Please Check 'I Am Agree' "})
         }
 
         if(!image){
-            return setErrormsg({message:"Please select the image"}) 
+            setLoading(false)
+            return setErrormsg({message:"Please select the image"})  
         }
 
         try {
@@ -73,6 +75,7 @@ const ProfilePicUpload = () => {
             const response = await update_professional_details(image, id);
             if (response?.data?.success === false) {
                 setErrormsg(response?.data)
+                setLoading(false)
             }
             localStorage.removeItem("signSteps")
             localStorage.removeItem("url")
@@ -86,8 +89,6 @@ const ProfilePicUpload = () => {
         } finally{
             setLoading(false)
         }
-
-       
     }
 
     return (

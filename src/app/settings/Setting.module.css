@@ -74,7 +74,7 @@ padding: 10px 22px 10px 22px;
 gap: 10px;
 border-radius: 40px;
 border: 1px 0px 0px 0px;
-opacity: 0px;
+
   }
 .rates_div{
   display: flex;
@@ -204,7 +204,6 @@ margin-right: 20px;
 }
 
 .switch input {
-  opacity: 0;
   width: 0;
   height: 0;
 }
@@ -292,7 +291,6 @@ padding: 15px 15px 15px 15px;
 gap: 20px;
 border-radius: 10px;
 border: 1px 0px 0px 0px;
-/* opacity: 0px; */
 display: flex;
 align-items: center;
 justify-content: space-between;

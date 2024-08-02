@@ -8,30 +8,11 @@ import profilepicture from '../../../public/Images/profilepic.png'
 import { getClinent } from '../../api/helper';
 import Loader from '../_components/Loader';
 
-const AddClients = ({  handleClose,setSelectclients }) => {
-  const [clientData, setclientData] = useState([])
-  const [loading, setLoading] = useState(false);
-  const [selectedClients, setSelectedClients] = useState([]);
-  console.log(selectedClients,'===selectedClients')
+const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas }) => {
+  console.log()
+  const [clientData, setclientData] = useState(clientDatas)
+  const [selectedClients, setSelectedClients] = useState(selectClients);
 
-  const getApiClinent = async (data) => {
-    try {
-      setLoading(true)
-      const getData = await getClinent(data,`&sort=asc`)
-      // console.log(getData.data.data.getAllClientData,'=====hereee')
-      setclientData(getData.data.data.getAllClientData)
-    } catch (error) {
-      console.log(error, '====error')
-    }finally{
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getApiClinent(0)
-    return () => {}
-  }, [])
-  
 
   const group1 = [
     { id: 1, name: 'Eloise Robinson', avatar: profilepicture },
@@ -39,39 +20,43 @@ const AddClients = ({  handleClose,setSelectclients }) => {
     { id: 3, name: 'Bronson Glass', avatar: profilepicture },
     { id: 4, name: 'Monroe Benjamin', avatar: profilepicture },
   ];
-  
+
   const group2 = [
     { id: 5, name: 'Samuel O\'Brien', avatar: profilepicture },
     { id: 6, name: 'Morgan Warren', avatar: profilepicture },
   ];
-  
+
   const group3 = [
     { id: 7, name: 'Jonathan Andrews', avatar: profilepicture },
   ];
-  
 
-  const handleToggleClient = (id) => {
-    setSelectclients((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((clientId) => clientId !== id)
-        : [...prevSelected, id]
-    );
-    setSelectedClients((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((clientId) => clientId !== id)
-        : [...prevSelected, id]
-    );
+  const SelectClients = ()=>{
+    setSelectclients(selectedClients)
+    handleClose()
+  }
+
+  const handleToggleClient = (client) => {
+    setSelectedClients((prevSelected) => {
+      const isClientSelected = prevSelected.some(
+        (selectedClient) => selectedClient._id === client._id
+      );
+      return isClientSelected
+        ? prevSelected.filter(
+            (selectedClient) => selectedClient._id !== client._id
+          )
+        : [...prevSelected, client]; 
+    });
   };
   const renderClientGroup = (clients) => (
     clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
-        <Image height={35} width={35} src={client.clientImage?client.clientImage:profilepicture} alt={client.name} className={styles.avatar} />
+        <Image height={35} width={35} src={client.clientImage ? client.clientImage : profilepicture} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
           <span className={styles.Clientsname}>{client.name}</span>
           <input
             type="checkbox"
-            checked={selectedClients.includes(client._id)}
-            onChange={() => handleToggleClient(client._id)}
+            checked={selectedClients?.some(clientObj => clientObj?._id === client?._id)}
+            onChange={() => handleToggleClient(client)}
           />
         </div>
       </div>
@@ -80,12 +65,10 @@ const AddClients = ({  handleClose,setSelectclients }) => {
   return (
     <div className={styles.popupDisplay}>
       <div className={styles.popupContent}>
-      <Loader loading={loading} />
-      
-      <div className={styles.space_div}>
-      <div style={{width:100}} onClick={handleClose}><LeftArrow/></div>
+        <div className={styles.space_div}>
+          <div style={{ width: 100 }} onClick={handleClose}><LeftArrow /></div>
           <div className={styles.popheadertxt}>Add Clients</div>
-          <div className={styles.row} ><SearchIcon/><div style={{width:30}}/> <FilterIcon/></div>
+          <div className={styles.row} ><SearchIcon /><div style={{ width: 30 }} /> <FilterIcon /></div>
         </div>
 
         <div className={styles.clientList}>
@@ -96,11 +79,12 @@ const AddClients = ({  handleClose,setSelectclients }) => {
           <div className={styles.albhabate_txt}>C</div>
           {renderClientGroup(group3)} */}
         </div>
-      <OpticityButton
-      name="Select Clients"
-      txtstyle={{color:'#FFF'}}
-                    additionalMainDivClassName={styles.AddClientButton}
-      />
+        <OpticityButton
+        onClick={SelectClients}
+          name="Select Clients"
+          txtstyle={{ color: '#FFF' }}
+          additionalMainDivClassName={styles.AddClientButton}
+        />
       </div>
     </div>
   )

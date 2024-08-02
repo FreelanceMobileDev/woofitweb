@@ -1,5 +1,5 @@
 import { apiClient, apiClientUpload } from "./api";
-import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT, GET_TRANNING_SESSION, CREATE_UPDATE_RATE } from "./url";
+import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT, GET_TRANNING_SESSION, CREATE_UPDATE_RATE, UPDATE_PROILE } from "./url";
 
 
   export const imageUpload = (payload) => {
@@ -130,3 +130,15 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
       data: payload,
     });
   };
+
+  export const updateProfile  = (payload) => {
+    console.log("updateProfile--->>>>>", payload)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: POST_METHOD,
+      url: `${UPDATE_PROILE}`,
+      data: payload,
+    });
+  };
+
+  

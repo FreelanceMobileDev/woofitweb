@@ -2256,7 +2256,7 @@ padding: 10px 22px 10px 22px;
 gap: 10px;
 border-radius: 40px;
 border: 1px 0px 0px 0px;
-opacity: 0px;
+
   }
 .Setting_rates_div__3mffO{
   display: flex;
@@ -2386,7 +2386,6 @@ margin-right: 20px;
 }
 
 .Setting_switch__gWzA3 input {
-  opacity: 0;
   width: 0;
   height: 0;
 }
@@ -2474,7 +2473,6 @@ padding: 15px 15px 15px 15px;
 gap: 20px;
 border-radius: 10px;
 border: 1px 0px 0px 0px;
-/* opacity: 0px; */
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -2740,6 +2738,17 @@ color: #697585;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.Popups_button_main_div__kJ2Yh{
+  height: 50px;
+  /* background-color: #8D99AE26; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
 }
 
 .Popups_AddClientButton__8kZQD {
@@ -3087,7 +3096,7 @@ margin-bottom: 10px;
 
 .Componet_button_main_div__qp8l2{
   height: 50px;
-  background-color: #8D99AE26;
+  /* background-color: #8D99AE26; */
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 30px;

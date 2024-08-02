@@ -147,6 +147,17 @@ color: #697585;
   align-items: center;
   justify-content: center;
 }
+.button_main_div{
+  height: 50px;
+  /* background-color: #8D99AE26; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+}
 
 .AddClientButton {
   background-color: #14AED1;
