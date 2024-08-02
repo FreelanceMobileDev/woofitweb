@@ -13,6 +13,7 @@ import Image from 'next/image';
 import useAuth from '../hooks/useAuth';
 import check from '../../../public/Images/Checkflieddbox.png'
 import nocheck from '../../../public/Images/Checkbox@2x.png'
+import Loader from '../_components/Loader';
 
 
 const ProfilePicUpload = () => {
@@ -22,6 +23,7 @@ const ProfilePicUpload = () => {
     const [errMessage, setErrormsg] = useState();
     const [image, setImage] = useState();
     const [state, setState]=useState({term:false,privacy:false})
+    const [loading, setLoading] = useState(false);
 
     const handleFileSelect = async (event) => {
         const file = event.target.files[0];
@@ -37,11 +39,14 @@ const ProfilePicUpload = () => {
             const formData = new FormData();
             formData.append('image', file);
             try {
+                setLoading(true)
                 const imgData = await imageUpload(formData)
                 // console.log(imgData.data.filename, '=====imgData')
                 setImage({ image: imgData?.data?.filename })
             } catch (error) {
                 console.log(error, '====error')
+            } finally{
+                setLoading(false)
             }
         }
     };
@@ -52,6 +57,7 @@ const ProfilePicUpload = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setLoading(true)
        
         if(!state || state.term!=true || state.privacy!=true ){
             return setErrormsg({message:"Please Check 'I Am Agree' "})
@@ -61,24 +67,32 @@ const ProfilePicUpload = () => {
             return setErrormsg({message:"Please select the image"}) 
         }
 
-
-        const id = localStorage.getItem("id")
-        const response = await update_professional_details(image, id);
-        if (response?.data?.success === false) {
-            setErrormsg(response?.data)
+        try {
+            setLoading(true)
+            const id = localStorage.getItem("id")
+            const response = await update_professional_details(image, id);
+            if (response?.data?.success === false) {
+                setErrormsg(response?.data)
+            }
+            localStorage.removeItem("signSteps")
+            localStorage.removeItem("url")
+            const getData = await getProfile()
+            localStorage.setItem("userData",JSON.stringify(getData.data.data))
+            // console.log(response?.data, '====api response')
+            // user/get-profile
+            router.push('/dashboard')
+        } catch (error) {
+            console.log(error)
+        } finally{
+            setLoading(false)
         }
 
-        localStorage.removeItem("signSteps")
-        localStorage.removeItem("url")
-        const getData = await getProfile()
-        localStorage.setItem("userData",JSON.stringify(getData.data.data))
-        // console.log(response?.data, '====api response')
-        // user/get-profile
-        router.push('/dashboard')
+       
     }
 
     return (
         <>
+         <Loader loading={loading} />
             <div className={styles.container}>
                 <div className={styles.leftPane}>
                     <div className={styles.LeftContainor}>

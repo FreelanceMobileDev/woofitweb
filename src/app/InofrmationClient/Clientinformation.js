@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { getClientDetails, getRates } from '../../api/helper';
 import { formatDOB, calculateAge } from '../../util/common'
 import {genderData,experienceOptions,specializationOptions} from '../../util/staticData'
+import Loader from '../_components/Loader';
 
 
 const Clientinformation = ({ setSelectedItem }) => {
@@ -22,11 +23,21 @@ const Clientinformation = ({ setSelectedItem }) => {
   const [catchId, setCoachId] = useState()
   const [getData, setGetData] = useState()
   const [getRetes, setGetRates] = useState([])
+  const [loading, setLoading] = useState(false);
+
 
 
   const getClientDetail = async () => {
-    const respone = await getClientDetails(id)
-    setGetData(respone.data)
+    try {
+      setLoading(true)
+      const respone = await getClientDetails(id)
+      setGetData(respone.data)
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
+   
   }
   const getRateData = async (catchId) => {
     const response = await getRates(catchId)
@@ -51,6 +62,7 @@ const Clientinformation = ({ setSelectedItem }) => {
 
   return (
     <>
+     <Loader loading={loading} />
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>

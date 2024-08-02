@@ -11,6 +11,7 @@ import EditTraining from '../Popups/EditTraining';
 import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic.png'
 import { getClinent, getTranningSession } from '../../api/helper';
+import Loader from './Loader';
 
 const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
@@ -37,6 +38,7 @@ const ScheduleContant = () => {
   const [getdata, setData] = useState([])
   const [getSession, setSessing] = useState([])
   const [getTranningData, setTranningData] = useState([])
+  const [loading, setLoading] = useState(false);
 
   const openEditPopup = () => {
     seteditpopup(true);
@@ -114,15 +116,19 @@ const ScheduleContant = () => {
 
   const getApiClinent = async (data) => {
     try {
+      setLoading(true)
       const getData = await getClinent(data)
       setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
+    }finally{
+      setLoading(false)
     }
   }
 
   const getTranningSessions = async (data) => {
     try {
+      setLoading(true)
       const getData = await getTranningSession(data)
       setSessing(getData?.data?.data?.data)
       const groupedByDateArray = groupDataByDate(getData?.data?.data?.data);
@@ -131,6 +137,8 @@ const ScheduleContant = () => {
       // setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -178,6 +186,7 @@ const ScheduleContant = () => {
 
   return (
     <div className={styles.DashboardContenttwo}>
+        <Loader loading={loading} />
       <div className={styles.summarySecedule}>
         <div className={styles.calendarContainer}>
           <div className={styles.headercalender}>

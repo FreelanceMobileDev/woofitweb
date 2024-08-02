@@ -5,6 +5,7 @@ import { EditIcon, DeleteIcon } from '../../../public'; // Adjust the import pat
 import styles from './Login.module.css';
 import GroupEdit from '../Popups/GroupEdit'
 import { getGroupList } from '../../api/helper';
+import Loader from './Loader';
 
 
 const GroupItem = ({ name,title, clients, images, additionalClients, }) => {
@@ -48,14 +49,18 @@ const GroupItem = ({ name,title, clients, images, additionalClients, }) => {
 
 const GroupData = () => {
   const [getdata, setData] = useState()
+  const [loading, setLoading] = useState(false);
+
   const getApiGroup = async () => {
     try {
+      setLoading(true)
       const id = localStorage.getItem("id")
       const getData = await getGroupList(id)
-      // console.log(getData.data.data.data, '====here=======>>>>>>>>>>>>')
       setData(getData.data.data.data)
     } catch (error) {
       console.log(error, '====error')
+    }finally{
+      setLoading(false)
     }
   }
   useEffect(() => {
@@ -65,6 +70,7 @@ const GroupData = () => {
 
   return (
     <div className={styles.groupsContainer}>
+        <Loader loading={loading} />
       {getdata && getdata?.map((group, index) => (
         <GroupItem key={index} {...group} />
       ))}

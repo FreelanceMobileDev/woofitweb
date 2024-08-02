@@ -7,18 +7,24 @@ import Image from 'next/image';
 import profileiconn from '../../../../public/Images/profileee.png'
 import { Attherateimg, CalenderIcon, UploadimgIcon, Userimg } from '../../../../public';
 import Inputfield from '../../_reuseableComponent/Inputfield';
+import Loader from '../../_components/Loader';
 
 function page() {
     const [data, setData] = useState({});
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     // Ensure this code runs only on the client side
     if (typeof window !== 'undefined') {
+      
       const storedData = localStorage.getItem("userData");
       if (storedData) {
         setData(JSON.parse(storedData));
       }
+      
     }
+    setLoading(false)
   }, []);
 
 
@@ -26,6 +32,7 @@ function page() {
         <>
             <DeshBorad>
                 <SettingSidebar >
+                <Loader loading={loading} />
                     <div className={styles.right_div_data}>
                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
                             <Image src={data?.image} alt={profileiconn}

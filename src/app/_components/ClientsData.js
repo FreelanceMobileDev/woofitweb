@@ -6,17 +6,22 @@ import { getClinent } from '../../api/helper'
 import profilePic from '../../../public/Images/profilepic.png'
 import { useRouter } from 'next/navigation'
 import { specializationOptions ,genderData} from '../../util/staticData'
+import Loader from './Loader'
 
 const ClientsData = ({ activeTab}) => {
   const router = useRouter()
   const [getdata, setData] = useState([])
+  const [loading, setLoading] = useState(false);
 
   const getApiClinent = async (data) => {
     try {
+      setLoading(true)
       const getData = await getClinent(data)
       setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
+    }finally{
+      setLoading(false)
     }
   }
   console.log(activeTab)
@@ -32,6 +37,7 @@ const ClientsData = ({ activeTab}) => {
 
   return (
     <div >
+       <Loader loading={loading} />
       <table className={styles.table}>
         <thead>
           <tr>

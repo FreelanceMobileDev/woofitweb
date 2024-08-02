@@ -1,0 +1,8 @@
+{
+  "/settings/profile/page": "app/settings/profile/page.js",
+  "/settings/services/page": "app/settings/services/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/schedule/page": "app/schedule/page.js",
+  "/Clients/page": "app/Clients/page.js"
+}

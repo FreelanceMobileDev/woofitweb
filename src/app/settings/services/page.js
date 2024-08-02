@@ -6,12 +6,14 @@ import styles from '../Setting.module.css'
 import React, { useEffect, useState } from 'react';
 import RateEdit from '../../Popups/RateEdit'
 import { getRates } from '../../../api/helper';
+import Loader from '../../_components/Loader';
 
 function page() {
   const [popupIsOpen, setShowPopup] = useState(false);
   const [catchId, setCoachId] = useState()
   const [getRetes, setGetRates] = useState([])
   const [rateData,setRateData]= useState()
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     if (typeof window !== 'undefined') {
@@ -21,9 +23,17 @@ function page() {
   },[])
 
   const getRateData =async()=>{
-   const resoponse= await getRates(catchId)
-  //  console.log(resoponse?.data?.data,'===resoponse')
-   setGetRates(resoponse?.data?.data)
+    try {
+      setLoading(true)
+      const resoponse= await getRates(catchId)
+      //  console.log(resoponse?.data?.data,'===resoponse')
+       setGetRates(resoponse?.data?.data)
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
+ 
   }
   useEffect(() => {
     if (catchId) {
@@ -48,6 +58,7 @@ function page() {
     <>
       <DeshBorad>
         <SettingSidebar >
+        <Loader loading={loading} />
           <div className={styles.right_div_data}>
             <div className={styles.space_div} style={{ marginTop: 30 }}>
               <div className={styles.total_rate}>{getRetes?.pagination?.totalItems} Rates</div>
