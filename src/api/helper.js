@@ -52,12 +52,12 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
     });
   };
 
-  export const getClinent = (payload,) => {
+  export const getClinent = (payload,sort) => {
     // console.log("update-professional-details--->", payload,)
     return apiClient({
       baseURL: BASE_URL,
       method: GET_METHOD,
-      url: `${GET_CLIENT}?isArchive=${payload}`,
+      url: `${GET_CLIENT}?isArchive=${payload}${sort}`,
       // data: payload,
     });
   };

@@ -6,31 +6,30 @@ import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic.png'
 import { getClinent } from '../../api/helper';
+import Loader from '../_components/Loader';
 
-const AddClients = ({  handleClose }) => {
-  
-  
-  
+const AddClients = ({  handleClose,setSelectclients }) => {
   const [clientData, setclientData] = useState([])
-
+  const [loading, setLoading] = useState(false);
+  const [selectedClients, setSelectedClients] = useState([]);
+  console.log(selectedClients,'===selectedClients')
 
   const getApiClinent = async (data) => {
     try {
-      const getData = await getClinent(data)
-      console.log(getData.data.data.getAllClientData)
+      setLoading(true)
+      const getData = await getClinent(data,`&sort=asc`)
+      // console.log(getData.data.data.getAllClientData,'=====hereee')
       setclientData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
+    }finally{
+      setLoading(false)
     }
   }
 
   useEffect(() => {
-    getApiClinent()
-  
-    return () => {
-    console.log("clear function")
-    console.log(clientData,'===clientData')
-    }
+    getApiClinent(0)
+    return () => {}
   }, [])
   
 
@@ -50,9 +49,13 @@ const AddClients = ({  handleClose }) => {
     { id: 7, name: 'Jonathan Andrews', avatar: profilepicture },
   ];
   
-  const [selectedClients, setSelectedClients] = useState([]);
 
   const handleToggleClient = (id) => {
+    setSelectclients((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((clientId) => clientId !== id)
+        : [...prevSelected, id]
+    );
     setSelectedClients((prevSelected) =>
       prevSelected.includes(id)
         ? prevSelected.filter((clientId) => clientId !== id)
@@ -62,13 +65,13 @@ const AddClients = ({  handleClose }) => {
   const renderClientGroup = (clients) => (
     clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
-        <Image height={35} width={35} src={client.avatar} alt={client.name} className={styles.avatar} />
+        <Image height={35} width={35} src={client.clientImage?client.clientImage:profilepicture} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
           <span className={styles.Clientsname}>{client.name}</span>
           <input
             type="checkbox"
-            checked={selectedClients.includes(client.id)}
-            onChange={() => handleToggleClient(client.id)}
+            checked={selectedClients.includes(client._id)}
+            onChange={() => handleToggleClient(client._id)}
           />
         </div>
       </div>
@@ -77,6 +80,7 @@ const AddClients = ({  handleClose }) => {
   return (
     <div className={styles.popupDisplay}>
       <div className={styles.popupContent}>
+      <Loader loading={loading} />
       
       <div className={styles.space_div}>
       <div style={{width:100}} onClick={handleClose}><LeftArrow/></div>
@@ -85,12 +89,12 @@ const AddClients = ({  handleClose }) => {
         </div>
 
         <div className={styles.clientList}>
-          <div className={styles.albhabate_txt2}>A</div>
-          {renderClientGroup(group1)}
-          <div className={styles.albhabate_txt}>B</div>
+          {/* <div className={styles.albhabate_txt2}>A</div> */}
+          {renderClientGroup(clientData)}
+          {/* <div className={styles.albhabate_txt}>B</div>
           {renderClientGroup(group2)}
           <div className={styles.albhabate_txt}>C</div>
-          {renderClientGroup(group3)}
+          {renderClientGroup(group3)} */}
         </div>
       <OpticityButton
       name="Select Clients"

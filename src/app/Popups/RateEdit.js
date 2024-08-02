@@ -22,7 +22,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
     const [clientsopen, setclientsopen] = useState(false);
     const [selectClients, setSelectclients] = useState([]);
     const [errorMsg, setErrorMsg] = useState("")
-
+  
 
     const closePopup = () => {
         setclientsopen(false);
@@ -55,7 +55,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                 let response = {}
                 if (rateData._id) {
                     delete values.coachId;
-                    response = await createAndUpdateRate(values, `id=${rateData?._id}}`)
+                    response = await createAndUpdateRate(values, `id=${rateData?._id}`)
                 } else {
                     response = await createAndUpdateRate(values)
                 }
@@ -156,7 +156,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                 </form>
             </div>
             {clientsopen &&
-                <AddClients show={clientsopen} handleClose={closePopup}
+                <AddClients show={clientsopen} handleClose={closePopup} setSelectclients={setSelectclients}
                 //  <Clients show={clientsopen} handleClose={closePopup}
                 />}
         </div>
