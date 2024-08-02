@@ -65,7 +65,7 @@ function page() {
               <div className={styles.add_rate} style={{cursor:"pointer"}} onClick={openPopup}>Add Rate</div>
             </div>
             <div style={{ marginTop: 20 }} />
-            {getRetes?.getAllRatesData?.map((item, index) => (
+            {   getRetes?.getAllRatesData && getRetes?.getAllRatesData?.map((item, index) => (
               <div key={index} style={{ marginTop: 20 }} className={styles.rates_div} onClick={()=>openPopup(item)}>
                 <div className={styles.rate_txtt}>{item.name}</div>
                 <div className={styles.row}>
@@ -73,10 +73,11 @@ function page() {
                   <Rightarrow />
                 </div>
               </div>
-            ))}
+            ))|| "No Data" }
            {popupIsOpen && (
               <RateEdit show={popupIsOpen} handleClose={closePopup} rateData={rateData} catchId={catchId} />
-            )} </div>
+            )} 
+            </div>
             
         </SettingSidebar>
       </DeshBorad>

@@ -35,7 +35,7 @@ const Header = () => {
        
      </div>
       <div className={styles.userInfo}>
-        <Image height={40} width={40} src={data?.image} alt={profilepicture} className={styles.avatar} />
+        <Image height={40} width={40} src={data?.image ?data?.image :profilepicture.src} alt=''  className={styles.avatar} />
         <span className={styles.hellousername}>Hello {data?.name}!</span>
         <Notificationimg
         className={styles.Notificationimg}

@@ -20,7 +20,7 @@ const Clientsdata = [
 
 const RateEdit = ({ show, handleClose, rateData, catchId }) => {
     const [clientsopen, setclientsopen] = useState(false);
-    const [selectClients, setSelectclients] = useState([...rateData.clients]);
+    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients > 0? [ ...rateData?.clients]:[]);
     const [errorMsg, setErrorMsg] = useState("")
     const [clientDatas, setclientData] = useState([])
     const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
     try {
       setLoading(true)
       const getData = await getClinent(data, `&sort=asc`)
-      setclientData(getData.data.data.getAllClientData)
+      setclientData(getData?.data?.data?.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
     } finally {

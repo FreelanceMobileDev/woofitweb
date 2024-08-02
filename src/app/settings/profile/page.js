@@ -122,7 +122,7 @@ function page() {
                                 height={107}
                                 width={107}
                             />
-                            <div className={styles.upload_pic_div}>
+                            <div className={styles.upload_pic_div} style={{cursor:"pointer"}} >
                                 <UploadimgIcon />
                                 <div className={styles.upload_photo_text} onClick={triggerFileSelect} >Upload Photo</div>
                                 <input
