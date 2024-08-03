@@ -1,4 +1,4 @@
-// File: /Users/testingdemo/Desktop/projects/woofitweb/src/app/schedule/page.js
+// File: /Users/drmac/Documents/ReactNativeProject/woofitweb/src/app/schedule/page.js
 import * as entry from '../../../../src/app/schedule/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

@@ -1,4 +1,4 @@
-// File: /Users/testingdemo/Desktop/projects/woofitweb/src/app/authStack/page.js
+// File: /Users/drmac/Documents/ReactNativeProject/woofitweb/src/app/authStack/page.js
 import * as entry from '../../../../src/app/authStack/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
