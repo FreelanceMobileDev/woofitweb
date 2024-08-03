@@ -183,6 +183,31 @@
   width: 40%;
 }
 
+.CalenderDiv{ 
+  border-radius: 10px;
+  width: 100%;
+  border-width: 0;
+  background-color: white ;
+  outline: none;
+font-size: 16px;
+  /* border: 1px solid #ddd; */
+}
+
+.CalenderDivOuter{
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 40px;
+  justify-content: space-between;
+
+
+}
+
 .comment_div {
   height: 100px;
   width: 95%;

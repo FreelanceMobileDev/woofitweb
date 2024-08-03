@@ -9,14 +9,16 @@ import 'react-phone-input-2/lib/style.css'
 const Inputfield = ({ style, input_parent_div_prop,
     inputtxt, name, img5, img1, img2, img3,
     type, id, placeholder, additionalMainDivClassName,
-    additionalinput_field, onChange, value }) => {
+    additionalinput_field, onChange, value,handleButtonClick,ref }) => {
+        const today = new Date().toISOString().split('T')[0];
     return (
-        <div style={style} className={`${styles.input_parent_div} ${input_parent_div_prop}`}>
+        <div 
+        style={style} className={`${styles.input_parent_div} ${input_parent_div_prop}`}>
             <div className={styles.space_div}>
                 <div className={`${styles.inputtxt} ${inputtxt}`}>{name}</div>
                 {img5 && <div className={`${styles.inputtxt} ${inputtxt}`} style={{ marginRight: 10 }}><VisaIcon /></div>}
             </div>
-            <div className={`${styles.input_main_div} ${additionalMainDivClassName}`}>
+            <div  className={`${styles.input_main_div} ${additionalMainDivClassName}`}>
                 {img1 && img1}
                 {img2 && (
                     <div className={styles.leftImage}>
@@ -28,7 +30,7 @@ const Inputfield = ({ style, input_parent_div_prop,
                         country={'au'}
                         /> */}
                         <img src={ausFlag.src} width="27" height="20" />
-                        {/* <IndiaFlag /> */}
+                       
                         <Downarrow />
                     </div>
                 )}
@@ -39,12 +41,17 @@ const Inputfield = ({ style, input_parent_div_prop,
                 )}
                 
                 <input
+                   style={{ cursor: 'pointer', width: '100%' }}
+                    onClick={handleButtonClick}
+                    ref={ref}
                     type={type}
                     id={id}
                     placeholder={placeholder}
                     className={`${styles.input_field} ${additionalinput_field}`}
                     onChange={onChange}
                     value={value}
+                    max={today}
+                 
                 />
                 {img2 && img2}
             </div>

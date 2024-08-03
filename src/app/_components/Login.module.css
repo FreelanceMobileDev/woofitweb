@@ -439,6 +439,7 @@
   text-align: left;
   margin-left: 10px;
   cursor: pointer;
+  color: #0070f3;
 
 }
 
@@ -764,12 +765,11 @@
 
 }
 .navItem:hover {
-  background-color: #14AED1;
-  color :white;
+  color :#14AED1;
 }
 .navItem.selected .dashboradimage,
 .navItem.selected .navLabel {
-  color: #f7f7f7;
+  color: #14AED1;
 }
 
 .TodayTxtdiv {
@@ -1443,7 +1443,7 @@
 }
 .selected {
   background-color: #14AED1;
-  color: white;
+  color: #14AED1;
 }
 
 .day {
@@ -1684,6 +1684,7 @@
   line-height: 19.2px;
   text-align: left;
   color: #FFFFFF;
+  border-width:0px;
 }
 
 .profile_pic_setting {
@@ -2116,3 +2117,4 @@ line-height: 14.4px;
 text-align: left;
 color: #FFF;
 }
+

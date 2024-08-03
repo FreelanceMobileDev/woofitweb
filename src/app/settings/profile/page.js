@@ -124,7 +124,9 @@ function page() {
                     <Loader loading={loading} />
                     <div className={styles.right_div_data}>
                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
-                            <Image src={selectedFile ? selectedFile : data?.image} alt={profileiconn}
+                            <Image 
+                                src={selectedFile ? selectedFile: data?.image} 
+                                alt={profileiconn}
                                 className={styles.profile_pic_setting}
                                 height={107}
                                 width={107}
