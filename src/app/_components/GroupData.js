@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { EditIcon, DeleteIcon } from "../../../public"; // Adjust the import paths accordingly
 import styles from "./Login.module.css";
 import GroupEdit from "../Popups/GroupEdit";
-import { getGroupList } from "../../api/helper";
+import { deleteGroup, getGroupList } from "../../api/helper";
 import Loader from "./Loader";
 
 const GroupData = () => {
@@ -36,6 +36,17 @@ const GroupData = () => {
   useEffect(() => {
     getApiGroup();
   }, [popupIsOpen]);
+
+  const deletetThisGroup=async(id)=>{
+    const confirmed = window.confirm("Are you sure you want to Delete group?");
+    if (confirmed) {
+      setLoading(true)
+     const respone = await deleteGroup(id)
+     getApiGroup();
+     setLoading(false)
+
+    }
+  }
 
   const GroupItem = ({ group }) => {
     // console.log(name,'====name')
@@ -75,7 +86,7 @@ const GroupData = () => {
             <EditIcon className={styles.actionIcon} />
           </div>
           <div style={{ width: 20 }} />
-          <div>
+          <div onClick={()=>{deletetThisGroup(group?._id)}}>
             <DeleteIcon className={styles.actionIcon} />
           </div>
         </div>
