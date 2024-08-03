@@ -7,23 +7,22 @@ import OpticityButton from "../_reuseableComponent/OpicityButton";
 import Inputfield from "../_reuseableComponent/Inputfield";
 import Image from "next/image";
 import profilepicture from "../../../public/Images/profilepic.png";
-import { getClinent, updateGroup } from "../../api/helper";
+import { createGroup, getClinent, updateGroup } from "../../api/helper";
 import check from "../../../public/Images/Checkflieddbox.png";
 import nocheck from "../../../public/Images/Checkbox@2x.png";
 import Loader from "../_components/Loader";
+import { toast } from 'react-toastify';
 
 const GroupEdit = ({ data, show, handleClose }) => {
   const [clientData, setclientData] = useState([]);
   const [type, setType] = useState("Group");
   const [loader, setLoader] = useState(true);
-  const [comment, setcomment] = useState("");
+  const [comment, setcomment] = useState(data?.comment||"");
+  const [name, setName] = useState(data?.name||"");
   const [groudClients, setGroupClients] = useState(
     data?.clients ? data?.clients : []
   );
 
-  const handleSave = () => {
-    handleClose();
-  };
 
   const getAllClients = async () => {
     setLoader(true);
@@ -54,13 +53,20 @@ const GroupEdit = ({ data, show, handleClose }) => {
   const updateThisGroup = async () => {
     setLoader(true);
     const updatedItems = groudClients.map((item) => item?._id);
-    console.log(data?._id, "updatedItems======>");
-    const param = { clients: updatedItems, comment: comment };
-    const response = await updateGroup(param, data?._id);
+    const param = { name:name,clients: updatedItems, comment: comment };
+    let response={}
+    if(data?._id){
+      response = await updateGroup(param, data?._id);
+    }else{
+      const coachId = localStorage.getItem("id")
+      param.coachId=coachId
+      response = await createGroup(param)
+    }
     setLoader(false);
     if (response?.data?.success) {
       handleClose();
-      alert(response?.data?.message);
+      toast.success(response?.data?.message)
+      // alert(response?.data?.message);
     }
   };
 
@@ -70,16 +76,20 @@ const GroupEdit = ({ data, show, handleClose }) => {
       <div className={styles.popupContent}>
         <div className={styles.space_div}>
           <div style={{ width: 60 }} />
-          {/* <div className={styles.popheadertxt}>Edit Group</div> */}
+          <div className={styles.popheadertxt}>{data ?"Edit Group" :"Add Group"}</div>
           <div onClick={handleClose} className={styles.greycrossicon}>
             <CrossIcon />
           </div>
         </div>
-        <TextWithButton
-          label={"Group Name"}
-          additionalcontainer={styles.TextWithButtonstyle}
-          text={data?.name}
+
+        <Inputfield
+          name={"Group Name"}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          value={name}
         />
+
         <div style={{ marginLeft: 10 }}>
           <div className={styles.space_div} style={{ marginTop: 18 }}>
             <div className={styles.Clientaddtxt}>Groups</div>
@@ -95,7 +105,7 @@ const GroupEdit = ({ data, show, handleClose }) => {
 
           {type === "Group" && (
             <div className={styles.scroll_div}>
-              {groudClients?.map((item, index) => (
+              {groudClients&& groudClients?.length>0 ? groudClients && groudClients?.map((item, index) => (
                 <div
                   key={index}
                   className={styles.space_div}
@@ -118,7 +128,13 @@ const GroupEdit = ({ data, show, handleClose }) => {
                     <CrossIcon />
                   </div>
                 </div>
-              ))}
+              ))
+              :
+              <>
+              <div style={{display:"flex",alignItems:"center" , alignSelf:"center" , marginTop:"20%"}}>Select Clients</div>
+              
+              </> }
+
             </div>
           )}
           {type === "All" && (
@@ -176,6 +192,8 @@ const GroupEdit = ({ data, show, handleClose }) => {
           txtstyle={{ color: "#FFF" }}
           additionalMainDivClassName={styles.SaveButton}
         />
+ 
+        
       </div>
     </div>
   );

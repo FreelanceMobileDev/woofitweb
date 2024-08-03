@@ -21,7 +21,7 @@ const Clientsdata = [
 const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
     const [clientsopen, setclientsopen] = useState(false);
-    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients.length > 0? [ ...rateData?.clients]:[]);
+    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients?.length > 0? [ ...rateData?.clients]:[]);
     const [errorMsg, setErrorMsg] = useState("")
     const [clientDatas, setclientData] = useState([])
     const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
         onSubmit: async (values) => {
             try {
-                // setLoading(true)
+                setLoading(true)
                 if (selectClients && selectClients.length > 0) {
                     values.clients = selectClients.map((e) => e._id)
                 }

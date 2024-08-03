@@ -6,7 +6,7 @@ import GroupEdit from "../Popups/GroupEdit";
 import { deleteGroup, getGroupList } from "../../api/helper";
 import Loader from "./Loader";
 
-const GroupData = () => {
+const GroupData = ({ updateGroup, setUpdateGroup }) => {
   const [getdata, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [popupIsOpen, setShowPopup] = useState(false);
@@ -16,6 +16,12 @@ const GroupData = () => {
     setgroupData(group);
     setShowPopup(true);
   };
+  useEffect(() => {
+    if (updateGroup) {
+      setUpdateGroup(false)
+      getApiGroup();
+    }
+  }, [updateGroup])
 
   const closePopup = () => {
     setShowPopup(false);
@@ -37,19 +43,18 @@ const GroupData = () => {
     getApiGroup();
   }, [popupIsOpen]);
 
-  const deletetThisGroup=async(id)=>{
+  const deletetThisGroup = async (id) => {
     const confirmed = window.confirm("Are you sure you want to Delete group?");
     if (confirmed) {
       setLoading(true)
-     const respone = await deleteGroup(id)
-     getApiGroup();
-     setLoading(false)
+      const respone = await deleteGroup(id)
+      getApiGroup();
+      setLoading(false)
 
     }
   }
 
   const GroupItem = ({ group }) => {
-    // console.log(name,'====name')
 
     return (
       <div className={styles.groupItem}>
@@ -64,11 +69,10 @@ const GroupData = () => {
                 group?.clients?.map((img, index) => (
                   <img
                     key={index}
-                    src={`${
-                      img.clientImage
+                    src={`${img.clientImage
                         ? img.clientImage
                         : "/images/profilepic.png"
-                    }`}
+                      }`}
                     alt={`/images/profilepic.png`}
                     className={styles.clientImage}
                   />
@@ -86,7 +90,7 @@ const GroupData = () => {
             <EditIcon className={styles.actionIcon} />
           </div>
           <div style={{ width: 20 }} />
-          <div onClick={()=>{deletetThisGroup(group?._id)}}>
+          <div onClick={() => { deletetThisGroup(group?._id) }}>
             <DeleteIcon className={styles.actionIcon} />
           </div>
         </div>

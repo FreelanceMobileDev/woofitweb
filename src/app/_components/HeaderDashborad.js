@@ -7,6 +7,9 @@ import styles from './Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
 import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Header = () => {
   useAuth()
@@ -21,6 +24,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
+      <ToastContainer />
       <div style={{width:'30%',}}>
       {/* <Inputfield
       img1={<Searchimg/>}

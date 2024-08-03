@@ -20,3 +20,4 @@ export const DELETE_RATES='rates/delete-rates'
 export const DASHBOARD_DATA='user/getDashboardData?'
 export const UPDATE_GROUP="group/createUpdateGroup"
 export const DELETE_GROUP="group/deleteGroup"
+export const CREATE_GROUP = 'group/createUpdateGroup'

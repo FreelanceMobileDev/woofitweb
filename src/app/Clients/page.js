@@ -6,13 +6,20 @@ import styles from '../_components/Login.module.css';
 import React, { useState } from 'react';
 import DeshBorad from '../dashboard/DashCompoent';
 import { useRouter } from 'next/navigation';
+import GroupEdit from '../Popups/GroupEdit';
 
 function page() {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('Clients');
+  const [popupIsOpen, setShowPopup] = useState(false);
+  const [updateGroup , setUpdateGroup ]= useState(false)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+  const closePopup = () => {
+    setShowPopup(false);
+    setUpdateGroup(true)
   };
   return (
     <>
@@ -24,7 +31,7 @@ function page() {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <ArchivedIcon />
                 <div className={styles.Archived_Clients} onClick={() => { handleTabClick('ArchivedClients') }}>Archived Clients</div>
-                <div className={styles.Add_Client} style={{cursor:"pointer"}} onClick={()=>router.push('Clients/edit')}  >Add a Client</div>
+                <div className={styles.Add_Client} style={{cursor:"pointer"}} onClick={()=>(activeTab === 'Clients' || activeTab === "ArchivedClients") ?router.push('Clients/edit'):setShowPopup(true)}  >{(activeTab === 'Clients' || activeTab === "ArchivedClients")  ? "Add a client" :  "Add Groups"}</div>
                 {/* Clients/edit */}
               </div>
             </div>
@@ -51,7 +58,8 @@ function page() {
             </div>
           </div>
           {(activeTab === 'Clients' || activeTab === "ArchivedClients") && <ClientsData activeTab={activeTab} />}
-          {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData /></div>}
+          {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData updateGroup={updateGroup}  setUpdateGroup={setUpdateGroup} /></div>}
+          {popupIsOpen && (  <GroupEdit  show={popupIsOpen} handleClose={closePopup} />)}
         </div>
       </DeshBorad>
     </>
