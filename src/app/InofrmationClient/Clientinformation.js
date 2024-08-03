@@ -60,6 +60,22 @@ const Clientinformation = ({ setSelectedItem }) => {
 
 
 
+  const archiveUser = async () => {
+    try {
+      setLoading(true)
+      const respone = await getClientDetails(id)
+      setGetData(respone.data)
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
+   
+  }
+
+
+
+
   return (
     <>
      <Loader loading={loading} />

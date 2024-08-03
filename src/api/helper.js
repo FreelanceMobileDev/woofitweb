@@ -1,5 +1,5 @@
 import { apiClient, apiClientUpload } from "./api";
-import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT, GET_TRANNING_SESSION, CREATE_UPDATE_RATE, UPDATE_PROILE, DELETE_RATES, DELETE } from "./url";
+import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT, GET_TRANNING_SESSION, CREATE_UPDATE_RATE, UPDATE_PROILE, DELETE_RATES, DELETE, DASHBOARD_DATA } from "./url";
 
 
   export const imageUpload = (payload) => {
@@ -148,6 +148,15 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
       method: DELETE,
       url: `${DELETE_RATES}?id=${payload}`,
       // data: payload,
+    });
+  };
+
+  export const DashboardData  = (payload) => {
+    console.log("DashboardData--->>>>>", payload)
+    return apiClient({
+      baseURL: BASE_URL,
+      method: GET_METHOD,
+      url: `${DASHBOARD_DATA}${payload}`,
     });
   };
 

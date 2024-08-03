@@ -53,6 +53,8 @@ function page() {
     getRateData(catchId)
   };
 
+  console.log(getRetes,'===getRetes')
+
   return (
     <>
       <DeshBorad>
@@ -68,7 +70,7 @@ function page() {
               <div key={index} style={{ marginTop: 20 }} className={styles.rates_div} onClick={()=>openPopup(item)}>
                 <div className={styles.rate_txtt}>{item.name}</div>
                 <div className={styles.row}>
-                  <div className={styles.rate_amount}>{item.amount}</div>
+                  <div className={styles.rate_amount}>${item.priceForTraining}</div>
                   <Rightarrow />
                 </div>
               </div>

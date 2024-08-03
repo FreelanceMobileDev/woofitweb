@@ -17,3 +17,4 @@ export const GET_TRANNING_SESSION ="tranning/getTrainingSession"
 export const CREATE_UPDATE_RATE = "rates/create-or-update-rates"
 export const UPDATE_PROILE = "user/update-profile"
 export const DELETE_RATES='rates/delete-rates'
+export const DASHBOARD_DATA='user/getDashboardData?'

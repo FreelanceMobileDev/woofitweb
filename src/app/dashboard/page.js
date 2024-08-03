@@ -1,6 +1,6 @@
 'use client';
 import DeshBorad from "./DashCompoent";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CheckIcon from '../../../public/Images/CheckIcon';
 import ClockCalender from '../../../public/Images/ClockCalender';
 import CrossIcon from '../../../public/Images/CrossIcon';
@@ -15,7 +15,9 @@ import Sessionsimg from '../../../public/Images/Sessionsimg';
 import styles from '../_components/Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image'
-import useAuth from "../hooks/useAuth";
+import { DashboardData, getTranningSession } from "../../api/helper";
+import Loader from "../_components/Loader";
+import moment from "moment";
 
 const DashContant = () => {
   const newClients = [
@@ -30,17 +32,113 @@ const DashContant = () => {
     { name: 'Glass Bronson', action: 'has completed his training.', item: '', time: '2 hours ago', avatar: profilepicture },
     { name: 'Monroe Benjamin', action: 'purchased the', item: 'Monthly Subscription', time: '3 hours ago', avatar: profilepicture },
   ];
-  const sessions = [
-    { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: profilepicture, icon: <CrossIcon /> },
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
-    { time: '11:20 AM', name: "Samuel O'Brien", backgroundColor: '#E0FFE1', avatar: profilepicture, icon: <CheckIcon /> },
-  ];
+  const [data, setData] = useState()
+  const [loading, setLoading] = useState(false);
+  const [getTranningData, setTranningData] = useState([])
 
-  const Augestdata = [
-    { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, icon: <ClockCalender /> },
-  ];
+  const dashbardCountData = async (payload) => {
+    try {
+      setLoading(true)
+      const response = await DashboardData(payload)
+      setData(response.data.data)
+      // console.log(response.data.data, '===response')
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+  useEffect(() => {
+    dashbardCountData()
+  }, [])
+
+
+  function convertTo12Hour(time24) {
+    const time = moment(time24, 'HH:mm');
+    return time.format('h:mm A');
+  }
+
+  const getTranningSessions = async (data) => {
+    try {
+      setLoading(true)
+      const getData = await getTranningSession(data)
+      const groupedByDateArray = groupDataByDate(getData?.data?.data?.data);
+      setTranningData(groupedByDateArray)
+    } catch (error) {
+      console.log(error, '====error')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getTranningSessions()
+  }, [])
+
+  const seletFilter = (period) => {
+    let startDate, endDate;
+    switch (period) {
+      case 'monthly':
+        startDate = moment().startOf('month').format('YYYY-MM-DD');
+        endDate = moment().endOf('month').format('YYYY-MM-DD');
+        break;
+      case 'yearly':
+        startDate = moment().startOf('year').format('YYYY-MM-DD');
+        endDate = moment().endOf('year').format('YYYY-MM-DD');
+        break;
+      default:
+    }
+    dashbardCountData(`startDate=${startDate}&endDate=${endDate}`)
+  }
+
+  function groupDataByDate(data) {
+    const groupedData = {};
+    data.forEach(item => {
+      const startDate = moment(item.startDate);
+      const formattedDate = startDate.format('MMMM D'); // Format like "August 19"
+
+      if (!groupedData[formattedDate]) {
+        groupedData[formattedDate] = [];
+      }
+      groupedData[formattedDate].push(item);
+    });
+
+    const resultArray = Object.keys(groupedData).map(date => ({
+      date,
+      events: groupedData[date]
+    }));
+
+    resultArray.sort((a, b) => {
+      const today = moment().format('MMMM D');
+      if (a.date === today) return -1;
+      if (b.date === today) return 1;
+      return moment(a.date, 'MMMM D').diff(moment(b.date, 'MMMM D'));
+    });
+
+    return resultArray;
+  }
+
+  const backgroundColor = [
+    { id: 0, backgroundColor: '#FFE0E0', icon: <CrossIcon /> },
+    { id: 1, backgroundColor: '#E0F7FF', icon: <PlayIcon /> },
+    { id: 2, backgroundColor: '#E0FFE1', icon: <CheckIcon /> },
+  ]
+
+
+  function backColor(id) {
+    const item = backgroundColor.find(item => item.id === id);
+    return item ? item.backgroundColor : "#E0FFE1";
+  }
+
+  function backIcon(id) {
+    const item = backgroundColor.find(item => item.id === id);
+    return item ? item.icon : <CheckIcon />;
+  }
+
+
   return (
     <DeshBorad >
+      <Loader loading={loading} />
       <div className={styles.DashboardContenttwo}>
         <div className={styles.summary}>
           <div className={styles.headerdashboardContent}>
@@ -49,7 +147,7 @@ const DashContant = () => {
             </div>
 
             <div className={styles.dateSelector}>
-              <div className={styles.Monthlytxt}>Monthly</div> <Downarrow />
+              <div className={styles.Monthlytxt} onClick={()=>seletFilter("monthly")} >Monthly</div> <Downarrow />
             </div>
           </div>
 
@@ -59,78 +157,90 @@ const DashContant = () => {
                 <p className={styles.Total_Earnings} style={{ color: '#67C537' }} >Total Earnings</p>
                 <EarningsIcon />
               </div>
-              <div className={styles.Eraning_price}>$7,216</div>
+              <div className={styles.Eraning_price}>${data?.totalEarning}</div>
             </div>
             <div className={styles.summaryCarddashboard} style={{ backgroundColor: '#CFF3FD' }}>
               <div className={styles.Total_Earnings_card}>
                 <div className={styles.Total_Earnings} style={{ color: '#14AED1' }} >New Clients</div>
                 <NewClients />
               </div>
-              <div className={styles.Eraning_price}>165</div>
+              <div className={styles.Eraning_price}>{data?.clientsCount}</div>
             </div>
             <div className={styles.summaryCarddashboard} style={{ backgroundColor: '#E0EAFE' }}>
               <div className={styles.Total_Earnings_card}>
                 <div className={styles.Total_Earnings} style={{ color: '#5465F0' }} >Sessions</div>
                 <Sessionsimg />
               </div>
-              <div className={styles.Eraning_price}>20</div>
+              <div className={styles.Eraning_price}>{data?.sessionsCount}</div>
             </div>
           </div>
 
           <div className={styles.upcomingSessions}>
             <h4>Upcoming Sessions</h4>
             <div className={styles.session}>
-              <div className={styles.Todayline}>
+              {/* <div className={styles.Todayline}>
                 <span>Today</span>
                 <PlusIcon />
-              </div>
+              </div> */}
 
-              <div className={styles.sessionDetails}>
-                {sessions.map((session, index) => (
-                  <div className={styles.sessionCard2} >
-                    <p style={{ marginBottom: 20, width: 120 }}>{session.time}</p>
-                    <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
-                      <div style={{ display: 'flex', alignItems: 'center', }}>
-                        {session.icon}
-                        <Image src={session.avatar} height={25} width={25} />
-                        {session.avatar2 && <Image height={25} width={25} src={session.avatar2} className={styles.avatar2imagee} />}
-                        <p style={{ marginLeft: 10 }}>{session.name}</p>
-                      </div>
-                      <Rightarrow />
+
+
+              {getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
+                <>
+                  <div className={styles.session}>
+                    <div className={styles.TodayTxtdiv}>
+                      <span>{ele.date == moment().format('MMMM D') ? "Today" : ele.date}</span>
+                      {/* <PlusIcon /> */}
+                    </div>
+                    <div className={styles.sessionDetails}>
+                      {ele?.events?.sort((a, b) => {
+                        const startDateA = moment(a?.startDate);
+                        const startTimeA = moment(a?.schedule[0]?.startTime, 'HH:mm');
+                        const combinedDateTimeA = startDateA.set({
+                          hour: startTimeA.hour(),
+                          minute: startTimeA.minute(),
+                          second: startTimeA.second(),
+                          millisecond: startTimeA.millisecond()
+                        });
+
+                        const startDateB = moment(b?.startDate);
+                        const startTimeB = moment(b?.schedule[0]?.startTime, 'HH:mm');
+                        const combinedDateTimeB = startDateB.set({
+                          hour: startTimeB.hour(),
+                          minute: startTimeB.minute(),
+                          second: startTimeB.second(),
+                          millisecond: startTimeB.millisecond()
+                        });
+
+                        return combinedDateTimeA - combinedDateTimeB;
+                      })?.map((session, index) => (
+                        <>
+                          {
+                            (session?.clients.length > 0 || session?.group.length > 0) ?
+                              (<div className={styles.sessionCard2} >
+                                <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
+                                <div key={index} className={styles.sessionCard} style={{ backgroundColor: backColor(index) }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', }}>
+                                    {backIcon(index)}
+                                    {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
+                                      <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
+                                      : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />}
+                                    <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
+                                  </div>
+                                  <Rightarrow />
+                                </div>
+                              </div>) : <p>No Trainings</p>
+                          }
+                        </>
+                      ))}
                     </div>
                   </div>
-                ))}
-              </div>
+                </>
+              ) : <p>No Trainings</p>
+              }
+            </div>
 
-            </div>
-            <div className={styles.sessionCardbottomline} />
-            <div className={styles.Todayline}>
-              <span>August 17</span>
-              <PlusIcon />
-            </div>
-            <div className={styles.sessionDetails}>
-              {Augestdata.map((session, index) => (
-                <div className={styles.sessionCard2} >
-                  <p style={{ marginBottom: 20, width: 120 }}>{session.time}</p>
-                  <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
-                    <div style={{ display: 'flex', alignItems: 'center', }}>
-                      {session.icon}
-                      <Image src={session.avatar} height={25} width={25} />
-                      <p style={{ marginLeft: 10 }}>{session.name}</p>
-                    </div>
-                    <Rightarrow />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className={styles.sessionCardbottomline} />
-            <div className={styles.session}>
-              <div className={styles.Todayline}>
-                <span>August 18</span>
-                <PlusIcon />
-              </div>
-              <p>No Trainings</p>
-            </div>
+
           </div>
         </div>
         <div className={styles.newclientSidebar}>

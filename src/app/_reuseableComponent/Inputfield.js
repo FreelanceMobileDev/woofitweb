@@ -20,13 +20,13 @@ const Inputfield = ({ style, input_parent_div_prop,
                 {img1 && img1}
                 {img2 && (
                     <div className={styles.leftImage}>
-                        <PhoneInput 
+                        {/* <PhoneInput 
                          id={id}
                          value={value}
                          onChange={onChange}
                          placeholder={placeholder}
                         country={'au'}
-                        />
+                        /> */}
                         <img src={ausFlag.src} width="27" height="20" />
                         {/* <IndiaFlag /> */}
                         <Downarrow />

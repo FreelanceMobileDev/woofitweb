@@ -5,12 +5,14 @@ import DeshBorad from '../../dashboard/DashCompoent';
 import styles from '../../_components/Login.module.css';
 import Image from 'next/image';
 import profileiconn from '../../../../public/Images/profileee.png'
-import { Attherateimg, CalenderIcon, UploadimgIcon, Userimg } from '../../../../public';
+import { Attherateimg, CalenderIcon, Downarrow, UploadimgIcon, Userimg } from '../../../../public';
 import Inputfield from '../../_reuseableComponent/Inputfield';
 import Loader from '../../_components/Loader';
 import { getProfile, imageUpload, updateProfile } from '../../../api/helper';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import { experienceOptions, specializationOptions } from '../../../util/staticData';
+import SelectOption from '../../_reuseableComponent/SelectOption';
 
 function page() {
     const [data, setData] = useState({});
@@ -41,7 +43,10 @@ function page() {
         initialValues: {
             email: "",
             name: "",
-            mobileNumber: ""
+            mobileNumber: "",
+            coachSpecialization: '',
+            yearOfExperience: '',
+
 
         },
         validationSchema: Yup.object({
@@ -56,7 +61,7 @@ function page() {
                 if (image) {
                     values.image = image.image
                 }
-                console.log(values,'==values')
+                console.log(values,'===values')
                 const respone = await updateProfile(values)
                 if (respone.data.success == false) {
                     return setErrorMsg(respone.data.message)
@@ -77,6 +82,8 @@ function page() {
                 name: data?.name || '',
                 email: data?.email || '',
                 mobileNumber: data?.mobileNumber || '',
+                coachSpecialization: data?.coachSpecialization || '',
+                yearOfExperience: data?.yearOfExperience || "",
             });
         }
     }, [data]);
@@ -96,14 +103,14 @@ function page() {
             const formData = new FormData();
             formData.append('image', file);
             try {
-                
+
                 const imgData = await imageUpload(formData)
                 // console.log(imgData.data.filename, '=====imgData')
                 setImage({ image: imgData?.data?.filename })
             } catch (error) {
                 setLoading(false);
                 console.log(error, '====error')
-            }finally{
+            } finally {
                 setLoading(false);
             }
         }
@@ -122,7 +129,7 @@ function page() {
                                 height={107}
                                 width={107}
                             />
-                            <div className={styles.upload_pic_div} style={{cursor:"pointer"}} >
+                            <div className={styles.upload_pic_div} style={{ cursor: "pointer" }} >
                                 <UploadimgIcon />
                                 <div className={styles.upload_photo_text} onClick={triggerFileSelect} >Upload Photo</div>
                                 <input
@@ -177,9 +184,35 @@ function page() {
                                 <div style={{ color: 'red' }}>{errorMsg}</div>
                             ) : null}
 
+                            <SelectOption label={"Coaching Specialization"}
+                                id={"coachSpecialization"}
+                                data={specializationOptions}
+                                RightIcon={Downarrow}
+                                onChange={formik.handleChange}
+                                value={formik.values.coachSpecialization}
+                                selectedId={formik.values.coachSpecialization?formik.values.coachSpecialization:data?.coachSpecialization}
+                            />
+                            {formik.touched.coachSpecialization && formik.errors.coachSpecialization ? (
+                                <div style={{ color: 'red' }}>{formik.errors.coachSpecialization}</div>
+                            ) : null}
+
+                            <SelectOption label={"Years of Experience"}
+                                id={"yearOfExperience"}
+                                data={experienceOptions}
+                                RightIcon={Downarrow}
+                                onChange={formik.handleChange}
+                                value={formik.values.yearOfExperience}
+                                selectedId={formik.values.yearOfExperience?formik.values.yearOfExperience:data?.yearOfExperience}
+
+                            />
+                            {formik.touched.yearOfExperience && formik.errors.yearOfExperience ? (
+                                <div style={{ color: 'red' }}>{formik.errors.yearOfExperience}</div>
+                            ) : null}
+
+
                             <button type='submit' className={styles.Save_button} >Save</button>
 
-                            {/* <div className={styles.S ave_button}>Save</div> */}
+                            {/* <div className={styles.Save_button}>Save</div> */}
                         </form>
                     </div>
 

@@ -114,7 +114,8 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                     <div style={{ width: 60 }} />
                     <div className={styles.popheadertxt}>{rateData?._id ? "Edit Rate" : "Add Rate"} </div>
                     {/* onClick={handleClose} */}
-                    <div onClick={()=>rateData?._id ? handleDelete(rateData?._id):handleClose()} className={styles.greycrossicon} ><DeleteIcon /></div>
+                    <div onClick={handleClose} className={styles.greycrossicon} ><CrossIcon /></div>
+                    {/* <div onClick={()=>rateData?._id ? handleDelete(rateData?._id):handleClose()} className={styles.greycrossicon} ><DeleteIcon /></div> */}
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     <Inputfield
