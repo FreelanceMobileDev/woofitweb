@@ -467,3 +467,9 @@ line-height: 28.8px;
 text-align: left;
 margin-bottom: 10px;
 }
+.scroll_div{
+  height: 250px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
