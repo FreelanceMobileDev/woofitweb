@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import styles from './Popups.module.css';
-import { CrossIcon, Rightarrow } from '../../../public';
+import { CrossIcon, Rightarrow, DeleteIcon } from '../../../public';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Inputfield from '../_reuseableComponent/Inputfield';
@@ -11,7 +11,7 @@ import profilepicture from '../../../public/Images/profilepic.png'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import AddClients from './AddClients';
-import { createAndUpdateRate, getClinent } from '../../api/helper';
+import { createAndUpdateRate, deleteRate, getClinent } from '../../api/helper';
 import Loader from '../_components/Loader';
 
 const Clientsdata = [
@@ -37,7 +37,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
   const getApiClinent = async (data) => {
     try {
       setLoading(true)
-      const getData = await getClinent(data, `&sort=asc`)
+      const getData = await getClinent(data)
       setclientData(getData?.data?.data?.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
@@ -52,8 +52,6 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
     return () => { }
   }, [])
 
- 
-  
 
     const formik = useFormik({
         initialValues: {
@@ -93,6 +91,21 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
     });
     const maxDisplayed = 4;
 
+    const handleDelete=async(id)=>{
+        try {
+            setLoading(true)
+            const response = await deleteRate(id)
+            if(response.data.success==false){
+                return console.log(response)
+            }
+            handleClose()
+        } catch (error) {
+            console.log(error)
+        }finally{
+            setLoading(false)
+        }
+    }
+
     return (
         <div className={show ? styles.popupDisplay : styles.popupHide}>
              <Loader loading={loading} />
@@ -100,8 +113,8 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                 <div className={styles.space_div}>
                     <div style={{ width: 60 }} />
                     <div className={styles.popheadertxt}>{rateData?._id ? "Edit Rate" : "Add Rate"} </div>
-
-                    <div onClick={handleClose} className={styles.greycrossicon}><CrossIcon /></div>
+                    {/* onClick={handleClose} */}
+                    <div onClick={()=>rateData?._id ? handleDelete(rateData?._id):handleClose()} className={styles.greycrossicon} ><DeleteIcon /></div>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     <Inputfield
@@ -178,17 +191,13 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                     {formik.touched.comment && formik.errors.comment ? (
                         <div style={{ color: 'red' }}>{formik.errors.comment}</div>
                     ) : null}
+                    <div style={{ display:"flex",justifyContent:"center", alignItems:"center" }}>
+                    <button type='submit' className={styles.SaveButton}  style={{width:"100%" , borderWidth:0}} txtstyle={{ color: '#FFF' }} >Save</button>
+                    </div>
 
-                    <button type='submit' className={styles.SaveButton} txtstyle={{ color: '#FFF' }} >Save</button>
-                    {/* <OpticityButton 
-                        onClick={handleClose}
-                        name={'Save'}
-                        txtstyle={{ color: '#FFF' }}
-                        additionalMainDivClassName={styles.SaveButton}
-                    /> */}
                 </form>
             </div>
-            {clientsopen &&
+            {clientsopen && clientDatas&&
                 <AddClients show={clientsopen} handleClose={closePopup} setSelectclients={setSelectclients} selectClients={selectClients} clientDatas={clientDatas}
                 />}
         </div>

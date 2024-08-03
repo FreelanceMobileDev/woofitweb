@@ -156,7 +156,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  width: 100%;
+  align-items: center;
+  flex-direction: row;
 }
 
 .commentSection {
@@ -207,7 +208,7 @@
   /* border: 1px solid red; */
   justify-content: center;
   width: 100%;
-  margin-left: 17px;
+  /* margin-left: 17px; */
 }
 .measurements {
   padding: 20px;
@@ -517,10 +518,14 @@
   line-height: 19.2px;
   text-align: left;
   color: white;
-  width: 110px;
+  width: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  border: 0;
+  border-width: 0;
+  
 }
 
 .changePhoto {

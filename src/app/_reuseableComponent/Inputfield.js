@@ -1,7 +1,10 @@
 import React from 'react';
 import { Downarrow, VisaIcon } from '../../../public';
+import ausFlag from '../../../public/Images/ausflag.png'
 import IndiaFlag from '../../../public/Images/IndiaFlag';
 import styles from './Componet.module.css'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const Inputfield = ({ style, input_parent_div_prop,
     inputtxt, name, img5, img1, img2, img3,
@@ -17,7 +20,15 @@ const Inputfield = ({ style, input_parent_div_prop,
                 {img1 && img1}
                 {img2 && (
                     <div className={styles.leftImage}>
-                        <IndiaFlag />
+                        <PhoneInput 
+                         id={id}
+                         value={value}
+                         onChange={onChange}
+                         placeholder={placeholder}
+                        country={'au'}
+                        />
+                        <img src={ausFlag.src} width="27" height="20" />
+                        {/* <IndiaFlag /> */}
                         <Downarrow />
                     </div>
                 )}
@@ -26,6 +37,7 @@ const Inputfield = ({ style, input_parent_div_prop,
                         USD
                     </div>
                 )}
+                
                 <input
                     type={type}
                     id={id}

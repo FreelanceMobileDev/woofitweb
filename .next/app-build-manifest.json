@@ -1,16 +1,22 @@
 {
   "pages": {
-    "/settings/services/page": [
+    "/Clients/edit/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/settings/services/page.css",
-      "static/chunks/app/settings/services/page.js"
+      "static/css/app/Clients/edit/page.css",
+      "static/chunks/app/Clients/edit/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
+    ],
+    "/Clients/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Clients/page.css",
+      "static/chunks/app/Clients/page.js"
     ],
     "/settings/page": [
       "static/chunks/webpack.js",
@@ -24,6 +30,12 @@
       "static/css/app/settings/profile/page.css",
       "static/chunks/app/settings/profile/page.js"
     ],
+    "/settings/services/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/settings/services/page.css",
+      "static/chunks/app/settings/services/page.js"
+    ],
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -35,6 +47,12 @@
       "static/chunks/main-app.js",
       "static/css/app/dashboard/page.css",
       "static/chunks/app/dashboard/page.js"
+    ],
+    "/schedule/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/schedule/page.css",
+      "static/chunks/app/schedule/page.js"
     ]
   }
 }

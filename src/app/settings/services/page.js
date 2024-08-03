@@ -26,7 +26,6 @@ function page() {
     try {
       setLoading(true)
       const resoponse= await getRates(catchId)
-      //  console.log(resoponse?.data?.data,'===resoponse')
        setGetRates(resoponse?.data?.data)
     } catch (error) {
       console.log(error)

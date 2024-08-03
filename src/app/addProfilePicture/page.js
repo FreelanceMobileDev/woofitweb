@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './../_components/Login.module.css'
 import { LeftArrow } from '../../../public';
 import { useRouter } from 'next/navigation'
-import { imageUpload, update_professional_details ,getProfile} from '../../api/helper';
+import { imageUpload, update_professional_details, getProfile } from '../../api/helper';
 import { useState } from 'react';
 import logoicon from '../../../public/Images/Logo.png'
 import africanimg from '../../../public/Images/africanMan.png'
@@ -22,7 +22,7 @@ const ProfilePicUpload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [errMessage, setErrormsg] = useState();
     const [image, setImage] = useState();
-    const [state, setState]=useState({term:false,privacy:false})
+    const [state, setState] = useState({ term: false, privacy: false })
     const [loading, setLoading] = useState(false);
 
     const handleFileSelect = async (event) => {
@@ -45,7 +45,7 @@ const ProfilePicUpload = () => {
                 setImage({ image: imgData?.data?.filename })
             } catch (error) {
                 console.log(error, '====error')
-            } finally{
+            } finally {
                 setLoading(false)
             }
         }
@@ -55,18 +55,18 @@ const ProfilePicUpload = () => {
         document.getElementById('fileInput').click();
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-       
-        if(!state || state.term!=true || state.privacy!=true ){
+
+        if (!state || state.term != true || state.privacy != true) {
             setLoading(false)
-            return setErrormsg({message:"Please Check 'I Am Agree' "})
+            return setErrormsg({ message: "Please select the terms and policy" })
         }
 
-        if(!image){
+        if (!image) {
             setLoading(false)
-            return setErrormsg({message:"Please select the image"})  
+            return setErrormsg({ message: "Please select the image" })
         }
 
         try {
@@ -80,20 +80,20 @@ const ProfilePicUpload = () => {
             localStorage.removeItem("signSteps")
             localStorage.removeItem("url")
             const getData = await getProfile()
-            localStorage.setItem("userData",JSON.stringify(getData.data.data))
+            localStorage.setItem("userData", JSON.stringify(getData.data.data))
             // console.log(response?.data, '====api response')
             // user/get-profile
             router.push('/dashboard')
         } catch (error) {
             console.log(error)
-        } finally{
+        } finally {
             setLoading(false)
         }
     }
 
     return (
         <>
-         <Loader loading={loading} />
+            <Loader loading={loading} />
             <div className={styles.container}>
                 <div className={styles.leftPane}>
                     <div className={styles.LeftContainor}>
@@ -123,17 +123,17 @@ const ProfilePicUpload = () => {
                                     />
                                     <div className={styles.Linediv} />
                                     <div className={styles.flex_row_div}>
-                                    <Image src={ state.term ? check : nocheck} height={15} width={15}  onClick={()=>{setState({...state,term:!state.term} , setErrormsg(""))}} />
+                                        <Image src={state.term ? check : nocheck} height={15} width={15} onClick={() => { setState({ ...state, term: !state.term }, setErrormsg("")) }} />
 
-                                        <div className={styles.i_accept_txt} style={{marginLeft:5}}>I Accept the </div>
+                                        <div className={styles.i_accept_txt} style={{ marginLeft: 5 }}>I Accept the </div>
                                         <div className={styles.terms_and_condi_txt}>Terms and Conditions.</div>
                                     </div>
                                     <div className={styles.flex_row_div} style={{ marginTop: 15 }}>
                                         {/* <input type="checkbox" className={styles.inputcheckbox}  name="Privacy" onChange={handleChange}/> */}
-                                        
-                                        <Image src={ state.privacy ? check : nocheck} height={15} width={15} onClick={()=>{setState({...state,privacy:!state.privacy}),  setErrormsg("")}}/>
 
-                                        <div className={styles.i_accept_txt} style={{marginLeft:5}}>I Agree to the </div>
+                                        <Image src={state.privacy ? check : nocheck} height={15} width={15} onClick={() => { setState({ ...state, privacy: !state.privacy }), setErrormsg("") }} />
+
+                                        <div className={styles.i_accept_txt} style={{ marginLeft: 5 }}>I Agree to the </div>
                                         <div className={styles.terms_and_condi_txt}>Privacy Policy.</div>
                                     </div>
                                 </div>
@@ -153,11 +153,11 @@ const ProfilePicUpload = () => {
                         className={styles.Logoimg}
                         height={136}
                         width={450}
-                       
+
                     />
                     <p className={styles.textttt}>Where Coaching Meets Excellence</p>
                     <Image src={africanimg} alt="Workout"
-height={400} width={400}
+                        height={400} width={400}
                         className={styles.africnManstyle}
                     />
                 </div>

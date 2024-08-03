@@ -180,10 +180,6 @@ const ScheduleContant = () => {
     return resultArray;
   }
 
-
-
-
-
   return (
     <div className={styles.DashboardContenttwo}>
         <Loader loading={loading} />

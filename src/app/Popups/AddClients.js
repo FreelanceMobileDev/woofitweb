@@ -5,11 +5,10 @@ import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic.png'
-import { getClinent } from '../../api/helper';
-import Loader from '../_components/Loader';
+
 
 const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas }) => {
-  console.log()
+  console.log(clientDatas,'===clientDatas?????????')
   const [clientData, setclientData] = useState(clientDatas)
   const [selectedClients, setSelectedClients] = useState(selectClients);
 
@@ -48,7 +47,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
     });
   };
   const renderClientGroup = (clients) => (
-    clients.map((client) => (
+    clients.length>0 ? clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
         <Image height={35} width={35} src={client.clientImage ? client.clientImage : profilepicture} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
@@ -60,7 +59,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
           />
         </div>
       </div>
-    ))
+    )):"No Data "
   );
   return (
     <div className={styles.popupDisplay}>

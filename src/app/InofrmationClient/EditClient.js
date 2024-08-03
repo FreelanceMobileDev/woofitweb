@@ -18,6 +18,7 @@ import { genderData, experienceOptions, specializationOptions } from '../../util
 import moment from 'moment';
 import Loader from '../_components/Loader';
 
+
 const EditClient = ({ setSelectedItem }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -156,12 +157,12 @@ const EditClient = ({ setSelectedItem }) => {
             const response = await createOrUpdateClient(getData.clientDetails._id, values)
             console.log(response, '======heteteget')
             getClientDetail(id)
-           return router.push(`/Clients/clientsInfo?id=${getData.clientDetails?._id}`)
+            return router.push(`/Clients/clientsInfo?id=${getData.clientDetails?._id}`)
           } else {
-            values.coachId=catchId
+            values.coachId = catchId
 
-            if(!values.clientImage){
-             return setErrormsg({message:"please seletc image"})
+            if (!values.clientImage) {
+              return setErrormsg({ message: "please seletc image" })
             }
             const response = await createOrUpdateClient("", values)
             if (response.data.success == false) {
@@ -208,7 +209,7 @@ const EditClient = ({ setSelectedItem }) => {
             <div onClick={() => router.push(`/Clients/clientsInfo?id=${id}`)} style={{ cursor: 'pointer' }}>
               <LeftArrow />
             </div>
-            <div className={styles.ClientStyle}>Edit Client Profile</div>
+            <div className={styles.ClientStyle}>{id ? "Edit Client Profile" : "Add Client Profile"}</div>
           </div>
 
         </div>
@@ -232,18 +233,26 @@ const EditClient = ({ setSelectedItem }) => {
             />
           </div>
 
-          <form onSubmit={formik.handleSubmit} >
-            <div className={styles.right_div_data}>
-              <Inputfield
-                name={"Name"}
-                id={"name"}
-                onChange={formik.handleChange}
-                value={formik.values.name}
-              />
-              {formik.touched.name && formik.errors.name ? (
-                <div style={{ color: 'red' }}>{formik.errors.name}</div>
-              ) : null}
-              <div className={styles.rateAndGoal}>
+          <form onSubmit={formik.handleSubmit} className={styles.right_div_data} >
+            <div style={{ alignItems: "flex-end", display: 'flex', justifyContent: 'center', width: 200, alignSelf: 'flex-end' }}>
+              <button type="submit" className={styles.SaveButton} >Save</button>
+            </div>
+            {/* <div className={styles.right_div_data}> */}
+            {/* <div type="submit" className={styles.SaveButton}>Save</div> */}
+           <div style={{}}>
+            <Inputfield
+              name={"Name"}
+              id={"name"}
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+            {formik.touched.name && formik.errors.name ? (
+              <div style={{ color: 'red' ,marginLeft:10}}>{formik.errors.name}</div>
+            ) : null}
+
+</div>
+            <div className={styles.rateAndGoal}>
+              <div style={{ width: '50%', }}>
                 <Inputfield
                   name={"Date of Birth"}
                   type={"date"}
@@ -256,9 +265,13 @@ const EditClient = ({ setSelectedItem }) => {
                 {formik.touched.DOB && formik.errors.DOB ? (
                   <div style={{ color: 'red' }}>{formik.errors.DOB}</div>
                 ) : null}
-                <div style={{ width: 80 }} />
+              </div>
 
+              <div style={{ width: 80 }} />
+            
+              <div style={{ width: '50%', marginTop: 20 }}>
                 <SelectOption
+
                   label={"Gender"}
                   id={"gender"}
                   data={genderData}
@@ -266,13 +279,18 @@ const EditClient = ({ setSelectedItem }) => {
                   onChange={formik.handleChange}
                   selectedId={formik.values.gender}
                   RightIcon={Downarrow}
-                />
-              </div>
-              {formik.touched.gender && formik.errors.gender ? (
-                <div style={{ color: 'red' }}>{formik.errors.gender}</div>
-              ) : null}
 
-              <div className={styles.row_div} style={{ marginTop: 20 }}>
+                />
+                {formik.touched.gender && formik.errors.gender ? (
+                  <div style={{ color: 'red' , marginLeft:15 }}>{formik.errors.gender}</div>
+                ) : null}
+              </div>
+            </div>
+
+
+
+            <div className={styles.row_div} style={{ marginTop: 20 }}>
+              <div style={{ width: '50%', }}>
                 <Inputfield
                   input_parent_div_prop={styles.calender_input}
                   additionalMainDivClassName={styles.additionalMainDiv}
@@ -283,11 +301,18 @@ const EditClient = ({ setSelectedItem }) => {
                   placeholder={"michelle.rivera@example.com"}
                   onChange={id ? "" : formik.handleChange}
                   value={formik?.values?.email}
+
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: 'red' }}>{formik.errors.email}</div>
                 ) : null}
-                <div style={{ width: 40 }} />
+
+              </div>
+
+
+
+              <div style={{ width: 80 }} />
+              <div style={{ width: '50%', }}>
                 <Inputfield
                   img2
                   input_parent_div_prop={styles.calender_input}
@@ -304,7 +329,12 @@ const EditClient = ({ setSelectedItem }) => {
                   <div style={{ color: 'red' }}>{formik.errors.mobileNumber}</div>
                 ) : null}
               </div>
-              <div className={styles.rateAndGoal}>
+
+            </div>
+
+            <div className={styles.rateAndGoal}>
+
+              <div style={{ width: '50%', marginLeft: -17 }}>
                 <SelectOption
                   label={"Rate"}
                   id={"rate"}
@@ -313,11 +343,17 @@ const EditClient = ({ setSelectedItem }) => {
                   onChange={formik.handleChange}
                   selectedId={formik?.values?.rate}
                   RightIcon={Downarrow}
+
                 />
                 {formik.touched.rate && formik.errors.rate ? (
-                  <div style={{ color: 'red' }}>{formik.errors.rate}</div>
+                  <div style={{ color: 'red',marginLeft:15 }}>{formik.errors.rate}</div>
                 ) : null}
-                <div style={{ width: 80 }} />
+              </div>
+
+
+
+              <div style={{ width: 50 }} />
+              <div style={{ width: '50%', marginRight: -10 }}>
                 <SelectOption
                   label={"Training Goal"}
                   id={"trainingGoal"}
@@ -326,34 +362,42 @@ const EditClient = ({ setSelectedItem }) => {
                   onChange={formik.handleChange}
                   selectedId={formik?.values?.trainingGoal}
                   RightIcon={Downarrow}
-                />
-                {formik.touched.trainingGoal && formik.errors.trainingGoal ? (
-                  <div style={{ color: 'red' }}>{formik.errors.trainingGoal}</div>
-                ) : null}
 
+                />
+
+                {formik.touched.trainingGoal && formik.errors.trainingGoal ? (
+                  <div style={{ color: 'red',marginLeft:15 }}>{formik.errors.trainingGoal}</div>
+                ) : null}
               </div>
-              <div className={styles.Credit_Card}>Credit Card</div>
-              <div className={styles.add_card} onClick={openPopup}>
-                <PlusIcon />
-                Add
-              </div>
-              <Inputfield
-                name={"Comment"}
-                id={"comment"}
-                additionalMainDivClassName={styles.comment_div_2}
-                onChange={formik.handleChange}
-                value={formik.values.comment}
-              />
-              {formik.touched.comment && formik.errors.comment ? (
-                <div style={{ color: 'red' }}>{formik.errors.comment}</div>
-              ) : null}
+
+
+
             </div>
+
+
+            <div className={styles.Credit_Card}>Credit Card</div>
+            <div className={styles.add_card} onClick={openPopup}>
+              <PlusIcon />
+              Add
+            </div>
+            <Inputfield
+              name={"Comment"}
+              id={"comment"}
+              additionalMainDivClassName={styles.comment_div_2}
+              onChange={formik.handleChange}
+              value={formik.values.comment}
+            />
+            {formik.touched.comment && formik.errors.comment ? (
+              <div style={{ color: 'red' }}>{formik.errors.comment}</div>
+            ) : null}
+            {/* </div> */}
             {errMessage ? (
-            <div style={{ color: 'red' }}>{errMessage?.message}</div>
-          ) : null}
-            <button type="submit" className={styles.SaveButton} >Save</button>
+              <div style={{ color: 'red' }}>{errMessage?.message}</div>
+            ) : null}
+
+
           </form>
-         
+
         </div>
         {popupIsOpen && <CreditCard show={popupIsOpen} handleClose={closePopup} />}
       </div>
