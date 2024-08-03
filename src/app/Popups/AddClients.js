@@ -8,7 +8,7 @@ import profilepicture from '../../../public/Images/profilepic.png'
 
 
 const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas }) => {
-  console.log(clientDatas,'===clientDatas?????????')
+  console.log(clientDatas,'===clientDatas?????????',selectClients)
   const [clientData, setclientData] = useState(clientDatas)
   const [selectedClients, setSelectedClients] = useState(selectClients);
 
@@ -47,7 +47,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
     });
   };
   const renderClientGroup = (clients) => (
-    clients.length>0 ? clients.map((client) => (
+     clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
         <Image height={35} width={35} src={client.clientImage ? client.clientImage : profilepicture} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
@@ -59,7 +59,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
           />
         </div>
       </div>
-    )):"No Data "
+    ))
   );
   return (
     <div className={styles.popupDisplay}>
@@ -72,7 +72,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
 
         <div className={styles.clientList}>
           {/* <div className={styles.albhabate_txt2}>A</div> */}
-          {renderClientGroup(clientData)}
+          {renderClientGroup(clientDatas)}
           {/* <div className={styles.albhabate_txt}>B</div>
           {renderClientGroup(group2)}
           <div className={styles.albhabate_txt}>C</div>

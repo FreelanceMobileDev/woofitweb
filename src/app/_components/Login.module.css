@@ -1685,6 +1685,7 @@
   text-align: left;
   color: #FFFFFF;
   border-width:0px;
+  cursor: pointer;
 }
 
 .profile_pic_setting {

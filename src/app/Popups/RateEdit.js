@@ -19,8 +19,9 @@ const Clientsdata = [
 ];
 
 const RateEdit = ({ show, handleClose, rateData, catchId }) => {
+
     const [clientsopen, setclientsopen] = useState(false);
-    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients > 0? [ ...rateData?.clients]:[]);
+    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients.length > 0? [ ...rateData?.clients]:[]);
     const [errorMsg, setErrorMsg] = useState("")
     const [clientDatas, setclientData] = useState([])
     const [loading, setLoading] = useState(false);
@@ -68,13 +69,14 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
         onSubmit: async (values) => {
             try {
-
+                // setLoading(true)
                 if (selectClients && selectClients.length > 0) {
                     values.clients = selectClients.map((e) => e._id)
                 }
                 let response = {}
                 if (rateData._id) {
-                    response = await createAndUpdateRate(values, `id=${rateData?._id}`)
+
+                    response = await createAndUpdateRate(values,`id=${rateData?._id}`)
                 } else {
                     response = await createAndUpdateRate(values)
                 }
@@ -86,6 +88,8 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                 // router.push('/addProfilePicture')
             } catch (error) {
                 console.log(error, '====')
+            }finally{
+                setLoading(false)
             }
         },
     });
@@ -105,6 +109,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
             setLoading(false)
         }
     }
+    console.log(selectClients,'===selectClients')
 
     return (
         <div className={show ? styles.popupDisplay : styles.popupHide}>
@@ -132,6 +137,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
                     <Inputfield
                         name={'Price for Training'}
+                        img3
                         type="number"
                         id={"priceForTraining"}
                         additionalcontainer={styles.UsdInput2}
@@ -177,7 +183,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                                 onClick={handleSave}
                                 name={'Add Client'}
                                 txtstyle={{ color: '#fff' }}
-                                additionalMainDivClassName={styles.SaveButton}
+                                additionalMainDivClassName={styles.AddClient}
                             />}
                     </div>
 

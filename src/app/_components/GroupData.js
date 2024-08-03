@@ -6,10 +6,10 @@ import styles from './Login.module.css';
 import GroupEdit from '../Popups/GroupEdit'
 import { getGroupList } from '../../api/helper';
 import Loader from './Loader';
-
+import Deficon from '../../../public/Images/profilepic@2x.png'
 
 const GroupItem = ({ name,title, clients, images, additionalClients, }) => {
-  // console.log(name,'====name')
+  // console.log(Deficon,'====name')
   const [popupIsOpen, setShowPopup] = useState(false);
   
   const openPopup = () => {
@@ -27,7 +27,7 @@ const GroupItem = ({ name,title, clients, images, additionalClients, }) => {
           <div className={styles.groupClients}>{clients?.length} Clients</div>
           <div className={styles.groupImages}>
             {clients && clients?.map((img, index) => (
-              <img key={index} src={`${img.clientImage ? img.clientImage :"/images/profilepic.png"}`}  alt={`/images/profilepic.png`} className={styles.clientImage} />
+              <img key={index} src={`${img.clientImage ? img.clientImage :Deficon.src}`}  alt="" className={styles.clientImage} />
             ))}
             {/* {additionalClients > 0 && <span className={styles.additionalClients}>+{additionalClients}</span>} */}
           </div>

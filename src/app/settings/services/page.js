@@ -53,7 +53,7 @@ function page() {
     getRateData(catchId)
   };
 
-  console.log(getRetes,'===getRetes')
+  // console.log(getRetes,'===getRetes')
 
   return (
     <>

@@ -44,7 +44,7 @@ function page() {
             email: "",
             name: "",
             mobileNumber: "",
-            coachSpecialization: '',
+            yearOfExperience: '',
             yearOfExperience: '',
 
 
@@ -61,7 +61,6 @@ function page() {
                 if (image) {
                     values.image = image.image
                 }
-                console.log(values,'===values')
                 const respone = await updateProfile(values)
                 if (respone.data.success == false) {
                     return setErrorMsg(respone.data.message)
@@ -124,9 +123,7 @@ function page() {
                     <Loader loading={loading} />
                     <div className={styles.right_div_data}>
                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
-                            <Image 
-                                src={selectedFile ? selectedFile: data?.image} 
-                                alt={profileiconn}
+                            <Image src={selectedFile ? selectedFile : data?.image} alt={profileiconn}
                                 className={styles.profile_pic_setting}
                                 height={107}
                                 width={107}
@@ -211,9 +208,9 @@ function page() {
                                 <div style={{ color: 'red' }}>{formik.errors.yearOfExperience}</div>
                             ) : null}
 
-
+                            <div style={{width:'97%',justifyContent:'flex-end',display:'flex'}}>
                             <button type='submit' className={styles.Save_button} >Save</button>
-
+</div>
                             {/* <div className={styles.Save_button}>Save</div> */}
                         </form>
                     </div>
