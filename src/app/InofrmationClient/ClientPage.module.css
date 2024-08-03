@@ -185,11 +185,13 @@
 
 .CalenderDiv{ 
   border-radius: 10px;
-  width: 100%;
+  width: 150%;
   border-width: 0;
-  background-color: white ;
+  background-color:white;
   outline: none;
-font-size: 16px;
+  font-size: 16px;
+  height: 40px;
+ 
   /* border: 1px solid #ddd; */
 }
 
