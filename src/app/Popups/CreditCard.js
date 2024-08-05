@@ -11,8 +11,7 @@ const CreditCard = ({ show, handleClose }) => {
         handleClose();
     };
     return (
-        <div className={show ? styles.popupDisplay2 : styles.popupHide}>
-
+        <div className={styles.popupDisplay} style={{height:'100vh'}}>
             <div className={styles.popupContent} style={{ marginTop: 80 }}>
                 <div className={styles.space_div}>
                     <div style={{ width: 60 }} />
@@ -34,7 +33,9 @@ const CreditCard = ({ show, handleClose }) => {
                         name={"Expiry Date"}
                         placeholder={"MM/YY"}
                         inputtxt={styles.cvvcodetxt}
-                    /><Inputfield
+                    />
+                    <div style={{width:60}}/>
+                    <Inputfield
                     placeholder={"000"}
                         name={"CVV code"}
                         inputtxt={styles.cvvcodetxt}

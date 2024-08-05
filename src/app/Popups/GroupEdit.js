@@ -92,7 +92,7 @@ const GroupEdit = ({ data, show, handleClose }) => {
 
         <div style={{ marginLeft: 10 }}>
           <div className={styles.space_div} style={{ marginTop: 18 }}>
-            <div className={styles.Clientaddtxt}>Groups</div>
+            <div className={styles.Clientaddtxt}>Clients</div>
             <div
               onClick={() => {
                 type === "Group" ? setType("All") : setType("Group");
@@ -131,7 +131,8 @@ const GroupEdit = ({ data, show, handleClose }) => {
               ))
               :
               <>
-              <div style={{display:"flex",alignItems:"center" , alignSelf:"center" , marginTop:"20%"}}>Select Clients</div>
+          
+              {/* <div style={{display:"flex",alignItems:"center" , alignSelf:"center" , marginTop:"20%"}}>Select Clients</div> */}
               
               </> }
 

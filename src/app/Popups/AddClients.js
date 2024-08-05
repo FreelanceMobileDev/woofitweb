@@ -8,9 +8,10 @@ import profilepicture from '../../../public/Images/profilepic.png'
 
 
 const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas }) => {
-  console.log(clientDatas,'===clientDatas?????????',selectClients)
-  const [clientData, setclientData] = useState(clientDatas)
+  // console.log(clientDatas,'===clientDatas?????????',selectClients)
+
   const [selectedClients, setSelectedClients] = useState(selectClients);
+
 
 
   const group1 = [
@@ -36,12 +37,12 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
 
   const handleToggleClient = (client) => {
     setSelectedClients((prevSelected) => {
-      const isClientSelected = prevSelected.some(
-        (selectedClient) => selectedClient._id === client._id
+      const isClientSelected = prevSelected?.some(
+        (selectedClient) => selectedClient?._id === client?._id
       );
       return isClientSelected
-        ? prevSelected.filter(
-            (selectedClient) => selectedClient._id !== client._id
+        ? prevSelected?.filter(
+            (selectedClient) => selectedClient?._id !== client?._id
           )
         : [...prevSelected, client]; 
     });
@@ -62,7 +63,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
     ))
   );
   return (
-    <div className={styles.popupDisplay}>
+    <div className={styles.popupDisplay} style={{height:'100vh'}}>
       <div className={styles.popupContent}>
         <div className={styles.space_div}>
           <div style={{ width: 100 }} onClick={handleClose}><LeftArrow /></div>

@@ -155,7 +155,7 @@
 .rateAndGoal {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   align-items: center;
   flex-direction: row;
 }
@@ -204,7 +204,7 @@
   height: 40px;
   border-radius: 10px;
   align-items: center;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   justify-content: space-between;
 
 
@@ -572,4 +572,15 @@
   border: 1px 0px 0px 0px;
   cursor: pointer;
 
+}
+
+.doblabel {
+  margin-top: 15px;
+  font-family: Urbanist;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  text-align: left;
+  color: #697585;
+  margin-bottom: 6px;margin-left: 10px;
 }

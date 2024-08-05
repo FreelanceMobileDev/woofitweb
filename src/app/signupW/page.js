@@ -62,6 +62,10 @@ const SignupWoofit = () => {
         },
     });
 
+    const handleCustomChange = (event) => {
+        formik.handleChange(event);
+        setErrormsg("")
+    };
     return (
         <>
            <Loader loading={loading} />
@@ -86,7 +90,7 @@ const SignupWoofit = () => {
                                     name="Name"
                                     type="name" id="name" placeholder="Enter your Name"
                                     img1={<Userimg />}
-                                    onChange={formik.handleChange}
+                                    onChange={handleCustomChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.name}
                                 />
@@ -98,7 +102,7 @@ const SignupWoofit = () => {
                                     name="Email"
                                     type="email" id="email" placeholder="Enter your Email"
                                     img1={<Attherateimg />}
-                                    onChange={formik.handleChange}
+                                    onChange={handleCustomChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.email}
                                 />
@@ -108,9 +112,9 @@ const SignupWoofit = () => {
 
                                 <Inputfield
                                     name={"Phone"}
-                                    type="number" id="mobileNumber"
+                                    type="phone" id="mobileNumber"
                                     img2
-                                    onChange={formik.handleChange}
+                                    onChange={handleCustomChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.mobileNumber}
                                 />
@@ -122,7 +126,7 @@ const SignupWoofit = () => {
                                     name="Password"
                                     type="password" id="password" placeholder="Enter your Password"
                                     img1={<Lockimg />}
-                                    onChange={formik.handleChange}
+                                    onChange={handleCustomChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.password}
                                 />
@@ -133,7 +137,7 @@ const SignupWoofit = () => {
                                     name="Confirm password"
                                     type="password" id="confirmPassword" placeholder="Confirm your Password"
                                     img1={<Lockimg />}
-                                    onChange={formik.handleChange}
+                                    onChange={handleCustomChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.confirmPassword}
                                 />

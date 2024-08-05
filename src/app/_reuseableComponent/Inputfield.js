@@ -1,12 +1,10 @@
 import React from 'react';
 import { Downarrow, VisaIcon } from '../../../public';
 import ausFlag from '../../../public/Images/ausflag.png'
-import IndiaFlag from '../../../public/Images/IndiaFlag';
+// import IndiaFlag from '../../../public/Images/IndiaFlag';
 import styles from './Componet.module.css'
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 
-const Inputfield = ({ style, input_parent_div_prop,
+const Inputfield = ({ style, input_parent_div_prop,onBlur,
     inputtxt, name, img5, img1, img2, img3,
     type, id, placeholder, additionalMainDivClassName,
     additionalinput_field, onChange, value,handleButtonClick,ref }) => {
@@ -22,15 +20,7 @@ const Inputfield = ({ style, input_parent_div_prop,
                 {img1 && img1}
                 {img2 && (
                     <div className={styles.leftImage}>
-                        {/* <PhoneInput 
-                         id={id}
-                         value={value}
-                         onChange={onChange}
-                         placeholder={placeholder}
-                        country={'au'}
-                        /> */}
                         <img src={ausFlag.src} width="27" height="20" />
-                       
                         <Downarrow />
                     </div>
                 )}
@@ -39,7 +29,7 @@ const Inputfield = ({ style, input_parent_div_prop,
                         USD
                     </div>
                 )}
-                
+
                 <input
                    style={{ cursor: 'pointer', width: '100%' }}
                     onClick={handleButtonClick}
@@ -50,8 +40,8 @@ const Inputfield = ({ style, input_parent_div_prop,
                     className={`${styles.input_field} ${additionalinput_field}`}
                     onChange={onChange}
                     value={value}
-                    max={today}
-                 
+                    onBlur={onBlur}
+                    // max={today}
                 />
                 {img2 && img2}
             </div>
