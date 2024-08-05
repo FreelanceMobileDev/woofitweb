@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './ClientPage.module.css';
-import { CalenderIcon, Coins, Downarrow, LeftArrow, MuscleIcon, PlusIcon } from '../../../public';
+import { CalenderIcon, Coins, CrossIcon, Downarrow, LeftArrow, MuscleIcon, PlusIcon, VisaIcon } from '../../../public';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import TextWithButton from '../_reuseableComponent/TextWithButton';
 import CreditCard from '../Popups/CreditCard'
@@ -41,9 +41,10 @@ const EditClient = ({ setSelectedItem }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errMessage, setErrormsg] = useState();
-  const dateInputRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState("");
+  const [caredData, setCardData] = useState(null)
+
+  // console.log(caredData, '==================>>>>>>>>>>>>>>')
   const openPopup = () => {
     setShowPopup(true);
   };
@@ -121,7 +122,9 @@ const EditClient = ({ setSelectedItem }) => {
 
 
     onSubmit: async (values) => {
-      const param = {
+      setErrormsg("");
+      setLoading(true);
+      let param = {
         "name": values.name,
         "email": values.email,
         "mobileNumber": values.mobileNumber,
@@ -132,9 +135,14 @@ const EditClient = ({ setSelectedItem }) => {
         "gender": values.gender,
         "coachId": values.coachId
       }
+
+      if (caredData) {
+        console.log(caredData, '===caredData')
+        param = { ...param, ...caredData }
+      }
+
       try {
-        setErrormsg("");
-        setLoading(true);
+
         const expectedFormat = "YYYY-MM-DD";
         if (moment(param.DOB, expectedFormat, true).isValid())
           values.DOB = convertDateFormat(param.DOB);
@@ -191,7 +199,7 @@ const EditClient = ({ setSelectedItem }) => {
         trainingGoal: getData.clientDetails?.trainingGoal || "",
         gender: getData.clientDetails?.gender || "",
       });
-      setDate(getData.clientDetails?.DOB||"")
+      setDate(getData.clientDetails?.DOB || "")
     }
   }, [getData]);
 
@@ -216,15 +224,19 @@ const EditClient = ({ setSelectedItem }) => {
   };
 
   const triggerFileSelect = () => {
+    setErrormsg("")
     document.getElementById("fileInput").click();
   };
   const onSelectDate = (date) => {
     setDate(date);
   };
-
+  const cards = [
+    { type: 'Visa', number: '4913' },
+    { type: 'Mastercard', number: '4913' }
+  ];
   return (
     <>
-    <Loader loading={loading} />
+      <Loader loading={loading} />
       <form onSubmit={formik.handleSubmit}>
         <div className={styles.containor}>
           <div className={styles.headerr}>
@@ -254,8 +266,8 @@ const EditClient = ({ setSelectedItem }) => {
                 Change Photo
               </div>
               {errMessage ? (
-              <div style={{ color: "red" }}>{errMessage?.message}</div>
-            ) : null}
+                <div style={{ color: "red" }}>{errMessage?.message}</div>
+              ) : null}
               <input
                 type="file"
                 id="fileInput"
@@ -292,6 +304,7 @@ const EditClient = ({ setSelectedItem }) => {
                     placeholder={"michelle.rivera@example.com"}
                     onChange={id ? "" : formik.handleChange}
                     value={formik?.values?.email}
+                    onBlur={formik.handleBlur}
                   />
                   {formik.touched.email && formik.errors.email ? (
                     <div style={{ color: "red" }}>{formik.errors.email}</div>
@@ -311,6 +324,7 @@ const EditClient = ({ setSelectedItem }) => {
                     id={"mobileNumber"}
                     onChange={id ? "" : formik.handleChange}
                     value={formik?.values?.mobileNumber}
+                    onBlur={formik.handleBlur}
                   />
                   {formik.touched.mobileNumber && formik.errors.mobileNumber ? (
                     <div style={{ color: "red" }}>
@@ -319,28 +333,29 @@ const EditClient = ({ setSelectedItem }) => {
                   ) : null}
                 </div>
               </div>
-              <div className={styles.rateAndGoal} style={{width:'97%',alignSelf:'center'}}>
-              <div style={{ width: "45%", }}>
-                <div className={styles.doblabel}  >Date of Birth</div>
-                <div className={styles.CalenderDivOuter} >
-                  <DatePicker
-                    selected={date}
-                    onChange={onSelectDate}
-                    dateFormat="YYYY-MM-DD"
-                    placeholderText="Select Date of Birth"
-                    className={styles.CalenderDiv}
-                    maxDate={new Date()}
-                  />
-                  <CalenderIcon />
-                  {formik.touched.DOB && formik.errors.DOB ? (
-                    <div style={{ color: "red", marginLeft: 15 }}>
-                      {formik.errors.DOB}
-                    </div>
-                  ) : null}
-                </div>
+              <div className={styles.rateAndGoal} style={{ width: '97%', alignSelf: 'center' }}>
+                <div style={{ width: "45%", }}>
+                  <div className={styles.doblabel}  >Date of Birth</div>
+                  <div className={styles.CalenderDivOuter} >
+                    <DatePicker
+                      selected={date}
+                      onChange={onSelectDate}
+                      dateFormat="YYYY-MM-DD"
+                      placeholderText="Select Date of Birth"
+                      className={styles.CalenderDiv}
+                      maxDate={new Date()}
+
+                    />
+                    <CalenderIcon />
+                    {formik.touched.DOB && formik.errors.DOB ? (
+                      <div style={{ color: "red", marginLeft: 15 }}>
+                        {formik.errors.DOB}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
                 {/* <div style={{ width: 30 }} /> */}
-                <div style={{ width: "49.5%",  }}>
+                <div style={{ width: "49.5%", }}>
                   <SelectOption
                     label={"Gender"}
                     id={"gender"}
@@ -360,8 +375,8 @@ const EditClient = ({ setSelectedItem }) => {
 
               </div>
 
-              <div className={styles.rateAndGoal} style={{width:'98%',alignSelf:'center'}}>
-                 <div style={{ width: "47.5%", }}>
+              <div className={styles.rateAndGoal} style={{ width: '98%', alignSelf: 'center' }}>
+                <div style={{ width: "47.5%", }}>
                   <SelectOption
                     label={"Rate"}
                     id={"rate"}
@@ -370,6 +385,7 @@ const EditClient = ({ setSelectedItem }) => {
                     onChange={formik.handleChange}
                     selectedId={formik?.values?.rate}
                     RightIcon={Downarrow}
+                    onBlur={formik.handleBlur}
                   />
                   {formik.touched.rate && formik.errors.rate ? (
                     <div style={{ color: "red", marginLeft: 15 }}>
@@ -378,22 +394,23 @@ const EditClient = ({ setSelectedItem }) => {
                   ) : null}
                 </div>
                 <div></div>
-                 <div style={{ width: "49.5%",  }}>
+                <div style={{ width: "49.5%", }}>
                   <SelectOption
-                   label={"Training Goal"}
-                   id={"trainingGoal"}
-                   data={specializationOptions}
-                   value={formik.values.trainingGoal}
-                   onChange={formik.handleChange}
-                   selectedId={formik?.values?.trainingGoal}
-                   RightIcon={Downarrow}
-                 />
+                    label={"Training Goal"}
+                    id={"trainingGoal"}
+                    data={specializationOptions}
+                    value={formik.values.trainingGoal}
+                    onChange={formik.handleChange}
+                    selectedId={formik?.values?.trainingGoal}
+                    RightIcon={Downarrow}
+                    onBlur={formik.handleBlur}
+                  />
 
-                 {formik.touched.trainingGoal && formik.errors.trainingGoal ? (
-                   <div style={{ color: "red", marginLeft: 15 }}>
-                     {formik.errors.trainingGoal}
-                   </div>
-                 ) : null}
+                  {formik.touched.trainingGoal && formik.errors.trainingGoal ? (
+                    <div style={{ color: "red", marginLeft: 15 }}>
+                      {formik.errors.trainingGoal}
+                    </div>
+                  ) : null}
                 </div>
               </div>
               <div className={styles.Credit_Card}>Credit Card</div>
@@ -401,6 +418,29 @@ const EditClient = ({ setSelectedItem }) => {
                 <PlusIcon />
                 Add
               </div>
+
+
+              <div className={styles.cardcontainer}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div className={styles.Credit_Card}>Credit Card</div>
+                  <button className={styles.addButton}>+ Add</button>
+                </div>
+                {/* {cards.map((card, index) => ( */}
+                {caredData && <div className={styles.card}>
+                  <div className={styles.cardType}>
+                    <VisaIcon />
+                    {/* <img src={`/${card.type.toLowerCase()}.png`} alt={card.type} /> */}
+                    <span style={{marginLeft:"10px"}} >{caredData?.cardHolderName}    xxxx    {caredData?.cardHolderName}</span>
+                  </div>
+                  <div className={styles.actions}>
+                    <CrossIcon />
+                  </div>
+                </div>
+                }
+
+                {/* ))} */}
+              </div>
+
               <div>
                 <Inputfield
                   name={"Comment"}
@@ -415,7 +455,7 @@ const EditClient = ({ setSelectedItem }) => {
               </div>
             </div>
           </div>
-          {popupIsOpen && <CreditCard show={popupIsOpen} handleClose={closePopup} />}
+          {popupIsOpen && <CreditCard show={popupIsOpen} handleClose={closePopup} setCardData={setCardData} />}
         </div>
 
       </form>

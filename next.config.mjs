@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
     images: {
       domains: ['woofitapp.s3.eu-north-1.amazonaws.com'],
+      unoptimized: true,
     },
 };
 

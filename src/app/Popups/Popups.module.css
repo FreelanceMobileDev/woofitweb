@@ -473,3 +473,28 @@ margin-bottom: 10px;
   display: flex;
   flex-direction: column;
 }
+
+.container {
+  display: flex;
+  border-radius: 60px;
+  justify-content: center;
+  align-items: center;
+  background-color: #14AED1;
+  margin-top: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid #14AED1;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;     /* Make the button fill the width of the container */
+  height: 100%;    /* Make the button fill the height of the container */
+  border-radius: 60px; /* Match the border radius of the container for rounded edges */
+  display: flex;   /* Use flex to center text within the button */
+  justify-content: center; /* Center text horizontally */
+  align-items: center;    /* Center text vertically */
+}
