@@ -28,6 +28,7 @@ import {
   dateFormateDate,
   convertDateFormat,
 } from "../../util/common";
+import { toast } from 'react-toastify';
 
 const EditClient = ({ setSelectedItem }) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const EditClient = ({ setSelectedItem }) => {
   const [date, setDate] = useState("");
   const [caredData, setCardData] = useState(null)
 
-  console.log(getData?.cardDetails, '==getData================>>>>>>>>>>>>>>')
+  // console.log(caredData, '==caredData================>>>>>>>>>>>>>>')
   const openPopup = () => {
     setShowPopup(true);
   };
@@ -151,23 +152,24 @@ const EditClient = ({ setSelectedItem }) => {
         try {
           if (getData?.clientDetails?._id) {
             const response = await createOrUpdateClient(
-              getData.clientDetails._id,
-              values
+              values,getData.clientDetails._id,
+              
             );
             getClientDetail(id);
+            toast.success(response.data.message)
             return router.push(
               `/Clients/clientsInfo?id=${getData.clientDetails?._id}`
             );
           } else {
             values.coachId = catchId;
-
             if (!values.clientImage) {
               return setErrormsg({ message: "Please Select Image" });
             }
-            const response = await createOrUpdateClient("", values);
+            const response = await createOrUpdateClient(values);
             if (response.data.success == false) {
               return setErrormsg(response?.data);
             }
+            toast.success(response.data.message)
             return router.push(`/Clients`);
           }
         } catch (error) {
@@ -177,7 +179,6 @@ const EditClient = ({ setSelectedItem }) => {
         }
       } catch (error) {
         console.log(error, "====");
-        setLoading(false);
       } finally {
         setLoading(false);
       }
@@ -227,10 +228,9 @@ const EditClient = ({ setSelectedItem }) => {
   const onSelectDate = (date) => {
     setDate(date);
   };
-  const cards = [
-    { type: 'Visa', number: '4913' },
-    { type: 'Mastercard', number: '4913' }
-  ];
+ 
+  const shouldShowAddButton = !(getData?.cardDetails?.length > 0 || caredData !== null);
+
   return (
     <>
       <Loader loading={loading} />
@@ -350,6 +350,7 @@ const EditClient = ({ setSelectedItem }) => {
                       </div>
                     ) : null}
                   </div>
+                  
                 </div>
                 {/* <div style={{ width: 30 }} /> */}
                 <div style={{ width: "49.5%", }}>
@@ -411,7 +412,7 @@ const EditClient = ({ setSelectedItem }) => {
                 </div>
               </div>
               {
-                (!caredData || !getData) && !getData?.cardDetails?.length > 0 && (
+                shouldShowAddButton && (
                   <>
                     <div className={styles.Credit_Card}>Credit Card</div>
                     <div className={styles.add_card} onClick={openPopup}>
@@ -422,42 +423,31 @@ const EditClient = ({ setSelectedItem }) => {
                 )
               }
 
-
-              {(caredData || getData) && getData?.cardDetails?.length > 0 &&(
+              {(caredData || getData) && (getData?.cardDetails?.length > 0 || caredData != null) && (
                 <div className={styles.cardcontainer}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div className={styles.Credit_Card}>Credit Card</div>
-                  <div
-                    style={{ display: 'flex', alignItems: 'center', marginLeft: 10, marginBottom: 5 }}
-                    onClick={openPopup}
-                  >
-                    <PlusIcon />
-                    Add
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.Credit_Card}>Credit Card</div>
+                    <div
+                      style={{ display: 'flex', alignItems: 'center', marginLeft: 10, marginBottom: 5 }}
+                      onClick={openPopup}
+                    >
+                      <PlusIcon />
+                      Add
+                    </div>
+                  </div>
+                  <div className={styles.card}>
+                    <div className={styles.cardType}>
+                      <VisaIcon />
+                      <span style={{ marginLeft: "10px" }}>
+                        {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.name : caredData?.cardHolderName} xxxx {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.last4 : caredData?.cardHolderName}
+                      </span>
+                    </div>
+                    <div className={styles.actions}>
+                      <CrossIcon />
+                    </div>
                   </div>
                 </div>
-                <div className={styles.card}>
-                  <div className={styles.cardType}>
-                    <VisaIcon />
-                    <span style={{ marginLeft: "10px" }}>
-                      {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.name : caredData?.cardHolderName} xxxx {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.last4 : caredData?.cardHolderName}
-                    </span>
-                  </div>
-                  <div className={styles.actions}>
-                    <CrossIcon />
-                  </div>
-                </div>
-              </div>
-
-
               )}
-
-
-              
-
-
-
-
-
               <div>
                 <Inputfield
                   name={"Comment"}

@@ -100,13 +100,16 @@ import { LOGIN,REGISTER,BASE_URL,POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_D
       // data: payload,
     });
   };
+
+
   
-  export const createOrUpdateClient = (id,payload) => {
+  export const createOrUpdateClient = (payload,id) => {
+   const url = id ? `${CREATE_OR_UPDATE_CLIENT}?id=${id}`:CREATE_OR_UPDATE_CLIENT
     console.log("createOrUpdateClient-====>>>>>>>>",id,payload)
     return apiClient({
       baseURL: BASE_URL,
       method: POST_METHOD,
-      url: `${CREATE_OR_UPDATE_CLIENT}?id=${id}`,
+      url: url,
       data: payload,
     });
   };
