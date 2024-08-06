@@ -1,4 +1,7 @@
 {
+  "/schedule/page": "app/schedule/page.js",
+  "/Clients/edit/page": "app/Clients/edit/page.js",
   "/Clients/page": "app/Clients/page.js",
-  "/Clients/edit/page": "app/Clients/edit/page.js"
+  "/Clients/clientsInfo/page": "app/Clients/clientsInfo/page.js",
+  "/settings/services/page": "app/settings/services/page.js"
 }

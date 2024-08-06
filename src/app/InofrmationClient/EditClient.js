@@ -44,7 +44,7 @@ const EditClient = ({ setSelectedItem }) => {
   const [date, setDate] = useState("");
   const [caredData, setCardData] = useState(null)
 
-  // console.log(caredData, '==================>>>>>>>>>>>>>>')
+  console.log(getData?.cardDetails, '==getData================>>>>>>>>>>>>>>')
   const openPopup = () => {
     setShowPopup(true);
   };
@@ -137,10 +137,8 @@ const EditClient = ({ setSelectedItem }) => {
       }
 
       if (caredData) {
-        console.log(caredData, '===caredData')
-        param = { ...param, ...caredData }
+        values = { ...param, ...caredData }
       }
-
       try {
 
         const expectedFormat = "YYYY-MM-DD";
@@ -150,7 +148,6 @@ const EditClient = ({ setSelectedItem }) => {
         if (image) {
           values.clientImage = image.image;
         }
-
         try {
           if (getData?.clientDetails?._id) {
             const response = await createOrUpdateClient(
@@ -413,33 +410,53 @@ const EditClient = ({ setSelectedItem }) => {
                   ) : null}
                 </div>
               </div>
-              <div className={styles.Credit_Card}>Credit Card</div>
-              <div className={styles.add_card} onClick={openPopup}>
-                <PlusIcon />
-                Add
-              </div>
+              {
+                (!caredData || !getData) && !getData?.cardDetails?.length > 0 && (
+                  <>
+                    <div className={styles.Credit_Card}>Credit Card</div>
+                    <div className={styles.add_card} onClick={openPopup}>
+                      <PlusIcon />
+                      Add
+                    </div>
+                  </>
+                )
+              }
 
 
-              <div className={styles.cardcontainer}>
+              {(caredData || getData) && getData?.cardDetails?.length > 0 &&(
+                <div className={styles.cardcontainer}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <div className={styles.Credit_Card}>Credit Card</div>
-                  <button className={styles.addButton}>+ Add</button>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', marginLeft: 10, marginBottom: 5 }}
+                    onClick={openPopup}
+                  >
+                    <PlusIcon />
+                    Add
+                  </div>
                 </div>
-                {/* {cards.map((card, index) => ( */}
-                {caredData && <div className={styles.card}>
+                <div className={styles.card}>
                   <div className={styles.cardType}>
                     <VisaIcon />
-                    {/* <img src={`/${card.type.toLowerCase()}.png`} alt={card.type} /> */}
-                    <span style={{marginLeft:"10px"}} >{caredData?.cardHolderName}    xxxx    {caredData?.cardHolderName}</span>
+                    <span style={{ marginLeft: "10px" }}>
+                      {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.name : caredData?.cardHolderName} xxxx {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.last4 : caredData?.cardHolderName}
+                    </span>
                   </div>
                   <div className={styles.actions}>
                     <CrossIcon />
                   </div>
                 </div>
-                }
-
-                {/* ))} */}
               </div>
+
+
+              )}
+
+
+              
+
+
+
+
 
               <div>
                 <Inputfield

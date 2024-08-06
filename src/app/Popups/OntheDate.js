@@ -64,23 +64,23 @@ const OntheDate = ({ handleClose }) => {
     },
     validationSchema: Yup.object({
       startDate: Yup.string()
-    .required('Start date is required')
-    .matches(dateFormatPattern, 'Start date must be in the format "12 May 2020"')
-    .test('is-valid-date', 'Start date must be a valid date', function(value) {
-      if (!value) return false;
+        .required('Start date is required')
+        .matches(dateFormatPattern, 'Start date must be in the format "12 May 2020"')
+        .test('is-valid-date', 'Start date must be a valid date', function (value) {
+          if (!value) return false;
 
-      // Split the input value into day, month, and year      const [day, month, year] = value.split(' ');
-      
-     
-      const monthIndex = new Date(Date.parse(month +" 1, 2021")).getMonth();
-      
+          // Split the input value into day, month, and year      const [day, month, year] = value.split(' ');
 
-      const date = new Date(year, monthIndex, day);
-    
-      return date.getDate() === parseInt(day) &&
-             date.getMonth() === monthIndex &&
-             date.getFullYear() === parseInt(year);
-    }),
+
+          const monthIndex = new Date(Date.parse(month + " 1, 2021")).getMonth();
+
+
+          const date = new Date(year, monthIndex, day);
+
+          return date.getDate() === parseInt(day) &&
+            date.getMonth() === monthIndex &&
+            date.getFullYear() === parseInt(year);
+        }),
       endDate: Yup.date()
         .required('End date is required')
         .nullable()
@@ -125,68 +125,67 @@ const OntheDate = ({ handleClose }) => {
       <Loader loading={loading} />
       <form onSubmit={formik.handleSubmit} >
         <div>
-          <Inputfield
+          <TextWithButton
             label={"Date"}
-            RightIcon={CalenderIcon}
+            RightIcon={Rightarrow}
             additionalcontainer={styles.TextWithButtonstyle}
-            text={'14 Mar 2002'}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.startDate}
+            text={'14 Mar 2024'}
           />
+
+
           {formik.touched.startDate && formik.errors.startDate ? (
             <div style={{ color: 'red' }}>{formik.errors.startDate}</div>
           ) : null}
           <div className={styles.row_div}>
-          
+
             {selectClients && selectClients.length > 0 ?
-               <>
-                <span  onClick={() => setShowPopup(true)}>Add Clients</span>
+              <>
+                <span onClick={() => setShowPopup(true)}>Add Clients</span>
                 <div style={{ marginTop: 30 }}>
-                {selectClients?.map((item, index) => (
-                  <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
-                    <div className={styles.row}>
-                      <Image width={40} height={40} src={item.clientImage ? item.clientImage : profilepicture} />
-                      <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
+                  {selectClients?.map((item, index) => (
+                    <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
+                      <div className={styles.row}>
+                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profilepicture} />
+                        <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
+                      </div>
+                      <CrossIcon />
                     </div>
-                    <CrossIcon />
-                  </div>
-                ))}
-              </div>
-               </> 
+                  ))}
+                </div>
+              </>
               : <>
-                <TextWithButton
-                  label={"Select"}
-                  LeftIcon={Userimg}
-                  RightIcon={Rightarrow}
-                  additionalcontainer={styles.TextWithButtonstyle}
-                  text={'Client'}
-                  onClick={() => setShowPopup(true)}
-                />
-                <div style={{ width: 30 }} />
-                <TextWithButton
-                  space
-                  LeftIcon={GroupIcon}
-                  RightIcon={Rightarrow}
-                  additionalcontainer={styles.TextWithButtonstyle}
-                  text={'Group'}
-                  onClick={() => setgroupdata(true)}
-                />
+                <div className={styles.row_div} style={{ marginRight: 20, width: '100%' }}>
+                  <TextWithButton
+                    label={"Select"}
+                    LeftIcon={Userimg}
+                    RightIcon={Rightarrow}
+                    additionalcontainer={styles.TextWithButtonstyle}
+                    text={'Client'}
+                    onClick={() => setShowPopup(true)}
+                  />
+                  <div style={{ width: 30 }} />
+                  <TextWithButton
+                    space
+                    LeftIcon={GroupIcon}
+                    RightIcon={Rightarrow}
+                    additionalcontainer={styles.TextWithButtonstyle}
+                    text={'Group'}
+                    onClick={() => setgroupdata(true)}
+                  />
+                </div>
               </>}
-
-
           </div>
-          <div className={styles.row_div}>
-            <Inputfield
+          <div className={styles.row_div} style={{ marginRight: 20 }}>
+            <TextWithButton
               label={"Start"}
               RightIcon={ClockIcon}
               additionalcontainer={styles.TextWithButtonstyle}
               text={'6:30 pm'}
             />
             <div style={{ width: 30 }} />
-            <Inputfield
-              
+            <TextWithButton
               label={"End"}
+
               RightIcon={ClockIcon}
               additionalcontainer={styles.TextWithButtonstyle}
               text={'8:30 pm'}
@@ -210,15 +209,18 @@ const OntheDate = ({ handleClose }) => {
             name={'Comment'}
             additionalMainDivClassName={styles.comment_div_2}
           />
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <button type='submit' className={styles.SaveButton} style={{ width: "100%", borderWidth: 0  ,cursor:"pointer"}} txtstyle={{ color: '#FFF' }} >Save</button>
+          </div>
 
-          <button type='submit' className={styles.SaveButton} >Save</button>
+          {/* <button type='submit' className={styles.SaveButton} >Save</button> */}
           {/* <OpticityButton
             onClick={handleClose}
             name={'Save'}
             txtstyle={{ color: '#FFF' }}
             additionalMainDivClassName={styles.SaveButton}
           /> */}
-          {clientDatas && clientDatas.length>0 && popupIsOpen && <AddClients show={popupIsOpen} handleClose={closePopup} selectClients={selectClients} setSelectclients={setSelectclients} clientDatas={clientDatas} />}
+          {clientDatas && clientDatas.length > 0 && popupIsOpen && <AddClients show={popupIsOpen} handleClose={closePopup} selectClients={selectClients} setSelectclients={setSelectclients} clientDatas={clientDatas} />}
           {groupdata && <Groups show={groupdata} handleClose={closegroupPopUp} />}
 
         </div>
