@@ -482,3 +482,4 @@ const EditClient = ({ setSelectedItem }) => {
 };
 
 export default EditClient
+
