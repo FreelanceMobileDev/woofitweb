@@ -12,7 +12,7 @@ import Reportsimg from '../../../public/Images/Reportsimg';
 import Settingsimg from '../../../public/Images/Settingsimg';
 import LogoWoofit from '../../../public/Images/LogoWoofit';
 import DashboradBlue from '../../../public/Images/DashboardBlue';
-import ScheduleimgBlue from '../../../public/Images/Scheduleimgblue.js';
+import ScheduleimgBlue from '../../../public/Images/Scheduleimgblue';
 import ClientsBlue from '../../../public/Images/ClientsimgBlue';
 import PaymentsimgBlue from '../../../public/Images/PaymentimgBlue';
 import ReportsimgBlue from '../../../public/Images/ReportsimgBlue';
