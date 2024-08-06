@@ -84,11 +84,13 @@ text-align: left;
   align-items: center;
   border: 1px solid #ddd;
   border-radius: 8px;
-  /* padding: 10px; */
   height: 48px;
   padding-left: 10px;padding-right: 10px;
   cursor: pointer;
   background-color: #fff;
+  color: black;
+  font-size: 18px;
+
 }
 
 .text {
