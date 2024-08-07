@@ -3,7 +3,7 @@ import { ArchivedIcon, FilterIcon, SearchIcon } from '../../../public';
 import ClientsData from '../_components/ClientsData';
 import GroupData from '../_components/GroupData';
 import styles from '../_components/Login.module.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DeshBorad from '../dashboard/DashCompoent';
 import { useRouter } from 'next/navigation';
 import GroupEdit from '../Popups/GroupEdit';
@@ -13,6 +13,8 @@ function page() {
   const [activeTab, setActiveTab] = useState('Clients');
   const [popupIsOpen, setShowPopup] = useState(false);
   const [updateGroup , setUpdateGroup ]= useState(false)
+  const [search, serSearch] = useState()
+  const [searchClick , setSearchClick]= useState(false)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -21,6 +23,15 @@ function page() {
     setShowPopup(false);
     setUpdateGroup(true)
   };
+
+  console.log(activeTab,'=======active tab')
+  
+  const handleChange =(e)=>{
+    const {value} =e.target;
+    serSearch(value)
+  }
+  useEffect(()=>{},[search])
+
   return (
     <>
       <DeshBorad>
@@ -51,14 +62,19 @@ function page() {
                 </div>
               </div>
               <div style={{ display: 'flex' }}>
-                <SearchIcon />
+               {searchClick && <input type='text' name="search" onChange={handleChange} style={{borderRadius:10}} /> } 
+              <div onClick={()=>setSearchClick(!searchClick)} style={{cursor:"pointer"}} >
+                <SearchIcon   />
+              </div>
                 <div style={{ width: 40 }} />
+                <div>
                 <FilterIcon />
+                </div>
               </div>
             </div>
           </div>
-          {(activeTab === 'Clients' || activeTab === "ArchivedClients") && <ClientsData activeTab={activeTab} />}
-          {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData updateGroup={updateGroup}  setUpdateGroup={setUpdateGroup} /></div>}
+          {(activeTab === 'Clients' || activeTab === "ArchivedClients") && <ClientsData activeTab={activeTab}  search={search} />}
+          {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData updateGroup={updateGroup}  setUpdateGroup={setUpdateGroup} search={search} /></div>}
           {popupIsOpen && (  <GroupEdit  show={popupIsOpen} handleClose={closePopup} />)}
         </div>
       </DeshBorad>

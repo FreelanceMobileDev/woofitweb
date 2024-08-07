@@ -297,7 +297,7 @@ const EditClient = ({ setSelectedItem }) => {
         <div className={styles.containor}>
           <div className={styles.headerr}>
             <div className={styles.clietdiv}>
-              <div onClick={() => router.push(`/Clients/clientsInfo?id=${id}`)} style={{ cursor: 'pointer' }}>
+              <div onClick={() => router.push(id?`/Clients/clientsInfo?id=${id}`:"/Clients")} style={{ cursor: 'pointer' }}>
                 <LeftArrow />
               </div>
               <div className={styles.ClientStyle}> {id ? "Edit Client Profile" : "Add Client"}</div>

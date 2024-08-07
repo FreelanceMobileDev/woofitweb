@@ -12,13 +12,16 @@ import check from "../../../public/Images/Checkflieddbox.png";
 import nocheck from "../../../public/Images/Checkbox@2x.png";
 import Loader from "../_components/Loader";
 import { toast } from 'react-toastify';
+import profileiconn from '../../../public/Images/addProfile@2x.png'
+
+
 
 const GroupEdit = ({ data, show, handleClose }) => {
   const [clientData, setclientData] = useState([]);
-  const [type, setType] = useState("Group");
+  const [type, setType] = useState("All");
   const [loader, setLoader] = useState(true);
-  const [comment, setcomment] = useState(data?.comment||"");
-  const [name, setName] = useState(data?.name||"");
+  const [comment, setcomment] = useState(data?.comment || "");
+  const [name, setName] = useState(data?.name || "");
   const [groudClients, setGroupClients] = useState(
     data?.clients ? data?.clients : []
   );
@@ -53,13 +56,13 @@ const GroupEdit = ({ data, show, handleClose }) => {
   const updateThisGroup = async () => {
     setLoader(true);
     const updatedItems = groudClients.map((item) => item?._id);
-    const param = { name:name,clients: updatedItems, comment: comment };
-    let response={}
-    if(data?._id){
+    const param = { name: name, clients: updatedItems, comment: comment };
+    let response = {}
+    if (data?._id) {
       response = await updateGroup(param, data?._id);
-    }else{
+    } else {
       const coachId = localStorage.getItem("id")
-      param.coachId=coachId
+      param.coachId = coachId
       response = await createGroup(param)
     }
     setLoader(false);
@@ -72,11 +75,11 @@ const GroupEdit = ({ data, show, handleClose }) => {
 
   return (
     <div className={show ? styles.popupDisplay : styles.popupHide}>
-      {loader && <Loader loader={loader} />}
+      
       <div className={styles.popupContent}>
         <div className={styles.space_div}>
           <div style={{ width: 60 }} />
-          <div className={styles.popheadertxt}>{data ?"Edit Group" :"Add Group"}</div>
+          <div className={styles.popheadertxt}>{data ? "Edit Group" : "Add Group"}</div>
           <div onClick={handleClose} className={styles.greycrossicon}>
             <CrossIcon />
           </div>
@@ -105,7 +108,7 @@ const GroupEdit = ({ data, show, handleClose }) => {
 
           {type === "Group" && (
             <div className={styles.scroll_div}>
-              {groudClients&& groudClients?.length>0 ? groudClients && groudClients?.map((item, index) => (
+              {groudClients && groudClients?.length > 0 ? groudClients && groudClients?.map((item, index) => (
                 <div
                   key={index}
                   className={styles.space_div}
@@ -114,7 +117,7 @@ const GroupEdit = ({ data, show, handleClose }) => {
                   <div className={styles.row_div}>
                     <Image
                       src={
-                        item?.clientImage ? item?.clientImage : profilepicture
+                        item?.clientImage ? item?.clientImage : profileiconn.src
                       }
                       alt={item.name}
                       width={50}
@@ -123,18 +126,17 @@ const GroupEdit = ({ data, show, handleClose }) => {
                     />
                     <div className={styles.client_name_style}>{item.name}</div>
                   </div>
-
-                  <div onClick={()=>{ checktheSelecteditems(item);}}>
+                  <div onClick={() => { checktheSelecteditems(item); }}>
                     <CrossIcon />
                   </div>
                 </div>
               ))
-              :
-              <>
-          
-              {/* <div style={{display:"flex",alignItems:"center" , alignSelf:"center" , marginTop:"20%"}}>Select Clients</div> */}
-              
-              </> }
+                :
+                <>
+
+                  {/* <div style={{display:"flex",alignItems:"center" , alignSelf:"center" , marginTop:"20%"}}>Select Clients</div> */}
+
+                </>}
 
             </div>
           )}
@@ -150,7 +152,7 @@ const GroupEdit = ({ data, show, handleClose }) => {
                     <div className={styles.row_div}>
                       <Image
                         src={
-                          item?.clientImage ? item?.clientImage : profilepicture
+                          item?.clientImage ? item?.clientImage : profileiconn.src
                         }
                         alt={item.name}
                         width={50}
@@ -185,16 +187,23 @@ const GroupEdit = ({ data, show, handleClose }) => {
           }}
           value={comment}
         />
-        <OpticityButton
+        <div className={styles.container}>
+
+          <a className={styles.button} onClick={() => {
+            updateThisGroup();
+          }}  >Save</a>
+        </div>
+
+        {/* <OpticityButton
           onClick={() => {
             updateThisGroup();
           }}
           name={"Save"}
           txtstyle={{ color: "#FFF" }}
           additionalMainDivClassName={styles.SaveButton}
-        />
- 
-        
+        /> */}
+
+
       </div>
     </div>
   );

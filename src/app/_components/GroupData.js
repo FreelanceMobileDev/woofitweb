@@ -4,9 +4,13 @@ import { EditIcon, DeleteIcon } from "../../../public"; // Adjust the import pat
 import styles from "./Login.module.css";
 import GroupEdit from "../Popups/GroupEdit";
 import { deleteGroup, getGroupList } from "../../api/helper";
+import profileiconn from '../../../public/Images/addProfile@2x.png'
 import Loader from "./Loader";
 
-const GroupData = ({ updateGroup, setUpdateGroup }) => {
+
+
+const GroupData = ({ updateGroup, setUpdateGroup,search}) => {
+ 
   const [getdata, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [popupIsOpen, setShowPopup] = useState(false);
@@ -26,11 +30,13 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
   const closePopup = () => {
     setShowPopup(false);
   };
-  const getApiGroup = async () => {
+  const id = localStorage.getItem("id");
+  const getApiGroup = async (search) => {
     try {
-      setLoading(true);
-      const id = localStorage.getItem("id");
-      const getData = await getGroupList(id);
+      if(!search){
+        setLoading(true);
+      }
+      const getData = await getGroupList(id,search);
       setData(getData.data.data.data);
     } catch (error) {
       console.log(error, "====error");
@@ -38,8 +44,16 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
       setLoading(false);
     }
   };
-  
 
+  useEffect(()=>{
+    if(search?.length>0){
+      getApiGroup(`&search=${search}`)
+    }else{
+      getApiGroup()
+    }
+  },[search])
+
+  
   useEffect(() => {
     getApiGroup();
   }, [popupIsOpen]);
@@ -51,13 +65,10 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
       const respone = await deleteGroup(id)
       getApiGroup();
       setLoading(false)
-
     }
   }
 
-
   const GroupItem = ({ group }) => {
-
     return (
       <div className={styles.groupItem}>
         <div className={styles.groupContent}>
@@ -73,9 +84,9 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
                     key={index}
                     src={`${img.clientImage
                         ? img.clientImage
-                        : "/images/profilepic.png"
+                        : profileiconn.src
                       }`}
-                    alt={`/images/profilepic.png`}
+                    alt={profileiconn.src}
                     className={styles.clientImage}
                   />
                 ))}

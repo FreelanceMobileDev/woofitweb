@@ -7,7 +7,7 @@ import Payments from './Payments';
 import styles from './ClientPage.module.css';
 import { ArchivedIcon, CallIcon, LeftArrow, MessageIcon } from '../../../public';
 import Image from 'next/image';
-import profileiconn from '../../../public/Images/profileee.png'
+import profileiconn from '../../../public/Images/addProfile@2x.png'
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loader from '../_components/Loader';
 import { getClientDetails, getRates } from '../../api/helper';
@@ -25,14 +25,11 @@ const Clientinformation = ({ setSelectedItem }) => {
   const [getRetes, setGetRates] = useState([])
   const [loading, setLoading] = useState(false);
 
-
-
   const getClientDetail = async () => {
     try {
       setLoading(true)
       const respone = await getClientDetails(id)
       setGetData(respone.data)
-      // console.log(respone.data.clientDetails,'====respone.data')
     } catch (error) {
       console.log(error)
     } finally {
@@ -58,12 +55,10 @@ const Clientinformation = ({ setSelectedItem }) => {
     }
   }, [catchId])
 
-
-
-
   return (
 
     <div className={styles.containor}>
+      <Loader loading={loading}/>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
           <div onClick={() => router.push('/Clients')} style={{ cursor: 'pointer' }}>
@@ -98,9 +93,6 @@ const Clientinformation = ({ setSelectedItem }) => {
             Edit Profile
           </div>
         </div>
-
-
-
 
         <div className={styles.right_div_data}>
 

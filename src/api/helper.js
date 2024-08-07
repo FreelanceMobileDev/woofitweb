@@ -53,21 +53,21 @@ export const update_professional_details = (payload, id) => {
 };
 
 export const getClinent = (payload, sort) => {
-  // console.log("update-professional-details--->", payload,)
+  console.log("update-professional-details--->", payload,)
   return apiClient({
     baseURL: BASE_URL,
     method: GET_METHOD,
-    url: `${GET_CLIENT}?isArchive=${payload}${sort}`,
+    url: `${GET_CLIENT}?isArchive=${payload}${sort?sort:""}`,
     // data: payload,
   });
 };
 
-export const getGroupList = (payload,) => {
+export const getGroupList = (payload,search) => {
   console.log("GET_GROUP_LIST->", payload,)
   return apiClient({
     baseURL: BASE_URL,
     method: GET_METHOD,
-    url: `${GET_GROUP_LIST}?coachId=${payload}`,
+    url: `${GET_GROUP_LIST}?coachId=${payload}${search?search:""}`,
     // data: payload,
   });
 };
@@ -219,6 +219,7 @@ export const deleteClient = (id) => {
     url: `rates/delete-client?id=${id}`
   });
 };
+
 
 
 

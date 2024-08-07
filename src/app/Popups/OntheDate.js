@@ -13,6 +13,7 @@ import { getClinent } from '../../api/helper';
 import Loader from '../_components/Loader';
 import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image';
+import moment from 'moment';
 
 
 const OntheDate = ({ handleClose }) => {
@@ -22,6 +23,7 @@ const OntheDate = ({ handleClose }) => {
   const [clientDatas, setclientData] = useState([])
   const [loading, setLoading] = useState(false);
   const [selectClients, setSelectclients] = useState([]);
+  const today = moment().format('DD MMM YYYY');
 
   const getApiClinent = async (data) => {
     try {
@@ -68,15 +70,8 @@ const OntheDate = ({ handleClose }) => {
         .matches(dateFormatPattern, 'Start date must be in the format "12 May 2020"')
         .test('is-valid-date', 'Start date must be a valid date', function (value) {
           if (!value) return false;
-
-          // Split the input value into day, month, and year      const [day, month, year] = value.split(' ');
-
-
           const monthIndex = new Date(Date.parse(month + " 1, 2021")).getMonth();
-
-
           const date = new Date(year, monthIndex, day);
-
           return date.getDate() === parseInt(day) &&
             date.getMonth() === monthIndex &&
             date.getFullYear() === parseInt(year);
@@ -129,7 +124,7 @@ const OntheDate = ({ handleClose }) => {
             label={"Date"}
             RightIcon={Rightarrow}
             additionalcontainer={styles.TextWithButtonstyle}
-            text={'14 Mar 2024'}
+            text={today}
           />
 
 
