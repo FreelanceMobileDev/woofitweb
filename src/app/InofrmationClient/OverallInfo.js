@@ -7,7 +7,8 @@ import styles from './ClientPage.module.css';
 import {genderData,experienceOptions,specializationOptions} from '../../util/staticData'
 
 const OverallInfo = ({ info, getRetes }) => {
-  
+  console.log(info,'=====info')
+  console.log(getRetes,'==11111==getRetes')
   return (
     <div className={styles.container}>
       

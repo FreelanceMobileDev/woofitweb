@@ -1,9 +1,9 @@
 {
-  "/settings/profile/page": "app/settings/profile/page.js",
-  "/settings/services/page": "app/settings/services/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/Clients/edit/page": "app/Clients/edit/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/payments/page": "app/payments/page.js",
+  "/schedule/page": "app/schedule/page.js",
   "/Clients/page": "app/Clients/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js",
-  "/signupW/page": "app/signupW/page.js"
+  "/Clients/clientsInfo/page": "app/Clients/clientsInfo/page.js"
 }

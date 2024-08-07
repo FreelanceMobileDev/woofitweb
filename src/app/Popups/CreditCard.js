@@ -9,7 +9,7 @@ import * as Yup from "yup";
 
 
 
-const CreditCard = ({ handleClose, setCardData }) => {
+const CreditCard = ({ handleClose, setCardData,caredData }) => {
 
 
     const handleSave = () => {
@@ -58,7 +58,7 @@ const CreditCard = ({ handleClose, setCardData }) => {
         onSubmit: async (values) => {
             try {
                 let data = transformCardData(values)
-                setCardData(data)
+                setCardData([...caredData,data])
                 handleClose();
             } catch (error) {
                 // setLoading(false);

@@ -14,6 +14,9 @@ import {
   getRates,
   imageUpload,
   createOrUpdateClient,
+  addCard,
+  deleteClient,
+  DeleteCard,
 } from "../../api/helper";
 import * as Yup from "yup";
 import moment from "moment";
@@ -43,7 +46,7 @@ const EditClient = ({ setSelectedItem }) => {
   const [loading, setLoading] = useState(false);
   const [errMessage, setErrormsg] = useState();
   const [date, setDate] = useState("");
-  const [caredData, setCardData] = useState(null)
+  const [caredData, setCardData] = useState([])
 
   // console.log(caredData, '==caredData================>>>>>>>>>>>>>>')
   const openPopup = () => {
@@ -65,6 +68,7 @@ const EditClient = ({ setSelectedItem }) => {
       setLoading(true);
       const respone = await getClientDetails(id);
       setGetData(respone.data);
+      setCardData(respone.data.clientDetails.cards)
     } catch (error) {
       console.log(error);
     } finally {
@@ -77,7 +81,7 @@ const EditClient = ({ setSelectedItem }) => {
       setLoading(true);
       const response = await getRates(catchId);
       setGetRates(response?.data?.data);
-      if(response?.data?.data.getAllRatesData.length==0){
+      if (response?.data?.data.getAllRatesData.length == 0) {
         return toast.error("Please Add Rate Firts")
       }
     } catch (error) {
@@ -118,7 +122,7 @@ const EditClient = ({ setSelectedItem }) => {
         .matches(/^\d{10}$/, "Mobile number must be exactly 10 digits")
         .required("Mobile number is required"),
       // DOB:  
-     
+
       comment: Yup.string().required("Comment is required").max(500, "Comment cannot exceed 500 characters"),
       trainingGoal: Yup.string().required("Training goal is required"),
       rate: Yup.string().required("Rate is required"),
@@ -127,7 +131,7 @@ const EditClient = ({ setSelectedItem }) => {
 
 
     onSubmit: async (values) => {
-      
+
       setErrormsg("");
       setLoading(true);
       let param = {
@@ -142,9 +146,9 @@ const EditClient = ({ setSelectedItem }) => {
         "coachId": values.coachId
       }
 
-      if (caredData) {
-        values = { ...param, ...caredData }
-      }
+      // if (caredData) {
+      //   values = { ...param, ...caredData }
+      // }
       try {
 
         const expectedFormat = "YYYY-MM-DD";
@@ -154,12 +158,22 @@ const EditClient = ({ setSelectedItem }) => {
         if (image) {
           values.clientImage = image.image;
         }
+
         try {
           if (getData?.clientDetails?._id) {
             const response = await createOrUpdateClient(
-              values,getData.clientDetails._id,
-              
+              values, getData.clientDetails._id,
             );
+            let data = caredData
+            .filter(e => !e._id) 
+            .map(e => ({
+              ...e,
+              clientId: getData.clientDetails?._id
+            }));
+            if(data.length>0){
+              addCardDb(data)
+            }
+          
             getClientDetail(id);
             toast.success(response.data.message)
             return router.push(
@@ -167,13 +181,19 @@ const EditClient = ({ setSelectedItem }) => {
             );
           } else {
             values.coachId = catchId;
-            if (!values.clientImage) {
-              return setErrormsg({ message: "Please Select Image" });
-            }
             const response = await createOrUpdateClient(values);
             if (response.data.success == false) {
               return setErrormsg(response?.data);
             }
+
+            console.log(response.data.data, '=====datat')
+
+            let data = caredData.map((e) => {
+              return { ...e, clientId: response.data.data._id };
+            });
+
+
+            addCardDb(data)
             toast.success(response.data.message)
             return router.push(`/Clients`);
           }
@@ -189,6 +209,22 @@ const EditClient = ({ setSelectedItem }) => {
       }
     },
   });
+
+  const addCardDb = async (data) => {
+    try {
+      const ddd= await addCard(data)
+    } catch (error) {
+      console.log(error)
+    }
+ 
+  }
+  // const DeleteClient=async(id)=>{
+  //   try {
+  //     await deleteClient(id)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   useEffect(() => {
     if (getData && id) {
@@ -233,8 +269,26 @@ const EditClient = ({ setSelectedItem }) => {
   const onSelectDate = (date) => {
     setDate(date);
   };
- 
-  const shouldShowAddButton = !(getData?.cardDetails?.length > 0 || caredData !== null);
+
+
+  const deleteCard = (value) => {
+    if (value?._id) {
+      const confirmed = window.confirm("Are you sure you want to Delete?");
+      if (confirmed) {
+        DeteteCares(value?._id)
+        let dd = caredData.filter(e => e._id !== value._id);
+        setCardData(dd)
+      }
+    } else {
+      let dd = caredData.filter(e => e.cardNumber !== value.cardNumber);
+      setCardData(dd)
+    }
+  }
+  const DeteteCares = async (id) => {
+    await DeleteCard(id)
+    // DeletecardDb
+  }
+  // const shouldShowAddButton = !(getData?.cardDetails?.length > 0 || caredData !== null);
 
   return (
     <>
@@ -263,6 +317,7 @@ const EditClient = ({ setSelectedItem }) => {
                   getData?.clientDetails?.clientImage ||
                   profileiconn
                 }
+                style={{ borderRadius: 60 }}
               />
               <div className={styles.changePhoto} onClick={triggerFileSelect} >
                 Change Photo
@@ -354,7 +409,7 @@ const EditClient = ({ setSelectedItem }) => {
                       </div>
                     ) : null}
                   </div>
-                  
+
                 </div>
                 {/* <div style={{ width: 30 }} /> */}
                 <div style={{ width: "49.5%", }}>
@@ -416,7 +471,7 @@ const EditClient = ({ setSelectedItem }) => {
                 </div>
               </div>
               {
-                shouldShowAddButton && (
+                caredData.length == 0 && (
                   <>
                     <div className={styles.Credit_Card}>Credit Card</div>
                     <div className={styles.add_card} onClick={openPopup}>
@@ -427,7 +482,7 @@ const EditClient = ({ setSelectedItem }) => {
                 )
               }
 
-              {(caredData || getData) && (getData?.cardDetails?.length > 0 || caredData != null) && (
+              {caredData && caredData.length > 0 && (
                 <div className={styles.cardcontainer}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div className={styles.Credit_Card}>Credit Card</div>
@@ -439,17 +494,22 @@ const EditClient = ({ setSelectedItem }) => {
                       Add
                     </div>
                   </div>
-                  <div className={styles.card}>
-                    <div className={styles.cardType}>
-                      <VisaIcon />
-                      <span style={{ marginLeft: "10px" }}>
-                        {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.name : caredData?.cardHolderName} xxxx {getData?.cardDetails?.length > 0 ? getData?.cardDetails[0]?.last4 : caredData?.cardHolderName}
-                      </span>
-                    </div>
-                    <div className={styles.actions}>
-                      <CrossIcon />
-                    </div>
-                  </div>
+                  {
+                    caredData?.map((e) =>
+                      <div className={styles.card}>
+                        <div className={styles.cardType}>
+                          <VisaIcon />
+                          <span style={{ marginLeft: "10px" }}>
+                            {e.cardHolderName ? e?.cardHolderName : e?.name} xxxx {e.cardHolderName ? e?.cardNumber : e?.name}
+                          </span>
+                        </div>
+                        <div className={styles.actions} onClick={() => deleteCard(e)}>
+                          <CrossIcon />
+                        </div>
+                      </div>
+                    )
+                  }
+
                 </div>
               )}
               <div>
@@ -466,7 +526,7 @@ const EditClient = ({ setSelectedItem }) => {
               </div>
             </div>
           </div>
-          {popupIsOpen && <CreditCard show={popupIsOpen} handleClose={closePopup} setCardData={setCardData} />}
+          {popupIsOpen && <CreditCard show={popupIsOpen} handleClose={closePopup} setCardData={setCardData} caredData={caredData} />}
         </div>
 
       </form>

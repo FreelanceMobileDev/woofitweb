@@ -9,17 +9,17 @@ import { ArchivedIcon, CallIcon, LeftArrow, MessageIcon } from '../../../public'
 import Image from 'next/image';
 import profileiconn from '../../../public/Images/profileee.png'
 import { useRouter, useSearchParams } from 'next/navigation';
-import { getClientDetails, getRates } from '../../api/helper';
-import { formatDOB, calculateAge } from '../../util/common'
-import {genderData,experienceOptions,specializationOptions} from '../../util/staticData'
 import Loader from '../_components/Loader';
-
+import { getClientDetails, getRates } from '../../api/helper';
+import { calculateAge } from '../../util/common'
+import { genderData } from '../../util/staticData';
 
 const Clientinformation = ({ setSelectedItem }) => {
+  const [activeTab, setActiveTab] = useState('Overall Info');
   const router = useRouter()
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
-  const [activeTab, setActiveTab] = useState('Overall Info');
+
   const [catchId, setCoachId] = useState()
   const [getData, setGetData] = useState()
   const [getRetes, setGetRates] = useState([])
@@ -32,12 +32,13 @@ const Clientinformation = ({ setSelectedItem }) => {
       setLoading(true)
       const respone = await getClientDetails(id)
       setGetData(respone.data)
+      // console.log(respone.data.clientDetails,'====respone.data')
     } catch (error) {
       console.log(error)
-    }finally{
+    } finally {
       setLoading(false)
     }
-   
+
   }
   const getRateData = async (catchId) => {
     const response = await getRates(catchId)
@@ -60,25 +61,8 @@ const Clientinformation = ({ setSelectedItem }) => {
 
 
 
-  const archiveUser = async () => {
-    try {
-      setLoading(true)
-      const respone = await getClientDetails(id)
-      setGetData(respone.data)
-    } catch (error) {
-      console.log(error)
-    }finally{
-      setLoading(false)
-    }
-   
-  }
-
-
-
-
   return (
-    <>
-     <Loader loading={loading} />
+
     <div className={styles.containor}>
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
@@ -95,15 +79,16 @@ const Clientinformation = ({ setSelectedItem }) => {
       <div className={styles.main_div__}>
         <div className={styles.left_div_profile}>
           <Image
+
+            style={{height:107,width:107, borderRadius:60}}
             height={107} width={107}
-            src={getData?.clientDetails?.clientImage}
-            style={{ borderRadius: 60 }}
+            src={getData?.clientDetails?.clientImage ? getData?.clientDetails?.clientImage : profileiconn }
           />
           <h1 className={styles.usernamee}>{getData?.clientDetails?.name}</h1>
           <div className={styles.clietdiv}>
             <div className={styles.gender_age}>{calculateAge(getData?.clientDetails?.DOB)} Years old</div>
             <div className={styles.lineee} />
-            <div className={styles.gender_age}>{ genderData?.find((ele)=>ele._id==getData?.clientDetails?.gender)?.name }</div>
+            <div className={styles.gender_age}>{genderData?.find((ele) => ele._id == getData?.clientDetails?.gender)?.name}</div>
           </div>
           <div className={styles.clietdiv} style={{ marginTop: 30, marginBottom: 30 }}>
             <div className={styles.callicon_background}><CallIcon /></div>
@@ -113,6 +98,9 @@ const Clientinformation = ({ setSelectedItem }) => {
             Edit Profile
           </div>
         </div>
+
+
+
 
         <div className={styles.right_div_data}>
 
@@ -134,10 +122,11 @@ const Clientinformation = ({ setSelectedItem }) => {
             {activeTab === 'Trainings' && <Trainings />}
             {activeTab === 'Payments' && <Payments />}
           </div>
+
+
         </div>
       </div>
     </div>
-    </>
   );
 };
 
