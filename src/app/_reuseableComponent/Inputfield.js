@@ -4,7 +4,7 @@ import ausFlag from '../../../public/Images/ausflag.png'
 // import IndiaFlag from '../../../public/Images/IndiaFlag';
 import styles from './Componet.module.css'
 
-const Inputfield = ({ style, input_parent_div_prop,onBlur,
+const Inputfield = ({ style, input_parent_div_prop,onBlur,disabled=false,
     inputtxt, name, img5, img1, img2, img3,
     type, id, placeholder, additionalMainDivClassName,
     additionalinput_field, onChange, value,handleButtonClick,ref }) => {
@@ -41,6 +41,7 @@ const Inputfield = ({ style, input_parent_div_prop,onBlur,
                     onChange={onChange}
                     value={value}
                     onBlur={onBlur}
+                    disabled={disabled}
                     // max={today}
                 />
                 {img2 && img2}

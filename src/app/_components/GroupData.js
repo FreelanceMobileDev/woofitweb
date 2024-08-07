@@ -38,6 +38,7 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     getApiGroup();
@@ -53,6 +54,7 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
 
     }
   }
+
 
   const GroupItem = ({ group }) => {
 
@@ -97,11 +99,16 @@ const GroupData = ({ updateGroup, setUpdateGroup }) => {
       </div>
     );
   };
+ 
 
   return (
     <div className={styles.groupsContainer}>
-      <Loader loading={loading} />
-      {getdata &&
+       <Loader loading={loading} />
+      { getdata&& getdata.length==0? <>
+      <div>
+        No Groups
+      </div>
+      </>: getdata &&
         getdata?.map((group, index) => <GroupItem key={index} group={group} />)}
       {popupIsOpen && (
         <GroupEdit data={data} show={popupIsOpen} handleClose={closePopup} />

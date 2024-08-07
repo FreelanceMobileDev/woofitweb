@@ -77,6 +77,9 @@ const EditClient = ({ setSelectedItem }) => {
       setLoading(true);
       const response = await getRates(catchId);
       setGetRates(response?.data?.data);
+      if(response?.data?.data.getAllRatesData.length==0){
+        return toast.error("Please Add Rate Firts")
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -114,7 +117,8 @@ const EditClient = ({ setSelectedItem }) => {
       mobileNumber: Yup.string()
         .matches(/^\d{10}$/, "Mobile number must be exactly 10 digits")
         .required("Mobile number is required"),
-      // DOB: Yup.date().required("Date of Birth is required").nullable(),
+      // DOB:  
+     
       comment: Yup.string().required("Comment is required").max(500, "Comment cannot exceed 500 characters"),
       trainingGoal: Yup.string().required("Training goal is required"),
       rate: Yup.string().required("Rate is required"),
@@ -123,6 +127,7 @@ const EditClient = ({ setSelectedItem }) => {
 
 
     onSubmit: async (values) => {
+      
       setErrormsg("");
       setLoading(true);
       let param = {
@@ -241,7 +246,7 @@ const EditClient = ({ setSelectedItem }) => {
               <div onClick={() => router.push(`/Clients/clientsInfo?id=${id}`)} style={{ cursor: 'pointer' }}>
                 <LeftArrow />
               </div>
-              <div className={styles.ClientStyle}> {id ? "Edit Client Profile" : "Add Client Profile"}</div>
+              <div className={styles.ClientStyle}> {id ? "Edit Client Profile" : "Add Client"}</div>
             </div>
 
             {/* <div className={styles.SaveButton}>Save</div> */}
@@ -337,11 +342,10 @@ const EditClient = ({ setSelectedItem }) => {
                     <DatePicker
                       selected={date}
                       onChange={onSelectDate}
-                      dateFormat="YYYY-MM-DD"
+                      dateFormat="yyyy/MM/dd"
                       placeholderText="Select Date of Birth"
                       className={styles.CalenderDiv}
                       maxDate={new Date()}
-
                     />
                     <CalenderIcon />
                     {formik.touched.DOB && formik.errors.DOB ? (

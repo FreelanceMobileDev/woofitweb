@@ -21,7 +21,7 @@ const Clientsdata = [
 const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
     const [clientsopen, setclientsopen] = useState(false);
-    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients?.length > 0? [ ...rateData?.clients]:[]);
+    const [selectClients, setSelectclients] = useState(rateData && rateData?.clients?.length > 0 ? [...rateData?.clients] : []);
     const [errorMsg, setErrorMsg] = useState("")
     const [clientDatas, setclientData] = useState([])
     const [loading, setLoading] = useState(false);
@@ -35,23 +35,24 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
         setclientsopen(true);
     };
 
-  const getApiClinent = async (data) => {
-    try {
-      setLoading(true)
-      const getData = await getClinent(data)
-      setclientData(getData?.data?.data?.getAllClientData)
-    } catch (error) {
-      console.log(error, '====error')
-    } finally {
-      setLoading(false)
+    const getApiClinent = async (data) => {
+        try {
+            setLoading(true)
+            const getData = await getClinent(data)
+              setclientData(getData?.data?.data?.getAllClientData)
+            //   console.log(getData?.data?.data?.getAllClientData,'====getData?.data?.data?.getAllClientData')
+        } catch (error) {
+            console.log(error, '====error')
+        } finally {
+            setLoading(false)
+        }
     }
-  }
-  
 
-  useEffect(() => {
-    getApiClinent(0)
-    return () => { }
-  }, [])
+
+    useEffect(() => {
+        getApiClinent(0)
+        return () => { }
+    }, [])
 
 
     const formik = useFormik({
@@ -76,7 +77,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                 let response = {}
                 if (rateData._id) {
 
-                    response = await createAndUpdateRate(values,`id=${rateData?._id}`)
+                    response = await createAndUpdateRate(values, `id=${rateData?._id}`)
                 } else {
                     response = await createAndUpdateRate(values)
                 }
@@ -88,32 +89,32 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                 // router.push('/addProfilePicture')
             } catch (error) {
                 console.log(error, '====')
-            }finally{
+            } finally {
                 setLoading(false)
             }
         },
     });
     const maxDisplayed = 4;
 
-    const handleDelete=async(id)=>{
+    const handleDelete = async (id) => {
         try {
             setLoading(true)
             const response = await deleteRate(id)
-            if(response.data.success==false){
+            if (response.data.success == false) {
                 return console.log(response)
             }
             handleClose()
         } catch (error) {
             console.log(error)
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
-    console.log(selectClients,'===selectClients')
+    // console.log(selectClients,'===selectClients')
 
     return (
         <div className={show ? styles.popupDisplay : styles.popupHide}>
-             <Loader loading={loading} />
+            <Loader loading={loading} />
             <div className={styles.popupContent} style={{ marginTop: 30, marginBottom: 30 }}>
                 <div className={styles.space_div}>
                     <div style={{ width: 60 }} />
@@ -157,7 +158,7 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
 
                         {selectClients.length > 0 && selectClients ?
                             <div className={styles.space_div} style={{ marginBottom: 10, marginTop: 10 }} onClick={handleSave}>
-                                <div className={styles.client_name_style2} style={{ marginLeft: 0 }}>{selectClients.length}{selectClients.length >1? ` Clients`:" Client" } </div>
+                                <div className={styles.client_name_style2} style={{ marginLeft: 0 }}>{selectClients.length}{selectClients.length > 1 ? ` Clients` : " Client"} </div>
                                 <div className={styles.row} >
                                     {selectClients.slice(0, maxDisplayed).map((item, index) =>
                                         <>
@@ -179,12 +180,16 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                                 </div>
                             </div>
                             :
-                            <OpticityButton
-                                onClick={handleSave}
-                                name={'Add Client'}
-                                txtstyle={{ color: '#fff' }}
-                                additionalMainDivClassName={styles.AddClient}
-                            />}
+                            <>
+                                {clientDatas.length > 0 && <OpticityButton
+                                    onClick={handleSave}
+                                    name={'Add Client'}
+                                    txtstyle={{ color: '#fff' }}
+                                    additionalMainDivClassName={styles.AddClient}
+                                />}
+
+                            </>
+                        }
                     </div>
 
                     <Inputfield
@@ -198,13 +203,13 @@ const RateEdit = ({ show, handleClose, rateData, catchId }) => {
                     {formik.touched.comment && formik.errors.comment ? (
                         <div style={{ color: 'red' }}>{formik.errors.comment}</div>
                     ) : null}
-                    <div style={{ display:"flex",justifyContent:"center", alignItems:"center" }}>
-                    <button type='submit' className={styles.SaveButton}  style={{width:"100%" , borderWidth:0}} txtstyle={{ color: '#FFF' }} >Save</button>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <button type='submit' className={styles.SaveButton} style={{ width: "100%", borderWidth: 0 }} txtstyle={{ color: '#FFF' }} >Save</button>
                     </div>
 
                 </form>
             </div>
-            {clientsopen && clientDatas&&
+            {clientsopen && clientDatas &&
                 <AddClients show={clientsopen} handleClose={closePopup} setSelectclients={setSelectclients} selectClients={selectClients} clientDatas={clientDatas}
                 />}
         </div>

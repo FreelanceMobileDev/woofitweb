@@ -18,6 +18,7 @@ const OverallInfo = ({ info, getRetes }) => {
             data={getRetes?.getAllRatesData}
             selectedId={info?.clientDetails?.rate?._id}
             RightIcon={Downarrow}
+            disabled={true}
           />
         <div style={{ width: 50 }} />
 
@@ -27,6 +28,7 @@ const OverallInfo = ({ info, getRetes }) => {
             data={specializationOptions}
             selectedId={info?.clientDetails?.trainingGoal}
             RightIcon={Downarrow}
+            disabled={true}
           />
   
         {/* <TextWithButton
@@ -46,6 +48,7 @@ const OverallInfo = ({ info, getRetes }) => {
         name={"Comment"}
         additionalMainDivClassName={styles.comment_div}
         value={info?.clientDetails?.comment}
+        disabled={true}
       />
     </div>
   )

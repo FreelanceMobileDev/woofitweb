@@ -35,11 +35,19 @@ const ClientsData = ({ activeTab}) => {
     }
   }, [activeTab])
 
+  if (loading) {
+    return  <Loader loading={loading} />;
+  }
+
   return (
     <div >
-       <Loader loading={loading} />
-       {getdata && getdata.length ==0? "Clients Not Found" :
-       <table className={styles.table}>
+
+       { getdata && getdata?.length == 0 ?(
+       <div style={{height:"67vh"}}>
+       Clients Not Found
+       </div>)
+         :
+      ( <table className={styles.table}>
        <thead>
          <tr>
            <th><input type="checkbox" /></th>
@@ -73,7 +81,7 @@ const ClientsData = ({ activeTab}) => {
          ))}
        </tbody>
      </table>
-       }
+       )}
       
     </div>
   )
