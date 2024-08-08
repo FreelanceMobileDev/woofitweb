@@ -13,7 +13,6 @@ const NewTraining = ({ show, handleClose }) => {
 
   return (
     <div className={show ? styles.popupDisplay : styles.popupHide}>
-
       <div className={styles.popupContent}>
         <div className={styles.space_div}>
           <div />
@@ -24,9 +23,8 @@ const NewTraining = ({ show, handleClose }) => {
           <div onClick={() => handleTabClick('OntheDate')}  className={activeTab === 'OntheDate' ? styles.on_the_date : styles.for_the_period} >On the Date</div>
           <div  onClick={() => handleTabClick('ForthePeriod')} className={activeTab === 'ForthePeriod' ? styles.on_the_date : styles.for_the_period}>For the Period</div>
         </div>
-        {/* <OntheDate/> */}
-        {activeTab === 'OntheDate' && <OntheDate />}
-        {activeTab === 'ForthePeriod' && <ForthePeriod />}
+        {activeTab === 'OntheDate' && <OntheDate  handleClose={handleClose} />}
+        {activeTab === 'ForthePeriod' && <ForthePeriod   handleClose={handleClose}  />}
       </div>
     </div>
   )

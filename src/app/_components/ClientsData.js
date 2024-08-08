@@ -92,15 +92,6 @@ const ClientsData = ({ activeTab ,search}) => {
     setCheckedItems(newCheckedItems);
   };
 
-  const popup = ({})=>{
-    return (
-      <div className={styles.groupsContainer}>
-         <Loader loading={loading} />
-        hello this is  popup
-      </div>
-    );
-  }
-
 
   return (
     <div >

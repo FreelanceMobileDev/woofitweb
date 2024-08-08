@@ -12,6 +12,9 @@ import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic.png'
 import { getClinent, getTranningSession } from '../../api/helper';
 import Loader from './Loader';
+import profileiconn from '../../../public/Images/addProfile@2x.png'
+
+
 
 const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
@@ -62,6 +65,7 @@ const ScheduleContant = () => {
 
   const closeopenTraning = () => {
     setNewTrainingpop(false);
+    getTranningSessions();
   };
 
   useEffect(() => {
@@ -87,7 +91,7 @@ const ScheduleContant = () => {
   const handleDateClick = (date) => {
     const formattedDate = date.format('YYYY-MM-DD');
     getTranningSessions(`fromDate=${formattedDate}`)
-    setSelectedDate(date);  
+    setSelectedDate(date);
   };
 
   const startOfWeek = currentDate.clone().startOf('isoWeek');
@@ -112,7 +116,7 @@ const ScheduleContant = () => {
     return item ? item.icon : <CheckIcon />;
   }
 
- 
+
 
   const getApiClinent = async (data) => {
     try {
@@ -121,7 +125,7 @@ const ScheduleContant = () => {
       setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
-    }finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -137,7 +141,7 @@ const ScheduleContant = () => {
       // setData(getData.data.data.getAllClientData)
     } catch (error) {
       console.log(error, '====error')
-    }finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -182,7 +186,7 @@ const ScheduleContant = () => {
 
   return (
     <div className={styles.DashboardContenttwo}>
-        <Loader loading={loading} />
+      <Loader loading={loading} />
       <div className={styles.summarySecedule}>
         <div className={styles.calendarContainer}>
           <div className={styles.headercalender}>
@@ -286,10 +290,12 @@ const ScheduleContant = () => {
                             <div key={index} className={styles.sessionCard} style={{ backgroundColor: backColor(index) }}>
                               <div style={{ display: 'flex', alignItems: 'center', }}>
                                 {backIcon(index)}
-                                {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
+                                {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
                                   <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
-                                  : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />}
+                                  : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />} */}
+                                <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} />
                                 <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
+                                {/* session?.clients[0]?.clientImage */}
                               </div>
                               <Rightarrow />
                             </div>
@@ -411,7 +417,7 @@ const ScheduleContant = () => {
 
           {getdata?.map((client, index) => (
             <div key={index} className={styles.newclientItem}>
-              <Image height={40} width={40} src={client?.clientImage ? client?.clientImage : profilepicture} alt={profilepicture} className={styles.avatar} />
+              <Image height={40} width={40} src={client?.clientImage ? client?.clientImage : profileiconn} alt={profileiconn} className={styles.avatar} />
               <span>{client.name}</span>
             </div>
           ))}

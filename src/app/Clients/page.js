@@ -7,9 +7,7 @@ import React, { useEffect, useState } from 'react';
 import DeshBorad from '../dashboard/DashCompoent';
 import { useRouter } from 'next/navigation';
 import GroupEdit from '../Popups/GroupEdit';
-import TextWithButton from '../_reuseableComponent/TextWithButton';
-import Inputfield from '../_reuseableComponent/Inputfield';
-import OpticityButton from '../_reuseableComponent/OpicityButton';
+import FilterClients from '../Popups/FilterClients';
 
 function page() {
   const router = useRouter()
@@ -18,10 +16,16 @@ function page() {
   const [updateGroup , setUpdateGroup ]= useState(false)
   const [search, serSearch] = useState()
   const [searchClick , setSearchClick]= useState(false)
+  const [filter, setFilter] = useState(false)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+  const closefilter = () => {
+    setFilter(false);
+   
+  };
+
   const closePopup = () => {
     setShowPopup(false);
     setUpdateGroup(true)
@@ -35,53 +39,9 @@ function page() {
   useEffect(()=>{},[search])
 
 
-const Grouppopups = ({ show, handleClose }) => {
-    const handleSave = () => {
-        handleClose();
-    };
-
-    return (
-        <div className={show ? styles.popupDisplay : styles.popupHide}>
-            <div className={styles.popupContent}>
-                <div className={styles.space_div}>
-                    <div style={{ width: 60 }} />
-                    <div className={styles.popheadertxt}>Edit Group</div>
-                    {/* <div onClick={handleClose} className={styles.greycrossicon}><CrossIcon /></div> */}
-                </div>
-                <TextWithButton
-                    label={"Group Name"}
-                    additionalcontainer={styles.TextWithButtonstyle}
-                    text={'Academic Tutors'}
-                />
-                <div style={{ marginLeft: 10 }}>
-                    <div className={styles.space_div} style={{ marginTop: 18 }}>
-                        <div className={styles.Clientaddtxt}>Groups</div>
-                        <div className={styles.add_buttn}>Add</div>
-                    </div>
-
-                  
-                </div>
-                <Inputfield
-                    name={'Comment'}
-                    additionalMainDivClassName={styles.comment_div_2}
-                />
-                <OpticityButton
-                    onClick={handleClose}
-                    name={'Save'}
-                    txtstyle={{ color: '#FFF' }}
-                    additionalMainDivClassName={styles.SaveButton}
-                />
-            </div>
-        </div>
-    );
-}
-
-
   return (
     <>
       <DeshBorad>
-
-      
         <div className={styles.DashboardContent} style={{ paddingTop: 10, flexDirection: 'column' }}>
           <div style={{ padding: 20, }}>
             <div className={styles.clientsHeaderdiv}>
@@ -114,7 +74,7 @@ const Grouppopups = ({ show, handleClose }) => {
                 <SearchIcon   />
               </div>
                 <div style={{ width: 40 }} />
-                <div>
+                <div onClick={()=>setFilter(true)}>
                 <FilterIcon />
                 </div>
               </div>
@@ -123,6 +83,7 @@ const Grouppopups = ({ show, handleClose }) => {
           {(activeTab === 'Clients' || activeTab === "ArchivedClients") && <ClientsData activeTab={activeTab}  search={search} />}
           {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData updateGroup={updateGroup}  setUpdateGroup={setUpdateGroup} search={search} /></div>}
           {popupIsOpen && (  <GroupEdit  show={popupIsOpen} handleClose={closePopup} />)}
+          {filter && <FilterClients show={filter}  closefilter={closefilter} /> }
         </div>
       </DeshBorad>
     </>

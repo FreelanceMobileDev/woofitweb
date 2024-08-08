@@ -5,8 +5,10 @@ import TextWithButton from '../_reuseableComponent/TextWithButton';
 import styles from './Popups.module.css';
 import Inputfield from '../_reuseableComponent/Inputfield';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
+import { useFormik } from 'formik';
 const ForthePeriod = ({handleClose}) => {
-  const daysOfWeek = ['Sunday',  'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const formik = useFormik({})
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const [isToggled, setIsToggled] = useState(false);
   const [toggleStates, setToggleStates] = useState(
     daysOfWeek.reduce((acc, day) => {
@@ -15,10 +17,18 @@ const ForthePeriod = ({handleClose}) => {
     }, {})
   );
   const handleToggle = (day) => {
-    setToggleStates((prevStates) => ({
-      ...prevStates,
-      [day]: !prevStates[day],
-    }));
+    const updatedStates = {
+      ...toggleStates,
+      [day]: !toggleStates[day],
+    };
+    setToggleStates(updatedStates);
+
+    // Update Formik values
+    // formik.setFieldValue('schedule', Formik.values.schedule.map(schedule => 
+    //   schedule.day === day
+    //     ? { ...schedule, active: updatedStates[day] }
+    //     : schedule
+    // ));
   };
   const handleToggleeee = () => {
     setIsToggled(!isToggled);

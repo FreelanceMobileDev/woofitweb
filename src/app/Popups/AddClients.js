@@ -4,15 +4,14 @@ import styles from './Popups.module.css';
 import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
-import profilepicture from '../../../public/Images/profilepic.png'
+import profilepicture from '../../../public/Images/profilepic@2x.png'
 
 
 const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas }) => {
   // console.log(clientDatas,'===clientDatas?????????',selectClients)
 
   const [selectedClients, setSelectedClients] = useState(selectClients);
-
-
+  // console.log(selectedClients,'===selectedClients')
 
   const group1 = [
     { id: 1, name: 'Eloise Robinson', avatar: profilepicture },
@@ -50,7 +49,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
   const renderClientGroup = (clients) => (
      clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
-        <Image height={35} width={35} src={client.clientImage ? client.clientImage : profilepicture} alt={client.name} className={styles.avatar} />
+        <Image height={35} width={35} src={client.clientImage ? client.clientImage : profilepicture.src} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
           <span className={styles.Clientsname}>{client.name}</span>
           <input

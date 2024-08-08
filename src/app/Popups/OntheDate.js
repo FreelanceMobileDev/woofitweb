@@ -9,11 +9,12 @@ import AddClients from './AddClients'
 import Groups from './Groups'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import { getClinent } from '../../api/helper';
+import { createUpdateTrainingSession, getClinent } from '../../api/helper';
 import Loader from '../_components/Loader';
 import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 
 
 const OntheDate = ({ handleClose }) => {
@@ -23,8 +24,8 @@ const OntheDate = ({ handleClose }) => {
   const [clientDatas, setclientData] = useState([])
   const [loading, setLoading] = useState(false);
   const [selectClients, setSelectclients] = useState([]);
-  const today = moment().format('DD MMM YYYY');
 
+  const today = moment().format('DD MMM YYYY');
   const getApiClinent = async (data) => {
     try {
       setLoading(true)
@@ -49,68 +50,69 @@ const OntheDate = ({ handleClose }) => {
     setgroupdata(false);
   };
 
+
   const dateFormatPattern = /^(\d{1,2})\s([A-Za-z]{3,9})\s(\d{4})$/;
   const formik = useFormik({
     initialValues: {
-      startDate: "",
-      endDate: "",
+      startDate: moment().format('YYYY-MM-DD'),
+      endDate: moment().format('YYYY-MM-DD'),
       recurring: true,
-      clients: "",
+      paymentMode: selected || '',
+      clients: [],
       comment: "",
       schedule: [{
-        "day": "",
-        "startTime": "",
-        "endTime": "",
-        "active": true
+        day: moment().format('dddd'),
+        startTime: "",
+        endTime: "",
+        active: true
       }]
     },
-    validationSchema: Yup.object({
-      startDate: Yup.string()
-        .required('Start date is required')
-        .matches(dateFormatPattern, 'Start date must be in the format "12 May 2020"')
-        .test('is-valid-date', 'Start date must be a valid date', function (value) {
-          if (!value) return false;
-          const monthIndex = new Date(Date.parse(month + " 1, 2021")).getMonth();
-          const date = new Date(year, monthIndex, day);
-          return date.getDate() === parseInt(day) &&
-            date.getMonth() === monthIndex &&
-            date.getFullYear() === parseInt(year);
-        }),
-      endDate: Yup.date()
-        .required('End date is required')
-        .nullable()
-        .typeError('End date must be a valid date')
-        .min(Yup.ref('startDate'), 'End date must be after start date'),
-      recurring: Yup.boolean()
-        .required('Recurring is required'),
-      clients: Yup.string()
-        .required('Clients field is required'),
-      comment: Yup.string()
-        .optional()
-        .max(500, 'Comment cannot exceed 500 characters'),
+    validationSchema :Yup.object({
+      // startDate: Yup.date().required('Start date is required'),
+      // endDate: Yup.date().required('End date is required'),
+      // recurring: Yup.boolean(),
+      // paymentMode: Yup.string().required('Payment mode is required'),
+      // clients: Yup.array().min(1, 'At least one client is required'),
+      comment: Yup.string().max(500, 'Comment cannot exceed 500 characters'),
       schedule: Yup.array().of(
         Yup.object({
-          day: Yup.string()
-            .required('Day is required')
-            .oneOf(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 'Invalid day'),
-          startTime: Yup.string()
-            .required('Start time is required')
-            .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Start time must be in HH:mm format'),
-          endTime: Yup.string()
-            .required('End time is required')
-            .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'End time must be in HH:mm format'),
-          active: Yup.boolean()
-            .required('Active status is required')
+          // day: Yup.string().required('Day is required'),
+          startTime: Yup.string().required('Start time is required'),
+          endTime: Yup.string().required('End time is required'),
+          // active: Yup.boolean(),
         })
-      )
+      ),
     }),
+
     onSubmit: async (values) => {
       try {
-        console.log(values, '====values')
-
-
+        setLoading(true)
+        values.clients = selectClients?.map((e) => e?._id) || [];
+        if (values.clients.length === 0 || (values.group && values.group.length === 0)) {
+          return toast.error("Please Select Client OR Group");
+        }
+        values.paymentMode = selected;
+        console.log(values, '====values');
+        try {
+          const response = await createUpdateTrainingSession(values)
+          console.log(response.data)
+          if(response.data.success==false){
+            return toast.error(response.data.message)
+          }
+          toast.success(response.data.message)
+          console.log(response.data)
+           handleClose()
+        } catch (error) {
+          console.log('here is the not aailabel')
+          return toast.error(error.response.data.message)
+          console.log(error.response.data.message,'===here')
+        }finally{
+          setLoading(false)
+        }
       } catch (error) {
-        console.log(error, '====')
+        console.log(error, '====');
+      }finally{
+        setLoading(false)
       }
     },
   });
@@ -126,11 +128,6 @@ const OntheDate = ({ handleClose }) => {
             additionalcontainer={styles.TextWithButtonstyle}
             text={today}
           />
-
-
-          {formik.touched.startDate && formik.errors.startDate ? (
-            <div style={{ color: 'red' }}>{formik.errors.startDate}</div>
-          ) : null}
           <div className={styles.row_div}>
 
             {selectClients && selectClients.length > 0 ?
@@ -170,21 +167,52 @@ const OntheDate = ({ handleClose }) => {
                 </div>
               </>}
           </div>
-          <div className={styles.row_div} style={{ marginRight: 20 }}>
-            <TextWithButton
+          <div className={styles.row_div} >
+            <div style={{width:"100%" }} >
+            <Inputfield
+              id={"schedule[0].startTime"}
+              type={"time"}
+              name={'Start'}
+              additionalMainDivClassName={styles.TextWithButtonstyle}
+              onChange={formik.handleChange}
+              value={formik?.values?.schedule[0]?.startTime}
+            />
+              {formik.touched.schedule?.[0]?.startTime && formik.errors.schedule?.[0]?.startTime ? (
+          <div style={{ color: "red", marginLeft: 10 }}>
+            {formik.errors.schedule[0].startTime}
+          </div>
+        ) : null}
+            </div>
+           
+            {/* <TextWithButton
               label={"Start"}
               RightIcon={ClockIcon}
               additionalcontainer={styles.TextWithButtonstyle}
               text={'6:30 pm'}
+            /> */}
+            {/* <div style={{ width: 30 }} /> */}
+            <div  style={{width:"100%" ,}}>
+            <Inputfield
+              id={"schedule[0].endTime"}
+              type={"time"}
+              name={'End'}
+              additionalMainDivClassName={styles.TextWithButtonstyle}
+              onChange={formik.handleChange}
+              value={formik?.values?.schedule[0]?.endTime}
             />
-            <div style={{ width: 30 }} />
-            <TextWithButton
+            {formik.touched.schedule?.[0]?.endTime && formik.errors.schedule?.[0]?.endTime ? (
+          <div style={{ color: "red", marginLeft: 10 }}>
+            {formik.errors.schedule[0].endTime}
+          </div>
+        ) : null}
+          </div>
+            {/* <TextWithButton
               label={"End"}
-
               RightIcon={ClockIcon}
               additionalcontainer={styles.TextWithButtonstyle}
               text={'8:30 pm'}
-            />
+            /> */}
+
           </div>
           <div className={styles.paymentTypetxt}>Type of Payment</div>
           <div className={styles.row_div} style={{ justifyContent: 'space-between' }}>
@@ -199,13 +227,26 @@ const OntheDate = ({ handleClose }) => {
               <div className={`${selected === 'noncash' ? styles.Cashtxt : styles.noncashtxt}`}>Non-Cash</div>
             </div>
           </div>
+          <div>
+
+        
           <Inputfield
             id={"comment"}
+            type={"text"}
             name={'Comment'}
             additionalMainDivClassName={styles.comment_div_2}
+            onChange={formik.handleChange}
+            value={formik?.values?.comment}
           />
+           {formik.touched.comment && formik.errors.comment ? (
+          <div style={{ color: "red", marginLeft: 10 }}>
+            {formik.errors.comment}
+          </div>
+        ) : null}
+          </div>
+
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <button type='submit' className={styles.SaveButton} style={{ width: "100%", borderWidth: 0  ,cursor:"pointer"}} txtstyle={{ color: '#FFF' }} >Save</button>
+            <button type='submit' className={styles.SaveButton} style={{ width: "100%", borderWidth: 0, cursor: "pointer" }} txtstyle={{ color: '#FFF' }} >Save</button>
           </div>
 
           {/* <button type='submit' className={styles.SaveButton} >Save</button> */}
