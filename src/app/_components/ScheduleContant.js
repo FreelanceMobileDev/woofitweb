@@ -42,6 +42,7 @@ const ScheduleContant = () => {
   const [getSession, setSessing] = useState([])
   const [getTranningData, setTranningData] = useState([])
   const [loading, setLoading] = useState(false);
+  const [editTraining , setEditTraining]= useState({})
 
   const openEditPopup = () => {
     seteditpopup(true);
@@ -60,6 +61,7 @@ const ScheduleContant = () => {
   };
 
   const openTraning = () => {
+    setEditTraining()
     setNewTrainingpop(true);
   };
 
@@ -67,6 +69,12 @@ const ScheduleContant = () => {
     setNewTrainingpop(false);
     getTranningSessions();
   };
+
+  const editTrainingsession =(data)=>{
+    // console.log(data);
+    setNewTrainingpop(true);
+    setEditTraining(data)
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -161,7 +169,7 @@ const ScheduleContant = () => {
     const groupedData = {};
     data.forEach(item => {
       const startDate = moment(item.startDate);
-      const formattedDate = startDate.format('MMMM D'); // Format like "August 19"
+      const formattedDate = startDate.format('MMMM D');
 
       if (!groupedData[formattedDate]) {
         groupedData[formattedDate] = [];
@@ -249,7 +257,7 @@ const ScheduleContant = () => {
         </div>
 
         {popupIsOpen && <NewPayment show={popupIsOpen} handleClose={closePopup} />}
-        {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={closeopenTraning} />}
+        {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={closeopenTraning} editTraining={editTraining} />}
         {editpopup && <EditTraining show={editpopup} handleClose={closeEditPopup} />}
 
         {
@@ -285,9 +293,12 @@ const ScheduleContant = () => {
                     <>
                       {
                         (session?.clients.length > 0 || session?.group.length > 0) ?
-                          (<div className={styles.sessionCard2} >
+                          (<div className={styles.sessionCard2}    >
                             <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
-                            <div key={index} className={styles.sessionCard} style={{ backgroundColor: backColor(index) }}>
+                            <div key={index} className={styles.sessionCard}
+                              style={{ backgroundColor: backColor(index), cursor: "pointer" }}
+                              onClick={()=>editTrainingsession(session)}
+                            >
                               <div style={{ display: 'flex', alignItems: 'center', }}>
                                 {backIcon(index)}
                                 {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>

@@ -22,3 +22,4 @@ export const UPDATE_GROUP="group/createUpdateGroup"
 export const DELETE_GROUP="group/deleteGroup"
 export const CREATE_GROUP = 'group/createUpdateGroup'
 export const CREATE_UPDATE_TRANNING_SESSION="tranning/createUpdateTrainingSession"
+export const CONTECT_US ="user/create-contact-us"

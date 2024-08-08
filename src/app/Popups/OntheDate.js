@@ -15,17 +15,18 @@ import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import profileiconn from '../../../public/Images/addProfile@2x.png'
 
 
-const OntheDate = ({ handleClose }) => {
+const OntheDate = ({ handleClose, editTraining }) => {
+
   const [popupIsOpen, setShowPopup] = useState(false);
   const [groupdata, setgroupdata] = useState(false);
-  const [selected, setSelected] = useState('cash');
+  const [selected, setSelected] = useState(editTraining ? editTraining?.paymentMode : 'cash');
   const [clientDatas, setclientData] = useState([])
   const [loading, setLoading] = useState(false);
-  const [selectClients, setSelectclients] = useState([]);
-
-  const today = moment().format('DD MMM YYYY');
+  const [selectClients, setSelectclients] = useState(editTraining ? editTraining?.clients || editTraining?.group : []);
+  const today = editTraining ? moment(editTraining?.startDate).format('DD MMM YYYY') : moment().format('DD MMM YYYY');
   const getApiClinent = async (data) => {
     try {
       setLoading(true)
@@ -51,7 +52,6 @@ const OntheDate = ({ handleClose }) => {
   };
 
 
-  const dateFormatPattern = /^(\d{1,2})\s([A-Za-z]{3,9})\s(\d{4})$/;
   const formik = useFormik({
     initialValues: {
       startDate: moment().format('YYYY-MM-DD'),
@@ -59,6 +59,7 @@ const OntheDate = ({ handleClose }) => {
       recurring: true,
       paymentMode: selected || '',
       clients: [],
+      group: [],
       comment: "",
       schedule: [{
         day: moment().format('dddd'),
@@ -67,7 +68,7 @@ const OntheDate = ({ handleClose }) => {
         active: true
       }]
     },
-    validationSchema :Yup.object({
+    validationSchema: Yup.object({
       // startDate: Yup.date().required('Start date is required'),
       // endDate: Yup.date().required('End date is required'),
       // recurring: Yup.boolean(),
@@ -84,38 +85,88 @@ const OntheDate = ({ handleClose }) => {
       ),
     }),
 
+
+
     onSubmit: async (values) => {
       try {
-        setLoading(true)
+        // setLoading(true)
         values.clients = selectClients?.map((e) => e?._id) || [];
         if (values.clients.length === 0 || (values.group && values.group.length === 0)) {
           return toast.error("Please Select Client OR Group");
         }
-        values.paymentMode = selected;
-        console.log(values, '====values');
-        try {
-          const response = await createUpdateTrainingSession(values)
-          console.log(response.data)
-          if(response.data.success==false){
-            return toast.error(response.data.message)
+
+        if (values.clients.length > 1) {
+          return toast.error("Please Select Only one Client");
+        }
+        if (editTraining) {
+          try {
+            const response = await createUpdateTrainingSession(values, editTraining._id)
+            console.log(response.data)
+            if (response.data.success == false) {
+              return toast.error(response.data.message)
+            }
+            toast.success(response.data.message)
+            console.log(response.data)
+            handleClose()
+          } catch (error) {
+            console.log('here is the not aailabel')
+            return toast.error(error.response.data.message)
+            console.log(error.response.data.message, '===here')
+          } finally {
+            setLoading(false)
           }
-          toast.success(response.data.message)
-          console.log(response.data)
-           handleClose()
-        } catch (error) {
-          console.log('here is the not aailabel')
-          return toast.error(error.response.data.message)
-          console.log(error.response.data.message,'===here')
-        }finally{
-          setLoading(false)
+
+        } else {
+          try {
+            values.paymentMode = selected;
+            const response = await createUpdateTrainingSession(values)
+            console.log(response.data)
+            if (response.data.success == false) {
+              return toast.error(response.data.message)
+            }
+            toast.success(response.data.message)
+            console.log(response.data)
+            handleClose()
+          } catch (error) {
+            console.log('here is the not aailabel')
+            return toast.error(error.response.data.message)
+            console.log(error.response.data.message, '===here')
+          } finally {
+            setLoading(false)
+          }
         }
       } catch (error) {
         console.log(error, '====');
-      }finally{
+      } finally {
         setLoading(false)
       }
     },
   });
+
+  useEffect(() => {
+    if (editTraining) {
+      formik.setValues({
+        startDate: editTraining?.startDate || "",
+        endDate: editTraining?.endDate || "",
+        recurring: editTraining?.recurring || "",
+        paymentMode: editTraining?.paymentMode || '',
+        clients: editTraining?.clients || "",
+        group: editTraining?.group || "",
+        comment: editTraining?.comment || "",
+        schedule: [{
+          day: editTraining?.schedule[0]?.day || "",
+          startTime: editTraining?.schedule[0]?.startTime || "",
+          endTime: editTraining?.schedule[0]?.endTime || "",
+          active: editTraining?.schedule[0]?.active || "",
+        }]
+      })
+    }
+  }, [editTraining])
+
+  const handleRomeve = (data) => {
+    let filterData = selectClients.filter((e) => e._id !== data)
+    setSelectclients(filterData)
+  }
 
   return (
     <>
@@ -129,7 +180,6 @@ const OntheDate = ({ handleClose }) => {
             text={today}
           />
           <div className={styles.row_div}>
-
             {selectClients && selectClients.length > 0 ?
               <>
                 <span onClick={() => setShowPopup(true)}>Add Clients</span>
@@ -137,10 +187,12 @@ const OntheDate = ({ handleClose }) => {
                   {selectClients?.map((item, index) => (
                     <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
                       <div className={styles.row}>
-                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profilepicture} />
+                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />
                         <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
                       </div>
-                      <CrossIcon />
+                      <div onClick={() => handleRomeve(item?._id)}>
+                        <CrossIcon />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -168,22 +220,22 @@ const OntheDate = ({ handleClose }) => {
               </>}
           </div>
           <div className={styles.row_div} >
-            <div style={{width:"100%" }} >
-            <Inputfield
-              id={"schedule[0].startTime"}
-              type={"time"}
-              name={'Start'}
-              additionalMainDivClassName={styles.TextWithButtonstyle}
-              onChange={formik.handleChange}
-              value={formik?.values?.schedule[0]?.startTime}
-            />
+            <div style={{ width: "100%" }} >
+              <Inputfield
+                id={"schedule[0].startTime"}
+                type={"time"}
+                name={'Start'}
+                additionalMainDivClassName={styles.TextWithButtonstyle}
+                onChange={formik.handleChange}
+                value={formik?.values?.schedule[0]?.startTime}
+              />
               {formik.touched.schedule?.[0]?.startTime && formik.errors.schedule?.[0]?.startTime ? (
-          <div style={{ color: "red", marginLeft: 10 }}>
-            {formik.errors.schedule[0].startTime}
-          </div>
-        ) : null}
+                <div style={{ color: "red", marginLeft: 10 }}>
+                  {formik.errors.schedule[0].startTime}
+                </div>
+              ) : null}
             </div>
-           
+
             {/* <TextWithButton
               label={"Start"}
               RightIcon={ClockIcon}
@@ -191,21 +243,21 @@ const OntheDate = ({ handleClose }) => {
               text={'6:30 pm'}
             /> */}
             {/* <div style={{ width: 30 }} /> */}
-            <div  style={{width:"100%" ,}}>
-            <Inputfield
-              id={"schedule[0].endTime"}
-              type={"time"}
-              name={'End'}
-              additionalMainDivClassName={styles.TextWithButtonstyle}
-              onChange={formik.handleChange}
-              value={formik?.values?.schedule[0]?.endTime}
-            />
-            {formik.touched.schedule?.[0]?.endTime && formik.errors.schedule?.[0]?.endTime ? (
-          <div style={{ color: "red", marginLeft: 10 }}>
-            {formik.errors.schedule[0].endTime}
-          </div>
-        ) : null}
-          </div>
+            <div style={{ width: "100%", }}>
+              <Inputfield
+                id={"schedule[0].endTime"}
+                type={"time"}
+                name={'End'}
+                additionalMainDivClassName={styles.TextWithButtonstyle}
+                onChange={formik.handleChange}
+                value={formik?.values?.schedule[0]?.endTime}
+              />
+              {formik.touched.schedule?.[0]?.endTime && formik.errors.schedule?.[0]?.endTime ? (
+                <div style={{ color: "red", marginLeft: 10 }}>
+                  {formik.errors.schedule[0].endTime}
+                </div>
+              ) : null}
+            </div>
             {/* <TextWithButton
               label={"End"}
               RightIcon={ClockIcon}
@@ -221,28 +273,28 @@ const OntheDate = ({ handleClose }) => {
               <CashSecondIcon className={selected === 'cash' ? styles.selectedIcon : styles.unselectedIcon} />
               <div className={` ${selected === 'cash' ? styles.Cashtxt : styles.noncashtxt}`}>Cash</div>
             </div>
-            <div className={` ${selected === 'noncash' ? styles.cashDiv : styles.noncash}`}
-              onClick={() => setSelected("noncash")}>
-              <NonCashIcon className={selected === 'noncash' ? styles.selectedIcon : styles.unselectedIcon} />
-              <div className={`${selected === 'noncash' ? styles.Cashtxt : styles.noncashtxt}`}>Non-Cash</div>
+            <div className={` ${selected === 'card' ? styles.cashDiv : styles.noncash}`}
+              onClick={() => setSelected("card")}>
+              <NonCashIcon className={selected === 'card' ? styles.selectedIcon : styles.unselectedIcon} />
+              <div className={`${selected === 'card' ? styles.Cashtxt : styles.noncashtxt}`}>Non-Cash</div>
             </div>
           </div>
           <div>
 
-        
-          <Inputfield
-            id={"comment"}
-            type={"text"}
-            name={'Comment'}
-            additionalMainDivClassName={styles.comment_div_2}
-            onChange={formik.handleChange}
-            value={formik?.values?.comment}
-          />
-           {formik.touched.comment && formik.errors.comment ? (
-          <div style={{ color: "red", marginLeft: 10 }}>
-            {formik.errors.comment}
-          </div>
-        ) : null}
+
+            <Inputfield
+              id={"comment"}
+              type={"text"}
+              name={'Comment'}
+              additionalMainDivClassName={styles.comment_div_2}
+              onChange={formik.handleChange}
+              value={formik?.values?.comment}
+            />
+            {formik.touched.comment && formik.errors.comment ? (
+              <div style={{ color: "red", marginLeft: 10 }}>
+                {formik.errors.comment}
+              </div>
+            ) : null}
           </div>
 
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

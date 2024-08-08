@@ -20,7 +20,6 @@ export const apiClientUpload = axios.create({
 
 apiClient.interceptors.request.use(
     (config) => {
-
          const state = []
         // console.log("==========>",state?.cookies?.userDetails,"console.log(state?.cookies?.userDetails)============>")
         const token = localStorage.getItem("token")

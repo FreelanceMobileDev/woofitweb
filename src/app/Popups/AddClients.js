@@ -5,6 +5,8 @@ import { CrossIcon, FilterIcon, LeftArrow, SearchIcon } from '../../../public';
 import OpticityButton from '../_reuseableComponent/OpicityButton';
 import Image from 'next/image';
 import profilepicture from '../../../public/Images/profilepic@2x.png'
+import profileiconn from '../../../public/Images/addProfile@2x.png'
+
 
 
 const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas }) => {
@@ -49,7 +51,7 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
   const renderClientGroup = (clients) => (
      clients.map((client) => (
       <div key={client.id} className={styles.clientItem}>
-        <Image height={35} width={35} src={client.clientImage ? client.clientImage : profilepicture.src} alt={client.name} className={styles.avatar} />
+        <Image height={35} width={35} src={client.clientImage ? client.clientImage : profileiconn} alt={client.name} className={styles.avatar} />
         <div className={styles.clientInfo}>
           <span className={styles.Clientsname}>{client.name}</span>
           <input

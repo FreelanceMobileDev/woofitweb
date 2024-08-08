@@ -165,15 +165,15 @@ const EditClient = ({ setSelectedItem }) => {
               values, getData.clientDetails._id,
             );
             let data = caredData
-            .filter(e => !e._id) 
-            .map(e => ({
-              ...e,
-              clientId: getData.clientDetails?._id
-            }));
-            if(data.length>0){
+              .filter(e => !e._id)
+              .map(e => ({
+                ...e,
+                clientId: getData.clientDetails?._id
+              }));
+            if (data.length > 0) {
               addCardDb(data)
             }
-          
+
             getClientDetail(id);
             toast.success(response.data.message)
             return router.push(
@@ -186,14 +186,12 @@ const EditClient = ({ setSelectedItem }) => {
               return setErrormsg(response?.data);
             }
 
-            console.log(response.data.data, '=====datat')
-
-            let data = caredData.map((e) => {
-              return { ...e, clientId: response.data.data._id };
-            });
-
-
-            addCardDb(data)
+            if (caredData.length > 0) {
+              let data = caredData.map((e) => {
+                return { ...e, clientId: response.data.data._id };
+              });
+              addCardDb(data)
+            }
             toast.success(response.data.message)
             return router.push(`/Clients`);
           }
@@ -212,11 +210,11 @@ const EditClient = ({ setSelectedItem }) => {
 
   const addCardDb = async (data) => {
     try {
-      const ddd= await addCard(data)
+      const ddd = await addCard(data)
     } catch (error) {
       console.log(error)
     }
- 
+
   }
   // const DeleteClient=async(id)=>{
   //   try {
@@ -297,7 +295,7 @@ const EditClient = ({ setSelectedItem }) => {
         <div className={styles.containor}>
           <div className={styles.headerr}>
             <div className={styles.clietdiv}>
-              <div onClick={() => router.push(id?`/Clients/clientsInfo?id=${id}`:"/Clients")} style={{ cursor: 'pointer' }}>
+              <div onClick={() => router.push(id ? `/Clients/clientsInfo?id=${id}` : "/Clients")} style={{ cursor: 'pointer' }}>
                 <LeftArrow />
               </div>
               <div className={styles.ClientStyle}> {id ? "Edit Client Profile" : "Add Client"}</div>

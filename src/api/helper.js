@@ -1,5 +1,11 @@
 import { apiClient, apiClientUpload } from "./api";
-import { LOGIN, REGISTER, BASE_URL, POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT, GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT, GET_TRANNING_SESSION, CREATE_UPDATE_RATE, UPDATE_PROILE, DELETE_RATES, DELETE, DASHBOARD_DATA, PUTMETHOD, UPDATE_GROUP, DELETE_GROUP, CREATE_GROUP, CREATE_UPDATE_TRANNING_SESSION } from "./url";
+import {
+  LOGIN, REGISTER, BASE_URL, POST_METHOD, IMAGEUPLOAD, UPDATE_PROFESSIONAL_DETAILS, GET_CLIENT,
+  GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT,
+  GET_TRANNING_SESSION, CREATE_UPDATE_RATE, UPDATE_PROILE, DELETE_RATES, DELETE, DASHBOARD_DATA, PUTMETHOD,
+  UPDATE_GROUP, DELETE_GROUP, CREATE_GROUP, CREATE_UPDATE_TRANNING_SESSION,
+  CONTECT_US
+} from "./url";
 
 
 export const imageUpload = (payload) => {
@@ -57,17 +63,17 @@ export const getClinent = (payload, sort) => {
   return apiClient({
     baseURL: BASE_URL,
     method: GET_METHOD,
-    url: `${GET_CLIENT}?isArchive=${payload}${sort?sort:""}`,
+    url: `${GET_CLIENT}?isArchive=${payload}${sort ? sort : ""}`,
     // data: payload,
   });
 };
 
-export const getGroupList = (payload,search) => {
+export const getGroupList = (payload, search) => {
   console.log("GET_GROUP_LIST->", payload,)
   return apiClient({
     baseURL: BASE_URL,
     method: GET_METHOD,
-    url: `${GET_GROUP_LIST}?coachId=${payload}${search?search:""}`,
+    url: `${GET_GROUP_LIST}?coachId=${payload}${search ? search : ""}`,
     // data: payload,
   });
 };
@@ -220,15 +226,26 @@ export const deleteClient = (id) => {
   });
 };
 
-export const createUpdateTrainingSession = (payload) => {
-  console.log("createUpdateTrainingSession>>>>>", payload)
+export const createUpdateTrainingSession = (payload, id) => {
+  const url = id ? `${CREATE_UPDATE_TRANNING_SESSION}?id=${id}`:CREATE_UPDATE_TRANNING_SESSION;
+  console.log("createUpdateTrainingSession>>>>>", payload , id)
   return apiClient({
     baseURL: BASE_URL,
-    method: POST_METHOD,
-    url: CREATE_UPDATE_TRANNING_SESSION,
-    data:payload
+    method: id ? PUTMETHOD : POST_METHOD,
+    url: url,
+    data: payload
   });
 };
+
+export const contectUs =(payload)=>{
+  console.log(payload ,'=====>>>>>>>>>contectUs')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  POST_METHOD,
+    url: CONTECT_US,
+    data: payload
+  });
+}
 
 
 

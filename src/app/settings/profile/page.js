@@ -4,7 +4,7 @@ import SettingSidebar from '../settingSidebar'
 import DeshBorad from '../../dashboard/DashCompoent';
 import styles from '../../_components/Login.module.css';
 import Image from 'next/image';
-import profileiconn from '../../../../public/Images/profileee.png'
+// import profileiconn from '../../../../public/Images/profileee.png'
 import { Attherateimg, CalenderIcon, Downarrow, UploadimgIcon, Userimg } from '../../../../public';
 import Inputfield from '../../_reuseableComponent/Inputfield';
 import Loader from '../../_components/Loader';
@@ -13,6 +13,8 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { experienceOptions, specializationOptions } from '../../../util/staticData';
 import SelectOption from '../../_reuseableComponent/SelectOption';
+import profileiconn from '../../../../public/Images/addProfile@2x.png'
+
 
 function page() {
     const [data, setData] = useState({});
@@ -25,7 +27,7 @@ function page() {
         try {
             setLoading(true)
             const getData = await getProfile()
-            console.log(getData.data.data, '===getData')
+            // console.log(getData.data.data, '===getData')
             setData(getData.data.data)
             localStorage.setItem("userData", JSON.stringify(getData.data.data))
         } catch (error) {
@@ -123,7 +125,7 @@ function page() {
                     <Loader loading={loading} />
                     <div className={styles.right_div_data}>
                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
-                            <Image src={selectedFile ? selectedFile : data?.image} alt={profileiconn}
+                            <Image src={selectedFile ? selectedFile : data?.image||profileiconn} alt={profileiconn}
                                 className={styles.profile_pic_setting}
                                 height={107}
                                 width={107}
