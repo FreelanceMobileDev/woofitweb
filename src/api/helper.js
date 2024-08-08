@@ -69,11 +69,13 @@ export const getClinent = (payload, sort) => {
 };
 
 export const getGroupList = (payload, search) => {
+
+
   console.log("GET_GROUP_LIST->", payload,)
   return apiClient({
     baseURL: BASE_URL,
     method: GET_METHOD,
-    url: `${GET_GROUP_LIST}?coachId=${payload}${search ? search : ""}`,
+    url: `${GET_GROUP_LIST}?coachId=${payload ? payload :""}${search ? search : ""}`,
     // data: payload,
   });
 };

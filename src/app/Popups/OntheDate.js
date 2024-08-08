@@ -9,7 +9,7 @@ import AddClients from './AddClients'
 import Groups from './Groups'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import { createUpdateTrainingSession, getClinent } from '../../api/helper';
+import { createUpdateTrainingSession, getClinent, getGroupList } from '../../api/helper';
 import Loader from '../_components/Loader';
 import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image';
@@ -25,8 +25,12 @@ const OntheDate = ({ handleClose, editTraining }) => {
   const [selected, setSelected] = useState(editTraining ? editTraining?.paymentMode : 'cash');
   const [clientDatas, setclientData] = useState([])
   const [loading, setLoading] = useState(false);
-  const [selectClients, setSelectclients] = useState(editTraining ? editTraining?.clients || editTraining?.group : []);
+  const [selectClients, setSelectclients] = useState(editTraining ? editTraining?.clients : []);
   const today = editTraining ? moment(editTraining?.startDate).format('DD MMM YYYY') : moment().format('DD MMM YYYY');
+  const [groupDatas, setgroupDatas] = useState([])
+  const [selectdGroup, setSelectedGroup] = useState(editTraining?.group ? editTraining?.group : [])
+  // console.log(selectdGroup,'====selectdGroup')
+
   const getApiClinent = async (data) => {
     try {
       setLoading(true)
@@ -38,10 +42,25 @@ const OntheDate = ({ handleClose, editTraining }) => {
       setLoading(false)
     }
   }
+  const id = localStorage.getItem("id");
+  const groupData = async () => {
+    try {
+      const response = await getGroupList(id)
+      setgroupDatas(response.data.data.data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+
+    }
+  }
+
+
   useEffect(() => {
     if (!clientDatas.length > 0) {
       getApiClinent(0)
     }
+    groupData()
+
   }, [])
 
   const closePopup = () => {
@@ -90,14 +109,25 @@ const OntheDate = ({ handleClose, editTraining }) => {
     onSubmit: async (values) => {
       try {
         // setLoading(true)
+        values.group = selectdGroup?.map((e) => e._id) || []
         values.clients = selectClients?.map((e) => e?._id) || [];
-        if (values.clients.length === 0 || (values.group && values.group.length === 0)) {
-          return toast.error("Please Select Client OR Group");
-        }
 
-        if (values.clients.length > 1) {
-          return toast.error("Please Select Only one Client");
-        }
+        // if (values.clients.length === 0 || (values.group && values.group.length === 0)) {
+        //   return toast.error("Please Select Client OR Group");
+        // }
+
+        
+          if (values.clients.length > 1) {
+            return toast.error("Please Select Only One Client");
+          }
+      
+
+        // if (selectdGroup) {
+        //   if (values.clients.length > 1) {
+        //     return toast.error("Please Select Only One Group");
+        //   }
+        // }
+
         if (editTraining) {
           try {
             const response = await createUpdateTrainingSession(values, editTraining._id)
@@ -168,6 +198,11 @@ const OntheDate = ({ handleClose, editTraining }) => {
     setSelectclients(filterData)
   }
 
+  const handleRomeveGroup = (data) => {
+    let filterData = selectdGroup.filter((e) => e._id !== data)
+    setSelectedGroup(filterData)
+  }
+
   return (
     <>
       <Loader loading={loading} />
@@ -180,17 +215,34 @@ const OntheDate = ({ handleClose, editTraining }) => {
             text={today}
           />
           <div className={styles.row_div}>
-            {selectClients && selectClients.length > 0 ?
+            {(selectdGroup && selectdGroup.length > 0) || (selectClients && selectClients.length > 0) ?
               <>
-                <span onClick={() => setShowPopup(true)}>Add Clients</span>
+                <span onClick={() => selectdGroup ? setgroupdata(true) : setShowPopup(true)}>{selectdGroup ? "Add Group" : "Add Clients"} </span>
                 <div style={{ marginTop: 30 }}>
-                  {selectClients?.map((item, index) => (
+                  {selectClients && selectClients?.map((item, index) => (
                     <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
                       <div className={styles.row}>
                         <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />
                         <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
                       </div>
                       <div onClick={() => handleRomeve(item?._id)}>
+                        <CrossIcon />
+                      </div>
+                    </div>
+                  ))
+                  }
+                  {selectdGroup && selectdGroup?.map((item, index) => (
+                    <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
+                      <div className={styles.row}>
+                        {
+                          item.clients.map((e) =>
+                            <Image width={40} height={40} src={e.clientImage ? item.clientImage : profileiconn} />
+                          )
+                        }
+                        {/* <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} /> */}
+                        <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
+                      </div>
+                      <div onClick={() => handleRomeveGroup(item?._id)}>
                         <CrossIcon />
                       </div>
                     </div>
@@ -309,7 +361,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
             additionalMainDivClassName={styles.SaveButton}
           /> */}
           {clientDatas && clientDatas.length > 0 && popupIsOpen && <AddClients show={popupIsOpen} handleClose={closePopup} selectClients={selectClients} setSelectclients={setSelectclients} clientDatas={clientDatas} />}
-          {groupdata && <Groups show={groupdata} handleClose={closegroupPopUp} />}
+          {groupdata && <Groups show={groupdata} handleClose={closegroupPopUp} groupDatas={groupDatas} setSelectedGroup={setSelectedGroup} selectdGroup={selectdGroup} />}
 
         </div>
       </form>
