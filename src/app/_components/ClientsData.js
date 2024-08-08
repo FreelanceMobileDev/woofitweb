@@ -31,14 +31,22 @@ const ClientsData = ({ activeTab ,search}) => {
       setLoading(false)
     }
   }
-  useEffect(()=>{
-    if(search?.length>0){
-      search=`&search=${search}`
-      let act = activeTab == "Clients" ? 0 : 1
-      getApiClinent(act,search)
-    }else{
-      activeTabCall()
+  const activeTabCall = () => { 
+    if (activeTab === "Clients") {
+      getApiClinent(0)
     }
+    if (activeTab === "ArchivedClients") {
+      getApiClinent(1)
+    }
+  }
+  useEffect(()=>{
+      if(search?.length>0){
+        search=`&search=${search}`
+        let act = activeTab == "Clients" ? 0 : 1
+        getApiClinent(act,search)
+      }else{
+        activeTabCall()
+      }
   },[search])
 
   useEffect(() => {
@@ -52,15 +60,6 @@ const ClientsData = ({ activeTab ,search}) => {
   const handleClick = (id) => {
     router.push(`/Clients/clientsInfo?id=${id}`);
   };
-
-  const activeTabCall = () => { 
-    if (activeTab === "Clients") {
-      getApiClinent(0)
-    }
-    if (activeTab === "ArchivedClients") {
-      getApiClinent(1)
-    }
-  }
 
 
   const DeleteClient = async (id) => {
