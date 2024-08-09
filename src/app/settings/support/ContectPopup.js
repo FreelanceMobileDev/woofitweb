@@ -91,13 +91,17 @@ function ContectPopup({ show, handleClose }) {
             <div style={{ color: 'red' }}>{formik.errors.message}</div>
           ) : null}
 
-          <button type='submit' className={styles.AddClientButton} >Submit</button>
+<div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <button type='submit' className={styles.SaveButton} style={{ width: "100%", borderWidth: 0, cursor: "pointer" }} txtstyle={{ color: '#FFF' }} >Save</button>
+          </div>
+
+          {/* <button type='submit' className={styles.AddClientButton} >Submit</button>
 
           <OpticityButton
             name={"Submit"}
             txtstyle={{ color: '#FFF' }}
             additionalMainDivClassName={styles.AddClientButton}
-          />
+          /> */}
         </form>
       </div>
     </div>
