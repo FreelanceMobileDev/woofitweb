@@ -102,11 +102,11 @@ const TrainingInformation = ({ show, handleClose, editTraining }) => {
 
                 {editTraining.status === "pending" && <>
                     <div className={styles.actions} style={{ display: 'flex', alignItems: 'center', width: '90%', justifyContent: 'space-between', alignSelf: 'center', marginLeft: 30, }}>
-                    <div onClick={openTraning} style={{ borderRadius: 30, width: '40%', justifyContent: 'center', alignItems: 'center', display: 'flex', height: 50, backgroundColor: '#CFF3FD', color: '#14AED1' }}>Edit</div>
-                    <div   onClick={()=>handelCancelOrComplete("canceled")}  style={{ borderRadius: 30, width: '40%', justifyContent: 'center', alignItems: 'center', display: 'flex', height: 50, backgroundColor: '#FFE6D7', color: '#FE4726' }}>Cancel</div>
+                    <div onClick={openTraning} style={{ cursor:"pointer", borderRadius: 30, width: '40%', justifyContent: 'center', alignItems: 'center', display: 'flex', height: 50, backgroundColor: '#CFF3FD', color: '#14AED1' }}>Edit</div>
+                    <div   onClick={()=>handelCancelOrComplete("canceled")}  style={{ cursor:"pointer", borderRadius: 30, width: '40%', justifyContent: 'center', alignItems: 'center', display: 'flex', height: 50, backgroundColor: '#FFE6D7', color: '#FE4726' }}>Cancel</div>
                 </div>
                 <div
-                 style={{ borderRadius: 30, width: '90%', justifyContent: 'center', alignItems: 'center', display: 'flex', height: 50, backgroundColor: '#14AED1',color: '#FFFFFF', marginTop: 30, alignSelf: 'center', display: 'flex', marginLeft: 30, }}
+                 style={{ cursor:"pointer", borderRadius: 30, width: '90%', justifyContent: 'center', alignItems: 'center', display: 'flex', height: 50, backgroundColor: '#14AED1',color: '#FFFFFF', marginTop: 30, alignSelf: 'center', display: 'flex', marginLeft: 30, }}
                   onClick={()=>handelCancelOrComplete("complete")}    >Mark as Complete</div>
                 </>}
                 {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={handleClose} editTraining={editTraining} />}

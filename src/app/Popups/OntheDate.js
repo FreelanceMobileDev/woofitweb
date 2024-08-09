@@ -16,60 +16,83 @@ import Image from 'next/image';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import profileiconn from '../../../public/Images/addProfile@2x.png'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
+const validationSchema = Yup.object().shape({
+  comment: Yup.string().required("Comment is required"),
+});
 
 const OntheDate = ({ handleClose, editTraining }) => {
 
   const [popupIsOpen, setShowPopup] = useState(false);
   const [groupdata, setgroupdata] = useState(false);
   const [selected, setSelected] = useState(editTraining ? editTraining?.paymentMode : 'cash');
-  const [clientDatas, setclientData] = useState([])
+  const [clientDatas, setclientData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectClients, setSelectclients] = useState(editTraining ? editTraining?.clients : []);
   const today = editTraining ? moment(editTraining?.startDate).format('DD MMM YYYY') : moment().format('DD MMM YYYY');
-  const [groupDatas, setgroupDatas] = useState([])
-  const [selectdGroup, setSelectedGroup] = useState(editTraining?.group ? editTraining?.group : [])
-  // console.log(selectdGroup,'====selectdGroup')
+  const [groupDatas, setgroupDatas] = useState([]);
+  const [selectdGroup, setSelectedGroup] = useState(editTraining?.group ? editTraining?.group : []);
+  
+  const parseTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const now = new Date();
+    now.setHours(hours);
+    now.setMinutes(minutes);
+    now.setSeconds(0);
+    return now;
+  };
+
+  const [startTime, setStartTime] = useState(() => {
+    const initialStartTime = editTraining?.schedule[0]?.startTime || "00:00";
+    return parseTime(initialStartTime);
+  });
+  const [endTime, setEndTime] = useState(() => {
+    const initialEndTime = editTraining?.schedule[0]?.endTime || "23:59";
+    return parseTime(initialEndTime);
+  });
 
   const getApiClinent = async (data) => {
     try {
-      setLoading(true)
-      const getData = await getClinent(data)
-      setclientData(getData?.data?.data?.getAllClientData)
+      setLoading(true);
+      const getData = await getClinent(data);
+      setclientData(getData?.data?.data?.getAllClientData);
     } catch (error) {
-      console.log(error, '====error')
+      console.log(error, '====error');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+
   const id = localStorage.getItem("id");
   const groupData = async () => {
     try {
-      const response = await getGroupList(id)
-      setgroupDatas(response.data.data.data)
+      const response = await getGroupList(id);
+      setgroupDatas(response.data.data.data);
     } catch (error) {
-      console.log(error)
-    } finally {
-
+      console.log(error);
     }
-  }
-
+  };
 
   useEffect(() => {
     if (!clientDatas.length > 0) {
-      getApiClinent(0)
+      getApiClinent(0);
     }
-    groupData()
-
-  }, [])
+    groupData();
+  }, []);
 
   const closePopup = () => {
     setShowPopup(false);
   };
+  
   const closegroupPopUp = () => {
     setgroupdata(false);
   };
 
+  function formatTime(date) {
+    return moment(date).format('HH:mm');
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -87,88 +110,38 @@ const OntheDate = ({ handleClose, editTraining }) => {
         active: true
       }]
     },
-    validationSchema: Yup.object({
-      // startDate: Yup.date().required('Start date is required'),
-      // endDate: Yup.date().required('End date is required'),
-      // recurring: Yup.boolean(),
-      // paymentMode: Yup.string().required('Payment mode is required'),
-      // clients: Yup.array().min(1, 'At least one client is required'),
-      comment: Yup.string().max(500, 'Comment cannot exceed 500 characters'),
-      schedule: Yup.array().of(
-        Yup.object({
-          // day: Yup.string().required('Day is required'),
-          startTime: Yup.string().required('Start time is required'),
-          endTime: Yup.string().required('End time is required'),
-          // active: Yup.boolean(),
-        })
-      ),
-    }),
-
-
-
+    validationSchema,
     onSubmit: async (values) => {
       try {
-        // setLoading(true)
-        values.group = selectdGroup?.map((e) => e._id) || []
+        setLoading(true);
+        values.schedule = values.schedule.map(entry => ({
+          day: entry.day,
+          startTime: formatTime(startTime),
+          endTime: formatTime(endTime),
+          active: entry.active
+        }));
+        values.group = selectdGroup?.map((e) => e._id) || [];
         values.clients = selectClients?.map((e) => e?._id) || [];
 
-        // if (values.clients.length === 0 || (values.group && values.group.length === 0)) {
-        //   return toast.error("Please Select Client OR Group");
-        // }
-
-
-        if (values.clients.length > 1) {
-          return toast.error("Please Select Only One Client");
+        if (values.clients.length === 0 && values.group.length === 0) {
+          return toast.error("Please select at least one client and one group.");
         }
 
+        const response = editTraining
+          ? await createUpdateTrainingSession(values, editTraining._id)
+          : await createUpdateTrainingSession(values);
 
-        // if (selectdGroup) {
-        //   if (values.clients.length > 1) {
-        //     return toast.error("Please Select Only One Group");
-        //   }
-        // }
-
-        if (editTraining) {
-          try {
-            const response = await createUpdateTrainingSession(values, editTraining._id)
-            console.log(response.data)
-            if (response.data.success == false) {
-              return toast.error(response.data.message)
-            }
-            toast.success(response.data.message)
-            console.log(response.data)
-            handleClose()
-          } catch (error) {
-            console.log('here is the not aailabel')
-            return toast.error(error.response.data.message)
-            console.log(error.response.data.message, '===here')
-          } finally {
-            setLoading(false)
-          }
-
-        } else {
-          try {
-            values.paymentMode = selected;
-            const response = await createUpdateTrainingSession(values)
-            console.log(response.data)
-            if (response.data.success == false) {
-              return toast.error(response.data.message)
-            }
-            toast.success(response.data.message)
-            console.log(response.data)
-            handleClose()
-          } catch (error) {
-            console.log('here is the not aailabel')
-            return toast.error(error.response.data.message)
-            console.log(error.response.data.message, '===here')
-          } finally {
-            setLoading(false)
-          }
+        if (!response.data.success) {
+          return toast.error(response.data.message);
         }
+
+        toast.success(response.data.message);
+        handleClose();
       } catch (error) {
-        console.log(error, '====');
+        const errorMessage = error.response?.data?.message || 'An unexpected error occurred';
+        toast.error(errorMessage);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     },
   });
@@ -189,21 +162,19 @@ const OntheDate = ({ handleClose, editTraining }) => {
           endTime: editTraining?.schedule[0]?.endTime || "",
           active: editTraining?.schedule[0]?.active || "",
         }]
-      })
+      });
     }
-  }, [editTraining])
+  }, [editTraining]);
 
   const handleRomeve = (data) => {
-    console.group(data, '====dara')
-    let filterData = selectClients.filter((e) => e._id !== data)
-    setSelectclients(filterData)
-  }
+    let filterData = selectClients.filter((e) => e._id !== data);
+    setSelectclients(filterData);
+  };
 
   const handleRomeveGroup = (data) => {
-    let filterData = selectdGroup.filter((e) => e._id !== data)
-    setSelectedGroup(filterData)
-  }
-
+    let filterData = selectdGroup.filter((e) => e._id !== data);
+    setSelectedGroup(filterData);
+  };
   return (
     <>
       <Loader loading={loading} />
@@ -229,7 +200,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
                       <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
                         <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />
                         <div style={{ width: 20 }} />
-                        <div onClick={() => handleRomeve(item?._id)} style={{cursor:"pointer"}} >
+                        <div onClick={() => handleRomeve(item?._id)} style={{ cursor: "pointer" }} >
                           <CrossIcon style={{ height: 23, width: 23 }} />
                         </div>
                       </div>
@@ -244,7 +215,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
                         ))}
                         {/* <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />  */}
                         <div style={{ width: 20 }} />
-                        <div onClick={() => handleRomeveGroup(item?._id)}  style={{cursor:"pointer"}} >
+                        <div onClick={() => handleRomeveGroup(item?._id)} style={{ cursor: "pointer" }} >
                           <CrossIcon style={{ height: 23, width: 23 }} />
                         </div>
                       </div>
@@ -263,6 +234,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
                     text={'Client'}
                     onClick={() => setShowPopup(true)}
                   />
+
                   <div style={{ width: 30 }} />
                   <TextWithButton
                     space
@@ -277,7 +249,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
             }
           </div>
 
-          <div className={styles.row_div} >
+          {/* <div className={styles.row_div} >
             <div style={{ width: "100%" }} >
               <Inputfield
                 id={"schedule[0].startTime"}
@@ -287,21 +259,16 @@ const OntheDate = ({ handleClose, editTraining }) => {
                 onChange={formik.handleChange}
                 value={formik?.values?.schedule[0]?.startTime}
               />
+
+
               {formik.touched.schedule?.[0]?.startTime && formik.errors.schedule?.[0]?.startTime ? (
                 <div style={{ color: "red", marginLeft: 10 }}>
                   {formik.errors.schedule[0].startTime}
                 </div>
               ) : null}
             </div>
-
-            {/* <TextWithButton
-              label={"Start"}
-              RightIcon={ClockIcon}
-              additionalcontainer={styles.TextWithButtonstyle}
-              text={'6:30 pm'}
-            /> */}
-            {/* <div style={{ width: 30 }} /> */}
             <div style={{ width: "100%", }}>
+            
               <Inputfield
                 id={"schedule[0].endTime"}
                 type={"time"}
@@ -316,14 +283,46 @@ const OntheDate = ({ handleClose, editTraining }) => {
                 </div>
               ) : null}
             </div>
-            {/* <TextWithButton
-              label={"End"}
-              RightIcon={ClockIcon}
-              additionalcontainer={styles.TextWithButtonstyle}
-              text={'8:30 pm'}
-            /> */}
+          </div> */}
 
+          <div className={styles.row_div}>
+            <div style={{ width: "100%" }}>
+              <label>Start</label>
+              <DatePicker
+                selected={startTime}
+                onChange={(time) => {
+                  setStartTime(time);
+                  if (endTime && time >= endTime) {
+                    setEndTime(null);
+                  }
+                }}
+                showTimeSelect
+                showTimeSelectOnly
+                timeFormat="hh:mm aa"
+                timeIntervals={15}
+                dateFormat="hh:mm aa"
+              />
+            </div>
+            <div style={{ width: "100%" }}>
+              <label>End</label>
+              <DatePicker
+                selected={endTime}
+                onChange={(time) => {
+                  if (startTime && time <= startTime) {
+                    return;
+                  }
+                  setEndTime(time);
+                }}
+                showTimeSelect
+                showTimeSelectOnly
+                timeFormat="hh:mm aa"
+                timeIntervals={15}
+                dateFormat="hh:mm aa"
+                minDate={startTime}
+              />
+            </div>
           </div>
+
           <div className={styles.paymentTypetxt}>Type of Payment</div>
           <div className={styles.row_div} style={{ justifyContent: 'space-between' }}>
             <div className={`${selected === 'cash' ? styles.cashDiv : styles.noncash}`}

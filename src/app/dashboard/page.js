@@ -121,19 +121,19 @@ const DashContant = () => {
   }
 
   const backgroundColor = [
-    { id: 0, backgroundColor: '#FFE0E0', icon: <CrossIcon /> },
-    { id: 1, backgroundColor: '#E0F7FF', icon: <PlayIcon /> },
-    { id: 2, backgroundColor: '#E0FFE1', icon: <CheckIcon /> },
+    { id: 0, backgroundColor: '#FFE0E0', icon: <CrossIcon />, status: "canceled" },
+    { id: 1, backgroundColor: '#E0F7FF', icon: <PlayIcon />, status: "pending" },
+    { id: 2, backgroundColor: '#E0FFE1', icon: <CheckIcon />, status: "complete" },
   ]
 
 
   function backColor(id) {
-    const item = backgroundColor.find(item => item.id === id);
+    const item = backgroundColor.find(item => item.status === id);
     return item ? item.backgroundColor : "#E0FFE1";
   }
 
   function backIcon(id) {
-    const item = backgroundColor.find(item => item.id === id);
+    const item = backgroundColor.find(item => item.status === id);
     return item ? item.icon : <CheckIcon />;
   }
 
@@ -187,61 +187,65 @@ const DashContant = () => {
 
 
 
-              {getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
-                <>
-                  <div className={styles.session}>
-                    <div className={styles.TodayTxtdiv}>
-                      <span>{ele.date == moment().format('MMMM D') ? "Today" : ele.date}</span>
-                      {/* <PlusIcon /> */}
-                    </div>
-                    <div className={styles.sessionDetails}>
-                      {ele?.events?.sort((a, b) => {
-                        const startDateA = moment(a?.startDate);
-                        const startTimeA = moment(a?.schedule[0]?.startTime, 'HH:mm');
-                        const combinedDateTimeA = startDateA.set({
-                          hour: startTimeA.hour(),
-                          minute: startTimeA.minute(),
-                          second: startTimeA.second(),
-                          millisecond: startTimeA.millisecond()
-                        });
+{
+          getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
+            <>
+              <div className={styles.session}>
+                <div className={styles.TodayTxtdiv}>
+                  <span>{ele.date == moment().format('MMMM D') ? "Today" : ele.date}</span>
+                  <PlusIcon />
+                </div>
+                <div className={styles.sessionDetails}>
+                  {ele?.events?.sort((a, b) => {
+                    const startDateA = moment(a?.startDate);
+                    const startTimeA = moment(a?.schedule[0]?.startTime, 'HH:mm');
+                    const combinedDateTimeA = startDateA.set({
+                      hour: startTimeA.hour(),
+                      minute: startTimeA.minute(),
+                      second: startTimeA.second(),
+                      millisecond: startTimeA.millisecond()
+                    });
 
-                        const startDateB = moment(b?.startDate);
-                        const startTimeB = moment(b?.schedule[0]?.startTime, 'HH:mm');
-                        const combinedDateTimeB = startDateB.set({
-                          hour: startTimeB.hour(),
-                          minute: startTimeB.minute(),
-                          second: startTimeB.second(),
-                          millisecond: startTimeB.millisecond()
-                        });
+                    const startDateB = moment(b?.startDate);
+                    const startTimeB = moment(b?.schedule[0]?.startTime, 'HH:mm');
+                    const combinedDateTimeB = startDateB.set({
+                      hour: startTimeB.hour(),
+                      minute: startTimeB.minute(),
+                      second: startTimeB.second(),
+                      millisecond: startTimeB.millisecond()
+                    });
 
-                        return combinedDateTimeA - combinedDateTimeB;
-                      })?.map((session, index) => (
-                        <>
-                          {
-                            (session?.clients.length > 0 || session?.group.length > 0) ?
-                              (<div className={styles.sessionCard2} >
-                                <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
-                                <div key={index} className={styles.sessionCard} style={{ backgroundColor: backColor(index) }}>
-                                  <div style={{ display: 'flex', alignItems: 'center', }}>
-                                    {backIcon(index)}
-                                    {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
-                                      <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
-                                      : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />} */}
-                                    <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} />
-                                
-                                    <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
-                                  </div>
-                                  <Rightarrow />
-                                </div>
-                              </div>) : <p>No Trainings</p>
-                          }
-                        </>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              ) : <p>No Trainings</p>
-              }
+                    return combinedDateTimeA - combinedDateTimeB;
+                  })?.map((session, index) => (
+                    <>
+                      {
+                        (session?.clients.length > 0 || session?.group.length > 0) ?
+                          (<div className={styles.sessionCard2}    >
+                            <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
+                            <div key={index} className={styles.sessionCard}
+                              style={{ backgroundColor: backColor(session.status), cursor: "pointer" }}
+                              onClick={() => editTrainingsession(session)}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', }}>
+                                {backIcon(session.status)}
+                                {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
+                                  <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
+                                  : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />} */}
+                                <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} />
+                                <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
+                                {/* session?.clients[0]?.clientImage */}
+                              </div>
+                              <Rightarrow />
+                            </div>
+                          </div>) : <p>No Trainings</p>
+                      }
+                    </>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : <p>No Trainings</p>
+        }
             </div>
 
 
