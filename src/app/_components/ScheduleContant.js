@@ -13,6 +13,7 @@ import profilepicture from '../../../public/Images/profilepic.png'
 import { getClinent, getTranningSession } from '../../api/helper';
 import Loader from './Loader';
 import profileiconn from '../../../public/Images/addProfile@2x.png'
+import TrainingInformation from '../Popups/TrainingInformation';
 
 
 
@@ -42,7 +43,8 @@ const ScheduleContant = () => {
   const [getSession, setSessing] = useState([])
   const [getTranningData, setTranningData] = useState([])
   const [loading, setLoading] = useState(false);
-  const [editTraining , setEditTraining]= useState({})
+  const [editTraining, setEditTraining] = useState({})
+  const [traininginfo, settraininginfo] = useState(false)
 
   const openEditPopup = () => {
     seteditpopup(true);
@@ -50,6 +52,8 @@ const ScheduleContant = () => {
 
   const closeEditPopup = () => {
     seteditpopup(false);
+    settraininginfo(false)
+    getTranningSessions()
   };
 
   const openPopup = () => {
@@ -70,11 +74,13 @@ const ScheduleContant = () => {
     getTranningSessions();
   };
 
-  const editTrainingsession =(data)=>{
-    // console.log(data);
-    setNewTrainingpop(true);
+  const editTrainingsession = (data) => {
+    settraininginfo(true)
     setEditTraining(data)
   }
+
+
+
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -108,19 +114,19 @@ const ScheduleContant = () => {
   const days = Array.from(range.by('day'));
 
   const backgroundColor = [
-    { id: 0, backgroundColor: '#FFE0E0', icon: <CrossIcon /> },
-    { id: 1, backgroundColor: '#E0F7FF', icon: <PlayIcon /> },
-    { id: 2, backgroundColor: '#E0FFE1', icon: <CheckIcon /> },
+    { id: 0, backgroundColor: '#FFE0E0', icon: <CrossIcon />, status: "canceled" },
+    { id: 1, backgroundColor: '#E0F7FF', icon: <PlayIcon />, status: "pending" },
+    { id: 2, backgroundColor: '#E0FFE1', icon: <CheckIcon />, status: "complete" },
   ]
 
 
   function backColor(id) {
-    const item = backgroundColor.find(item => item.id === id);
+    const item = backgroundColor.find(item => item.status === id);
     return item ? item.backgroundColor : "#E0FFE1";
   }
 
   function backIcon(id) {
-    const item = backgroundColor.find(item => item.id === id);
+    const item = backgroundColor.find(item => item.status === id);
     return item ? item.icon : <CheckIcon />;
   }
 
@@ -259,7 +265,7 @@ const ScheduleContant = () => {
         {popupIsOpen && <NewPayment show={popupIsOpen} handleClose={closePopup} />}
         {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={closeopenTraning} editTraining={editTraining} />}
         {editpopup && <EditTraining show={editpopup} handleClose={closeEditPopup} />}
-
+        {traininginfo && <TrainingInformation show={traininginfo} handleClose={closeEditPopup} editTraining={editTraining} />}
         {
           getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
             <>
@@ -296,11 +302,11 @@ const ScheduleContant = () => {
                           (<div className={styles.sessionCard2}    >
                             <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
                             <div key={index} className={styles.sessionCard}
-                              style={{ backgroundColor: backColor(index), cursor: "pointer" }}
-                              onClick={()=>editTrainingsession(session)}
+                              style={{ backgroundColor: backColor(session.status), cursor: "pointer" }}
+                              onClick={() => editTrainingsession(session)}
                             >
                               <div style={{ display: 'flex', alignItems: 'center', }}>
-                                {backIcon(index)}
+                                {backIcon(session.status)}
                                 {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
                                   <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
                                   : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />} */}

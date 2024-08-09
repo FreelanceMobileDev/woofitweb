@@ -37,16 +37,18 @@ const AddClients = ({ handleClose, setSelectclients,selectClients,clientDatas })
   }
 
   const handleToggleClient = (client) => {
-    setSelectedClients((prevSelected) => {
-      const isClientSelected = prevSelected?.some(
-        (selectedClient) => selectedClient?._id === client?._id
-      );
-      return isClientSelected
-        ? prevSelected?.filter(
-            (selectedClient) => selectedClient?._id !== client?._id
-          )
-        : [...prevSelected, client]; 
-    });
+    setSelectedClients([client])
+    
+    // setSelectedClients((prevSelected) => {
+    //   const isClientSelected = prevSelected?.some(
+    //     (selectedClient) => selectedClient?._id === client?._id
+    //   );
+    //   return isClientSelected
+    //     ? prevSelected?.filter(
+    //         (selectedClient) => selectedClient?._id !== client?._id
+    //       )
+    //     : [...prevSelected, client]; 
+    // });
   };
   const renderClientGroup = (clients) => (
      clients.map((client) => (

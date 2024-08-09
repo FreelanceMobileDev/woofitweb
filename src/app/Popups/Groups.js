@@ -20,16 +20,17 @@ const Groups = ({ handleClose, groupDatas,selectdGroup,setSelectedGroup }) => {
 
     const [selectedClients, setSelectedClients] = useState(selectdGroup);
     const handleToggleClient = (client) => {
-        setSelectedClients((prevSelected) => {
-          const isClientSelected = prevSelected?.some(
-            (selectedClient) => selectedClient?._id === client?._id
-          );
-          return isClientSelected
-            ? prevSelected?.filter(
-                (selectedClient) => selectedClient?._id !== client?._id
-              )
-            : [...prevSelected, client]; 
-        });
+        setSelectedClients([client])
+        // setSelectedClients((prevSelected) => {
+        //   const isClientSelected = prevSelected?.some(
+        //     (selectedClient) => selectedClient?._id === client?._id
+        //   );
+        //   return isClientSelected
+        //     ? prevSelected?.filter(
+        //         (selectedClient) => selectedClient?._id !== client?._id
+        //       )
+        //     : [...prevSelected, client]; 
+        // });
       };
       const SelectClients = ()=>{
         setSelectedGroup(selectedClients)

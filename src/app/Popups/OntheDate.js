@@ -116,11 +116,11 @@ const OntheDate = ({ handleClose, editTraining }) => {
         //   return toast.error("Please Select Client OR Group");
         // }
 
-        
-          if (values.clients.length > 1) {
-            return toast.error("Please Select Only One Client");
-          }
-      
+
+        if (values.clients.length > 1) {
+          return toast.error("Please Select Only One Client");
+        }
+
 
         // if (selectdGroup) {
         //   if (values.clients.length > 1) {
@@ -194,6 +194,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
   }, [editTraining])
 
   const handleRomeve = (data) => {
+    console.group(data, '====dara')
     let filterData = selectClients.filter((e) => e._id !== data)
     setSelectclients(filterData)
   }
@@ -214,42 +215,45 @@ const OntheDate = ({ handleClose, editTraining }) => {
             additionalcontainer={styles.TextWithButtonstyle}
             text={today}
           />
-          <div className={styles.row_div}>
+          <div style={{ paddingLeft: 15 }}>
             {(selectdGroup && selectdGroup.length > 0) || (selectClients && selectClients.length > 0) ?
               <>
-                <span onClick={() => selectdGroup ? setgroupdata(true) : setShowPopup(true)}>{selectdGroup ? "Add Group" : "Add Clients"} </span>
-                <div style={{ marginTop: 30 }}>
-                  {selectClients && selectClients?.map((item, index) => (
-                    <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
-                      <div className={styles.row}>
+                <span
+                  onClick={() => selectdGroup.length > 0 ? setgroupdata(true) : setShowPopup(true)}
+                  style={{ cursor: "pointer", color: "#14AED1", }}>{selectdGroup.length > 0 ? "Add Group" : "Add Clients"}
+                </span>
+                <div style={{}}>
+                  {selectClients && selectClients.map((item, index) => (
+                    <div key={index} style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
+                      <div>{item.name}</div>
+                      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
                         <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />
-                        <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
-                      </div>
-                      <div onClick={() => handleRomeve(item?._id)}>
-                        <CrossIcon />
+                        <div style={{ width: 20 }} />
+                        <div onClick={() => handleRomeve(item?._id)} style={{cursor:"pointer"}} >
+                          <CrossIcon style={{ height: 23, width: 23 }} />
+                        </div>
                       </div>
                     </div>
-                  ))
-                  }
-                  {selectdGroup && selectdGroup?.map((item, index) => (
-                    <div key={index} className={styles.space_div} style={{ marginBottom: 20, marginTop: 15 }} >
-                      <div className={styles.row}>
-                        {
-                          item.clients.map((e) =>
-                            <Image width={40} height={40} src={e.clientImage ? item.clientImage : profileiconn} />
-                          )
-                        }
-                        {/* <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} /> */}
-                        <div className={styles.Clientsname} style={{ marginLeft: 16 }}>{item.name}</div>
-                      </div>
-                      <div onClick={() => handleRomeveGroup(item?._id)}>
-                        <CrossIcon />
+                  ))}
+                  {selectdGroup && selectdGroup.map((item, index) => (
+                    <div key={index} style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
+                      <div>{item.name}</div>
+                      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
+                        {item.clients.map((e, clientIndex) => (
+                          <Image key={clientIndex} width={40} height={40} src={e.clientImage ? e.clientImage : profileiconn} />
+                        ))}
+                        {/* <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />  */}
+                        <div style={{ width: 20 }} />
+                        <div onClick={() => handleRomeveGroup(item?._id)}  style={{cursor:"pointer"}} >
+                          <CrossIcon style={{ height: 23, width: 23 }} />
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </>
-              : <>
+              :
+              <>
                 <div className={styles.row_div} style={{ marginRight: 20, width: '100%' }}>
                   <TextWithButton
                     label={"Select"}
@@ -269,8 +273,10 @@ const OntheDate = ({ handleClose, editTraining }) => {
                     onClick={() => setgroupdata(true)}
                   />
                 </div>
-              </>}
+              </>
+            }
           </div>
+
           <div className={styles.row_div} >
             <div style={{ width: "100%" }} >
               <Inputfield

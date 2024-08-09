@@ -1,7 +1,7 @@
 {
-  "/page": "app/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/settings/page": "app/settings/page.js",
-  "/Clients/page": "app/Clients/page.js",
-  "/schedule/page": "app/schedule/page.js"
+  "/schedule/page": "app/schedule/page.js",
+  "/settings/profile/page": "app/settings/profile/page.js",
+  "/settings/integrations/page": "app/settings/integrations/page.js",
+  "/settings/support/page": "app/settings/support/page.js"
 }
