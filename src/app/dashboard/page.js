@@ -38,6 +38,10 @@ const DashContant = () => {
   const [loading, setLoading] = useState(false);
   const [getTranningData, setTranningData] = useState([])
 
+  
+
+
+
   const dashbardCountData = async (payload) => {
     try {
       setLoading(true)

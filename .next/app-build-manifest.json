@@ -71,6 +71,12 @@
       "static/chunks/main-app.js",
       "static/css/app/settings/support/page.css",
       "static/chunks/app/settings/support/page.js"
+    ],
+    "/Clients/edit/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Clients/edit/page.css",
+      "static/chunks/app/Clients/edit/page.js"
     ]
   }
 }
