@@ -11,8 +11,17 @@ import { contectUs } from '../../../api/helper';
 import Loader from '../../_components/Loader';
 
 function ContectPopup({ show, handleClose }) {
-  const { email } = JSON.parse(localStorage.getItem("userData"))
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState(null);
+
+  useEffect(() => {
+
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      const { email } = JSON.parse(userData);
+      setEmail(email);
+    }
+  }, []);
   
 
   // create-contact-us
