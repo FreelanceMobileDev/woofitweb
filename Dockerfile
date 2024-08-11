@@ -1,16 +1,19 @@
 FROM node:20
 
+WORKDIR /woofitweb
 
-WORKDIR /myapp
+# Copy only package.json first
+COPY package*.json ./
 
-
-COPY  . .
-
-
+# Install dependencies
 RUN npm install
 
+# Copy the rest of the code
+COPY . .
+
+# Run the build script
+RUN npm run build
 
 EXPOSE 3000
 
-
-CMD ["npm","start"]
+CMD ["npm", "start"]

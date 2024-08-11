@@ -22,7 +22,7 @@ function ContectPopup({ show, handleClose }) {
       setEmail(email);
     }
   }, []);
-  
+
 
   // create-contact-us
   const formik = useFormik({
@@ -36,10 +36,10 @@ function ContectPopup({ show, handleClose }) {
     }),
     onSubmit: async (values) => {
       try {
-         setLoading(true);
+        setLoading(true);
         values.email = email
         const response = await contectUs(values)
-        if(response.data.success==false){
+        if (response.data.success == false) {
           return toast.error(response.data.message)
         }
         toast.success("Thank you for your feedback")
@@ -54,11 +54,11 @@ function ContectPopup({ show, handleClose }) {
     },
   });
 
-  
+
 
   return (
     <div className={show ? styles.popupDisplay : styles.popupHide}>
-        <Loader loading={loading} />
+      <Loader loading={loading} />
       <div className={styles.popupContent}>
         <div className={styles.space_div}>
           <div />
@@ -91,7 +91,7 @@ function ContectPopup({ show, handleClose }) {
             <div style={{ color: 'red' }}>{formik.errors.message}</div>
           ) : null}
 
-<div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <button type='submit' className={styles.SaveButton} style={{ width: "100%", borderWidth: 0, cursor: "pointer" }} txtstyle={{ color: '#FFF' }} >Save</button>
           </div>
 
