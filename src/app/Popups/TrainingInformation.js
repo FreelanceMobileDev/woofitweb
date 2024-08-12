@@ -16,7 +16,8 @@ const TrainingInformation = ({ show, handleClose, editTraining }) => {
     const name = editTraining?.clients[0]?.name;
     const image = editTraining?.clients[0]?.clientImage;
     const datefromte = moment(editTraining?.startDate).format("DD MMM YYYY");
-    const dayFormate = moment(editTraining?.startDate).format('ddd');
+    const toDate = moment(editTraining?.endDate).format("DD MMM YYYY");
+    const dayFormate = moment(editTraining?.startDate).format('dddd');
     const formattedEndTime = moment(editTraining?.schedule[0]?.endTime, 'HH:mm').format('hh:mm A');
     const formattedStartTime = moment(editTraining?.schedule[0]?.startTime, 'HH:mm').format('hh:mm A');
 
@@ -62,7 +63,7 @@ const TrainingInformation = ({ show, handleClose, editTraining }) => {
                         <div style={{ display: 'flex', alignItems: 'center', }}>
                             <CalenderIcon />
                             <div style={{ marginLeft: 10 }}>
-                                <div>{datefromte}</div>
+                                <div>{datefromte} - {toDate}</div>
                                 <div>{dayFormate}</div>
                             </div>
                         </div>
