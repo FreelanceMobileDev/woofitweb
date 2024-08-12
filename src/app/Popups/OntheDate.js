@@ -34,7 +34,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
   const today = editTraining ? moment(editTraining?.startDate).format('DD MMM YYYY') : moment().format('DD MMM YYYY');
   const [groupDatas, setgroupDatas] = useState([]);
   const [selectdGroup, setSelectedGroup] = useState(editTraining?.group ? editTraining?.group : []);
-  
+
   const parseTime = (timeString) => {
     const [hours, minutes] = timeString.split(':').map(Number);
     const now = new Date();
@@ -85,7 +85,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
   const closePopup = () => {
     setShowPopup(false);
   };
-  
+
   const closegroupPopUp = () => {
     setgroupdata(false);
   };
@@ -98,7 +98,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
     initialValues: {
       startDate: moment().format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
-      recurring: true,
+      recurring: false,
       paymentMode: selected || '',
       clients: [],
       group: [],
@@ -186,7 +186,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
             additionalcontainer={styles.TextWithButtonstyle}
             text={today}
           />
-          <div style={{ }}>
+          <div style={{}}>
             {(selectdGroup && selectdGroup.length > 0) || (selectClients && selectClients.length > 0) ?
               <>
                 <span
@@ -225,97 +225,85 @@ const OntheDate = ({ handleClose, editTraining }) => {
               </>
               :
               <>
-                <div className={styles.row_div} style={{  width: '100%',justifyContent:'space-between', }}>
-       
+                <div className={styles.row_div} style={{ width: '100%', justifyContent: 'space-between', }}>
                   <TextWithButton
-                 
                     label={"Select"}
                     LeftIcon={Userimg}
                     RightIcon={Rightarrow}
-                    style={{width:'47%'}}
+                    style={{ width: '47%' }}
                     additionalcontainer={styles.TextWithButtonstyle}
                     text={'Client'}
                     onClick={() => setShowPopup(true)}
                   />
 
-                  <div style={{ width:35 }} />
+                  <div style={{ width: 35 }} />
                   <TextWithButton
                     space
                     LeftIcon={GroupIcon}
                     RightIcon={Rightarrow}
-                    style={{width:'50%'}}
+                    style={{ width: '50%' }}
                     additionalcontainer={styles.TextWithButtonstyle}
                     text={'Group'}
                     onClick={() => setgroupdata(true)}
-                  /> 
-               
-           </div>
+                  />
+
+                </div>
               </>
             }
           </div>
 
-         
-         
 
 
-          <div className={styles.row_div} style={{padding:5,justifyContent:'space-between'}}>
-            <div style={{ width: "47%" ,display:'flex',flexDirection:'column',}}>
-            <label className={styles.label}>{'Start'}</label>
-            <div className={styles.CalenderDivOuter} >
-                    <DatePicker
-                       selected={startTime}
-                      onChange={(time) => {
-                        setStartTime(time);
-                        if (endTime && time >= endTime) {
-                          setEndTime(null);
-                        }
-                      }}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeFormat="hh:mm aa"
-                      timeIntervals={15}
-                      dateFormat="hh:mm aa"
-                      className={styles.CalenderDiv}
+          <div className={styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
+            <div style={{ width: "47%", display: 'flex', flexDirection: 'column', }}>
+              <label className={styles.label}>{'Start'}</label>
+              <div className={styles.CalenderDivOuter} >
+                <DatePicker
+                  selected={startTime}
+                  onChange={(time) => {
+                    setStartTime(time);
+                    if (endTime && time >= endTime) {
+                      setEndTime(null);
+                    }
+                  }}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeFormat="hh:mm aa"
+                  timeIntervals={15}
+                  dateFormat="hh:mm aa"
+                  className={styles.CalenderDiv}
+                />
+                <ClockIcon />
 
-                    />
-                    <ClockIcon />
-                 
-                  </div>
-
-
-
-                
-
-     
-
+              </div>
             </div>
-           
-        <div style={{ width: "47%" ,display:'flex',flexDirection:'column',}}>
-            <label className={styles.label}>{'End'}</label>
-            <div className={styles.CalenderDivOuter} >
-                    <DatePicker
-                       selected={endTime}
-                       onChange={(time) => {
-                         if (startTime && time <= startTime) {
-                           return;
-                         }
-                         setEndTime(time);
-                       }}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeFormat="hh:mm aa"
-                      timeIntervals={15}
-                      dateFormat="hh:mm aa"
-                      className={styles.CalenderDiv}
-                      
-                    />
-                    <ClockIcon />
-                 
-                  </div>
+
+            <div style={{ width: "47%", display: 'flex', flexDirection: 'column', }}>
+              <label className={styles.label}>{'End'}</label>
+              <div className={styles.CalenderDivOuter} >
+                <DatePicker
+                  selected={endTime}
+                  onChange={(time) => {
+                    if (startTime && time <= startTime) {
+                      return;
+                    }
+                    setEndTime(time);
+                  }}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeFormat="hh:mm aa"
+                  timeIntervals={15}
+                  dateFormat="hh:mm aa"
+                  className={styles.CalenderDiv}
+
+                />
+                <ClockIcon />
+
+              </div>
 
 
 
-                
+
 
 
             </div>
@@ -323,7 +311,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
 
 
 
-        
+
           <div className={styles.paymentTypetxt}>Type of Payment</div>
           <div className={styles.row_div} style={{ justifyContent: 'space-between' }}>
             <div className={`${selected === 'cash' ? styles.cashDiv : styles.noncash}`}

@@ -79,9 +79,6 @@ const ScheduleContant = () => {
     setEditTraining(data)
   }
 
-
-
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const centerSelectedDate = () => {
@@ -225,36 +222,7 @@ const ScheduleContant = () => {
                   <div className={styles.label} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('ddd')}</div>
                 </div>
               ))}
-              {/* <div className={styles.calendar_container}>
-                <div className={styles.daytwo}>
-                  <div className={styles.datetwo}>13</div>
-                  <div className={styles.labeltwo}>Mon</div>
-                </div>
-                <div className={styles.daytwo}>
-                  <div className={styles.datetwo}>14</div>
-                  <div className={styles.labeltwo}>Tue</div>
-                </div>
-                <div className={styles.daytwo}>
-                  <div className={styles.datetwo}>15</div>
-                  <div className={styles.labeltwo}>Wed</div>
-                </div>
-                <div className={styles.selectedtwo}>
-                  <div className={styles.selecteddatetxt}>16</div>
-                  <div className={styles.selecteddaytxt}>Thu</div>
-                </div>
-                <div className={styles.daytwo}>
-                  <div className={styles.datetwo}>17</div>
-                  <div className={styles.labeltwo}>Fri</div>
-                </div>
-                <div className={styles.daytwo}>
-                  <div className={styles.datetwo}>18</div>
-                  <div className={styles.labeltwo}>Sat</div>
-                </div>
-                <div className={styles.daytwo}>
-                  <div className={styles.datetwo}>19</div>
-                  <div className={styles.labeltwo}>Sun</div>
-                </div>
-              </div> */}
+              
             </div>
             <div onClick={handleNextWeek}>
               <Rightarrow />

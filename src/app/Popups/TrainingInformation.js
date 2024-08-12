@@ -11,7 +11,7 @@ import NewTraining from './NewTraining';
 
 
 const TrainingInformation = ({ show, handleClose, editTraining }) => {
-    console.log(editTraining, '====>>>>>editTraining')
+    // console.log(editTraining, '====>>>>>editTraining')
     const [newTrainingpop, setNewTrainingpop] = useState(false);
     const name = editTraining?.clients[0]?.name;
     const image = editTraining?.clients[0]?.clientImage;
@@ -110,6 +110,7 @@ const TrainingInformation = ({ show, handleClose, editTraining }) => {
                   onClick={()=>handelCancelOrComplete("complete")}    >Mark as Complete</div>
                 </>}
                 {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={handleClose} editTraining={editTraining} />}
+
             </div>
         </div>
     );

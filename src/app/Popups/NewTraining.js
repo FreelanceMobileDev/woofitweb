@@ -5,11 +5,19 @@ import styles from './Popups.module.css';
 import OntheDate from './OntheDate'
 import ForthePeriod from './ForthePeriod'
 import { getClinent } from '../../api/helper';
-const NewTraining = ({ show, handleClose,editTraining }) => {
-  const [activeTab, setActiveTab] = useState('OntheDate');
+const NewTraining = ({ show, handleClose, editTraining }) => {
+
+  // console.log(editTraining)
+    // console.log(editTraining?.recurring, '===editTraining')
+  const [activeTab, setActiveTab] = useState(editTraining?.recurring ? "ForthePeriod" : 'OntheDate');
+
+  // const [activeTab, setActiveTab] = useState(  'OntheDate');
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+
+
   return (
     <div className={show ? styles.popupDisplay : styles.popupHide}>
       <div className={styles.popupContent}>
@@ -19,11 +27,11 @@ const NewTraining = ({ show, handleClose,editTraining }) => {
           <div onClick={handleClose} className={styles.greycrossicon}><CrossIcon /></div>
         </div>
         <div className={styles.NewTrainingTabsDiv}>
-          <div onClick={() => handleTabClick('OntheDate')}  className={activeTab === 'OntheDate' ? styles.on_the_date : styles.for_the_period} >On the Date</div>
-          <div  onClick={() => handleTabClick('ForthePeriod')} className={activeTab === 'ForthePeriod' ? styles.on_the_date : styles.for_the_period}>For the Period</div>
+          <div onClick={() => handleTabClick('OntheDate')} className={activeTab === 'OntheDate' ? styles.on_the_date : styles.for_the_period} >On the Date</div>
+          <div onClick={() => handleTabClick('ForthePeriod')} className={activeTab === 'ForthePeriod' ? styles.on_the_date : styles.for_the_period}>For the Period</div>
         </div>
-        {activeTab === 'OntheDate' && <OntheDate  handleClose={handleClose}  editTraining={editTraining} />}
-        {activeTab === 'ForthePeriod' && <ForthePeriod   handleClose={handleClose}  />}
+        {activeTab === 'OntheDate' && <OntheDate handleClose={handleClose} editTraining={editTraining} />}
+        {activeTab === 'ForthePeriod' && <ForthePeriod handleClose={handleClose} editTraining={editTraining} />}
       </div>
     </div>
   )
