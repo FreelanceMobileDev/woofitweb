@@ -120,14 +120,16 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
       try {
         // Process group and clients
         setLoading(true);
-        let data = {}
+        let data = {
+          paymentMode:values.paymentMode,
+          comment: values.comment,
+          recurring:values.recurring,
+          startDate:moment(values.startDate).format('YYYY-MM-DD'),
+          endDate:moment(values.endDate).format('YYYY-MM-DD')
+        }
         data.group = selectdGroup?.map((e) => e._id) || [];
         data.clients = selectClients?.map((e) => e?._id) || [];
-        data.schedule = values.schedule.filter((e) => e.active === true);
-        data.startDate = moment(values.startDate).format('YYYY-MM-DD');
-        data.endDate = moment(values.endDate).format('YYYY-MM-DD');
-        data.paymentMode = values.paymentMode;
-        data.comment= values.comment;
+        // data.schedule = values.schedule.filter((e) => e.active === true);      
         data.schedule = values.schedule
           .filter((e) => e.active === true &&
             moment(e.startTime, moment.ISO_8601, true).isValid() &&
@@ -342,7 +344,8 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
 
         {/* start the schedule */}
         {formik.values.schedule.map((daySchedule, index) => (
-          <div key={index} className={styles.timer_parent_div}>
+          <div key={index} className={daySchedule.active? styles.timer_parent_div:styles.timer_parent_div2}>
+           
             <div className={styles.space_div} style={{ paddingRight: 10, paddingLeft: 10 }}>
               <div className={styles.day}>{daySchedule.day}</div>
               <div className={styles.switchContainer}>
@@ -360,7 +363,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
             </div>
             {daySchedule.active && (
               <>
-                <div className={styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
+                <div className={  styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
                   <div style={{ width: "47%", display: 'flex', flexDirection: 'column' }}>
                     <label className={styles.label}>Start</label>
                     <div className={styles.CalenderDivOuter}>

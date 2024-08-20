@@ -47,7 +47,7 @@ const DashContant = () => {
       setLoading(true)
       const response = await DashboardData(payload)
       setData(response.data.data)
-      // console.log(response.data.data, '===response')
+      console.log(response.data.data, '===response')
     } catch (error) {
       console.log(error)
     } finally {
@@ -82,6 +82,7 @@ const DashContant = () => {
   }, [])
 
   const seletFilter = (period) => {
+    // console.log(period,'==period')
     let startDate, endDate;
     switch (period) {
       case 'monthly':
@@ -153,7 +154,11 @@ const DashContant = () => {
             </div>
 
             <div className={styles.dateSelector}>
-              <div className={styles.Monthlytxt} onClick={()=>seletFilter("monthly")} >Monthly</div> <Downarrow />
+              <select className={styles.Monthlytxt} style={{border:"none"}} onChange={(e)=>seletFilter(e.target.value)} >
+                <option value={"monthly"}>Monthly</option>
+                <option value={"yearly"} >Yearly</option>
+              </select>
+              {/* <div className={styles.Monthlytxt} onClick={()=>seletFilter("monthly")} >Monthly</div> <Downarrow /> */}
             </div>
           </div>
 

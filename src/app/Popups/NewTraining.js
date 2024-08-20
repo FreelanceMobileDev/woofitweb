@@ -8,7 +8,7 @@ import { getClinent } from '../../api/helper';
 const NewTraining = ({ show, handleClose, editTraining }) => {
 
   // console.log(editTraining)
-    // console.log(editTraining?.recurring, '===editTraining')
+    console.log(editTraining?.recurring, '===editTraining')
   const [activeTab, setActiveTab] = useState(editTraining?.recurring ? "ForthePeriod" : 'OntheDate');
 
   // const [activeTab, setActiveTab] = useState(  'OntheDate');
