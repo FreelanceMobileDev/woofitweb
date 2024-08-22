@@ -66,9 +66,9 @@ const Clientinformation = ({ setSelectedItem }) => {
           </div>
           <div className={styles.ClientStyle}>Client</div>
         </div>
-        <div className={styles.clietdiv}>
+        <div className={styles.clietdiv} style={{cursor:"pointer"}} >
           <ArchivedIcon />
-          <div className={styles.archive_div}>Add to Archive</div>
+          <div className={styles.archive_div}  >Add to Archive</div>
         </div>
       </div>
       <div className={styles.main_div__}>

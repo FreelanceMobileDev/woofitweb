@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import styles from './ClientPage.module.css';
 import Image from 'next/image';
 import backbodyimg from '../../../public/Images/backbody.png'
@@ -7,38 +8,69 @@ import frontbodyimg from '../../../public/Images/front_body.png'
 import leftarmimg from '../../../public/Images/leftARm.png'
 import RightARM from '../../../public/Images/RightARM.png'
 import chartimgg from '../../../public/Images/chartimg.png'
+import AddBodyPhoto from '../Popups/AddBodyPhoto'
+import { getClientImage } from '../../api/helper';
+import { useSearchParams } from 'next/navigation';
+import Loader from "../_components/Loader";
 const Measurements = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const [popup, setPopup] = useState(false)
+  const [clientImage, setClientImage] = useState([])
+  const [loading , setloading] = useState(false)
+
+  const getData = async () => {
+    try {
+      setloading(true)
+      const response = await getClientImage(`clientId=${id}`)
+      setClientImage(response.data.data)
+    } catch (error) {
+      console.log(error, '==error')
+    } finally {
+      setloading(false)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+
   const data = [
-    { position: 'Back', size: '24.4', image:backbodyimg },
+    { position: 'Back', size: '24.4', image: backbodyimg },
     { position: 'Front', size: '24.5', image: frontbodyimg },
     { position: 'Side', size: '24.2', image: sidebodyimg },
     { position: 'Left Arm', size: '24.2', image: leftarmimg },
-    { position: 'Right Arm', size: '24.2', image:RightARM },
+    { position: 'Right Arm', size: '24.2', image: RightARM },
   ]
   return (
     <div className={styles.measurements}>
       <div className={styles.tabs2}>
-        <button className={`${styles.tab} ${styles.activeTab2}`}>Current</button>
-        <button className={styles.tab}>22 Aug</button>
+        { loading && <Loader loading={loading} /> }
+        {/* <button className={`${styles.tab} ${styles.activeTab2}`}>Current</button> */}
+        {/* <button className={styles.tab}>22 Aug</button>
         <button className={styles.tab}>10 Aug</button>
         <button className={styles.tab}>28 Jul</button>
-        <button className={styles.tab}>12 Jul</button>
+        <button className={styles.tab}>12 Jul</button> */}
+        <a onClick={() => setPopup(true)} className={styles.tab}>Add Photo </a>
+
       </div>
       <h1 className={styles.header_txtt}>Photos</h1>
       <div className={styles.photos}>
-        {data.map((item, index) => (
+        {clientImage && clientImage?.data?.length>0 ? clientImage?.data && clientImage?.data?.map((item, index) => (
           <div key={index}>
-           <div className={styles.bodysizestyle} style={{textAlign:'left'}}>{item.position}</div>
-              <div className={styles.main_photo_div}>
-                <Image height={90} width={130} src={item.image} className={styles.image_body} />
-                <div className={styles.bodysizestyle}>{item.size}</div>
-              </div>
-         
+            <div className={styles.bodysizestyle} style={{ textAlign: 'left' }}>{item.side}</div>
+            <div className={styles.main_photo_div}>
+              <Image height={90} width={130} src={item.image} className={styles.image_body} />
+              <div className={styles.bodysizestyle}>{item.size}</div>
+            </div>
+
 
           </div>
-        ))}
+        )):"Photo Not Available "}
       </div>
       <h1 className={styles.header_txtt}>Metrics</h1>
+      <a className={styles.tab}>Add Metrics</a>
       <div className={styles.metrics}>
         {[
           { title: 'Weight', value: '70 kg', change: '-0.5', changeType: 'negative' },
@@ -60,8 +92,10 @@ const Measurements = () => {
               </div>
 
               <Image src={chartimgg} className={styles.chart}
-              width={'100%'}
+                width={'100%'}
               />
+
+              {popup && <AddBodyPhoto setPopup={setPopup} clientImage={clientImage}  getData={getData} />}
 
             </div>
           </div>

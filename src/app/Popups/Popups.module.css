@@ -540,3 +540,9 @@ margin-bottom: 10px;
  padding-left: 30;
   /* border: 1px solid #ddd; */
 }
+.className_cross{
+  position: absolute;
+  /* display: flex; */
+  top: -10;
+}
+

@@ -15,7 +15,7 @@ import Sessionsimg from '../../../public/Images/Sessionsimg';
 import styles from '../_components/Login.module.css';
 import profilepicture from '../../../public/Images/profilepic.png'
 import Image from 'next/image'
-import { DashboardData, getTranningSession } from "../../api/helper";
+import { DashboardData, getClinent, getTranningSession } from "../../api/helper";
 import Loader from "../_components/Loader";
 import moment from "moment";
 import profileiconn from '../../../public/Images/addProfile@2x.png'
@@ -37,9 +37,20 @@ const DashContant = () => {
   const [data, setData] = useState()
   const [loading, setLoading] = useState(false);
   const [getTranningData, setTranningData] = useState([])
+  const [clientList, setClientList] = useState([])
 
-  
 
+  const getApiClinent = async (data, search) => {
+    try {
+      setLoading(true)
+      const getData = await getClinent(data, search)
+      setClientList(getData.data.data.getAllClientData)
+    } catch (error) {
+      console.log(error, '====error')
+    } finally {
+      setLoading(false)
+    }
+  }
 
 
   const dashbardCountData = async (payload) => {
@@ -47,7 +58,7 @@ const DashContant = () => {
       setLoading(true)
       const response = await DashboardData(payload)
       setData(response.data.data)
-      console.log(response.data.data, '===response')
+      // console.log(response.data.data, '===response')
     } catch (error) {
       console.log(error)
     } finally {
@@ -56,6 +67,7 @@ const DashContant = () => {
   }
   useEffect(() => {
     dashbardCountData()
+    getApiClinent(0)
   }, [])
 
 
@@ -154,7 +166,7 @@ const DashContant = () => {
             </div>
 
             <div className={styles.dateSelector}>
-              <select className={styles.Monthlytxt} style={{border:"none"}} onChange={(e)=>seletFilter(e.target.value)} >
+              <select className={styles.Monthlytxt} style={{ border: "none" }} onChange={(e) => seletFilter(e.target.value)} >
                 <option value={"monthly"}>Monthly</option>
                 <option value={"yearly"} >Yearly</option>
               </select>
@@ -189,72 +201,65 @@ const DashContant = () => {
           <div className={styles.upcomingSessions}>
             <h4>Upcoming Sessions</h4>
             <div className={styles.session}>
-              {/* <div className={styles.Todayline}>
-                <span>Today</span>
-                <PlusIcon />
-              </div> */}
+              {
+                getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
+                  <>
+                    <div className={styles.session}>
+                      <div className={styles.TodayTxtdiv}>
+                        <span>{ele.date == moment().format('MMMM D') ? "Today" : ele.date}</span>
+                        <PlusIcon />
+                      </div>
+                      <div className={styles.sessionDetails}>
+                        {ele?.events?.sort((a, b) => {
+                          const startDateA = moment(a?.startDate);
+                          const startTimeA = moment(a?.schedule[0]?.startTime, 'HH:mm');
+                          const combinedDateTimeA = startDateA.set({
+                            hour: startTimeA.hour(),
+                            minute: startTimeA.minute(),
+                            second: startTimeA.second(),
+                            millisecond: startTimeA.millisecond()
+                          });
 
+                          const startDateB = moment(b?.startDate);
+                          const startTimeB = moment(b?.schedule[0]?.startTime, 'HH:mm');
+                          const combinedDateTimeB = startDateB.set({
+                            hour: startTimeB.hour(),
+                            minute: startTimeB.minute(),
+                            second: startTimeB.second(),
+                            millisecond: startTimeB.millisecond()
+                          });
 
-
-{
-          getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
-            <>
-              <div className={styles.session}>
-                <div className={styles.TodayTxtdiv}>
-                  <span>{ele.date == moment().format('MMMM D') ? "Today" : ele.date}</span>
-                  <PlusIcon />
-                </div>
-                <div className={styles.sessionDetails}>
-                  {ele?.events?.sort((a, b) => {
-                    const startDateA = moment(a?.startDate);
-                    const startTimeA = moment(a?.schedule[0]?.startTime, 'HH:mm');
-                    const combinedDateTimeA = startDateA.set({
-                      hour: startTimeA.hour(),
-                      minute: startTimeA.minute(),
-                      second: startTimeA.second(),
-                      millisecond: startTimeA.millisecond()
-                    });
-
-                    const startDateB = moment(b?.startDate);
-                    const startTimeB = moment(b?.schedule[0]?.startTime, 'HH:mm');
-                    const combinedDateTimeB = startDateB.set({
-                      hour: startTimeB.hour(),
-                      minute: startTimeB.minute(),
-                      second: startTimeB.second(),
-                      millisecond: startTimeB.millisecond()
-                    });
-
-                    return combinedDateTimeA - combinedDateTimeB;
-                  })?.map((session, index) => (
-                    <>
-                      {
-                        (session?.clients.length > 0 || session?.group.length > 0) ?
-                          (<div className={styles.sessionCard2}    >
-                            <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
-                            <div key={index} className={styles.sessionCard}
-                              style={{ backgroundColor: backColor(session.status), cursor: "pointer" }}
-                              onClick={() => editTrainingsession(session)}
-                            >
-                              <div style={{ display: 'flex', alignItems: 'center', }}>
-                                {backIcon(session.status)}
-                                {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
+                          return combinedDateTimeA - combinedDateTimeB;
+                        })?.map((session, index) => (
+                          <>
+                            {
+                              (session?.clients.length > 0 || session?.group.length > 0) ?
+                                (<div className={styles.sessionCard2}    >
+                                  <p style={{ marginBottom: 20, width: 120 }}>{convertTo12Hour(session?.schedule[0]?.startTime)}</p>
+                                  <div key={index} className={styles.sessionCard}
+                                    style={{ backgroundColor: backColor(session.status), cursor: "pointer" }}
+                                    onClick={() => editTrainingsession(session)}
+                                  >
+                                    <div style={{ display: 'flex', alignItems: 'center', }}>
+                                      {backIcon(session.status)}
+                                      {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
                                   <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
                                   : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />} */}
-                                <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} />
-                                <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
-                                {/* session?.clients[0]?.clientImage */}
-                              </div>
-                              <Rightarrow />
-                            </div>
-                          </div>) : <p>No Trainings</p>
-                      }
-                    </>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : <p>No Trainings</p>
-        }
+                                      <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} />
+                                      <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
+                                      {/* session?.clients[0]?.clientImage */}
+                                    </div>
+                                    <Rightarrow />
+                                  </div>
+                                </div>) : <p>No Trainings</p>
+                            }
+                          </>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                ) : <p>No Trainings</p>
+              }
             </div>
 
 
@@ -264,9 +269,12 @@ const DashContant = () => {
           <div className={styles.newClients}>
             <h3>New Clients</h3>
             <ul>
-              {newClients.map((client, index) => (
+              {clientList.length > 0 && clientList.map((client, index) => (
                 <li key={index} className={styles.clientItem}>
-                  <Image src={client.avatar} height={40} width={40} alt={client.name} className={styles.avatar} />
+                  {client.clientImage ?
+                    <Image src={client.clientImage} height={40} width={40} alt={client.name} className={styles.avatar} />:
+                    <Image src={profileiconn} height={40} width={40} alt={client.name} className={styles.avatar} />
+                  }
                   <span>{client.name}</span>
                 </li>
               ))}
@@ -276,14 +284,17 @@ const DashContant = () => {
           <div className={styles.recentActivities}>
             <h3>Recent Activities</h3>
             <ul>
-              {recentActivities.map((activity, index) => (
+              {clientList.map((activity, index) => (
                 <li key={index} className={styles.activityItem}>
-                  <Image src={activity.avatar} height={40} width={40} alt={activity.name} className={styles.avatar} />
+                  {activity.clientImage ?
+                    <Image src={activity?.clientImage} height={40} width={40} alt={activity?.name} className={styles.avatar} />:
+                    <Image src={profileiconn} height={40} width={40} alt={activity?.name} className={styles.avatar} />
+                  }
                   <div className={styles.activityText}>
-                    <span className={styles.clientName}>{activity.name}</span>
-                    <span className={styles.actionText}> {activity.action} </span>
-                    <span className={styles.itemText}>{activity.item}</span>
-                    <div className={styles.timeText}>{activity.time}</div>
+                    <span className={styles.clientName}>{activity?.name}</span>
+                    <span className={styles.actionText}> {recentActivities[index]?.action} </span>
+                    <span className={styles.itemText}>{recentActivities[index]?.item}</span>
+                    <div className={styles.timeText}>{recentActivities[index]?.time}</div>
                   </div>
                 </li>
               ))}

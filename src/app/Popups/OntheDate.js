@@ -178,7 +178,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
   return (
     <>
       <Loader loading={loading} />
-      <form onSubmit={formik.handleSubmit} >
+      <form onSubmit={formik.handleSubmit} style={{height:"100vh"}} >
         <div>
           <TextWithButton
             label={"Date"}

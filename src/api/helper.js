@@ -4,7 +4,11 @@ import {
   GET_METHOD, GET_GROUP_LIST, GET_PROFILE, GET_CLIENT_DETAILS, GET_RATES, CREATE_OR_UPDATE_CLIENT,
   GET_TRANNING_SESSION, CREATE_UPDATE_RATE, UPDATE_PROILE, DELETE_RATES, DELETE, DASHBOARD_DATA, PUTMETHOD,
   UPDATE_GROUP, DELETE_GROUP, CREATE_GROUP, CREATE_UPDATE_TRANNING_SESSION,
-  CONTECT_US
+  CONTECT_US,
+  CLIENT_IMAGE,
+  GET_CLIENT_IMAGE,
+  DELETE_CLIENT_IMAGE,
+  GET_CLIENT_TRAINING_SESSION
 } from "./url";
 
 
@@ -248,6 +252,47 @@ export const contectUs =(payload)=>{
     data: payload
   });
 }
+
+export const addClientImage =(payload)=>{
+  console.log(payload ,'=====>>>>>>>>>addClientImage')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  POST_METHOD,
+    url: CLIENT_IMAGE,
+    data: payload
+  });
+}
+
+export const getClientImage =(id)=>{
+  console.log(id ,'=====>>>>>>>>>getClientImage')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  GET_METHOD,
+    url: `${GET_CLIENT_IMAGE}${id}`,
+    // data: payload
+  });
+}
+
+export const deleteClientImage =(id)=>{
+  console.log(id ,'=====>>>>>>>>>deleteClientImage')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  DELETE,
+    url: `${DELETE_CLIENT_IMAGE}${id}`,
+    // data: payload
+  });
+}
+
+export const getClientTrainingSession =(id)=>{
+  console.log(id ,'=====>>>>>>>>>getClientTrainingSession')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  GET_METHOD,
+    url: `${GET_CLIENT_TRAINING_SESSION}${id}`,
+    // data: payload
+  });
+}
+
 
 
 

@@ -23,3 +23,7 @@ export const DELETE_GROUP="group/deleteGroup"
 export const CREATE_GROUP = 'group/createUpdateGroup'
 export const CREATE_UPDATE_TRANNING_SESSION="tranning/createUpdateTrainingSession"
 export const CONTECT_US ="user/create-contact-us"
+export const CLIENT_IMAGE ="rates/clietImage"
+export const GET_CLIENT_IMAGE= "rates/getClietImage?"
+export const DELETE_CLIENT_IMAGE= "rates/deleteClietImage?"
+export const GET_CLIENT_TRAINING_SESSION="tranning/getClientTrainingSession?clientId="
