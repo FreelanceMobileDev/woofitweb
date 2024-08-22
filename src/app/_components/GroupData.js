@@ -9,7 +9,7 @@ import Loader from "./Loader";
 
 
 
-const GroupData = ({ updateGroup, setUpdateGroup,search}) => {
+const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
  
   const [getdata, setData] = useState();
   const [loading, setLoading] = useState(false);
@@ -46,12 +46,19 @@ const GroupData = ({ updateGroup, setUpdateGroup,search}) => {
   };
 
   useEffect(()=>{
-    if(search?.length>0){
-      getApiGroup(`&search=${search}`)
+    // if(search?.length>0){
+    //   getApiGroup(`&search=${search}`)
+    // }else{
+    //   getApiGroup()
+    // }
+
+    if(filterData?.length>0){
+      getApiGroup(filterData)
     }else{
       getApiGroup()
     }
-  },[search])
+
+  },[search,filterData])
 
   
   useEffect(() => {

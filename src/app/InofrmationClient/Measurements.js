@@ -70,7 +70,7 @@ const Measurements = () => {
         )):"Photo Not Available "}
       </div>
       <h1 className={styles.header_txtt}>Metrics</h1>
-      <a className={styles.tab}>Add Metrics</a>
+      {/* <a className={styles.tab}>Add Metrics</a> */}
       <div className={styles.metrics}>
         {[
           { title: 'Weight', value: '70 kg', change: '-0.5', changeType: 'negative' },

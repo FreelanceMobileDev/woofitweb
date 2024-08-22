@@ -10,7 +10,7 @@ import Image from 'next/image';
 import profileiconn from '../../../public/Images/addProfile@2x.png'
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loader from '../_components/Loader';
-import { getClientDetails, getRates } from '../../api/helper';
+import { createOrUpdateClient, getClientDetails, getRates } from '../../api/helper';
 import { calculateAge } from '../../util/common'
 import { genderData } from '../../util/staticData';
 
@@ -55,10 +55,22 @@ const Clientinformation = ({ setSelectedItem }) => {
     }
   }, [catchId])
 
+  const archiveClient = async (data) => {
+    try {
+      setLoading(true)
+      const response = await createOrUpdateClient({ isArchive: data }, getData.clientDetails._id)
+      getClientDetail()
+    } catch (error) {
+      console.log(error, '===error')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
 
     <div className={styles.containor}>
-      <Loader loading={loading}/>
+      <Loader loading={loading} />
       <div className={styles.headerr}>
         <div className={styles.clietdiv}>
           <div onClick={() => router.push('/Clients')} style={{ cursor: 'pointer' }}>
@@ -66,18 +78,17 @@ const Clientinformation = ({ setSelectedItem }) => {
           </div>
           <div className={styles.ClientStyle}>Client</div>
         </div>
-        <div className={styles.clietdiv} style={{cursor:"pointer"}} >
+        <div className={styles.clietdiv} style={{ cursor: "pointer" }} onClick={() => archiveClient(!getData?.clientDetails?.isArchive)} >
           <ArchivedIcon />
-          <div className={styles.archive_div}  >Add to Archive</div>
+          <div className={styles.archive_div}  > {getData?.clientDetails?.isArchive ? "Remove to Archive" : "Add to Archive"} </div>
         </div>
       </div>
       <div className={styles.main_div__}>
         <div className={styles.left_div_profile}>
           <Image
-
-            style={{height:107,width:107, borderRadius:60}}
+            style={{ height: 107, width: 107, borderRadius: 60 }}
             height={107} width={107}
-            src={getData?.clientDetails?.clientImage ? getData?.clientDetails?.clientImage : profileiconn }
+            src={getData?.clientDetails?.clientImage ? getData?.clientDetails?.clientImage : profileiconn}
           />
           <h1 className={styles.usernamee}>{getData?.clientDetails?.name}</h1>
           <div className={styles.clietdiv}>

@@ -63,7 +63,7 @@ export const update_professional_details = (payload, id) => {
 };
 
 export const getClinent = (payload, sort) => {
-  console.log("update-professional-details--->", payload,)
+  console.log("getClinent--->======>>>>>>>>>>>",sort)
   return apiClient({
     baseURL: BASE_URL,
     method: GET_METHOD,

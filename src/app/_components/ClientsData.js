@@ -12,7 +12,8 @@ import { useRouter } from 'next/navigation'
 import { specializationOptions, genderData } from '../../util/staticData'
 import Loader from './Loader'
 
-const ClientsData = ({ activeTab ,search}) => {
+const ClientsData = ({ activeTab ,search,filterData}) => {
+  // console.log(filterData,'===ClientsDatafilterData222222')
   const router = useRouter()
   const [getdata, setData] = useState([])
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ const ClientsData = ({ activeTab ,search}) => {
 
   const getApiClinent = async (data,search) => {
     try {
-      if(!search){
+      if(!search || !filterData){
         setLoading(true)
       }
       const getData = await getClinent(data,search)
@@ -40,14 +41,22 @@ const ClientsData = ({ activeTab ,search}) => {
     }
   }
   useEffect(()=>{
-      if(search?.length>0){
-        search=`&search=${search}`
+      // if(search?.length>0){
+      //   search=`&search=${search}`
+      //   let act = activeTab == "Clients" ? 0 : 1
+      //   getApiClinent(act,search)
+      // }else{
+        // activeTabCall()
+      // }
+
+      if(filterData.length>0){
+        // console.log(filterData,'===filterData1111111')
         let act = activeTab == "Clients" ? 0 : 1
-        getApiClinent(act,search)
+        getApiClinent(act,filterData)
       }else{
         activeTabCall()
       }
-  },[search])
+  },[filterData])
 
   useEffect(() => {
     activeTabCall()
