@@ -20,7 +20,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const validationSchema = Yup.object().shape({
-  comment: Yup.string().required("Comment is required"),
+  // comment: Yup.string().required("Comment is required"),
+
 });
 
 const OntheDate = ({ handleClose, editTraining }) => {
@@ -35,23 +36,38 @@ const OntheDate = ({ handleClose, editTraining }) => {
   const [groupDatas, setgroupDatas] = useState([]);
   const [selectdGroup, setSelectedGroup] = useState(editTraining?.group ? editTraining?.group : []);
 
-  const parseTime = (timeString) => {
-    const [hours, minutes] = timeString.split(':').map(Number);
-    const now = new Date();
-    now.setHours(hours);
-    now.setMinutes(minutes);
-    now.setSeconds(0);
-    return now;
+  const parseTime = (time) => {
+    return moment(time, 'HH:mm').toDate();
   };
 
   const [startTime, setStartTime] = useState(() => {
     const initialStartTime = editTraining?.schedule[0]?.startTime || "00:00";
     return parseTime(initialStartTime);
   });
+
   const [endTime, setEndTime] = useState(() => {
-    const initialEndTime = editTraining?.schedule[0]?.endTime || "00:00";
-    return parseTime(initialEndTime);
+    const initialEndTime = editTraining?.schedule[0]?.endTime ?? null;
+    return initialEndTime ? parseTime(initialEndTime) : null;
   });
+
+  const handleEndTimeChange = (time) => {
+
+    const timeMoment = moment(time);
+    const startTimeMoment = moment(startTime);
+
+    if (timeMoment.isSame(startTimeMoment, 'minute')) {
+      toast.error("End time cannot be the same as start time")
+      return;
+    }
+
+    if (startTime && timeMoment.isBefore(startTimeMoment, 'minute')) {
+      toast.error("End time must be strictly greater than Start time")
+      return;
+    }
+
+    setEndTime(time);
+  };
+
 
   const getApiClinent = async (data) => {
     try {
@@ -93,6 +109,9 @@ const OntheDate = ({ handleClose, editTraining }) => {
   function formatTime(date) {
     return moment(date).format('HH:mm');
   }
+  const isValidTimeFormat = (timeString) => {
+    return moment(timeString, 'HH:mm', true).isValid();
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -113,18 +132,31 @@ const OntheDate = ({ handleClose, editTraining }) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
+
         setLoading(true);
+
         values.schedule = values.schedule.map(entry => ({
           day: entry.day,
           startTime: formatTime(startTime),
           endTime: formatTime(endTime),
           active: entry.active
         }));
+
         values.group = selectdGroup?.map((e) => e._id) || [];
         values.clients = selectClients?.map((e) => e?._id) || [];
 
         if (values.clients.length === 0 && values.group.length === 0) {
           return toast.error("Please select at least one client and one group.");
+        }
+
+        const hasInvalidTime = values.schedule.some(entry => {
+          const isStartTimeValid = isValidTimeFormat(formatTime(startTime));
+          const isEndTimeValid = isValidTimeFormat(formatTime(endTime));
+          return !isStartTimeValid || !isEndTimeValid;
+        });
+
+        if (hasInvalidTime) {
+          return toast.error("Please Select End Date.");
         }
 
         const response = editTraining
@@ -178,7 +210,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
   return (
     <>
       <Loader loading={loading} />
-      <form onSubmit={formik.handleSubmit} style={{height:"100vh"}} >
+      <form onSubmit={formik.handleSubmit} style={{ height: "100vh" }} >
         <div>
           <TextWithButton
             label={"Date"}
@@ -197,8 +229,8 @@ const OntheDate = ({ handleClose, editTraining }) => {
                   {selectClients && selectClients.map((item, index) => (
                     <div key={index} style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
                       <div>{item.name}</div>
-                      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
-                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />
+                      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' , }}>
+                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn}  />
                         <div style={{ width: 20 }} />
                         <div onClick={() => handleRomeve(item?._id)} style={{ cursor: "pointer" }} >
                           <CrossIcon style={{ height: 23, width: 23 }} />
@@ -252,8 +284,6 @@ const OntheDate = ({ handleClose, editTraining }) => {
             }
           </div>
 
-
-
           <div className={styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
             <div style={{ width: "47%", display: 'flex', flexDirection: 'column', }}>
               <label className={styles.label}>{'Start'}</label>
@@ -262,7 +292,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
                   selected={startTime}
                   onChange={(time) => {
                     setStartTime(time);
-                    if (endTime && time >= endTime) {
+                    if (endTime && time > endTime) {
                       setEndTime(null);
                     }
                   }}
@@ -274,7 +304,6 @@ const OntheDate = ({ handleClose, editTraining }) => {
                   className={styles.CalenderDiv}
                 />
                 <ClockIcon />
-
               </div>
             </div>
 
@@ -283,34 +312,20 @@ const OntheDate = ({ handleClose, editTraining }) => {
               <div className={styles.CalenderDivOuter} >
                 <DatePicker
                   selected={endTime}
-                  onChange={(time) => {
-                    if (startTime && time <= startTime) {
-                      return;
-                    }
-                    setEndTime(time);
-                  }}
+                  onChange={(time) => handleEndTimeChange(time)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeFormat="hh:mm aa"
                   timeIntervals={15}
                   dateFormat="hh:mm aa"
+                  minDate={startTime ? moment(startTime).add(1, 'minute').toDate() : undefined}
                   className={styles.CalenderDiv}
-
                 />
                 <ClockIcon />
 
               </div>
-
-
-
-
-
-
             </div>
           </div>
-
-
-
 
           <div className={styles.paymentTypetxt}>Type of Payment</div>
           <div className={styles.row_div} style={{ justifyContent: 'space-between' }}>

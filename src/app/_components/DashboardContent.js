@@ -91,7 +91,7 @@ const DashboardContent = () => {
                   <div key={index} className={styles.sessionCard} style={{ backgroundColor: session.backgroundColor }}>
                     <div style={{ display: 'flex', alignItems: 'center', }}>
                       {session.icon}
-                      <Image src={session.avatar} height={25} width={25} />
+                      <Image src={session.avatar} height={25} width={25}  />
                       {session.avatar2 && <Image height={25} width={25} src={session.avatar2} className={styles.avatar2imagee} />}
                       <p style={{ marginLeft: 10 }}>{session.name}</p>
                     </div>
@@ -138,7 +138,7 @@ const DashboardContent = () => {
           <ul>
             {newClients.map((client, index) => (
               <li key={index} className={styles.clientItem}>
-                <Image src={client.avatar} height={40} width={40} alt={client.name} className={styles.avatar} />
+                <Image src={client.avatar} height={40} width={40} alt={client.name} className={styles.avatar} style={{borderRadius:60}} />
                 <span>{client.name}</span>
               </li>
             ))}

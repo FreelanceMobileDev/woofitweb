@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import Loader from '../_components/Loader';
 
 const ForthePeriod = ({ handleClose, editTraining }) => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -80,7 +81,6 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
   const groupData = async () => {
     try {
       const response = await getGroupList(id);
-      // console.log(response.data.data.data,'====response.data.data')
       setgroupDatas(response.data.data.data);
     } catch (error) {
       console.log(error);
@@ -98,7 +98,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
   const formik = useFormik({
     initialValues: {
       startDate: today,
-      endDate: today,
+      endDate: null,
       recurring: true,
       paymentMode: 'cash',
       clients: [],
@@ -113,19 +113,24 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
     },
     validationSchema: Yup.object({
       startDate: Yup.date().required('Start date is required'),
-      endDate: Yup.date().required('End date is required'),
-
+      endDate: Yup.date()
+        .required('End date is required')
+        .test('is-greater', 'End date must be greater than start date', function (endDate) {
+          const { startDate } = this.parent;
+          return endDate > startDate;
+        })
     }),
+
     onSubmit: async (values) => {
       try {
         // Process group and clients
         setLoading(true);
         let data = {
-          paymentMode:values.paymentMode,
+          paymentMode: values.paymentMode,
           comment: values.comment,
-          recurring:values.recurring,
-          startDate:moment(values.startDate).format('YYYY-MM-DD'),
-          endDate:moment(values.endDate).format('YYYY-MM-DD')
+          recurring: values.recurring,
+          startDate: moment(values.startDate).format('YYYY-MM-DD'),
+          endDate: moment(values.endDate).format('YYYY-MM-DD')
         }
         data.group = selectdGroup?.map((e) => e._id) || [];
         data.clients = selectClients?.map((e) => e?._id) || [];
@@ -169,7 +174,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
   useEffect(() => {
     if (editTraining) {
 
-      
+
       formik.setValues({
         startDate: editTraining?.startDate ? moment(editTraining.startDate).toDate() : "",
         endDate: editTraining?.endDate ? moment(editTraining.endDate).toDate() : "",
@@ -208,21 +213,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
-        {/* <div className={styles.row_div}>
-          <TextWithButton
-            label={"Period from"}
-            RightIcon={Rightarrow}
-            additionalcontainer={styles.TextWithButtonstyle}
-            text={'14 Mar 2024'}
-          />
-          <div style={{ width: 30 }} />
-          <TextWithButton
-            label={"To"}
-            RightIcon={Rightarrow}
-            additionalcontainer={styles.TextWithButtonstyle}
-            text={'20 Mar 2024'}
-          />
-        </div> */}
+        {loading && <Loader loading={loading} />}
         <div className={styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
           <div style={{ width: "47%", display: 'flex', flexDirection: 'column', }}>
             <label className={styles.label}>{'Period from'}</label>
@@ -231,12 +222,14 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
                 selected={formik.values.startDate}
                 onChange={(startDate) => {
                   formik.setFieldValue('startDate', startDate);
+                  formik.setFieldTouched('startDate', true);
                 }}
                 className={styles.CalenderDiv}
                 dateFormat="d MMM yyyy"
                 minDate={today}
               />
               {/* <ClockIcon /> */}
+
               {formik.touched.startDate && formik.errors.startDate ? (
                 <div style={{ color: "red", marginLeft: 10 }}>
                   {formik.errors.startDate}
@@ -271,7 +264,6 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
             </div>
           </div>
         </div>
-
 
         <div style={{}}>
           {(selectdGroup && selectdGroup.length > 0) || (selectClients && selectClients.length > 0) ?
@@ -344,8 +336,8 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
 
         {/* start the schedule */}
         {formik.values.schedule.map((daySchedule, index) => (
-          <div key={index} className={daySchedule.active? styles.timer_parent_div:styles.timer_parent_div2}>
-           
+          <div key={index} className={daySchedule.active ? styles.timer_parent_div : styles.timer_parent_div2}>
+
             <div className={styles.space_div} style={{ paddingRight: 10, paddingLeft: 10 }}>
               <div className={styles.day}>{daySchedule.day}</div>
               <div className={styles.switchContainer}>
@@ -363,7 +355,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
             </div>
             {daySchedule.active && (
               <>
-                <div className={  styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
+                <div className={styles.row_div} style={{ padding: 5, justifyContent: 'space-between' }}>
                   <div style={{ width: "47%", display: 'flex', flexDirection: 'column' }}>
                     <label className={styles.label}>Start</label>
                     <div className={styles.CalenderDivOuter}>
@@ -384,7 +376,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
                         timeIntervals={15}
                         dateFormat="hh:mm aa"
                         className={styles.CalenderDiv}
-                      // minDate={daySchedule.startTime ? moment(daySchedule.startTime).toDate() : moment().toDate()}
+                        minDate={moment(daySchedule.startTime, 'HH:mm').toDate()}
                       />
                       <ClockIcon />
                       {formik.touched.schedule?.[index]?.startTime && formik.errors.schedule?.[index]?.startTime ? (
@@ -401,17 +393,20 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
                       <DatePicker
                         selected={moment(daySchedule.endTime, 'HH:mm').isValid() ? moment(daySchedule.endTime, 'HH:mm').toDate() : null}
                         onChange={(date) => {
+                          if (date && daySchedule.startTime && date <= moment(daySchedule.startTime, 'HH:mm').toDate()) return;
                           const newSchedule = [...formik.values.schedule];
                           newSchedule[index].endTime = date;
                           formik.setFieldValue('schedule', newSchedule);
-                        }}
+                        }
+
+                        }
                         showTimeSelect
                         showTimeSelectOnly
                         timeFormat="hh:mm aa"
                         timeIntervals={15}
                         dateFormat="hh:mm aa"
                         className={styles.CalenderDiv}
-                      // minDate={daySchedule.startTime ? moment(daySchedule.startTime).toDate() : null}
+                        minDate={daySchedule.startTime ? moment(daySchedule.startTime, 'HH:mm').toDate() : null}
                       />
 
                       <ClockIcon />
@@ -426,54 +421,8 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
               </>
             )}
 
-
           </div>
         ))}
-
-        {/* end the schedule */}
-
-        {/* <div className={styles.timer_parent_div}>
-        <div className={styles.space_div} style={{ paddingRight: 10, paddingLeft: 10 }}>
-          <div className={styles.day}>Monday</div>
-          <div className={styles.switchContainer}>
-            <div
-              className={`${styles.switchButton} ${isToggled ? styles.on : styles.off}`}
-              onClick={handleToggleeee}
-            >
-              <div className={styles.switchCircle}></div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.row_div} style={{ marginRight: 20 }}>
-          <TextWithButton
-            label={"Start"}
-            RightIcon={ClockIcon}
-            additionalcontainer={styles.TextWithButtonstyle}
-            text={'6:30 pm'}
-          />
-          <div style={{ width: 30 }} />
-          <TextWithButton
-            label={"End"}
-
-            RightIcon={ClockIcon}
-            additionalcontainer={styles.TextWithButtonstyle}
-            text={'8:30 pm'}
-          />
-        </div>
-      </div> */}
-        {/* {daysOfWeek.map((day) => (
-        <div key={day} className={styles.day_div}>
-          {day}
-          <div className={styles.switchContainer}>
-            <div
-              className={`${styles.switchButton} ${toggleStates[day] ? styles.on : styles.off}`}
-              onClick={() => handleToggle(day)}
-            >
-              <div className={styles.switchCircle}></div>
-            </div>
-          </div>
-        </div>
-      ))} */}
 
         <Inputfield
           id={"comment"}

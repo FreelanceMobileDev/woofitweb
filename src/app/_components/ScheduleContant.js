@@ -275,10 +275,15 @@ const ScheduleContant = () => {
                             >
                               <div style={{ display: 'flex', alignItems: 'center', }}>
                                 {backIcon(session.status)}
-                                {/* {session?.group.length > 0 ? session?.group[0].clients.map((img) =>
-                                  <Image src={img?.clientImage.length > 0 ? img?.clientImage : profilepicture} style={{ borderRadius: 60 }} height={25} width={25} className={styles.avatarimagee} />)
-                                  : <Image src={session?.clients[0]?.clientImage} height={25} width={25} className={styles.avatarimagee} />} */}
-                                <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} />
+                                
+                                {session.group.length > 0 ?
+                                      session?.group[0]?.clients.map((e)=>
+                                        <Image src={e.clientImage||profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> 
+                                      )
+                                      :
+                                      <Image src={ session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> 
+                                      }
+                                {/* <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> */}
                                 <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
                                 {/* session?.clients[0]?.clientImage */}
                               </div>
