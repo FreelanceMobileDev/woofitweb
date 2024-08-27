@@ -146,9 +146,7 @@ const EditClient = ({ setSelectedItem }) => {
         "coachId": values.coachId
       }
 
-      // if (caredData) {
-      //   values = { ...param, ...caredData }
-      // }
+     
       try {
 
         const expectedFormat = "YYYY-MM-DD";
@@ -265,7 +263,19 @@ const EditClient = ({ setSelectedItem }) => {
     document.getElementById("fileInput").click();
   };
   const onSelectDate = (date) => {
+    const dob = moment(date);
+  const today = moment();
+  const age = today.diff(dob, 'years');
+  if (age >= 18) {
+    formik.setFieldValue("DOB", dob.format("YYYY-MM-DD")); 
+    // console.log("User is at least 18 years old");
     setDate(date);
+  } else {
+    // console.log("User is under 18 years old");
+    toast.error("Please select the grater then 18 years")
+    // You can set an error message or prevent form submission here
+  }
+  
   };
 
 
@@ -399,6 +409,10 @@ const EditClient = ({ setSelectedItem }) => {
                       placeholderText="Select Date of Birth"
                       className={styles.CalenderDiv}
                       maxDate={new Date()}
+                      showYearDropdown  
+                      scrollableYearDropdown  
+                      yearDropdownItemNumber={40} 
+                      showMonthDropdown
                     />
                     <CalenderIcon />
                     {formik.touched.DOB && formik.errors.DOB ? (
