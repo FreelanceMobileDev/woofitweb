@@ -19,6 +19,7 @@ import TrainingInformation from '../Popups/TrainingInformation';
 
 const extendedMoment = extendMoment(moment);
 const ScheduleContant = () => {
+  // console.log(extendedMoment(),'====extendedMoment()')
   const sessions = [
     { time: '10:00 AM', name: 'Gabe Woodward', backgroundColor: '#FFE0E0', avatar: profilepicture, icon: <CrossIcon /> },
     { time: '11:00 AM', name: 'Academic Team', backgroundColor: '#E0F7FF', avatar: profilepicture, avatar2: profilepicture, icon: <PlayIcon /> },
@@ -155,7 +156,19 @@ const ScheduleContant = () => {
   useEffect(() => {
     getApiClinent(0)
     getTranningSessions()
+    // selectedDates()
   }, [])
+
+
+  // const selectedDates = () => {
+  //   const formattedDate = selectedDate.format('YYYY-MM-DD');
+  //   const today = moment().format('YYYY-MM-DD');
+  //   if (selectedDate.isSameOrAfter(today, 'day')) {
+  //     console.log('The selected date is today or a future date.');
+  //   } else {
+  //     console.log('The selected date is in the past.');
+  //   }
+  // }
 
 
   function convertTo12Hour(time24) {
@@ -217,7 +230,7 @@ const ScheduleContant = () => {
                   <div className={styles.label} style={{ color: date.isSame(selectedDate, 'day') ? 'white' : '#697585' }}>{date.format('ddd')}</div>
                 </div>
               ))}
-              
+
             </div>
             <div onClick={handleNextWeek}>
               <Rightarrow />
@@ -270,14 +283,14 @@ const ScheduleContant = () => {
                             >
                               <div style={{ display: 'flex', alignItems: 'center', }}>
                                 {backIcon(session.status)}
-                                
+
                                 {session.group.length > 0 ?
-                                      session?.group[0]?.clients.map((e)=>
-                                        <Image src={e.clientImage||profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> 
-                                      )
-                                      :
-                                      <Image src={ session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> 
-                                      }
+                                  session?.group[0]?.clients.map((e) =>
+                                    <Image src={e.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{ borderRadius: 60 }} />
+                                  )
+                                  :
+                                  <Image src={session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{ borderRadius: 60 }} />
+                                }
                                 {/* <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> */}
                                 <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
                                 {/* session?.clients[0]?.clientImage */}

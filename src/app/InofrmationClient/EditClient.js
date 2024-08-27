@@ -214,13 +214,6 @@ const EditClient = ({ setSelectedItem }) => {
     }
 
   }
-  // const DeleteClient=async(id)=>{
-  //   try {
-  //     await deleteClient(id)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   useEffect(() => {
     if (getData && id) {
@@ -272,7 +265,7 @@ const EditClient = ({ setSelectedItem }) => {
     setDate(date);
   } else {
     // console.log("User is under 18 years old");
-    toast.error("Please select the grater then 18 years")
+    toast.error("Please select grater then 18 years")
     // You can set an error message or prevent form submission here
   }
   

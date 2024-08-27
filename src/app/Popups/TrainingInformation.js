@@ -11,7 +11,7 @@ import NewTraining from './NewTraining';
 
 
 const TrainingInformation = ({ show, handleClose, editTraining }) => {
-    console.log(editTraining, '====>>>>>editTraining')
+    console.log(editTraining.recurring, '====>>>>>editTraining')
     const [newTrainingpop, setNewTrainingpop] = useState(false);
     const name = editTraining?.clients[0]?.name || editTraining?.group[0]?.name;
     const image = editTraining?.clients[0]?.clientImage;
@@ -66,8 +66,10 @@ const TrainingInformation = ({ show, handleClose, editTraining }) => {
                         <div style={{ display: 'flex', alignItems: 'center', }}>
                             <CalenderIcon />
                             <div style={{ marginLeft: 10 }}>
-                                <div>{datefromte} - {toDate}</div>
-                                {/* <div>{dayFormate}</div> */}
+                                {/* <div>{datefromte} - {toDate}</div> */}
+                                <div> {editTraining.recurring==true ? `${datefromte} - ${toDate}` : `${datefromte}`}  </div>
+
+                               
                             </div>
                         </div>
 
@@ -76,8 +78,8 @@ const TrainingInformation = ({ show, handleClose, editTraining }) => {
                             <div style={{ display: 'flex', alignItems: 'center', }}>
                                 <ClockIcon />
                                 <div style={{ marginLeft: 10 }}>
-                                <p style={{ marginLeft: 10 }}>{formateTime(item.startTime)} - {formateTime(item.endTime) }</p>
-                                <div>{item.day}</div>
+                                <p style={{ marginLeft: 10 }}><b> {item.day}</b>   {formateTime(item.startTime)} - {formateTime(item.endTime) }</p>
+                                {/* <div>{item.day}</div> */}
                                 </div>
                             </div>
                           
