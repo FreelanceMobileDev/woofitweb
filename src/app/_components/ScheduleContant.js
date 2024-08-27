@@ -46,9 +46,6 @@ const ScheduleContant = () => {
   const [editTraining, setEditTraining] = useState({})
   const [traininginfo, settraininginfo] = useState(false)
 
-  const openEditPopup = () => {
-    seteditpopup(true);
-  };
 
   const closeEditPopup = () => {
     seteditpopup(false);
@@ -126,8 +123,6 @@ const ScheduleContant = () => {
     const item = backgroundColor.find(item => item.status === id);
     return item ? item.icon : <CheckIcon />;
   }
-
-
 
   const getApiClinent = async (data) => {
     try {

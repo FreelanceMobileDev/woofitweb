@@ -18,8 +18,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import Loader from '../_components/Loader';
 
+
+
+
 const ForthePeriod = ({ handleClose, editTraining }) => {
-  const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  // const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const [daysOfWeek, setDayOfWeek] = useState(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
   const [popupIsOpen, setShowPopup] = useState(false);
   const [groupdata, setgroupdata] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -208,6 +212,61 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
     let filterData = selectdGroup.filter((e) => e._id !== data);
     setSelectedGroup(filterData);
   };
+  const customDaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const handleEndDateChange = (endDate) => {
+  const endMoment = moment(endDate);
+  const startMoment = moment(formik.values.startDate);
+
+  if (startMoment.isAfter(endMoment)) {
+    return;
+  }
+
+  formik.setFieldValue('endDate', endDate);
+
+  const daysOfWeekInRange = getDaysOfWeekFromRange(startMoment, endMoment);
+
+  setDayOfWeek(daysOfWeekInRange.slice(0, 7));
+
+  const updatedSchedule = daysOfWeekInRange.slice(0, 7).map((day) => {
+    const matchingSchedule = editTraining?.schedule.find((s) => s.day === day);
+    const startTime = matchingSchedule?.startTime ? moment(matchingSchedule.startTime, 'HH:mm').toDate() : '';
+    const endTime = matchingSchedule?.endTime ? moment(matchingSchedule.endTime, 'HH:mm').toDate() : '';
+
+    return {
+      day: day,
+      startTime: isNaN(startTime) ? '' : startTime,  // Handle invalid time values
+      endTime: isNaN(endTime) ? '' : endTime,        // Handle invalid time values
+      active: matchingSchedule ? matchingSchedule.active : false
+    };
+  });
+
+  formik.setFieldValue('schedule', updatedSchedule);
+};
+
+// Helper function to get days of the week from a date range
+const getDaysOfWeekFromRange = (startDate, endDate) => {
+  const dateRange = getDateRange(startDate, endDate);
+
+  return dateRange.map(date => {
+    const dayIndex = moment(date).day(); // Get the day index (0 for Sunday, 1 for Monday, etc.)
+    return customDaysOfWeek[dayIndex];   // Map the day index to the actual day name
+  });
+};
+
+// Helper function to generate the range of dates
+const getDateRange = (startDate, endDate) => {
+  const range = [];
+  let currentDate = startDate.clone();
+
+  while (currentDate.isSameOrBefore(endDate, 'day')) {
+    range.push(currentDate.clone().toDate());
+    currentDate.add(1, 'days');
+  }
+
+  return range;
+};
+
 
 
   return (
@@ -244,12 +303,7 @@ const ForthePeriod = ({ handleClose, editTraining }) => {
             <div className={styles.CalenderDivOuter} >
               <DatePicker
                 selected={formik.values.endDate}
-                onChange={(endDate) => {
-                  if (formik.values.endDate && endDate <= formik.values.endDate) {
-                    return;
-                  }
-                  formik.setFieldValue('endDate', endDate);
-                }}
+                onChange={handleEndDateChange}
                 dateFormat="d MMM yyyy"
                 minDate={formik.values.startDate ? formik.values.startDate : today}
                 className={styles.CalenderDiv}
