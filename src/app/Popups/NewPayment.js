@@ -32,12 +32,46 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        if (id == "numberOfTranning") {
-            setFormData({ ...formData, [id]: value, amount: formData.priceForTraining * value })
+    
+        // Convert the value to a number
+        const numericValue = parseInt(value, 10);
+    
+        if (id === "numberOfTranning") {
+            if (numericValue <= 999) {
+                // Update the number of training sessions
+                setFormData(prevFormData => {
+                    const newAmount = prevFormData.priceForTraining * (numericValue || 0);
+                    return {
+                        ...prevFormData,
+                        [id]: value,
+                        amount: newAmount
+                    };
+                });
+            } else {
+                toast.error("Can't add more than 999");
+            }
+        } else if (id === "priceForTraining") {
+            // Ensure priceForTraining is a valid number
+            if (!isNaN(numericValue)) {
+                setFormData(prevFormData => {
+                    const newAmount = numericValue * (parseInt(prevFormData.numberOfTranning, 10) || 0);
+                    return {
+                        ...prevFormData,
+                        [id]: value,
+                        amount: newAmount
+                    };
+                });
+            } else {
+                toast.error("Invalid price for training");
+            }
         } else {
-            setFormData({ ...formData, [id]: value })
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [id]: value
+            }));
         }
-    }
+    };
+    
 
 
     const handleToggle = (selection) => {
@@ -45,15 +79,33 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
         setFormData({ ...formData, paymentMode: selection })
     };
 
+    const validateFields = (formData, fields, messages) => {
+        for (const field of fields) {
+            if (!formData[field]) {
+                toast.error(messages[field] || `${field} is required`);
+                return false;
+            }
+        }
+        return true;
+    };
+
+    const fieldsToValidate = ['clientId', 'coachId', 'priceForTraining','numberOfTranning', 'date', 'amount'];
+
+    const errorMessages = {
+        clientId: 'Please Select Client',
+        coachId: 'Coach ID is required',
+        priceForTraining: 'Price for training is required',
+        numberOfTranning: 'Please enter the number of training sessions',
+        date: 'Date is required',
+        amount: 'Amount is required'
+    };
+
 
     const handleSave = async () => {
         try {
             setLoading(true)
-            if (!formData.coachId) {
-                return toast.error("coachId is required")
-            }
-            if (!formData.numberOfTranning) {
-                return toast.error("Please Enter Number Of Tranning")
+            if (!validateFields(formData, fieldsToValidate, errorMessages)) {
+                return;
             }
             const response = await payments(formData)
             toast.success(response.data.message)
@@ -128,7 +180,7 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
                         additionalinput_field={styles.additionalInputField}
                         inputtxt={styles.invoicenumber}
                         name="Number of Trainings"
-                        placeholder={"Exp=4"}
+                        placeholder={"4"}
                         type="number"
                         id="numberOfTranning"
                         onChange={handleChange}
