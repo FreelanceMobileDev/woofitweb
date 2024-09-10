@@ -1,10 +1,10 @@
 {
   "pages": {
-    "/Clients/clientsInfo/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/Clients/clientsInfo/page.css",
-      "static/chunks/app/Clients/clientsInfo/page.js"
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -12,29 +12,47 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/Clients/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Clients/page.css",
-      "static/chunks/app/Clients/page.js"
-    ],
-    "/schedule/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/schedule/page.css",
-      "static/chunks/app/schedule/page.js"
-    ],
     "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/dashboard/page.css",
       "static/chunks/app/dashboard/page.js"
     ],
-    "/page": [
+    "/Clients/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/page.css",
-      "static/chunks/app/page.js"
+      "static/css/app/Clients/page.css",
+      "static/chunks/app/Clients/page.js"
+    ],
+    "/Clients/edit/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Clients/edit/page.css",
+      "static/chunks/app/Clients/edit/page.js"
+    ],
+    "/payments/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/payments/page.css",
+      "static/chunks/app/payments/page.js"
+    ],
+    "/reports/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/reports/page.css",
+      "static/chunks/app/reports/page.js"
+    ],
+    "/payments/InvoiceCreate/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/payments/InvoiceCreate/page.css",
+      "static/chunks/app/payments/InvoiceCreate/page.js"
+    ],
+    "/schedule/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/schedule/page.css",
+      "static/chunks/app/schedule/page.js"
     ]
   }
 }

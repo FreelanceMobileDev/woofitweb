@@ -128,7 +128,9 @@ const DashboardContent = () => {
               <span>August 18</span>
               <PlusIcon />
             </div>
-            <p>No Trainings</p>
+            <div style={{ height: "67vh", display:"flex", alignItems:"center", justifyContent:"center" }}>
+         No Data
+        </div>
           </div>
         </div>
       </div>

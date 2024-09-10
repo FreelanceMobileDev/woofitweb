@@ -105,8 +105,8 @@ const ClientsData = ({ activeTab ,search,filterData}) => {
   return (
     <div >
       {getdata && getdata?.length == 0 ? (
-        <div style={{ height: "67vh" }}>
-          Clients Not Found
+        <div style={{ height: "67vh", display:"flex", alignItems:"center", justifyContent:"center" }}>
+         No Data
         </div>)
         :
         (

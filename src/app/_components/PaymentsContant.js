@@ -5,6 +5,8 @@ import styles from './Login.module.css';
 
 const PaymentsContant = ({ setSelectedItem }) => {
   const router = useRouter()
+
+  console.log(setSelectedItem,'==')
   const transactions = [
     { name: 'Franky Williamson', txnId: '79120283', date: 'May 31, 2015', amount: '$19.00', status: 'Success' },
     { name: 'Bronson Glass', txnId: '79116801', date: 'May 31, 2015', amount: '$90.00', status: 'Failed' },
@@ -30,36 +32,42 @@ const PaymentsContant = ({ setSelectedItem }) => {
       </div>
       </div>
       <div>
-        <div className={styles.tableContainer}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th ><input className={styles.checkbox} type="checkbox" /></th>
-                <th className={styles.headerCell} >Name</th>
-                <th className={styles.headerCell}>Txn ID</th>
-                <th className={styles.headerCell}>Date</th>
-                <th className={styles.headerCell}>Amount</th>
-                <div className={styles.headerCell}>Status</div>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.map((transaction, index) => (
-                <tr key={index}>
-                  <td ><input type="checkbox" className={styles.checkbox} /></td>
-                  <td className={styles.cellname}>{transaction.name}</td>
-                  <td className={styles.cell}>{transaction.txnId}</td>
-                  <td className={styles.cell}>{transaction.date}</td>
-                  <td className={styles.cellname}>{transaction.amount}</td>
-                  <td className={styles.cellname}>
-                        <div className={`${styles.status} ${styles[transaction.status.toLowerCase() + 'Status']}`}>
-                          {transaction.status}
-                        </div>
-                      </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+
+        {setSelectedItem ===undefined?<>
+          <div style={{ display:"flex" ,alignItems:"center", justifyContent:"center", height:"80vh"}} >No Data</div>
+        </>:
+         <div className={styles.tableContainer}>
+         <table className={styles.table}>
+           <thead>
+             <tr>
+               <th ><input className={styles.checkbox} type="checkbox" /></th>
+               <th className={styles.headerCell} >Name</th>
+               <th className={styles.headerCell}>Txn ID</th>
+               <th className={styles.headerCell}>Date</th>
+               <th className={styles.headerCell}>Amount</th>
+               <div className={styles.headerCell}>Status</div>
+             </tr>
+           </thead>
+           <tbody>
+             {transactions.map((transaction, index) => (
+               <tr key={index}>
+                 <td ><input type="checkbox" className={styles.checkbox} /></td>
+                 <td className={styles.cellname}>{transaction.name}</td>
+                 <td className={styles.cell}>{transaction.txnId}</td>
+                 <td className={styles.cell}>{transaction.date}</td>
+                 <td className={styles.cellname}>{transaction.amount}</td>
+                 <td className={styles.cellname}>
+                       <div className={`${styles.status} ${styles[transaction.status.toLowerCase() + 'Status']}`}>
+                         {transaction.status}
+                       </div>
+                     </td>
+               </tr>
+             ))}
+           </tbody>
+         </table>
+       </div>
+        }
+       
 
       </div>
     </div>

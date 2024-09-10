@@ -82,7 +82,7 @@ const EditClient = ({ setSelectedItem }) => {
       const response = await getRates(catchId);
       setGetRates(response?.data?.data);
       if (response?.data?.data.getAllRatesData.length == 0) {
-        return toast.error("Please Add Rate Firts")
+        return toast.error("Please Add Rate first")
       }
     } catch (error) {
       console.log(error);

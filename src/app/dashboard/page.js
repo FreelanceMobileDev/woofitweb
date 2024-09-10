@@ -97,6 +97,8 @@ const DashContant = () => {
     // console.log(period,'==period')
     let startDate, endDate;
     switch (period) {
+      case 'All':
+        return dashbardCountData()
       case 'monthly':
         startDate = moment().startOf('month').format('YYYY-MM-DD');
         endDate = moment().endOf('month').format('YYYY-MM-DD');
@@ -161,12 +163,13 @@ const DashContant = () => {
       <div className={styles.DashboardContenttwo}>
         <div className={styles.summary}>
           <div className={styles.headerdashboardContent}>
-            <div style={{ display: 'flex', alignItems: 'center', }}><LeftArrow /> <h2 className={styles.month_year_txt}>August 2024</h2>
+            <div style={{ display: 'flex', alignItems: 'center', }}><LeftArrow /> <h2 className={styles.month_year_txt}>{moment().format('MMMM YYYY')}</h2>
               <Rightarrow />
             </div>
 
             <div className={styles.dateSelector}>
               <select className={styles.Monthlytxt} style={{ border: "none" }} onChange={(e) => seletFilter(e.target.value)} >
+                <option value={"All"}>All</option>
                 <option value={"monthly"}>Monthly</option>
                 <option value={"yearly"} >Yearly</option>
               </select>
@@ -243,25 +246,29 @@ const DashContant = () => {
                                     <div style={{ display: 'flex', alignItems: 'center', }}>
                                       {backIcon(session.status)}
                                       {session.group.length > 0 ?
-                                      session?.group[0]?.clients.map((e)=>
-                                        <Image src={e.clientImage||profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> 
-                                      )
-                                      :
-                                      <Image src={ session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> 
+                                        session?.group[0]?.clients.map((e) =>
+                                          <Image src={e.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{ borderRadius: 60 }} />
+                                        )
+                                        :
+                                        <Image src={session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{ borderRadius: 60 }} />
                                       }
                                       {/* <Image src={session?.group.length > 0 ? session?.group[0]?.clientImage || profileiconn : session?.clients[0]?.clientImage || profileiconn} height={25} width={25} className={styles.avatarimagee} style={{borderRadius:60}} /> */}
                                       <p style={{ marginLeft: 10 }}>{session?.group.length > 0 ? session?.group[0]?.name : session?.clients[0]?.name}</p>
                                     </div>
                                     <Rightarrow />
                                   </div>
-                                </div>) : <p>No Trainings</p>
+                                </div>) : <div style={{ height: "67vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                  No Data
+                                </div>
                             }
                           </>
                         ))}
                       </div>
                     </div>
                   </>
-                ) : <p>No Trainings</p>
+                ) : <div style={{ height: "67vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  No Data
+                </div>
               }
             </div>
 
