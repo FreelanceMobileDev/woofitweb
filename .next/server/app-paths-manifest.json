@@ -1,9 +1,7 @@
 {
-  "/Clients/edit/page": "app/Clients/edit/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/Clients/page": "app/Clients/page.js",
+  "/payments/InvoiceCreate/page": "app/payments/InvoiceCreate/page.js",
   "/payments/page": "app/payments/page.js",
-  "/schedule/page": "app/schedule/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/payments/InvoiceCreate/page": "app/payments/InvoiceCreate/page.js"
+  "/Clients/clientsInfo/page": "app/Clients/clientsInfo/page.js",
+  "/Clients/page": "app/Clients/page.js"
 }

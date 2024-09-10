@@ -24,29 +24,29 @@
       "static/css/app/Clients/page.css",
       "static/chunks/app/Clients/page.js"
     ],
-    "/Clients/edit/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Clients/edit/page.css",
-      "static/chunks/app/Clients/edit/page.js"
-    ],
     "/payments/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/payments/page.css",
       "static/chunks/app/payments/page.js"
     ],
-    "/reports/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/reports/page.css",
-      "static/chunks/app/reports/page.js"
-    ],
     "/payments/InvoiceCreate/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/payments/InvoiceCreate/page.css",
       "static/chunks/app/payments/InvoiceCreate/page.js"
+    ],
+    "/Clients/clientsInfo/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Clients/clientsInfo/page.css",
+      "static/chunks/app/Clients/clientsInfo/page.js"
+    ],
+    "/reports/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/reports/page.css",
+      "static/chunks/app/reports/page.js"
     ],
     "/schedule/page": [
       "static/chunks/webpack.js",
