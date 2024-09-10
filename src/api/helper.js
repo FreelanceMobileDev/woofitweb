@@ -8,7 +8,9 @@ import {
   CLIENT_IMAGE,
   GET_CLIENT_IMAGE,
   DELETE_CLIENT_IMAGE,
-  GET_CLIENT_TRAINING_SESSION
+  GET_CLIENT_TRAINING_SESSION,
+  GET_CLIENT_METRICS,
+  PAYMENTS
 } from "./url";
 
 
@@ -273,6 +275,17 @@ export const getClientImage =(id)=>{
   });
 }
 
+
+export const getClientMetric =(id)=>{
+  console.log(id ,'=====>>>>>>>>>getClientMetric')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  GET_METHOD,
+    url: `${GET_CLIENT_METRICS}${id}`,
+    // data: payload
+  });
+}
+
 export const deleteClientImage =(id)=>{
   console.log(id ,'=====>>>>>>>>>deleteClientImage')
   return apiClient({
@@ -292,6 +305,29 @@ export const getClientTrainingSession =(id)=>{
     // data: payload
   });
 }
+
+export const payments =(payload)=>{
+  console.log(payload ,'=====>>>>>>>>>payments')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  POST_METHOD,
+    url: `${PAYMENTS}`,
+    data: payload
+  });
+}
+
+export const getClientPayments =(id)=>{
+  console.log(id ,'=====>>>>>>>>>getClientPayments')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  GET_METHOD,
+    url: `${PAYMENTS}`,
+    // data: payload
+  });
+}
+
+
+
 
 
 

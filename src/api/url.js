@@ -25,5 +25,8 @@ export const CREATE_UPDATE_TRANNING_SESSION="tranning/createUpdateTrainingSessio
 export const CONTECT_US ="user/create-contact-us"
 export const CLIENT_IMAGE ="rates/clietImage"
 export const GET_CLIENT_IMAGE= "rates/getClietImage?"
+export const GET_CLIENT_METRICS= "rates/getMetrics?"
 export const DELETE_CLIENT_IMAGE= "rates/deleteClietImage?"
 export const GET_CLIENT_TRAINING_SESSION="tranning/getClientTrainingSession?clientId="
+export const PAYMENTS="payment"
+

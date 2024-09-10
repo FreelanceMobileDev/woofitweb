@@ -42,6 +42,8 @@ const Clientinformation = ({ setSelectedItem }) => {
     setGetRates(response?.data?.data)
   }
 
+  // console.log(getData?.clientDetails?.rate?.priceForTraining,'===getData')
+
   useEffect(() => {
     getClientDetail()
     if (typeof window !== 'undefined') {
@@ -123,7 +125,7 @@ const Clientinformation = ({ setSelectedItem }) => {
             {activeTab === 'Overall Info' && <OverallInfo info={getData} getRetes={getRetes} />}
             {activeTab === 'Measurements' && <Measurements />}
             {activeTab === 'Trainings' && <Trainings />}
-            {activeTab === 'Payments' && <Payments />}
+            {activeTab === 'Payments' && <Payments catchId={catchId} id={id} priceForTraining={getData?.clientDetails?.rate?.priceForTraining} />}
           </div>
 
 
