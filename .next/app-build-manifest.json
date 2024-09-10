@@ -1,10 +1,10 @@
 {
   "pages": {
-    "/Clients/edit/page": [
+    "/Clients/clientsInfo/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/Clients/edit/page.css",
-      "static/chunks/app/Clients/edit/page.js"
+      "static/css/app/Clients/clientsInfo/page.css",
+      "static/chunks/app/Clients/clientsInfo/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -17,12 +17,6 @@
       "static/chunks/main-app.js",
       "static/css/app/Clients/page.css",
       "static/chunks/app/Clients/page.js"
-    ],
-    "/Clients/clientsInfo/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Clients/clientsInfo/page.css",
-      "static/chunks/app/Clients/clientsInfo/page.js"
     ],
     "/schedule/page": [
       "static/chunks/webpack.js",

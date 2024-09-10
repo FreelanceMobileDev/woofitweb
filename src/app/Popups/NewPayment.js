@@ -19,11 +19,12 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
     const [date, setDate] = useState(new Date());
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        clientId: id, coachId: catchId, paymentMode: selected, numberOfTranning: "",
+        clientId: id ? id : "", coachId: catchId, paymentMode: selected, numberOfTranning: "",
         date: moment(date).format('YYYY-MM-DD'), priceForTraining: priceForTraining,
         amount: "",
         createdAt: Date.now()
     })
+
     const onSelectDate = (date) => {
         setDate(date);
         setFormData({ ...formData, date: moment(date).format('YYYY-MM-DD') })
@@ -31,9 +32,8 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-
         if (id == "numberOfTranning") {
-            setFormData({ ...formData, [id]: value, amount: priceForTraining * value })
+            setFormData({ ...formData, [id]: value, amount: formData.priceForTraining * value })
         } else {
             setFormData({ ...formData, [id]: value })
         }
@@ -49,10 +49,12 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
     const handleSave = async () => {
         try {
             setLoading(true)
+            if (!formData.coachId) {
+                return toast.error("coachId is required")
+            }
             if (!formData.numberOfTranning) {
                 return toast.error("Please Enter Number Of Tranning")
             }
-        
             const response = await payments(formData)
             toast.success(response.data.message)
             handleClose();
@@ -61,8 +63,6 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
         } finally {
             setLoading(false)
         }
-
-
 
     };
 
@@ -81,7 +81,9 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
                 <SelectOption
                     label={"Select a Client"}
                     data={clientData}
-                    selectedId={id}
+                    id="clientId"
+                    selectedId={id ? id : formData.clientId}
+                    onChange={id ? "" : handleChange}
                 />
 
                 <div className={styles.CalenderDivOuter}>
@@ -116,7 +118,8 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
                     name={'Price for Training'}
                     input_parent_div_prop={styles.UsdInput}
                     value={priceForTraining}
-
+                    id="priceForTraining"
+                    onChange={priceForTraining ? "" : handleChange}
                 />
                 <div className={styles.row_div} style={{ marginTop: 20 }}>
                     <Inputfield
@@ -138,7 +141,7 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
                         additionalinput_field={styles.additionalInputField}
                         inputtxt={styles.invoicenumber}
                         name="Amount"
-                        value={formData.numberOfTranning * priceForTraining || ""}
+                        value={formData.amount || 0}
 
                     />
                 </div>

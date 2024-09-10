@@ -321,7 +321,7 @@ export const getClientPayments =(id)=>{
   return apiClient({
     baseURL: BASE_URL,
     method:  GET_METHOD,
-    url: `${PAYMENTS}`,
+    url: `${PAYMENTS}${id}`,
     // data: payload
   });
 }

@@ -46,6 +46,7 @@ const ScheduleContant = () => {
   const [loading, setLoading] = useState(false);
   const [editTraining, setEditTraining] = useState({})
   const [traininginfo, settraininginfo] = useState(false)
+  const [catchId, setCoachId] = useState()
 
 
   const closeEditPopup = () => {
@@ -88,6 +89,13 @@ const ScheduleContant = () => {
       centerSelectedDate();
     }
   }, [selectedDate]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      let ddata = localStorage.getItem("id");
+      setCoachId(ddata)
+    }
+  }, [])
 
   const handlePrevWeek = () => {
     setCurrentDate(currentDate.clone().subtract(1, 'weeks'));
@@ -203,6 +211,8 @@ const ScheduleContant = () => {
     return resultArray;
   }
 
+
+
   return (
     <div className={styles.DashboardContenttwo}>
       <Loader loading={loading} />
@@ -238,7 +248,7 @@ const ScheduleContant = () => {
           </div>
         </div>
 
-        {popupIsOpen && <NewPayment show={popupIsOpen} handleClose={closePopup} />}
+        {popupIsOpen && <NewPayment catchId={catchId} show={popupIsOpen} handleClose={closePopup}  clientData={getdata} />}
         {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={closeopenTraning} editTraining={editTraining} />}
         {editpopup && <EditTraining show={editpopup} handleClose={closeEditPopup} />}
         {traininginfo && <TrainingInformation show={traininginfo} handleClose={closeEditPopup} editTraining={editTraining} />}
