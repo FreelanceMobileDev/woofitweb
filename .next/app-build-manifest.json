@@ -24,35 +24,22 @@
       "static/css/app/Clients/page.css",
       "static/chunks/app/Clients/page.js"
     ],
+    "/schedule/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/schedule/page.css",
+      "static/chunks/app/schedule/page.js"
+    ],
     "/payments/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/payments/page.css",
       "static/chunks/app/payments/page.js"
     ],
-    "/payments/InvoiceCreate/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/payments/InvoiceCreate/page.css",
-      "static/chunks/app/payments/InvoiceCreate/page.js"
-    ],
-    "/Clients/clientsInfo/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Clients/clientsInfo/page.css",
-      "static/chunks/app/Clients/clientsInfo/page.js"
-    ],
-    "/reports/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/reports/page.css",
-      "static/chunks/app/reports/page.js"
-    ],
-    "/schedule/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/schedule/page.css",
-      "static/chunks/app/schedule/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

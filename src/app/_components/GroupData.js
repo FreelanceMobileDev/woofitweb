@@ -9,8 +9,7 @@ import Loader from "./Loader";
 
 
 
-const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
- 
+const GroupData = ({ updateGroup, setUpdateGroup, search, filterData, setShowHide }) => {
   const [getdata, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [popupIsOpen, setShowPopup] = useState(false);
@@ -33,11 +32,14 @@ const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
   const id = localStorage.getItem("id");
   const getApiGroup = async (search) => {
     try {
-      if(!search){
+      if (!search) {
         setLoading(true);
       }
-      const getData = await getGroupList(id,search);
+      const getData = await getGroupList(id, search);
       setData(getData.data.data.data);
+      if (getData.data.data.data.length > 0) {
+        setShowHide(true)
+      }
     } catch (error) {
       console.log(error, "====error");
     } finally {
@@ -45,22 +47,22 @@ const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     // if(search?.length>0){
     //   getApiGroup(`&search=${search}`)
     // }else{
     //   getApiGroup()
     // }
 
-    if(filterData?.length>0){
+    if (filterData?.length > 0) {
       getApiGroup(filterData)
-    }else{
+    } else {
       getApiGroup()
     }
 
-  },[search,filterData])
+  }, [search, filterData])
 
-  
+
   useEffect(() => {
     getApiGroup();
   }, [popupIsOpen]);
@@ -80,7 +82,7 @@ const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
       <div className={styles.groupItem}>
         <div className={styles.groupContent}>
           <div className={styles.groupTitle}>{group?.name}</div>
-          <div style={{ display: "flex", marginTop: 25, alignItems: "center" }}>
+          <div >
             <div className={styles.groupClients}>
               {group?.clients?.length} Clients
             </div>
@@ -90,8 +92,8 @@ const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
                   <img
                     key={index}
                     src={`${img.clientImage
-                        ? img.clientImage
-                        : profileiconn.src
+                      ? img.clientImage
+                      : profileiconn.src
                       }`}
                     alt={profileiconn.src}
                     className={styles.clientImage}
@@ -117,17 +119,17 @@ const GroupData = ({ updateGroup, setUpdateGroup,search,filterData}) => {
       </div>
     );
   };
- 
+
 
   return (
-    <div className={styles.groupsContainer}>
-       <Loader loading={loading} />
-      { getdata&& getdata.length==0? <>
-      <div>
-        No Groups
-      </div>
-      </>: getdata &&
-        getdata?.map((group, index) => <GroupItem key={index} group={group} />)}
+    <div className={styles.groupsContainer} >
+      <Loader loading={loading} />
+      {getdata && getdata.length == 0 ? <>
+        <div style={{display:"flex", alignItems:"center", justifyContent:"center" ,  width:"200%", marginTop:"25%"}} >
+        You haven't created any group yet. Once you add a group, it will be displayed here.
+        </div>
+      </> : getdata &&
+      getdata?.map((group, index) => <GroupItem key={index} group={group} />)}
       {popupIsOpen && (
         <GroupEdit data={data} show={popupIsOpen} handleClose={closePopup} />
       )}

@@ -24,6 +24,7 @@ function page() {
   const [loading, setLoading] = useState(false);
   const [filterData, setFilterData] = useState("&search=&rate=&sort=")
   const [preFilter, setPreFilter] = useState({})
+  const [showHide, setShowHide]= useState(false)
 
 
   const handleTabClick = (tab) => {
@@ -97,8 +98,9 @@ function page() {
                   Groups
                 </div>
               </div>
-              <div style={{ display: 'flex' }}>
-                {searchClick && <input type='text' name="search" onChange={handleChange} style={{ borderRadius: 10 }} />}
+              {showHide &&
+                <div style={{ display: 'flex' }}>
+                {  searchClick && <input type='text' name="search" onChange={handleChange} style={{ borderRadius: 10 }} />}
                 {searchClick ?
                   <div onClick={() => setSearchClick(!searchClick)} style={{ cursor: "pointer" }} >
                     <CrossIcon />
@@ -113,10 +115,12 @@ function page() {
                   <FilterIcon />
                 </div>
               </div>
+              }
+            
             </div>
           </div>
-          {(activeTab === 'Clients' || activeTab === "ArchivedClients") && <ClientsData activeTab={activeTab} search={search} filterData={filterData} />}
-          {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData updateGroup={updateGroup} setUpdateGroup={setUpdateGroup} search={search} filterData={filterData} /></div>}
+          {(activeTab === 'Clients' || activeTab === "ArchivedClients") && <ClientsData activeTab={activeTab} search={search} filterData={filterData} setShowHide={setShowHide} />}
+          {activeTab === 'Groups' && <div style={{ height: '100vh' }}><GroupData updateGroup={updateGroup} setUpdateGroup={setUpdateGroup} search={search} filterData={filterData} setShowHide={setShowHide} /></div>}
           {popupIsOpen && (<GroupEdit show={popupIsOpen} handleClose={closePopup} />)}
           {filter && <FilterClients setFilter={setFilter} getRetes={getRetes} setFilterData={setFilterData} setPreFilter={setPreFilter} preFilter={preFilter} />}
         </div>

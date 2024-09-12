@@ -173,7 +173,6 @@ const DashContant = () => {
                 <option value={"monthly"}>Monthly</option>
                 <option value={"yearly"} >Yearly</option>
               </select>
-              {/* <div className={styles.Monthlytxt} onClick={()=>seletFilter("monthly")} >Monthly</div> <Downarrow /> */}
             </div>
           </div>
 
@@ -276,40 +275,45 @@ const DashContant = () => {
           </div>
         </div>
         <div className={styles.newclientSidebar}>
-          <div className={styles.newClients}>
-            <h3>New Clients</h3>
-            <ul>
-              {clientList.length > 0 && clientList.map((client, index) => (
-                <li key={index} className={styles.clientItem}>
-                  {client.clientImage ?
-                    <Image src={client.clientImage} height={40} width={40} alt={client.name} className={styles.avatar} /> :
-                    <Image src={profileiconn} height={40} width={40} alt={client.name} className={styles.avatar} />
-                  }
-                  <span>{client.name}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          <div className={styles.recentActivities}>
-            <h3>Recent Activities</h3>
-            <ul>
-              {clientList.map((activity, index) => (
-                <li key={index} className={styles.activityItem}>
-                  {activity.clientImage ?
-                    <Image src={activity?.clientImage} height={40} width={40} alt={activity?.name} className={styles.avatar} /> :
-                    <Image src={profileiconn} height={40} width={40} alt={activity?.name} className={styles.avatar} />
-                  }
-                  <div className={styles.activityText}>
-                    <span className={styles.clientName}>{activity?.name}</span>
-                    <span className={styles.actionText}> {recentActivities[index]?.action} </span>
-                    <span className={styles.itemText}>{recentActivities[index]?.item}</span>
-                    <div className={styles.timeText}>{recentActivities[index]?.time}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {clientList.length > 0 &&
+            <div className={styles.newClients}>
+              <h3>New Clients</h3>
+              <ul>
+                {clientList.length > 0 && clientList.map((client, index) => (
+                  <li key={index} className={styles.clientItem}>
+                    {client.clientImage ?
+                      <Image src={client.clientImage} height={40} width={40} alt={client.name} className={styles.avatar} /> :
+                      <Image src={profileiconn} height={40} width={40} alt={client.name} className={styles.avatar} />
+                    }
+                    <span>{client.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          }
+          {
+            clientList && clientList.length > 0 &&
+            <div className={styles.recentActivities}>
+              <h3>Recent Activities</h3>
+              <ul>
+                {clientList && clientList.length > 0 && clientList.map((activity, index) => (
+                  <li key={index} className={styles.activityItem}>
+                    {activity.clientImage ?
+                      <Image src={activity?.clientImage} height={40} width={40} alt={activity?.name} className={styles.avatar} /> :
+                      <Image src={profileiconn} height={40} width={40} alt={activity?.name} className={styles.avatar} />
+                    }
+                    <div className={styles.activityText}>
+                      <span className={styles.clientName}>{activity?.name}</span>
+                      <span className={styles.actionText}> {recentActivities[index]?.action} </span>
+                      <span className={styles.itemText}>{recentActivities[index]?.item}</span>
+                      <div className={styles.timeText}>{recentActivities[index]?.time}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          }
         </div>
       </div>
 

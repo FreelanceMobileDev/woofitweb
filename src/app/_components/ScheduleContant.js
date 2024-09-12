@@ -248,14 +248,14 @@ const ScheduleContant = () => {
           </div>
         </div>
 
-        {popupIsOpen && <NewPayment catchId={catchId} show={popupIsOpen} handleClose={closePopup}  clientData={getdata} />}
+        {popupIsOpen && <NewPayment catchId={catchId} show={popupIsOpen} handleClose={closePopup} clientData={getdata} />}
         {newTrainingpop && <NewTraining show={newTrainingpop} handleClose={closeopenTraning} editTraining={editTraining} />}
         {editpopup && <EditTraining show={editpopup} handleClose={closeEditPopup} />}
         {traininginfo && <TrainingInformation show={traininginfo} handleClose={closeEditPopup} editTraining={editTraining} />}
         {
           getTranningData.length > 0 ? getTranningData && getTranningData.map((ele) =>
             <>
-              <div className={styles.session}>
+              <div className={styles.session} style={{ height: "60vh" }} >
                 <div className={styles.TodayTxtdiv}>
                   <span>{ele.date == moment().format('MMMM D') ? "Today" : ele.date}</span>
                   <PlusIcon />
@@ -307,14 +307,14 @@ const ScheduleContant = () => {
                               </div>
                               <Rightarrow />
                             </div>
-                          </div>) : <p>No Trainings</p>
+                          </div>) : <p style={{ height: "100vh" }} >No Trainings</p>
                       }
                     </>
                   ))}
                 </div>
               </div>
             </>
-          ) : <p>No Trainings</p>
+          ) : <p style={{ height: "100vh" }} >No Trainings</p>
         }
 
         {/* <div className={styles.session}>
@@ -419,11 +419,14 @@ const ScheduleContant = () => {
         </div> */}
 
         <div>
-          <div className={styles.clientslist}>
+
+
+          {getdata && getdata.length > 0 && <div className={styles.clientslist}>
             Clients
           </div>
+          }
 
-          {getdata?.map((client, index) => (
+          {getdata && getdata.length > 0 && getdata?.map((client, index) => (
             <div key={index} className={styles.newclientItem}>
               <Image height={40} width={40} src={client?.clientImage ? client?.clientImage : profileiconn} alt={profileiconn} className={styles.avatar} />
               <span>{client.name}</span>

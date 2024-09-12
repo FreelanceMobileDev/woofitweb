@@ -32,10 +32,10 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-    
+
         // Convert the value to a number
         const numericValue = parseInt(value, 10);
-    
+
         if (id === "numberOfTranning") {
             if (numericValue <= 999) {
                 // Update the number of training sessions
@@ -71,7 +71,7 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
             }));
         }
     };
-    
+
 
 
     const handleToggle = (selection) => {
@@ -89,7 +89,7 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
         return true;
     };
 
-    const fieldsToValidate = ['clientId', 'coachId', 'priceForTraining','numberOfTranning', 'date', 'amount'];
+    const fieldsToValidate = ['clientId', 'coachId', 'priceForTraining', 'numberOfTranning', 'date', 'amount'];
 
     const errorMessages = {
         clientId: 'Please Select Client',
@@ -119,9 +119,9 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
     };
 
     return (
-        <div className={show ? styles.popupDisplay : styles.popupHide}>
+        <div className={show ? styles.popupDisplay : styles.popupHide} style={{ height: '100vh' }} >
 
-            <div className={styles.popupContent}>
+            <div className={styles.popupContent} >
                 <div className={styles.space_div}>
                     <div />
                     <div className={styles.popheadertxt}>New Payment</div>
@@ -130,28 +130,36 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
                     {loading && <Loader loading={loading} />}
                 </div>
 
-                <SelectOption
-                    label={"Select a Client"}
-                    data={clientData}
-                    id="clientId"
-                    selectedId={id ? id : formData.clientId}
-                    onChange={id ? "" : handleChange}
-                />
 
-                <div className={styles.CalenderDivOuter}>
-                    <DatePicker
-                        selected={date}
-                        onChange={onSelectDate}
-                        dateFormat="yyyy/MM/dd"
-                        placeholderText="Select Date of Birth"
-                        className={styles.CalenderDiv}
-                        minDate={new Date()}
-                        showYearDropdown
-                        scrollableYearDropdown
-                        showMonthDropdown
+                <div style={{ width: '104%', marginLeft: '-8px' }}>
+                    <SelectOption
+                        label={"Select a Client"}
+                        data={clientData}
+                        id="clientId"
+                        selectedId={id ? id : formData.clientId}
+                        onChange={id ? "" : handleChange}
                     />
-                    <CalenderIcon />
                 </div>
+
+                <div>
+                    <lable style={{ margin: "8px", color: "#697585", fontFamily: "Urbanist" }} >Select Date of Birth</lable>
+                    <div className={styles.CalenderDivOuter} style={{ marginTop: "5px" }}>
+
+                        <DatePicker
+                            selected={date}
+                            onChange={onSelectDate}
+                            dateFormat="yyyy/MM/dd"
+                            placeholderText="Select Date of Birth"
+                            className={styles.CalenderDiv}
+                            minDate={new Date()}
+                            showYearDropdown
+                            scrollableYearDropdown
+                            showMonthDropdown
+                        />
+                        <CalenderIcon />
+                    </div>
+                </div>
+
 
                 {/* {formik.touched.DOB && formik.errors.DOB ? (
                     <div style={{ color: "red" }}>{formik.errors.DOB}</div>
@@ -210,13 +218,21 @@ const NewPayment = ({ catchId, show, handleClose, id, clientData, priceForTraini
                         <div className={`${selected === 'card' ? styles.Cashtxt : styles.noncashtxt}`}>Non-Cash</div>
                     </div>
                 </div>
-                <OpticityButton
+
+
+                {/* <OpticityButton
                     onClick={() => handleSave()}
                     name={'Save'}
                     txtstyle={{ color: '#FFF' }}
                     additionalMainDivClassName={styles.SaveButton}
 
-                />
+                /> */}
+
+                <a onClick={() => handleSave()}
+                    className={styles.SaveButton}
+                    style={{ width: "94%", borderWidth: 0, marginTop: "20px" }}
+                    txtstyle={{ color: '#FFF' }}
+                >Save</a>
             </div>
         </div>
     );

@@ -12,8 +12,7 @@ import { useRouter } from 'next/navigation'
 import { specializationOptions, genderData } from '../../util/staticData'
 import Loader from './Loader'
 
-const ClientsData = ({ activeTab ,search,filterData}) => {
-  // console.log(filterData,'===ClientsDatafilterData222222')
+const ClientsData = ({ activeTab ,search,filterData,setShowHide}) => {
   const router = useRouter()
   const [getdata, setData] = useState([])
   const [loading, setLoading] = useState(false);
@@ -26,6 +25,9 @@ const ClientsData = ({ activeTab ,search,filterData}) => {
       }
       const getData = await getClinent(data,search)
       setData(getData.data.data.getAllClientData)
+      if(getData.data.data.getAllClientData.length>0){
+        setShowHide(true)
+      }
     } catch (error) {
       console.log(error, '====error')
     } finally {
@@ -41,16 +43,7 @@ const ClientsData = ({ activeTab ,search,filterData}) => {
     }
   }
   useEffect(()=>{
-      // if(search?.length>0){
-      //   search=`&search=${search}`
-      //   let act = activeTab == "Clients" ? 0 : 1
-      //   getApiClinent(act,search)
-      // }else{
-        // activeTabCall()
-      // }
-
       if(filterData.length>0){
-        // console.log(filterData,'===filterData1111111')
         let act = activeTab == "Clients" ? 0 : 1
         getApiClinent(act,filterData)
       }else{
@@ -106,7 +99,7 @@ const ClientsData = ({ activeTab ,search,filterData}) => {
     <div >
       {getdata && getdata?.length == 0 ? (
         <div style={{ height: "67vh", display:"flex", alignItems:"center", justifyContent:"center" }}>
-         No Data
+        Currently, you don't have any clients. When you add a client, they will be displayed here.
         </div>)
         :
         (
