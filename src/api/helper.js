@@ -10,7 +10,10 @@ import {
   DELETE_CLIENT_IMAGE,
   GET_CLIENT_TRAINING_SESSION,
   GET_CLIENT_METRICS,
-  PAYMENTS
+  PAYMENTS,
+  GRAPH_DATA,
+  FAQS,
+  PAGES
 } from "./url";
 
 
@@ -177,6 +180,15 @@ export const DashboardData = (payload) => {
   });
 };
 
+export const getGraphDatas = (payload) => {
+  console.log("getGraphDatas--->>>>>", payload)
+  return apiClient({
+    baseURL: BASE_URL,
+    method: GET_METHOD,
+    url: `${GRAPH_DATA}${payload}`,
+  });
+};
+
 export const updateGroup = (payload, id) => {
   console.log("DashboardData--->>>>>", payload)
   return apiClient({
@@ -322,6 +334,26 @@ export const getClientPayments =(id)=>{
     baseURL: BASE_URL,
     method:  GET_METHOD,
     url: `${PAYMENTS}${id}`,
+    // data: payload
+  });
+}
+
+export const getFaqsData =(id)=>{
+  console.log(id ,'=====>>>>>>>>>getFaqs')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  GET_METHOD,
+    url: `${FAQS}`,
+    // data: payload
+  });
+}
+
+export const getContents =(id)=>{
+  console.log(id ,'=====>>>>>>>>>getContents')
+  return apiClient({
+    baseURL: BASE_URL,
+    method:  GET_METHOD,
+    url: `${PAGES}`,
     // data: payload
   });
 }

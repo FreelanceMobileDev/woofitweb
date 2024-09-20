@@ -53,7 +53,7 @@ const DashContant = () => {
   }
 
 
-  const dashbardCountData = async (payload) => {
+  const dashbardCountData = async (payload="") => {
     try {
       setLoading(true)
       const response = await DashboardData(payload)
@@ -182,7 +182,7 @@ const DashContant = () => {
                 <p className={styles.Total_Earnings} style={{ color: '#67C537' }} >Total Earnings</p>
                 <EarningsIcon />
               </div>
-              <div className={styles.Eraning_price}>${data?.totalEarning}</div>
+              <div className={styles.Eraning_price}>${data?.Earning}</div>
             </div>
             <div className={styles.summaryCarddashboard} style={{ backgroundColor: '#CFF3FD' }}>
               <div className={styles.Total_Earnings_card}>

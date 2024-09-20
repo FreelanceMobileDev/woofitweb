@@ -3,17 +3,35 @@ import DeshBorad from "../../dashboard/DashCompoent";
 import SettingSidebar from "../settingSidebar";
 import { Downarrow, Rightarrow } from '../../../../public';
 import styles from '../Setting.module.css'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getFaqsData } from "../../../api/helper";
+import Loader from "../../_components/Loader";
 
 function page() {
     const [openIndex, setOpenIndex] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [List, setList] = useState([])
 
     const handleToggle = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+
+
+    const getFaqs = async (data = "") => {
+        setLoading(true)
+        const respone = await getFaqsData(data)
+        // console.log(respone.data.data, '===respone')
+        setList(respone.data.data)
+        setLoading(false)
+      }
+    
+      useEffect(() => {
+        getFaqs()
+      }, [])
+
     const faqData = [
         {
-            question: "     What Is The Duration Of The Staff Augmentation Contract?",
+            question: " What Is The Duration Of The Staff Augmentation Contract?",
             answer: "",
         },
         {
@@ -42,9 +60,10 @@ function page() {
         <>
             <DeshBorad >
                 <SettingSidebar >
+                    <Loader loading={loading} />
                     <div className={styles.right_div_data}>
                         <div className={styles.faqContainer}>
-                            {faqData.map((item, index) => (
+                            {List&&List.map((item, index) => (
                                 <div key={index} className={styles.faqItem}>
                                     <div className={styles.question} onClick={() => handleToggle(index)}>
                                         <span>{index + 1}. {item.question}</span>

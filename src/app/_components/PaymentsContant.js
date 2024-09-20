@@ -5,13 +5,15 @@ import styles from './Login.module.css';
 import { useEffect, useState } from 'react';
 import { getClientPayments } from '../../api/helper';
 import moment from 'moment';
+import Loader from './Loader';
 
 const PaymentsContant = ({ setSelectedItem }) => {
   const router = useRouter()
   const [List, setList] = useState([])
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState(false)
 
-  console.log(setSelectedItem, '==')
+
   const transactions = [
     { name: 'Franky Williamson', txnId: '79120283', date: 'May 31, 2015', amount: '$19.00', status: 'Success' },
     { name: 'Bronson Glass', txnId: '79116801', date: 'May 31, 2015', amount: '$90.00', status: 'Failed' },
@@ -25,26 +27,53 @@ const PaymentsContant = ({ setSelectedItem }) => {
   ];
 
 
-  const getClientPayment = async () => {
-    const respone = await getClientPayments("")
+  const getClientPayment = async (data = "") => {
+    if (!data) {
+      setLoading(true)
+    }
+    const respone = await getClientPayments(data)
     // console.log(respone.data, '===respone')
     setList(respone.data.data.payments)
+    setLoading(false)
   }
 
   useEffect(() => {
     getClientPayment()
   }, [])
 
+  const handleSearch = () => {
+    setSearch(!search)
+  }
+
+  const handleChange = (e) => {
+    const { value } = e.target
+    if (!value) {
+      getClientPayment()
+    } else {
+      getClientPayment(`?search=${value}`)
+    }
+  }
+
+  function capitalizeFirstLetter(string) {
+    if (!string) return string; // Handle empty string
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
   return (
     <div style={{ backgroundColor: "white" }}>
+      <Loader loading={loading} />
       <div className={styles.PaymentsHeaderdiv}>
         <div className={styles.Paymentstxtt}>Payments</div>
         <div style={{ display: 'flex', alignItems: 'center', }}>
           <div className={styles.Add_Client} onClick={() => router.push('/payments/InvoiceCreate')}>Create Invoice</div>
           <div style={{ display: 'flex', marginLeft: 30 }}>
-            <SearchIcon />
+            {search && <input type="text" style={{}} onChange={handleChange} />}
+
+            <div onClick={handleSearch} >
+              <SearchIcon />
+            </div>
             <div style={{ width: 40 }} />
-            <FilterIcon />
+            {/* <FilterIcon /> */}
           </div>
         </div>
       </div>
@@ -53,7 +82,7 @@ const PaymentsContant = ({ setSelectedItem }) => {
         {List && List.length == 0 ? <>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "80vh" }} >No Data</div>
         </> :
-          <div className={styles.tableContainer} style={{height:"70vh"}} >
+          <div className={styles.tableContainer} style={{ height: "70vh" }} >
             <table className={styles.table}>
               <thead>
                 <tr>
@@ -62,7 +91,7 @@ const PaymentsContant = ({ setSelectedItem }) => {
                   <th className={styles.headerCell}>Txn ID</th>
                   <th className={styles.headerCell}>Date</th>
                   <th className={styles.headerCell}>Amount</th>
-                  {/* <div className={styles.headerCell}>Status</div> */}
+                  <div className={styles.headerCell}>Status</div>
                 </tr>
               </thead>
               <tbody>
@@ -71,13 +100,12 @@ const PaymentsContant = ({ setSelectedItem }) => {
                     <td ><input type="checkbox" className={styles.checkbox} /></td>
                     <td className={styles.cellname}>{transaction?.clientId?.name}</td>
                     <td className={styles.cell}>{transaction?._id}</td>
-                    <td className={styles.cell}>{ moment(transaction.createAt).format("DD-MM-YYYY") }</td>
+                    <td className={styles.cell}>{moment(transaction.createAt).format("DD-MM-YYYY")}</td>
                     <td className={styles.cellname}>{transaction.amount}</td>
                     <td className={styles.cellname}>
-                      {/* <div className={`${styles.status} ${styles[transaction.status.toLowerCase() + 'Status']}`}>
-                        {transaction.status}
-                      </div> */}
-                    </td>
+                    <div className={`${styles?.status} ${styles[transaction?.status + 'Status']}`}>
+                          {capitalizeFirstLetter(transaction?.status)||"Confirm"}
+                        </div>                    </td>
                   </tr>
                 ))}
               </tbody>
