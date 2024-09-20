@@ -132,16 +132,14 @@ const OntheDate = ({ handleClose, editTraining }) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-
         setLoading(true);
-
         values.schedule = values.schedule.map(entry => ({
           day: entry.day,
           startTime: formatTime(startTime),
           endTime: formatTime(endTime),
           active: entry.active
         }));
-
+        
         values.group = selectdGroup?.map((e) => e._id) || [];
         values.clients = selectClients?.map((e) => e?._id) || [];
 
@@ -183,7 +181,7 @@ const OntheDate = ({ handleClose, editTraining }) => {
       formik.setValues({
         startDate: editTraining?.startDate || "",
         endDate: editTraining?.endDate || "",
-        recurring: editTraining?.recurring || "",
+        recurring: editTraining?.recurring ,
         paymentMode: editTraining?.paymentMode || '',
         clients: editTraining?.clients || "",
         group: editTraining?.group || "",
@@ -229,8 +227,8 @@ const OntheDate = ({ handleClose, editTraining }) => {
                   {selectClients && selectClients.map((item, index) => (
                     <div key={index} style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
                       <div>{item.name}</div>
-                      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' , }}>
-                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn}  />
+                      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', }}>
+                        <Image width={40} height={40} src={item.clientImage ? item.clientImage : profileiconn} />
                         <div style={{ width: 20 }} />
                         <div onClick={() => handleRomeve(item?._id)} style={{ cursor: "pointer" }} >
                           <CrossIcon style={{ height: 23, width: 23 }} />
