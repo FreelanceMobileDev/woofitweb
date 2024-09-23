@@ -1,3 +1,9 @@
 {
-  "/schedule/page": "app/schedule/page.js"
+  "/Clients/page": "app/Clients/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/Clients/clientsInfo/page": "app/Clients/clientsInfo/page.js",
+  "/schedule/page": "app/schedule/page.js",
+  "/Clients/edit/page": "app/Clients/edit/page.js",
+  "/payments/page": "app/payments/page.js",
+  "/reports/page": "app/reports/page.js"
 }

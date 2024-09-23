@@ -23,6 +23,48 @@
       "static/chunks/main-app.js",
       "static/css/app/settings/support/page.css",
       "static/chunks/app/settings/support/page.js"
+    ],
+    "/payments/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/payments/page.css",
+      "static/chunks/app/payments/page.js"
+    ],
+    "/reports/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/reports/page.css",
+      "static/chunks/app/reports/page.js"
+    ],
+    "/settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/settings/page.css",
+      "static/chunks/app/settings/page.js"
+    ],
+    "/settings/profile/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/settings/profile/page.css",
+      "static/chunks/app/settings/profile/page.js"
+    ],
+    "/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/dashboard/page.css",
+      "static/chunks/app/dashboard/page.js"
+    ],
+    "/Clients/clientsInfo/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Clients/clientsInfo/page.css",
+      "static/chunks/app/Clients/clientsInfo/page.js"
+    ],
+    "/Clients/edit/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Clients/edit/page.css",
+      "static/chunks/app/Clients/edit/page.js"
     ]
   }
 }

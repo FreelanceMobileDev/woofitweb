@@ -48,7 +48,7 @@ const EditClient = ({ setSelectedItem }) => {
   const [date, setDate] = useState("");
   const [caredData, setCardData] = useState([])
 
-  // console.log(caredData, '==caredData================>>>>>>>>>>>>>>')
+  // console.log(image, '==image================>>>>>>>>>>>>>>')
   const openPopup = () => {
     setShowPopup(true);
   };
